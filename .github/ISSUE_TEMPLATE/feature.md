@@ -1,15 +1,17 @@
 ---
 name: Feature
-about: 기능 추가
-title: ''
-labels: ''
+about: 기능구현
+title: "[FEAT] "
+labels: feature
 assignees: ''
 
 ---
 
 ## Description
 
-## Do
-- 
+### ✅Todo
+- [ ] Todo
+- [ ] Todo
+- [ ] Todo
 
-## ETC
+> Reference

@@ -1,7 +1,7 @@
 ---
 name: Refactor
-about: 리팩토링
-title: ''
+about: 코드수정
+title: "[Refector]"
 labels: refactor
 assignees: ''
 
@@ -9,7 +9,9 @@ assignees: ''
 
 ## Description
 
-## Do
-- 
+### ✅Todo
+- [ ] Todo
+- [ ] Todo
+- [ ] Todo
 
-## ETC
+> Reference
