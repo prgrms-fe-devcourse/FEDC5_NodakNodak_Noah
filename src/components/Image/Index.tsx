@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { ImageProps } from '@/types/ImageProps';
 
 const Image = ({
@@ -11,14 +11,17 @@ const Image = ({
   mode,
   ...props
 }: ImageProps) => {
-  const [error, setError] = React.useState(false);
+  const [error, setError] = useState(false);
+
   const imgRef = useRef<HTMLImageElement | null>(null);
+
   const imageStyle = {
     display: block ? 'block' : 'none',
     width,
     height,
     objectFit: mode,
   };
+
   const handleImageError = () => {
     setError(true);
   };

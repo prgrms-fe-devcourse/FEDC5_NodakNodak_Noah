@@ -1,34 +1,7 @@
-import styled from 'styled-components';
+import { AvatarWrapper } from './AvatarStyled';
 import { useState, useEffect } from 'react';
 import { AvatarProps } from '@/types/AvatarProps';
 import ImageComponent from '@/components/Image';
-
-const ShapeToCssValue = {
-  circle: '50%',
-  square: '8px',
-} as const;
-
-interface AvatarWrapperProps {
-  shape: 'circle' | 'square';
-}
-
-const AvatarSizes = {
-  small: 40,
-  middle: 48,
-  large: 224,
-} as const;
-
-const AvatarWrapper = styled.div<AvatarWrapperProps>`
-  position: relative;
-  display: inline-block;
-  border: 1px solid #dadada;
-  border-radius: ${({ shape }) => ShapeToCssValue[shape]};
-  background-color: #eee;
-  overflow: hidden;
-  > img {
-    transition: opacity 0.2s ease-out;
-  }
-`;
 
 const Avatar = ({
   src,
@@ -41,11 +14,17 @@ const Avatar = ({
 }: AvatarProps) => {
   const [loaded, setLoaded] = useState(false);
 
+  const AvatarSizes = {
+    small: 40,
+    middle: 48,
+    large: 224,
+  };
+
+  const avatarSize = AvatarSizes[size];
+
   useEffect(() => {
     setLoaded(true);
   }, []);
-
-  const avatarSize = AvatarSizes[size];
 
   return (
     <>
