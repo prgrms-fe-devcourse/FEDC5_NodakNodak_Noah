@@ -1,11 +1,11 @@
 export interface User {
-  coverImage: String;
-  image: String;
-  role: String;
-  isOnline: Boolean;
+  coverImage: string;
+  image: string;
+  role: string;
+  isOnline: boolean;
   posts: Post[];
   likes: Like[];
-  comments: String[];
+  comments: string[];
   followers: [];
   following: [
     {
@@ -19,89 +19,89 @@ export interface User {
   ];
   notifications: Notification[];
   messages: Message[];
-  _id: String;
-  fullName: String;
-  email: String;
-  createdAt: String;
-  updatedAt: String;
+  _id: string;
+  fullName: string;
+  email: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Channel {
-  authRequired: Boolean; // 사용되지 않음
-  posts: String[];
-  _id: String;
-  name: String;
-  description: String;
-  createdAt: String;
-  updatedAt: String;
+  authRequired: boolean; // 사용되지 않음
+  posts: string[];
+  _id: string;
+  name: string;
+  description: string;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Post {
   likes: Like[];
   comments: Comment[];
-  _id: String;
-  image?: String;
-  imagePublicId?: String;
-  title: String;
+  _id: string;
+  image?: string;
+  imagePublicId?: string;
+  title: string;
   channel: Channel;
   author: User;
-  createdAt: String;
-  updatedAt: String;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Like {
-  _id: String;
+  _id: string;
   user: User;
   post: Post;
-  createdAt: String;
-  updatedAt: String;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Comment {
-  _id: String;
-  comment: String;
+  _id: string;
+  comment: string;
   author: User;
-  post: String; // 포스트 id
-  createdAt: String;
-  updatedAt: String;
+  post: string; // 포스트 id
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Notification {
-  seen: Boolean;
-  _id: String;
+  seen: boolean;
+  _id: string;
   author: User;
-  user: User | String;
-  post: String | null; // 포스트 id
-  follow?: String; // 사용자 id
+  user: User | string;
+  post: string | null; // 포스트 id
+  follow?: string; // 사용자 id
   comment?: Comment;
-  message?: String; // 메시지 id
-  createdAt: String;
-  updatedAt: String;
+  message?: string; // 메시지 id
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Follow {
-  _id: String;
-  user: String; // 사용자 id
-  follower: String; // 사용자 id
-  createdAt: String;
-  updatedAt: String;
+  _id: string;
+  user: string; // 사용자 id
+  follower: string; // 사용자 id
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface Conversation {
-  _id: String[];
-  message: String;
+  _id: string[];
+  message: string;
   sender: User;
   receiver: User;
-  seen: Boolean;
-  createdAt: String;
+  seen: boolean;
+  createdAt: string;
 }
 
 export interface Message {
-  _id: String;
-  message: String;
+  _id: string;
+  message: string;
   sender: User;
   receiver: User;
-  seen: Boolean;
-  createdAt: String;
-  updatedAt: String;
+  seen: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
