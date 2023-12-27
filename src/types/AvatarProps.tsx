@@ -8,7 +8,7 @@ export const AvatarSizes = {
 
 export const ShapeToCssValue = {
   circle: '50%',
-  square: '5px',
+  square: '8px',
 } as const;
 
 export interface AvatarProps {

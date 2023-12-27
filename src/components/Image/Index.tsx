@@ -14,7 +14,7 @@ const Image = ({
   const [error, setError] = React.useState(false);
   const imgRef = useRef<HTMLImageElement | null>(null);
   const imageStyle = {
-    display: block ? 'block' : undefined,
+    display: block ? 'block' : 'none',
     width,
     height,
     objectFit: mode,
