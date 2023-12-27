@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import theme from './theme';
 
 const GlobalStyle = createGlobalStyle`
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css");
@@ -6,6 +7,7 @@ const GlobalStyle = createGlobalStyle`
 
   body{
     font-family: 'Pretendard Variable', 'Noto Sans KR', sans-serif;
+    color: ${theme.colors.black}
   }
 `;
 export default GlobalStyle;
