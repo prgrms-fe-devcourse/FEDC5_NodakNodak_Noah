@@ -1,7 +1,7 @@
 import { AvatarWrapper } from './AvatarStyled';
 import { useState, useEffect } from 'react';
 import { AvatarProps } from '@/types/AvatarProps';
-import ImageComponent from '@/components/Image/Indexw';
+import ImageComponent from '@/components/Image';
 
 const Avatar = ({
   src,
