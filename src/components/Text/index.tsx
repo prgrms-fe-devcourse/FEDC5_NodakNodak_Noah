@@ -3,10 +3,10 @@ import theme from '@/styles/theme';
 import { TextProps } from '@/types/TextProps';
 
 const Text = ({
-  tagType,
-  fontType,
-  colorType,
-  colorNumber,
+  tagType = 'div',
+  fontType = 'body1',
+  colorType = 'primary',
+  colorNumber = '100',
   children,
 }: PropsWithChildren<TextProps>) => {
   const Tag = tagType;
