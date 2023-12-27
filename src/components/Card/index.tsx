@@ -2,6 +2,7 @@ import CardProps from './CardProps';
 import { PropsWithChildren } from 'react';
 
 const Card = ({
+  children,
   width = '100px',
   height = '100px',
   shadowType = 'small',
@@ -22,7 +23,7 @@ const Card = ({
     boxShadow: ShadowSizes[shadowType],
   };
 
-  return <div style={CardStyle}></div>;
+  return <div style={CardStyle}>{children}</div>;
 };
 
 export default Card;
