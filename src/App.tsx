@@ -1,5 +1,7 @@
+import Index from './pages/Index';
+
 const App = () => {
-  return <></>;
+  return <Index />;
 };
 
 export default App;
