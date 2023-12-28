@@ -3,6 +3,7 @@ import {
   BorderLine,
   ListItemButton,
   DropdownContent,
+  MenuForm,
 } from './DropdownMenuStyled';
 import { useState } from 'react';
 import { Channel } from '@/types/APIResponseTypes';
@@ -26,7 +27,7 @@ const DropdownMenu = ({ itemList, title, onClick }: DropdownMenuProps) => {
   };
 
   return (
-    <div>
+    <MenuForm>
       <DropdownButton onClick={toggleMenu} $ismenuopen={isMenuOpen}>
         {title}
         <BorderLine />
@@ -43,7 +44,7 @@ const DropdownMenu = ({ itemList, title, onClick }: DropdownMenuProps) => {
           ))}
         </DropdownContent>
       )}
-    </div>
+    </MenuForm>
   );
 };
 

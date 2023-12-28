@@ -60,7 +60,7 @@ const VotedBox = () => {
               bordertype='enabled'
               required={true}
               placeholder='투표주제를 입력하세요'
-              width='466px'
+              width='100%'
               height='48px'
               $flex={true}
               value={formData.voteTitle}
@@ -74,29 +74,25 @@ const VotedBox = () => {
               type='button'>
               <>선택지 추가 +</>
             </Button>
-            <div>
-              {formData.voteArray.map((candidate, index) => (
-                <InputContainer key={index}>
-                  <Input
-                    bordertype='enabled'
-                    required={true}
-                    placeholder={`투표 후보${index + 1}`}
-                    width='466px'
-                    height='48px'
-                    $flex={true}
-                    value={candidate}
-                    onChange={(e) =>
-                      handleCandidateChange(index, e.target.value)
-                    }
-                  />
-                  <DeleteButton
-                    $isshow={index >= 2}
-                    onClick={() => handleRemoveCandidate(index)}>
-                    삭제
-                  </DeleteButton>
-                </InputContainer>
-              ))}
-            </div>
+            {formData.voteArray.map((candidate, index) => (
+              <InputContainer key={index}>
+                <Input
+                  bordertype='enabled'
+                  required={true}
+                  placeholder={`투표 후보${index + 1}`}
+                  width='100%'
+                  height='48px'
+                  $flex={true}
+                  value={candidate}
+                  onChange={(e) => handleCandidateChange(index, e.target.value)}
+                />
+                <DeleteButton
+                  $isshow={index >= 2}
+                  onClick={() => handleRemoveCandidate(index)}>
+                  삭제
+                </DeleteButton>
+              </InputContainer>
+            ))}
           </Content>
         </ContentWrapper>
       </Card>

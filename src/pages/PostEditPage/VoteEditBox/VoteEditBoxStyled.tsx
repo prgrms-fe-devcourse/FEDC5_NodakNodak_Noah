@@ -1,23 +1,32 @@
 import styled from 'styled-components';
 
 export const ContentWrapper = styled.div`
-  padding: 40px 100px;
+  display: flex;
+  padding: 40px 20px;
+  justify-content: center;
 `;
 
 export const Content = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  align-items: flex-end;
+  width: 466px;
+  max-width: 100%;
 `;
 
 export const InputContainer = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  display: flex;
+  width: 100%;
 `;
 
 export const DeleteButton = styled.button<{ $isshow: boolean }>`
   margin-left: 10px;
+  position: absolute;
+  left: 100%;
   cursor: pointer;
   color: red;
   border: none;
