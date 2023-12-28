@@ -4,9 +4,9 @@ import { ButtonProps } from '@/types/ButtonPropsTypes';
 
 const Button = ({
   children,
-  styleType,
-  size,
-  event,
+  styleType = 'primary',
+  size = 'regular',
+  event = 'enabled',
   type,
   onClick,
   isArrow = false,
@@ -23,8 +23,8 @@ const Button = ({
         $size={size}
         $event={event}
         $isArrow={isArrow}>
-        {size !== 'mini' && children}
-        {(isArrow || size === 'mini') && <span>{'>'}</span>}
+        {children}
+        {isArrow && <span>{'>'}</span>}
       </ButtonLayout>
     </ButtonWrapper>
   );
