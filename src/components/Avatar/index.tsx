@@ -3,6 +3,7 @@ import Image from '../Image';
 import { useState, useEffect } from 'react';
 import { AvatarProps } from '@/types/AvatarProps';
 
+
 const Avatar = ({
   src,
   size = 'middle',
@@ -35,6 +36,7 @@ const Avatar = ({
           width: `${avatarSize}px`,
           height: `${avatarSize}px`,
         }}>
+
         <Image
           block
           width={avatarSize}

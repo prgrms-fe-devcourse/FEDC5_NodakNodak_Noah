@@ -5,6 +5,7 @@ export interface InputProps
   flex?: boolean;
   wrapperProps?: WrapperProps;
   hint?: string;
+  fontSize?: string;
   borderType?:
     | 'enabled'
     | 'hover'
