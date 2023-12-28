@@ -4,7 +4,7 @@ import { TextProps } from '@/types/TextProps';
 const Text = ({
   tagType = 'div',
   fontType = 'body1',
-  colorType = 'primary',
+  colorType = 'black',
   colorNumber = '100',
   children,
   ...props
