@@ -1,5 +1,7 @@
+import UserPage from '@/pages/userPage/UserInfo';
+
 const App = () => {
-  return <></>;
+  return <UserPage />;
 };
 
 export default App;
