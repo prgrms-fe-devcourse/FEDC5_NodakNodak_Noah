@@ -21,7 +21,6 @@ const PostEditPage = () => {
       </Button>
       <FormArea>
         <Input
-          bordertype='enabled'
           required={true}
           placeholder='제목을 입력하세요'
           width='589px'

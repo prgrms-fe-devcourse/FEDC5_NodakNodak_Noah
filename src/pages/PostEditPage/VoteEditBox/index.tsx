@@ -57,7 +57,6 @@ const VotedBox = () => {
         <ContentWrapper>
           <Content>
             <Input
-              bordertype='enabled'
               required={true}
               placeholder='투표주제를 입력하세요'
               width='100%'
@@ -77,7 +76,6 @@ const VotedBox = () => {
             {formData.voteArray.map((candidate, index) => (
               <InputContainer key={index}>
                 <Input
-                  bordertype='enabled'
                   required={true}
                   placeholder={`투표 후보${index + 1}`}
                   width='100%'
