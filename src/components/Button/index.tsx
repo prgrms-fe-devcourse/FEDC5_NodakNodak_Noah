@@ -23,8 +23,8 @@ const Button = ({
         $size={size}
         $event={event}
         $isArrow={isArrow}>
-        {size !== 'mini' && children}
-        {(isArrow || size === 'mini') && <span>{'>'}</span>}
+        {children}
+        {isArrow && <span>{'>'}</span>}
       </ButtonLayout>
     </ButtonWrapper>
   );
