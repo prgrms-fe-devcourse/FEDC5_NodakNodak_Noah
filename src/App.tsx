@@ -1,7 +1,7 @@
-import UserPage from '@/pages/userPage/UserInfo';
+import UserInfo from './pages/userPage/UserInfo';
 
 const App = () => {
-  return <UserPage />;
+  return <UserInfo />;
 };
 
 export default App;

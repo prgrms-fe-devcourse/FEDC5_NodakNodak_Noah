@@ -1,3 +1,4 @@
+import GrassTable from './GrassTable';
 import styled from 'styled-components';
 import Avatar from '@/components/Avatar';
 import Text from '@/components/Text';
@@ -40,6 +41,7 @@ const UserInfo = () => {
               {posts} 포스트
             </Button>
           </UserButtonContainer>
+          <GrassTable />
         </UserInfoWrapper>
       </UserInfoContainer>
     </>
