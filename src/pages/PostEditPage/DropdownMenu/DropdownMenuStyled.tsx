@@ -34,7 +34,6 @@ export const BorderLine = styled.div`
 export const ListItemButton = styled.button`
   width: 100%;
   height: 48px;
-
   text-align: left;
   background-color: #faf6e8;
   border: none;
@@ -54,7 +53,9 @@ export const ListItemButton = styled.button`
 `;
 
 export const DropdownContent = styled.ul`
-  top: 100;
+  width: 100%;
   position: absolute;
-  flex-direction: column;
+  top: 100%;
+  margin: 0px;
+  padding-inline-start: 0px;
 `;
