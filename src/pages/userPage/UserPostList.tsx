@@ -19,8 +19,8 @@ const UserPostList = () => {
 
   return (
     <>
-      <Text tagType={'div'} fontType={'h4'} colorType={'black'}>
-        {username} 님의 최근 게시글
+      <Text tagType='div' fontType='h4' colorType='black'>
+        {username}
       </Text>
       <PostContainer>
         {Array(4)
