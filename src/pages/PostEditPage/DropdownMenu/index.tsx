@@ -22,7 +22,9 @@ const DropdownMenu = ({ itemList, title, onClick }: DropdownMenuProps) => {
   };
 
   const handleItemClick = (item: Channel) => {
-    onClick!(item);
+    if (onClick) {
+      onClick(item);
+    }
     toggleMenu();
   };
 
