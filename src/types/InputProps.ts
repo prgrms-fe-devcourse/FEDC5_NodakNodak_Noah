@@ -5,7 +5,8 @@ export interface InputProps
   $flex?: boolean;
   wrapperProps?: WrapperProps;
   hint?: string;
-  bordertype?:
+  fontSize?: string;
+  borderType?:
     | 'enabled'
     | 'hover'
     | 'focus'

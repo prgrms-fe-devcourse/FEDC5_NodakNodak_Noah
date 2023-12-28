@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from '@/styles/theme';
 
 export const BadgeContainer = styled.div`
   position: relative;
@@ -17,16 +18,16 @@ export const Super = styled.sup<{ isOnline: boolean; isFollowing: boolean }>`
   color: white;
   border-radius: 20px;
   background-color: ${({ isOnline }) =>
-    isOnline ? 'var(--Success-300,#b3f17b)' : 'var(--Error-300,#f17b7b)'};
+    isOnline ? theme.colors.success[300] : theme.colors.error[300]};
 
   &.dot {
     padding: 0;
-    width: 16px;
-    height: 16px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
 
     border: 3px solid
       ${({ isFollowing }) =>
-        isFollowing ? 'var(--Primary-200, #e3d4b3)' : 'white'};
+        isFollowing ? theme.colors.info[300] : theme.colors.white};
   }
 `;

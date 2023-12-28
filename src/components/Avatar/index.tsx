@@ -1,7 +1,8 @@
 import { AvatarWrapper } from './AvatarStyled';
+import Image from '../Image';
 import { useState, useEffect } from 'react';
 import { AvatarProps } from '@/types/AvatarProps';
-import ImageComponent from '@/components/Image';
+
 
 const Avatar = ({
   src,
@@ -35,7 +36,8 @@ const Avatar = ({
           width: `${avatarSize}px`,
           height: `${avatarSize}px`,
         }}>
-        <ImageComponent
+
+        <Image
           block
           width={avatarSize}
           height={avatarSize}
