@@ -8,7 +8,7 @@ const Index = () => {
     <IndexContainer>
       <IndexWrapper>
         {/* <Logo /> */}
-        <Button>시작하기</Button>
+        <Button size='wide'>시작하기</Button>
       </IndexWrapper>
     </IndexContainer>
   );
