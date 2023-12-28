@@ -1,5 +1,10 @@
+import {
+  ContentWrapper,
+  Content,
+  InputContainer,
+  DeleteButton,
+} from './VoteEditBoxStyled';
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
 import Card from '@/components/Card';
@@ -98,31 +103,5 @@ const VotedBox = () => {
     </>
   );
 };
-
-const ContentWrapper = styled.div`
-  padding: 40px 100px;
-`;
-
-const Content = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-`;
-
-const InputContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-`;
-
-const DeleteButton = styled.button<{ $isshow: boolean }>`
-  margin-left: 10px;
-  cursor: pointer;
-  color: red;
-  border: none;
-  background: none;
-  font-size: 14px;
-  visibility: ${({ $isshow }) => ($isshow ? 'visible' : 'hidden')};
-`;
 
 export default VotedBox;
