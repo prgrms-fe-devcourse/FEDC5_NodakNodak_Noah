@@ -1,7 +1,5 @@
-import PostEditPage from './pages/PostEditPage/PostEditPage';
-
 const App = () => {
-  return <PostEditPage />;
+  return <></>;
 };
 
 export default App;
