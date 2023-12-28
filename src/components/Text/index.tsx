@@ -27,7 +27,7 @@ const Text = ({
     color,
   };
 
-  return <Tag style={{ ...props.style, ...textStyle }}>{children}</Tag>;
+  return <Tag style={{ ...textStyle, ...props.style }}>{children}</Tag>;
 };
 
 export default Text;
