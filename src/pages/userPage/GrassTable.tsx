@@ -5,7 +5,7 @@ const GrassTable = () => {
   return (
     <GrassWrapper>
       {Array(30)
-        .fill()
+        .fill(0)
         .map((_, i) => (
           <GrassItem key={i} />
         ))}
