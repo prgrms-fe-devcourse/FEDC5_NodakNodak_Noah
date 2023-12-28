@@ -1,4 +1,3 @@
-import { PropsWithChildren } from 'react';
 import theme from '@/styles/theme';
 import { TextProps } from '@/types/TextProps';
 
@@ -8,7 +7,8 @@ const Text = ({
   colorType = 'primary',
   colorNumber = '100',
   children,
-}: PropsWithChildren<TextProps>) => {
+  ...props
+}: TextProps) => {
   const Tag = tagType;
   const fontSize = theme.fontSize[fontType].size;
   const fontWeight = theme.fontSize[fontType].weight;
@@ -27,7 +27,7 @@ const Text = ({
     color,
   };
 
-  return <Tag style={{ ...textStyle }}>{children}</Tag>;
+  return <Tag style={{ ...props.style, ...textStyle }}>{children}</Tag>;
 };
 
 export default Text;
