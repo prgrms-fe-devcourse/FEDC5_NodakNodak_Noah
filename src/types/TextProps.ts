@@ -1,6 +1,6 @@
 export interface TextProps {
-  tagType: 'div' | 'span' | 'p';
-  fontType:
+  tagType?: 'div' | 'span' | 'p';
+  fontType?:
     | 'h1'
     | 'h2'
     | 'h3'
@@ -12,7 +12,7 @@ export interface TextProps {
     | 'button2'
     | 'button3'
     | 'caption';
-  colorType:
+  colorType?:
     | 'primary'
     | 'success'
     | 'error'
@@ -22,4 +22,6 @@ export interface TextProps {
     | 'white'
     | 'black';
   colorNumber?: '100' | '200' | '300' | '400' | '500';
+  children: string;
+  style?: React.CSSProperties;
 }

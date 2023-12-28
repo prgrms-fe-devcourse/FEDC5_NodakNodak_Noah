@@ -4,9 +4,9 @@ import { ButtonProps } from '@/types/ButtonPropsTypes';
 
 const Button = ({
   children,
-  styleType,
-  size,
-  event,
+  styleType = 'primary',
+  size = 'regular',
+  event = 'enabled',
   type,
   onClick,
   isArrow = false,

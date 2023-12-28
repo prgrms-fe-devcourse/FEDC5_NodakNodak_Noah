@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from '@/styles/theme';
 
 export interface WrapperProps {
   $flex?: boolean;
@@ -7,7 +8,8 @@ export interface WrapperProps {
 export interface StyledInputProps {
   width?: string | number;
   height?: string | number;
-  bordertype:
+  fontSize?: string;
+  borderType:
     | 'enabled'
     | 'hover'
     | 'focus'
@@ -28,6 +30,7 @@ export const Eye = styled.span``;
 export const StyledInput = styled.input<StyledInputProps>`
   width: ${({ width }) => (width ? width : 'auto')};
   height: ${({ height }) => (height ? height : 'auto')};
+  font-size: ${({ fontSize }) => (fontSize ? fontSize : 'auto')};
   padding: 4px 8px;
   border: 1px solid ${({ bordertype }) => borderMap[bordertype]};
   border-radius: 4px;
@@ -36,11 +39,11 @@ export const StyledInput = styled.input<StyledInputProps>`
 `;
 
 const borderMap = {
-  enabled: '#868E96',
-  hover: '#5C7CFA',
-  focus: '#5C7CFA',
-  active: '#5C7CFA',
-  filled: '#868E96',
-  error: '#C92A2A',
-  disabled: '#DEE2E6',
+  enabled: theme.colors.grayscale[300],
+  hover: theme.colors.info[300],
+  focus: theme.colors.info[300],
+  active: theme.colors.info[300],
+  filled: theme.colors.grayscale[300],
+  error: theme.colors.error[500],
+  disabled: theme.colors.grayscale[200],
 };
