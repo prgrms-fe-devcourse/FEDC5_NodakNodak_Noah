@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 import { Channel } from '@/types/APIResponseTypes';
+import them from '@/styles/theme';
 
 const PostEditPage = () => {
   const [currentChannel, setCurrentChannel] = useState<Channel | null>(null);
@@ -51,16 +52,15 @@ const FormArea = styled.div`
 const TextAreaWrapper = styled.div`
   width: 954px;
   height: 429px;
-  background-color: #f9f9f9;
+  background-color: ${them.colors.grayscale[100]};
   padding: 10px;
-  border: 1px solid #868e96;
+  border: 1px solid ${them.colors.grayscale[300]};
 `;
 
 const StyledTextArea = styled.textarea`
   font-size: 16px;
   width: 100%;
   height: 100%;
-  color: #000;
   border: none;
   resize: none;
   outline: none;
