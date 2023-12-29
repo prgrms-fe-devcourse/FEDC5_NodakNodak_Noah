@@ -17,6 +17,7 @@
     "styled-components": "^6.1.1"
   },
   "devDependencies": {
+    "@svgr/rollup": "^8.1.0",
     "@types/node": "^20.10.5",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
