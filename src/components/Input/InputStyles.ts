@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import theme from '@/styles/theme';
 
 export interface WrapperProps {
-  flex?: boolean;
+  $flex?: boolean;
 }
 
 export interface StyledInputProps {
@@ -20,7 +20,7 @@ export interface StyledInputProps {
 }
 
 export const Wrapper = styled.div<WrapperProps>`
-  display: ${({ flex }) => (flex ? 'flex' : 'inline-flex')};
+  display: ${({ $flex }) => ($flex ? 'flex' : 'inline-flex')};
   justify-content: center;
   width: 100%;
 `;
@@ -32,7 +32,7 @@ export const StyledInput = styled.input<StyledInputProps>`
   height: ${({ height }) => (height ? height : 'auto')};
   font-size: ${({ fontSize }) => (fontSize ? fontSize : 'auto')};
   padding: 4px 8px;
-  border: 1px solid ${({ borderType }) => borderMap[borderType]};
+  border: 1px solid ${({ bordertype }) => borderMap[bordertype]};
   border-radius: 4px;
   box-sizing: border-box;
   background-color: #f9f9f9;
