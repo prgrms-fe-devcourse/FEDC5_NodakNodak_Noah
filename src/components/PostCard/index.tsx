@@ -1,12 +1,13 @@
-import { TempPost } from './tempType';
 import { FlexWrapper } from './StyledPostCard';
 import PostSnippet from './PostSnippet';
 import Button from '../Button';
 import Card from '../Card';
-
 import styled from 'styled-components';
+import { PostCardProps } from '@/types/PostCardTypes';
 
-const PostCard = ({ avatar, image, title, count, fullName }: TempPost) => {
+const PostCard = ({ post }: PostCardProps) => {
+  const { avatar, image, title, count, fullName } = post;
+
   return (
     <Card width='280px' height='280px' shadowType='medium'>
       <PostSnippet

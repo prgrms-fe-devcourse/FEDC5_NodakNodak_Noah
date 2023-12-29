@@ -1,7 +1,8 @@
-import { TempPost } from './tempType';
+import { TempPost } from '@/types/PostCardTypes';
 
 export const mockPosts: TempPost[] = Array.from({ length: 40 }).map(
   (_, index) => ({
+    _id: index.toString(),
     count: Math.floor(Math.random() * 100).toString(),
     image: `https://picsum.photos/300/200?a=${index}`,
     title: `i am title ${index}`,
