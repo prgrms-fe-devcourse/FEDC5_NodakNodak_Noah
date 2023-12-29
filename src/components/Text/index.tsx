@@ -1,3 +1,4 @@
+import { PropsWithChildren } from 'react';
 import theme from '@/styles/theme';
 import { TextProps } from '@/types/TextProps';
 
@@ -8,7 +9,7 @@ const Text = ({
   colorNumber = '100',
   children,
   ...props
-}: TextProps) => {
+}: PropsWithChildren<TextProps>) => {
   const Tag = tagType;
   const fontSize = theme.fontSize[fontType].size;
   const fontWeight = theme.fontSize[fontType].weight;

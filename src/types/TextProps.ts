@@ -22,6 +22,6 @@ export interface TextProps {
     | 'white'
     | 'black';
   colorNumber?: '100' | '200' | '300' | '400' | '500';
-  children: string;
+  // children: string;
   style?: React.CSSProperties;
 }
