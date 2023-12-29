@@ -28,8 +28,9 @@ const PasswordInput = ({
         placeholder={placeholder}
         {...props}
       />
-      <Eye onClick={handleEye}>{canSee ? '*' : '&'}</Eye>
-      {/* <Eye className='material-symbols-outlined'>visibility</Eye> */}
+      <Eye onClick={handleEye} className='material-symbols-outlined'>
+        {canSee ? 'visibility_off' : 'visibility'}
+      </Eye>
     </Wrapper>
   );
 };

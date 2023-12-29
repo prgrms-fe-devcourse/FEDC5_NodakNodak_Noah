@@ -22,10 +22,23 @@ export interface StyledInputProps {
 export const Wrapper = styled.div<WrapperProps>`
   display: ${({ $flex }) => ($flex ? 'flex' : 'inline-flex')};
   justify-content: center;
+  align-items: center;
+  position: relative;
   width: 100%;
 `;
 
-export const Eye = styled.span``;
+export const Eye = styled.span`
+  display: flex;
+  position: absolute;
+  right: 32%;
+  @media screen and (max-width: 900px) {
+    right: 24%;
+  }
+  @media screen and (max-width: 600px) {
+    right: 6%;
+  }
+  cursor: pointer;
+`;
 
 export const StyledInput = styled.input<StyledInputProps>`
   width: ${({ width }) => (width ? width : 'auto')};
