@@ -53,7 +53,7 @@ const VotedBox = () => {
 
   return (
     <>
-      <Card width='666px' height='auto' shadowType='medium'>
+      <Card width='666px' height='auto' shadowType='medium' margin='0 auto'>
         <ContentWrapper>
           <Content>
             <Input

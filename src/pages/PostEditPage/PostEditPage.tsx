@@ -17,40 +17,60 @@ const PostEditPage = () => {
 
   return (
     <>
-      <Button styleType='primary' size='small' type='submit' event='enabled'>
-        등록하기
-      </Button>
-      <FormArea>
-        <Input
-          required={true}
-          placeholder='제목을 입력하세요'
-          width='589px'
-          height='70px'
-        />
-        <DropdownMenu
-          itemList={itemListData}
-          title='채널 선택'
-          onClick={handleChannelClick}
-        />
-        <TextAreaWrapper>
-          <StyledTextArea name='content' placeholder='내용을 입력하세요' />
-        </TextAreaWrapper>
-      </FormArea>
-      <VotedBox />
+      <FormContainer>
+        <Button styleType='primary' size='small' type='submit' event='enabled'>
+          등록하기
+        </Button>
+        <FormArea>
+          <Input
+            required={true}
+            placeholder='제목을 입력하세요'
+            width='589px'
+            height='70px'
+          />
+          <DropdownMenu
+            itemList={itemListData}
+            title='채널 선택'
+            onClick={handleChannelClick}
+          />
+          <TextAreaWrapper>
+            <StyledTextArea name='content' placeholder='내용을 입력하세요' />
+          </TextAreaWrapper>
+        </FormArea>
+        <VotedBox />
+      </FormContainer>
     </>
   );
 };
 
 export default PostEditPage;
 
+const FormContainer = styled.div`
+  display: flex;
+  width: 100%;
+  max-width: 954px;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 0 auto;
+`;
+
 const FormArea = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  width: 100%;
+  margin: 10px 0;
+
+  & > :nth-child(2) {
+    margin-bottom: 50px;
+  }
+
+  & > * {
+    margin-bottom: 15px;
+  }
 `;
 
 const TextAreaWrapper = styled.div`
-  width: 954px;
   height: 429px;
   background-color: ${them.colors.grayscale[100]};
   padding: 10px;
