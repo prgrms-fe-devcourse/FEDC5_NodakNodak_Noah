@@ -1,7 +1,8 @@
+import Index from './pages/Index';
 import NotFound from './pages/NotFound';
 
 const App = () => {
-  return <NotFound />;
+  return <Index />;
 };
 
 export default App;
