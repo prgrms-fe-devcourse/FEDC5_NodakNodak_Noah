@@ -30,6 +30,8 @@ PostCard.Group = styled.div`
   justify-content: center;
   flex-wrap: wrap;
 
+  width: 904px;
+
   gap: 16px;
 `;
 
