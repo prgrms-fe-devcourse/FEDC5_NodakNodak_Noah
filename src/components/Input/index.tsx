@@ -2,8 +2,8 @@
 import { InputProps } from '@/types/InputProps';
 
 const Input = ({
-  flex = false,
-  borderType = 'filled',
+  $flex = false,
+  bordertype = 'filled',
   required = false,
   disabled = false,
   readOnly = false,
@@ -12,9 +12,9 @@ const Input = ({
   ...props
 }: InputProps) => {
   return (
-    <Wrapper flex={flex} {...wrapperProps}>
+    <Wrapper $flex={$flex} {...wrapperProps}>
       <StyledInput
-        borderType={borderType}
+        bordertype={bordertype}
         required={required}
         disabled={disabled}
         readOnly={readOnly}
