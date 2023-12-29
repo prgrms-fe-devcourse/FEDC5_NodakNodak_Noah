@@ -1,11 +1,18 @@
-import { TempPost } from './tempType';
 import { PostSnippetBox } from './StyledPostCard';
 import { UserSnippetBox } from '../UserSnippet/StyledUserSnippet';
 import Avatar from '../Avatar';
 import Image from '../Image';
 import Text from '../Text';
 
-const PostSnippet = ({ avatar, image, title, count, fullName }: TempPost) => {
+import { PostSnippetProps } from '@/types/PostCardTypes';
+
+const PostSnippet = ({
+  avatar,
+  image,
+  title,
+  count,
+  fullName,
+}: PostSnippetProps) => {
   return (
     <PostSnippetBox>
       <Image
@@ -15,11 +22,16 @@ const PostSnippet = ({ avatar, image, title, count, fullName }: TempPost) => {
         src={image}
         mode='cover'
       />
-      <Text fontType='body2' colorType='black' style={{ fontWeight: '700' }}>
-        {title}
-      </Text>
-      <Text fontType='caption' colorType='black'>
-        총
+      <div>
+        <Text fontType='body2' colorType='black' style={{ fontWeight: '700' }}>
+          {title}
+        </Text>
+        <Text
+          fontType='caption'
+          colorType='black'
+          style={{ display: 'inline' }}>
+          {'총 '}
+        </Text>
         <Text
           fontType='caption'
           colorType='primary'
@@ -27,8 +39,13 @@ const PostSnippet = ({ avatar, image, title, count, fullName }: TempPost) => {
           style={{ display: 'inline' }}>
           {count}
         </Text>
-        명 투표
-      </Text>
+        <Text
+          fontType='caption'
+          colorType='black'
+          style={{ display: 'inline' }}>
+          명 투표
+        </Text>
+      </div>
       <UserSnippetBox>
         <Avatar size='mini' src={avatar} />
         <Text fontType='caption' colorType='black'>
