@@ -1,4 +1,4 @@
-import { Form, Guide, Register, SignProps } from './SignStyle';
+import { Form, Guide, Register, SignProps, Warning } from './SignStyle';
 import Input from '../Input';
 import Button from '../Button';
 import PasswordInput from '../Input/PasswordInput';
@@ -8,6 +8,8 @@ import axios from 'axios';
 const In = ({ isLogin, setIsLogin }: SignProps) => {
   const [email, setEmail] = useState('');
   const [pw, setPW] = useState('');
+  const [warn, setWarn] = useState(false);
+  const [warnText, setWarnText] = useState('');
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -22,7 +24,12 @@ const In = ({ isLogin, setIsLogin }: SignProps) => {
       localStorage.setItem('auth-token', data.token);
       alert('로그인 성공');
     } catch (e) {
-      alert(e);
+      setWarnText('아이디 또는 비밀번호가 일치하지 않습니다.');
+      setWarn(true);
+      setTimeout(() => {
+        setWarn(false);
+        setWarnText('');
+      }, 3000);
     }
   };
 
@@ -35,6 +42,7 @@ const In = ({ isLogin, setIsLogin }: SignProps) => {
         placeholder='Email'
         autoComplete='on'
         type='email'
+        $bordertype={warn ? 'error' : 'filled'}
         onChange={(e) => setEmail(e.target.value)}
       />
       <PasswordInput
@@ -43,8 +51,10 @@ const In = ({ isLogin, setIsLogin }: SignProps) => {
         fontSize='20px'
         placeholder='Password'
         autoComplete='off'
+        $bordertype={warn ? 'error' : 'filled'}
         onChange={(e) => setPW(e.target.value)}
       />
+      {warn ? <Warning>{warnText}</Warning> : ''}
       <Guide>
         노닥노닥이 처음이라면?
         <Register onClick={() => setIsLogin(!isLogin)}>

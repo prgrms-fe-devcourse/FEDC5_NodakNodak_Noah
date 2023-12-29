@@ -33,7 +33,7 @@ const PostComment = () => {
           }}>
           <Input
             flex={false}
-            borderType='filled'
+            $bordertype='filled'
             placeholder='플레이스 홀더 텍스트'
             width='588px'
             height='48px'
