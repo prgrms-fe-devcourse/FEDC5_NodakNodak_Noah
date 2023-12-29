@@ -26,23 +26,17 @@ const PostSnippet = ({
         <Text fontType='body2' colorType='black' style={{ fontWeight: '700' }}>
           {title}
         </Text>
-        <Text
-          fontType='caption'
-          colorType='black'
-          style={{ display: 'inline' }}>
+        <Text tagType='span' fontType='caption' colorType='black'>
           {'총 '}
         </Text>
         <Text
+          tagType='span'
           fontType='caption'
           colorType='primary'
-          colorNumber='400'
-          style={{ display: 'inline' }}>
+          colorNumber='400'>
           {count}
         </Text>
-        <Text
-          fontType='caption'
-          colorType='black'
-          style={{ display: 'inline' }}>
+        <Text tagType='span' fontType='caption' colorType='black'>
           명 투표
         </Text>
       </div>
