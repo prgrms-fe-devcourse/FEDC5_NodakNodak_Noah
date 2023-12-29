@@ -3,8 +3,8 @@ import { useState } from 'react';
 import { InputProps } from '@/types/InputProps';
 
 const PasswordInput = ({
-  flex = false,
-  borderType = 'filled',
+  $flex = false,
+  $bordertype = 'filled',
   required = false,
   disabled = false,
   readOnly = false,
@@ -18,9 +18,9 @@ const PasswordInput = ({
   };
 
   return (
-    <Wrapper flex={flex} {...wrapperProps}>
+    <Wrapper $flex={$flex} {...wrapperProps}>
       <StyledInput
-        borderType={borderType}
+        $bordertype={$bordertype}
         required={required}
         disabled={disabled}
         readOnly={readOnly}

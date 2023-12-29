@@ -4,9 +4,9 @@ export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
   $flex?: boolean;
   wrapperProps?: WrapperProps;
-  hint?: string;
   fontSize?: string;
-  borderType?:
+  $underline?: boolean;
+  $bordertype?:
     | 'enabled'
     | 'hover'
     | 'focus'
