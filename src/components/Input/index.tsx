@@ -10,7 +10,7 @@ const Input = ({
   readOnly = false,
   placeholder = '',
   height,
-  width,
+  width = '400px',
   wrapperStyle,
   ...props
 }: InputProps) => {
@@ -24,9 +24,7 @@ const Input = ({
         disabled={disabled}
         readOnly={readOnly}
         placeholder={placeholder}
-        width={width}
-        height={height}
-        style={{ ...props.style }}
+        style={{ ...props.style, width, height }}
       />
     </Wrapper>
   );
