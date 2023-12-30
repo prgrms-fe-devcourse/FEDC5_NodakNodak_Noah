@@ -7,7 +7,7 @@ const Text = ({
   colorType = 'black',
   colorNumber = '100',
   children,
-  ...props
+  style,
 }: TextProps) => {
   const Tag = tagType;
   const fontSize = theme.fontSize[fontType].size;
@@ -27,7 +27,7 @@ const Text = ({
     color,
   };
 
-  return <Tag style={{ ...textStyle, ...props.style }}>{children}</Tag>;
+  return <Tag style={{ ...textStyle, ...style }}>{children}</Tag>;
 };
 
 export default Text;
