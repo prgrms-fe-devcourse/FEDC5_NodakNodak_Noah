@@ -1,7 +1,7 @@
 import { AvatarWrapper } from './AvatarStyled';
+import { AvatarProps } from './AvatarProps';
 import Image from '../Image';
 import { useState, useEffect } from 'react';
-import { AvatarProps } from '@/types/AvatarProps';
 
 const avatarSizes = {
   mini: '24px',

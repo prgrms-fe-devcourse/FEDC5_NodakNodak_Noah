@@ -3,10 +3,10 @@ import {
   TextWrapper,
   PageNumberWrapper,
 } from './StyledPagination';
+import { PaginationProps } from './PaginationTypes';
 import Button from '../Button';
 import Text from '../Text';
 import { useState } from 'react';
-import { PaginationProps } from '@/types/PaginationTypes';
 
 const Pagination = ({ defaultPage = 1, limit, total }: PaginationProps) => {
   const [page, setPage] = useState(defaultPage);

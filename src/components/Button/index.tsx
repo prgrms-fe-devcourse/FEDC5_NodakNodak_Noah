@@ -1,6 +1,6 @@
 import { ButtonLayout, ButtonWrapper } from './StyledButton';
+import { ButtonProps } from './ButtonPropsTypes';
 import { PropsWithChildren } from 'react';
-import { ButtonProps } from '@/types/ButtonPropsTypes';
 
 const Button = ({
   children,

@@ -1,5 +1,5 @@
+import { ImageProps } from './ImageProps';
 import { useRef, useState } from 'react';
-import { ImageProps } from '@/types/ImageProps';
 
 const Image = ({
   defaultSrc,

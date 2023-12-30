@@ -1,5 +1,5 @@
 ﻿import { Wrapper, StyledInput } from './InputStyles';
-import { InputProps } from '@/types/InputProps';
+import { InputProps } from './InputProps';
 
 const Input = ({
   bordertype = 'filled',
