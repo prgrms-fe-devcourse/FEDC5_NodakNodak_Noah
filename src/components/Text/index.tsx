@@ -2,7 +2,7 @@ import theme from '@/styles/theme';
 import { TextProps } from '@/types/TextProps';
 
 const Text = ({
-  tagType = 'div',
+  tagType = 'span',
   fontType = 'body1',
   colorType = 'black',
   colorNumber = '100',
@@ -25,9 +25,10 @@ const Text = ({
     fontSize,
     fontWeight,
     color,
+    ...style,
   };
 
-  return <Tag style={{ ...textStyle, ...style }}>{children}</Tag>;
+  return <Tag style={textStyle}>{children}</Tag>;
 };
 
 export default Text;
