@@ -1,4 +1,4 @@
-import { Form, Guide, Register, SignProps } from './SignStyle';
+import { Form, Guide, Register, SignProps, Warning } from './SignStyle';
 import Button from '../Button';
 import Input from '../Input';
 import PasswordInput from '../Input/PasswordInput';
@@ -9,12 +9,18 @@ const Up = ({ isLogin, setIsLogin }: SignProps) => {
   const [email, setEmail] = useState('');
   const [pw, setPW] = useState('');
   const [confirmPW, setConfirmPW] = useState('');
-
+  const [pwWarn, setPwWarn] = useState(false);
+  const [warnText, setWarnText] = useState('');
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (pw !== confirmPW) {
-      alert('비밀번호가 다릅니다.');
+      setWarnText('비밀번호가 일치하지 않습니다.');
+      setPwWarn(true);
+      setTimeout(() => {
+        setPwWarn(false);
+        setWarnText('');
+      }, 3000);
       return;
     }
 
@@ -51,6 +57,7 @@ const Up = ({ isLogin, setIsLogin }: SignProps) => {
         fontSize='20px'
         placeholder='Password'
         autoComplete='off'
+        $bordertype={pwWarn ? 'error' : 'filled'}
         onChange={(e) => setPW(e.target.value)}
       />
 
@@ -60,9 +67,10 @@ const Up = ({ isLogin, setIsLogin }: SignProps) => {
         fontSize='20px'
         placeholder='Password'
         autoComplete='off'
+        $bordertype={pwWarn ? 'error' : 'filled'}
         onChange={(e) => setConfirmPW(e.target.value)}
       />
-
+      {pwWarn ? <Warning>{warnText}</Warning> : ''}
       <Guide>
         이미 노닥노닥과 함께라면
         <Register onClick={() => setIsLogin(!isLogin)}>

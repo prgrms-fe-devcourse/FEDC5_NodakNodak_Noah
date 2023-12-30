@@ -30,25 +30,25 @@ const PostVote = () => {
       </VoteTitleWrapper>
       <Input
         placeholder='투표 후보 1'
-        borderType='enabled'
+        $bordertype='enabled'
         width='466px'
         height='48px'
       />
       <Input
         placeholder='투표 후보 2'
-        borderType='enabled'
+        $bordertype='enabled'
         width='466px'
         height='48px'
       />
       <Input
         placeholder='투표 후보 3'
-        borderType='enabled'
+        $bordertype='enabled'
         width='466px'
         height='48px'
       />
       <Input
         placeholder='투표 후보 4'
-        borderType='enabled'
+        $bordertype='enabled'
         width='466px'
         height='48px'
       />

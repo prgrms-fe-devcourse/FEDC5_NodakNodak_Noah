@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from '@/styles/theme';
 
 export const Content = styled.div`
   display: flex;
@@ -12,6 +13,12 @@ export const Form = styled.form`
   flex-direction: column;
   align-items: center;
   gap: 16px;
+`;
+
+export const Warning = styled.div`
+  display: flex;
+  color: ${theme.colors.error[500]};
+  margin-left: 48px;
 `;
 
 export const Guide = styled.span`
