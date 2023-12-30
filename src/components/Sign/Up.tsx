@@ -45,7 +45,7 @@ const Up = ({ isLogin, setIsLogin }: SignProps) => {
       <Input
         width='360px'
         height='48px'
-        fontSize='20px'
+        fontType='body3'
         placeholder='Email'
         autoComplete='on'
         type='email'
@@ -54,20 +54,20 @@ const Up = ({ isLogin, setIsLogin }: SignProps) => {
       <PasswordInput
         width='360px'
         height='48px'
-        fontSize='20px'
+        fontType='body3'
         placeholder='Password'
         autoComplete='off'
-        $bordertype={pwWarn ? 'error' : 'filled'}
+        bordertype={pwWarn ? 'error' : 'filled'}
         onChange={(e) => setPW(e.target.value)}
       />
 
       <PasswordInput
         width='360px'
         height='48px'
-        fontSize='20px'
+        fontType='body3'
         placeholder='Password'
         autoComplete='off'
-        $bordertype={pwWarn ? 'error' : 'filled'}
+        bordertype={pwWarn ? 'error' : 'filled'}
         onChange={(e) => setConfirmPW(e.target.value)}
       />
       {pwWarn ? <Warning>{warnText}</Warning> : ''}

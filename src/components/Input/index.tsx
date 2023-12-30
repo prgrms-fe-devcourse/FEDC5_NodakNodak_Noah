@@ -25,6 +25,7 @@ const Input = ({
         readOnly={readOnly}
         placeholder={placeholder}
         style={{ ...props.style, width, height }}
+        {...props}
       />
     </Wrapper>
   );
