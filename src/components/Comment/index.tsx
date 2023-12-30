@@ -1,8 +1,13 @@
 import Avatar from './../Avatar/index';
 import Text from './../Text/index';
 import theme from '@/styles/theme';
+import { Comment } from '@/pages/DetailPage/Dummy';
 
-const Comment = () => {
+const CommentItem = ({ author, createdAt, comment }: Comment) => {
+  const { fullname, image } = author;
+  const { content } = comment;
+  // 여기서 에러가 왜 발생하는지 알 수가 없음
+
   return (
     <div
       className='commentItem'
@@ -14,11 +19,7 @@ const Comment = () => {
         height: '96px',
       }}>
       <div className='userData' style={{ display: 'inline-flex' }}>
-        <Avatar
-          src='https://via.placeholder.com/150'
-          size='middle'
-          alt='유저네임'
-        />
+        <Avatar src={image} size='middle' alt='유저네임' />
         <div
           style={{
             display: 'flex',
@@ -31,24 +32,23 @@ const Comment = () => {
             colorNumber='500'
             fontType='body1'
             tagType='span'>
-            nickname
+            {fullname}
           </Text>
           <Text
             tagType='span'
             fontType='caption'
             colorType='grayscale'
             colorNumber='300'>
-            2023.12.23 13:27
+            {createdAt}
           </Text>
           <hr />
         </div>
       </div>
       <Text tagType='span' fontType='body3' colorType='black'>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry.
+        {content}
       </Text>
     </div>
   );
 };
 
-export default Comment;
+export default CommentItem;
