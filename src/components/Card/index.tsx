@@ -5,8 +5,8 @@ const Card = ({
   width = '100px',
   height = '100px',
   shadowType = 'medium',
-  style,
   children,
+  ...props
 }: PropsWithChildren<CardProps>) => {
   const ShadowSizes = {
     medium:
@@ -19,7 +19,7 @@ const Card = ({
     width,
     height,
     boxShadow: ShadowSizes[shadowType],
-    ...style,
+    ...props.style,
   };
 
   return <div style={CardStyle}>{children}</div>;

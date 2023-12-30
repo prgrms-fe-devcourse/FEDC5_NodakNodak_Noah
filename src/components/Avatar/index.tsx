@@ -10,7 +10,13 @@ const avatarSizes = {
   large: '224px',
 };
 
-const Avatar = ({ src, size = 'middle', defaultSrc, alt }: AvatarProps) => {
+const Avatar = ({
+  src,
+  size = 'middle',
+  defaultSrc,
+  alt,
+  ...props
+}: AvatarProps) => {
   const [loaded, setLoaded] = useState(false);
   const avatarSize = avatarSizes[size];
 
@@ -31,7 +37,7 @@ const Avatar = ({ src, size = 'middle', defaultSrc, alt }: AvatarProps) => {
           src={src}
           defaultSrc={defaultSrc}
           alt={alt}
-          style={{ opacity: loaded ? 1 : 0 }}
+          style={{ ...props.style, opacity: loaded ? 1 : 0 }}
         />
       </AvatarWrapper>
     </>

@@ -1,7 +1,14 @@
 import { useRef, useState } from 'react';
 import { ImageProps } from '@/types/ImageProps';
 
-const Image = ({ defaultSrc, src, width, height, alt, style }: ImageProps) => {
+const Image = ({
+  defaultSrc,
+  src,
+  width,
+  height,
+  alt,
+  ...props
+}: ImageProps) => {
   const [error, setError] = useState(false);
 
   const imgRef = useRef<HTMLImageElement | null>(null);
@@ -10,7 +17,7 @@ const Image = ({ defaultSrc, src, width, height, alt, style }: ImageProps) => {
     display: 'block',
     width,
     height,
-    ...style,
+    ...props.style,
   };
 
   const handleImageError = () => {
