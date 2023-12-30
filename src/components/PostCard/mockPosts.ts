@@ -1,6 +1,6 @@
 import { TempPost } from '@/types/PostCardTypes';
 
-export const mockPosts: TempPost[] = Array.from({ length: 100 }).map(
+export const mockPosts: TempPost[] = Array.from({ length: 200 }).map(
   (_, index) => ({
     _id: index.toString(),
     count: Math.floor(Math.random() * 100).toString(),
