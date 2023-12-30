@@ -6,17 +6,8 @@ import {
 import { PaginationProps } from './PaginationTypes';
 import Button from '../Button';
 import Text from '../Text';
-import { useState } from 'react';
 
-const Pagination = ({ defaultPage = 1, limit, total }: PaginationProps) => {
-  const [page, setPage] = useState(defaultPage);
-  const totalPage = Math.ceil(total / limit);
-
-  const handlePageChange = (page: number) => {
-    if (page < 1 || page > totalPage) return;
-    setPage(page);
-  };
-
+const Pagination = ({ page, totalPage, handlePageChange }: PaginationProps) => {
   return (
     <PaginationWrapper>
       <Button
