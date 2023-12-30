@@ -1,12 +1,20 @@
-import { WrapperProps } from '@/components/Input/InputStyles';
-
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
-  $flex?: boolean;
-  wrapperProps?: WrapperProps;
-  fontSize?: string;
-  $underline?: boolean;
-  $bordertype?:
+  wrapperStyle?: React.CSSProperties;
+  underline?: boolean;
+  fontType?:
+    | 'h1'
+    | 'h2'
+    | 'h3'
+    | 'h4'
+    | 'body1'
+    | 'body2'
+    | 'body3'
+    | 'button1'
+    | 'button2'
+    | 'button3'
+    | 'caption';
+  bordertype?:
     | 'enabled'
     | 'hover'
     | 'focus'
