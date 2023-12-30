@@ -42,7 +42,7 @@ const Pagination = ({ defaultPage = 1, limit, total }: PaginationProps) => {
                 fontType='h4'
                 colorType='primary'
                 colorNumber={page === index + 1 ? '500' : '300'}>
-                {index + 1}
+                {(index + 1).toString()}
               </Text>
             </TextWrapper>
           ))}
