@@ -15,9 +15,7 @@ const PostContent = () => {
       <PostContentAuthorWrapper className='Author'>
         <Avatar
           src='https://via.placeholder.com/150'
-          shape='circle'
           size='middle'
-          mode='cover'
           alt='유저네임'
         />
         <Text
@@ -52,7 +50,6 @@ const PostContent = () => {
         of Lorem Ipsum.
       </Text>
       <Image
-        block={true}
         src='https://via.placeholder.com/150'
         width='23.25rem'
         height='9.4375rem'

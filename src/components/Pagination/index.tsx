@@ -3,9 +3,9 @@ import {
   TextWrapper,
   PageNumberWrapper,
 } from './StyledPagination';
+import { PaginationProps } from './PaginationTypes';
 import Button from '../Button';
 import Text from '../Text';
-import { PaginationProps } from '@/types/PaginationTypes';
 
 const Pagination = ({ page, totalPage, handlePageChange }: PaginationProps) => {
   return (

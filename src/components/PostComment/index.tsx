@@ -32,11 +32,11 @@ const PostComment = () => {
             justifyContent: 'space-between',
           }}>
           <Input
-            flex={false}
-            $bordertype='filled'
+            bordertype='filled'
             placeholder='플레이스 홀더 텍스트'
             width='588px'
             height='48px'
+            underline={true}
           />
           <Button
             event='enabled'

@@ -19,7 +19,7 @@ const UserPostList = () => {
 
   return (
     <>
-      <Text tagType='div' fontType='h4' colorType='black'>
+      <Text tagType='span' fontType='h4' colorType='black'>
         {username}
       </Text>
       <PostContainer>

@@ -1,12 +1,8 @@
 import { UserSnippetBox, Title } from './StyledUserSnippet';
+import { UserSnippetProps, UserSnippetGroupProps } from './UserSnippetProps';
 import Avatar from '../Avatar';
 import OnLineBadge from '../OnlineBadge';
 import { PropsWithChildren } from 'react';
-
-import {
-  UserSnippetProps,
-  UserSnippetGroupProps,
-} from '@/types/UserSnippetProps';
 
 const UserSnippet = ({
   isOnline,
