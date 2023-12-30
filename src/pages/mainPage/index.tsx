@@ -1,4 +1,4 @@
-import { MainWrapper, PostContentWrapper } from './StyledMain';
+import { MainWrapper, PostContentWrapper, MainFlexWrapper } from './StyledMain';
 import { useState } from 'react';
 
 import PostCard from '@/components/PostCard';
@@ -8,6 +8,11 @@ import UserListCard from '@/components/UserListCard';
 import { mockPosts } from '@/components/PostCard/mockPosts';
 import { mockUsers } from '@/components/UserListCard/mockUsers';
 import { TempPost } from '@/types/PostCardTypes';
+
+import Text from '@/components/Text';
+import Button from '@/components/Button';
+
+const MockTitle = '연예';
 
 const Main = () => {
   const [page, setPage] = useState(1);
@@ -25,6 +30,14 @@ const Main = () => {
   return (
     <MainWrapper>
       <PostContentWrapper>
+        <MainFlexWrapper>
+          <Text tagType='div' fontType='h2'>
+            {`${MockTitle} 채널`}
+          </Text>
+          <Button styleType='ghost' size='small'>
+            글 쓰기
+          </Button>
+        </MainFlexWrapper>
         <PostCard.Group>
           {posts.map((post) => (
             <PostCard key={post._id} post={post} />

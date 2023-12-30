@@ -1,8 +1,8 @@
 export interface TempPost {
-  _id: string;
   fullName: string;
-  image: string;
   avatar: string;
+  _id: string;
+  image: string;
   title: string;
   count: string;
 }
