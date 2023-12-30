@@ -1,25 +1,26 @@
 import { useRef, useState } from 'react';
 import { ImageProps } from '@/types/ImageProps';
 
-const Image = ({
-  defaultSrc,
-  src,
-  block,
-  width,
-  height,
-  alt,
-  mode,
-  ...props
-}: ImageProps) => {
-  const [error, setError] = useState(false);
+const imageSize = {
+  medium: {
+    width: '17.5rem',
+    height: '9.125rem',
+  },
+  large: {
+    width: '23.25rem',
+    height: '9.4375rem',
+  },
+};
 
+const Image = ({ defaultSrc, src, size, alt, style }: ImageProps) => {
+  const [error, setError] = useState(false);
   const imgRef = useRef<HTMLImageElement | null>(null);
 
   const imageStyle = {
-    display: block ? 'block' : 'none',
-    width,
-    height,
-    objectFit: mode,
+    display: 'block',
+    width: imageSize[size].width,
+    height: imageSize[size].height,
+    ...style,
   };
 
   const handleImageError = () => {
@@ -31,7 +32,7 @@ const Image = ({
       ref={imgRef}
       src={!error ? src : defaultSrc}
       alt={alt}
-      style={{ ...props.style, ...imageStyle }}
+      style={{ ...imageStyle, objectFit: 'cover' }}
       onError={handleImageError}
     />
   );
