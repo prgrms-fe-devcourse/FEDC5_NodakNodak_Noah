@@ -31,7 +31,7 @@ const Main = () => {
     <MainWrapper>
       <PostContentWrapper>
         <MainFlexWrapper>
-          <Text tagType='div' fontType='h2'>
+          <Text tagType='span' fontType='h2'>
             {`${MockTitle} 채널`}
           </Text>
           <Button styleType='ghost' size='small'>
