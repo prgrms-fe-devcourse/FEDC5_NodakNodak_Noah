@@ -1,9 +1,9 @@
 import { FlexWrapper } from './StyledPostCard';
 import PostSnippet from './PostSnippet';
+import { PostCardProps } from './PostCardTypes';
 import Button from '../Button';
 import Card from '../Card';
 import styled from 'styled-components';
-import { PostCardProps } from '@/types/PostCardTypes';
 
 const PostCard = ({ post }: PostCardProps) => {
   const { avatar, image, title, count, fullName } = post;

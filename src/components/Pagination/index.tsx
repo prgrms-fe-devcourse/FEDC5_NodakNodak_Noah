@@ -3,10 +3,10 @@ import {
   TextWrapper,
   PageNumberWrapper,
 } from './StyledPagination';
+import { PaginationProps } from './PaginationTypes';
 import Button from '../Button';
 import Text from '../Text';
 import { useState } from 'react';
-import { PaginationProps } from '@/types/PaginationTypes';
 
 const Pagination = ({ defaultPage = 1, limit, total }: PaginationProps) => {
   const [page, setPage] = useState(defaultPage);
@@ -42,7 +42,7 @@ const Pagination = ({ defaultPage = 1, limit, total }: PaginationProps) => {
                 fontType='h4'
                 colorType='primary'
                 colorNumber={page === index + 1 ? '500' : '300'}>
-                {index + 1}
+                {(index + 1).toString()}
               </Text>
             </TextWrapper>
           ))}

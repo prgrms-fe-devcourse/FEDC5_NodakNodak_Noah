@@ -1,6 +1,6 @@
 import { ButtonLayout, ButtonWrapper } from './StyledButton';
+import { ButtonProps } from './ButtonPropsTypes';
 import { PropsWithChildren } from 'react';
-import { ButtonProps } from '@/types/ButtonPropsTypes';
 
 const Button = ({
   children,
@@ -8,8 +8,9 @@ const Button = ({
   size = 'regular',
   event = 'enabled',
   type,
-  onClick,
   isArrow = false,
+  onClick,
+  ...props
 }: PropsWithChildren<ButtonProps>) => {
   return (
     <ButtonWrapper
@@ -22,7 +23,8 @@ const Button = ({
         $styleType={styleType}
         $size={size}
         $event={event}
-        $isArrow={isArrow}>
+        $isArrow={isArrow}
+        style={{ ...props.style }}>
         {children}
         {isArrow && <span>{'>'}</span>}
       </ButtonLayout>

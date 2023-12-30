@@ -1,5 +1,5 @@
 export interface TextProps {
-  tagType?: 'div' | 'span' | 'p';
+  tagType: 'span' | 'p';
   fontType?:
     | 'h1'
     | 'h2'

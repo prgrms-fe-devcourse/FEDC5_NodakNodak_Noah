@@ -16,9 +16,7 @@ const Comment = () => {
       <div className='userData' style={{ display: 'inline-flex' }}>
         <Avatar
           src='https://via.placeholder.com/150'
-          shape='circle'
           size='middle'
-          mode='cover'
           alt='유저네임'
         />
         <div
@@ -45,7 +43,7 @@ const Comment = () => {
           <hr />
         </div>
       </div>
-      <Text tagType='div' fontType='body3' colorType='black'>
+      <Text tagType='span' fontType='body3' colorType='black'>
         Lorem Ipsum is simply dummy text of the printing and typesetting
         industry.
       </Text>

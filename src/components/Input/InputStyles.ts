@@ -1,14 +1,7 @@
 import styled from 'styled-components';
 import theme from '@/styles/theme';
 
-export interface WrapperProps {
-  $flex?: boolean;
-}
-
 export interface StyledInputProps {
-  width?: string | number;
-  height?: string | number;
-  fontSize?: string;
   $underline?: boolean;
   $bordertype:
     | 'enabled'
@@ -18,10 +11,22 @@ export interface StyledInputProps {
     | 'filled'
     | 'error'
     | 'disabled';
+  $fontType?:
+    | 'h1'
+    | 'h2'
+    | 'h3'
+    | 'h4'
+    | 'body1'
+    | 'body2'
+    | 'body3'
+    | 'button1'
+    | 'button2'
+    | 'button3'
+    | 'caption';
 }
 
-export const Wrapper = styled.div<WrapperProps>`
-  display: ${({ $flex }) => ($flex ? 'flex' : 'inline-flex')};
+export const Wrapper = styled.div`
+  display: 'inline-flex';
   justify-content: center;
   align-items: center;
   position: relative;
@@ -42,9 +47,8 @@ export const Eye = styled.span`
 `;
 
 export const StyledInput = styled.input<StyledInputProps>`
-  width: ${({ width }) => (width ? width : 'auto')};
-  height: ${({ height }) => (height ? height : 'auto')};
-  font-size: ${({ fontSize }) => (fontSize ? fontSize : 'auto')};
+  font-size: ${({ $fontType }) =>
+    $fontType ? theme.fontSize[$fontType].size : 'auto'};
   border: 1px solid ${({ $bordertype }) => borderMap[$bordertype]};
   border-top: ${({ $underline }) => ($underline ? 'none' : 'auto')};
   border-left: ${({ $underline }) => ($underline ? 'none' : 'auto')};

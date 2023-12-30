@@ -1,19 +1,10 @@
 import styled from 'styled-components';
 
-export const ShapeToCssValue = {
-  circle: '50%',
-  square: '8px',
-} as const;
-
-export interface AvatarWrapperProps {
-  shape: 'circle' | 'square';
-}
-
-export const AvatarWrapper = styled.div<AvatarWrapperProps>`
+export const AvatarWrapper = styled.div`
   position: relative;
   display: inline-block;
   border: 1px solid #dadada;
-  border-radius: ${({ shape }) => ShapeToCssValue[shape]};
+  border-radius: 50%;
   background-color: #eee;
   overflow: hidden;
   > img {
