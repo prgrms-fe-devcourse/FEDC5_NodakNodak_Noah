@@ -5,8 +5,8 @@ import { Comment } from '@/pages/DetailPage/Dummy';
 
 const CommentItem = ({ author, createdAt, comment }: Comment) => {
   const { fullname, image } = author;
-  const { content } = comment;
-  // 여기서 에러가 왜 발생하는지 알 수가 없음
+  const content = { ...JSON.parse(comment) };
+  // any타입으로 추론되는데 왜그런거야,,
 
   return (
     <div

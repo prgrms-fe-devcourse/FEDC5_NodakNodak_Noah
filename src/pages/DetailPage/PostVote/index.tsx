@@ -36,7 +36,7 @@ const PostVote = () => {
         </Text>
       </VoteTitleWrapper>
       <InputWrapper>
-        {voteArray.map((vote, index) => (
+        {voteArray.map((vote: string, index: number) => (
           <Input
             key={index}
             placeholder={vote}

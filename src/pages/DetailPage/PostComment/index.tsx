@@ -21,7 +21,7 @@ const PostComment = () => {
           <CommentItem
             author={comment.author}
             createdAt={comment.createdAt}
-            comment={JSON.parse(comment.comment)}
+            comment={comment.comment}
             key={index}></CommentItem>
         ))}
         <div
