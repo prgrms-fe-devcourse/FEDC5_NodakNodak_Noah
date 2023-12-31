@@ -19,14 +19,16 @@ const PostEditPage = () => {
     setCurrentChannel(nextChannel);
   };
 
-  const handleTitleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(event.target.value);
+  const handleTitleChange = ({
+    target,
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(target.value);
   };
 
-  const handleContentChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement>,
-  ) => {
-    setContent(event.target.value);
+  const handleContentChange = ({
+    target,
+  }: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setContent(target.value);
   };
 
   const handleSubmit = (event: React.FormEvent) => {
@@ -51,8 +53,6 @@ const PostEditPage = () => {
       },
       channelID: currentChannel?._id,
     };
-
-    console.log(postData);
   };
 
   return (
