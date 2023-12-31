@@ -4,6 +4,8 @@ export const ContentWrapper = styled.div`
   display: flex;
   padding: 40px 20px;
   justify-content: center;
+  overflow-y: auto;
+  max-height: 400px;
 `;
 
 export const Content = styled.div`
