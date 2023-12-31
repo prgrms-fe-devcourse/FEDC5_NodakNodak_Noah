@@ -31,6 +31,17 @@ const PostEditPage = () => {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
+
+    if (!currentChannel || !content) {
+      if (!currentChannel) {
+        alert('채널을 선택하세요.');
+      }
+      if (!content) {
+        alert('내용을 입력하세요.');
+      }
+      return;
+    }
+
     const postData = {
       title: {
         title,

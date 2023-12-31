@@ -19,6 +19,7 @@ interface DropdownMenuProps {
 
 const DropdownMenu = ({ channelList, onClick }: DropdownMenuProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [channelTitle, setChannelTitle] = useState('채널 선택');
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -28,6 +29,7 @@ const DropdownMenu = ({ channelList, onClick }: DropdownMenuProps) => {
     if (onClick) {
       onClick(item);
     }
+    setChannelTitle(item.name);
     toggleMenu();
   };
 
@@ -37,7 +39,7 @@ const DropdownMenu = ({ channelList, onClick }: DropdownMenuProps) => {
         type='button'
         onClick={toggleMenu}
         $ismenuopen={isMenuOpen}>
-        채널 선택
+        {channelTitle}
         <BorderLine />
         {isMenuOpen ? '>' : '<'}
       </DropdownButton>
