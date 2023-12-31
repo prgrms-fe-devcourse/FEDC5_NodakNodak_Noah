@@ -38,20 +38,20 @@ const In = ({ isLogin, setIsLogin }: SignProps) => {
       <Input
         width='360px'
         height='48px'
-        fontSize='20px'
+        fontType='body3'
         placeholder='Email'
         autoComplete='on'
         type='email'
-        $bordertype={warn ? 'error' : 'filled'}
+        bordertype={warn ? 'error' : 'filled'}
         onChange={(e) => setEmail(e.target.value)}
       />
       <PasswordInput
         width='360px'
         height='48px'
-        fontSize='20px'
+        fontType='body3'
         placeholder='Password'
         autoComplete='off'
-        $bordertype={warn ? 'error' : 'filled'}
+        bordertype={warn ? 'error' : 'filled'}
         onChange={(e) => setPW(e.target.value)}
       />
       {warn ? <Warning>{warnText}</Warning> : ''}

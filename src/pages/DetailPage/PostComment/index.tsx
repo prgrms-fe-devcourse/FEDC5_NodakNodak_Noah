@@ -1,27 +1,29 @@
-import Comment from '@/components/Comment';
+import { dummyPost } from '../Dummy';
+import CommentItem from '@/components/Comment';
 import theme from '@/styles/theme';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
 
 const PostComment = () => {
   return (
-    <div style={{ margin: '3rem 15.19rem' }}>
-      <hr
-        style={{
-          width: '952px',
-          height: '1.48px',
-          color: `${theme.colors.grayscale[200]}`,
-        }}
-      />
+    <div
+      style={{
+        margin: '3rem 15.19rem',
+        borderTop: `solid 1px ${theme.colors.grayscale[200]}`,
+      }}>
       <div
         style={{
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
         }}>
-        <Comment></Comment>
-        <Comment></Comment>
-        <Comment></Comment>
+        {dummyPost.comments.map((comment, index) => (
+          <CommentItem
+            author={comment.author}
+            createdAt={comment.createdAt}
+            comment={comment.comment}
+            key={index}></CommentItem>
+        ))}
         <div
           className='userInput'
           style={{
@@ -34,7 +36,8 @@ const PostComment = () => {
           <Input
             bordertype='filled'
             placeholder='플레이스 홀더 텍스트'
-            width='588px'
+            fontType='body2'
+            width='538px'
             height='48px'
             underline={true}
           />

@@ -26,7 +26,7 @@ export interface StyledInputProps {
 }
 
 export const Wrapper = styled.div`
-  display: 'inline-flex';
+  display: flex;
   justify-content: center;
   align-items: center;
   position: relative;

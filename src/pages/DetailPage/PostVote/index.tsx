@@ -1,8 +1,9 @@
-import Card from '../Card';
-import Text from '../Text';
-import Button from '../Button';
-import Input from '../Input';
+import { dummyPost } from '../Dummy';
 import styled from 'styled-components';
+import Card from '@/components/Card';
+import Input from '@/components/Input';
+import Button from '@/components/Button';
+import Text from '@/components/Text';
 
 const VoteTitleWrapper = styled.div`
   display: flex;
@@ -16,42 +17,36 @@ const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
 `;
+const InputWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
 
 const PostVote = () => {
+  const { voteArray, voteTitle } = JSON.parse(dummyPost.title);
+
   return (
     <Card width='44.375rem' height='31.25rem' shadowType='large'>
       <VoteTitleWrapper>
         <Text tagType='span' fontType='h3' colorType='black'>
-          투표 주제 표시 할 위치
+          {voteTitle}
         </Text>
         <Text tagType='span' fontType='body2' colorType='black'>
-          총 20 투표
+          0명 투표
         </Text>
       </VoteTitleWrapper>
-      <Input
-        placeholder='투표 후보 1'
-        bordertype='enabled'
-        width='466px'
-        height='48px'
-      />
-      <Input
-        placeholder='투표 후보 2'
-        bordertype='enabled'
-        width='466px'
-        height='48px'
-      />
-      <Input
-        placeholder='투표 후보 3'
-        bordertype='enabled'
-        width='466px'
-        height='48px'
-      />
-      <Input
-        placeholder='투표 후보 4'
-        bordertype='enabled'
-        width='466px'
-        height='48px'
-      />
+      <InputWrapper>
+        {voteArray.map((vote: string, index: number) => (
+          <Input
+            key={index}
+            placeholder={vote}
+            bordertype='enabled'
+            width='466px'
+            height='48px'
+            readOnly={true}
+          />
+        ))}
+      </InputWrapper>
       <ButtonWrapper>
         <Button event='enabled' styleType='primary' size='wide'>
           투표 하기
