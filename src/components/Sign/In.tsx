@@ -4,12 +4,14 @@ import Button from '../Button';
 import PasswordInput from '../Input/PasswordInput';
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const In = ({ isLogin, setIsLogin }: SignProps) => {
   const [email, setEmail] = useState('');
   const [pw, setPW] = useState('');
   const [warn, setWarn] = useState(false);
   const [warnText, setWarnText] = useState('');
+  const navigate = useNavigate();
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
@@ -22,7 +24,7 @@ const In = ({ isLogin, setIsLogin }: SignProps) => {
         },
       });
       localStorage.setItem('auth-token', data.token);
-      alert('로그인 성공');
+      navigate('/home');
     } catch (e) {
       setWarnText('아이디 또는 비밀번호가 일치하지 않습니다.');
       setWarn(true);
