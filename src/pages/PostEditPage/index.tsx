@@ -31,53 +31,53 @@ const PostEditPage = () => {
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
-    // const postData = {
-    //   title: {
-    //     title,
-    //     content,
-    //     voteTitle: formData.voteTitle,
-    //     voteArray: formData.voteArray,
-    //   },
-    //   channelID: currentChannel?._id,
-    // };
+    const postData = {
+      title: {
+        title,
+        content,
+        voteTitle: formData.voteTitle,
+        voteArray: formData.voteArray,
+      },
+      channelID: currentChannel?._id,
+    };
 
-    // console.log(postData);
+    console.log(postData);
   };
 
   return (
-    <>
-      <FormContainer onSubmit={handleSubmit}>
+    <FormContainer onSubmit={handleSubmit}>
+      <FormArea>
+        <Input
+          required={true}
+          placeholder='제목을 입력하세요'
+          width='589px'
+          height='70px'
+          value={title}
+          onChange={handleTitleChange}
+        />
+        <DropdownMenu
+          channelList={itemListData.map((item) => ({
+            _id: item._id,
+            name: item.name,
+          }))}
+          onClick={handleChannelChange}
+        />
+        <TextAreaWrapper>
+          <StyledTextArea
+            name='content'
+            placeholder='내용을 입력하세요'
+            value={content}
+            onChange={handleContentChange}
+          />
+        </TextAreaWrapper>
+      </FormArea>
+      <VotedBox formData={formData} setFormData={setFormData} />
+      <ButtonWrapper>
         <Button styleType='primary' size='small' type='submit' event='enabled'>
           등록하기
         </Button>
-        <FormArea>
-          <Input
-            required={true}
-            placeholder='제목을 입력하세요'
-            width='589px'
-            height='70px'
-            value={title}
-            onChange={handleTitleChange}
-          />
-          <DropdownMenu
-            channelList={itemListData.map((item) => ({
-              _id: item._id,
-              name: item.name,
-            }))}
-            onClick={handleChannelChange}
-          />
-          <TextAreaWrapper>
-            <StyledTextArea
-              name='content'
-              placeholder='내용을 입력하세요'
-              value={content}
-              onChange={handleContentChange}
-            />
-          </TextAreaWrapper>
-        </FormArea>
-        <VotedBox formData={formData} setFormData={setFormData} />
-      </FormContainer>
-    </>
+      </ButtonWrapper>
+    </FormContainer>
   );
 };
 
@@ -90,6 +90,7 @@ const FormContainer = styled.form`
   flex-direction: column;
   align-items: flex-end;
   margin: 0 auto;
+  position: relative;
 `;
 
 const FormArea = styled.div`
@@ -123,6 +124,15 @@ const StyledTextArea = styled.textarea`
   resize: none;
   outline: none;
   background-color: transparent;
+`;
+
+const ButtonWrapper = styled.div`
+  position: sticky;
+  display: flex;
+  justify-content: flex-end;
+  bottom: 0;
+  padding-bottom: 10px;
+  margin: 20px 0;
 `;
 
 //임시 더미 데이터

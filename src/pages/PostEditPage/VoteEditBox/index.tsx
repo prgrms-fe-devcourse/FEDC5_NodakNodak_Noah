@@ -87,6 +87,7 @@ const VotedBox = ({ formData, setFormData }: FormProps) => {
                 />
                 <DeleteButton
                   $isshow={index >= 2}
+                  type='button'
                   onClick={() => handleRemoveCandidate(index)}>
                   삭제
                 </DeleteButton>
