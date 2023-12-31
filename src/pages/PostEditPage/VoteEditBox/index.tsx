@@ -54,7 +54,11 @@ const VotedBox = ({ formData, setFormData }: FormProps) => {
 
   return (
     <>
-      <Card width='666px' height='auto' shadowType='medium' margin='0 auto'>
+      <Card
+        width='666px'
+        height='auto'
+        shadowType='medium'
+        style={{ margin: '0 auto' }}>
         <ContentWrapper>
           <Content>
             <Input
