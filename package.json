@@ -36,6 +36,7 @@
     "typescript": "^5.2.2",
     "vercel": "^33.0.1",
     "vite": "^5.0.8",
+    "vite-plugin-svgr": "^4.2.0",
     "vite-tsconfig-paths": "^4.2.2"
   },
   "overrides": {
