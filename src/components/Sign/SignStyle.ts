@@ -18,7 +18,7 @@ export const Form = styled.form`
 export const Warning = styled.div`
   display: flex;
   color: ${theme.colors.error[500]};
-  margin-left: 48px;
+  margin-left: 160px;
 `;
 
 export const Guide = styled.span`
