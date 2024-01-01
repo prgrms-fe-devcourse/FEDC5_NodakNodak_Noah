@@ -3,20 +3,11 @@ import {
   TextWrapper,
   PageNumberWrapper,
 } from './StyledPagination';
+import { PaginationProps } from './PaginationTypes';
 import Button from '../Button';
 import Text from '../Text';
-import { useState } from 'react';
-import { PaginationProps } from '@/types/PaginationTypes';
 
-const Pagination = ({ defaultPage = 1, limit, total }: PaginationProps) => {
-  const [page, setPage] = useState(defaultPage);
-  const totalPage = Math.ceil(total / limit);
-
-  const handlePageChange = (page: number) => {
-    if (page < 1 || page > totalPage) return;
-    setPage(page);
-  };
-
+const Pagination = ({ page, totalPage, handlePageChange }: PaginationProps) => {
   return (
     <PaginationWrapper>
       <Button
@@ -42,7 +33,7 @@ const Pagination = ({ defaultPage = 1, limit, total }: PaginationProps) => {
                 fontType='h4'
                 colorType='primary'
                 colorNumber={page === index + 1 ? '500' : '300'}>
-                {index + 1}
+                {(index + 1).toString()}
               </Text>
             </TextWrapper>
           ))}

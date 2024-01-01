@@ -1,13 +1,13 @@
+import { TextProps } from './TextProps';
 import theme from '@/styles/theme';
-import { TextProps } from '@/types/TextProps';
 
 const Text = ({
-  tagType = 'div',
+  tagType = 'span',
   fontType = 'body1',
-  colorType = 'primary',
+  colorType = 'black',
   colorNumber = '100',
   children,
-  ...props
+  style,
 }: TextProps) => {
   const Tag = tagType;
   const fontSize = theme.fontSize[fontType].size;
@@ -25,9 +25,10 @@ const Text = ({
     fontSize,
     fontWeight,
     color,
+    ...style,
   };
 
-  return <Tag style={{ ...textStyle, ...props.style }}>{children}</Tag>;
+  return <Tag style={textStyle}>{children}</Tag>;
 };
 
 export default Text;

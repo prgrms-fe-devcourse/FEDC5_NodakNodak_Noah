@@ -1,15 +1,18 @@
 import { Wrapper, StyledInput, Eye } from './InputStyles';
+import { InputProps } from './InputProps';
 import { useState } from 'react';
-import { InputProps } from '@/types/InputProps';
 
 const PasswordInput = ({
-  flex = false,
-  borderType = 'filled',
+  bordertype = 'filled',
+  fontType = 'body3',
+  underline = false,
   required = false,
   disabled = false,
   readOnly = false,
   placeholder = '',
-  wrapperProps,
+  height,
+  width,
+  wrapperStyle,
   ...props
 }: InputProps) => {
   const [canSee, setCanSee] = useState(false);
@@ -18,18 +21,22 @@ const PasswordInput = ({
   };
 
   return (
-    <Wrapper flex={flex} {...wrapperProps}>
+    <Wrapper style={wrapperStyle}>
       <StyledInput
-        borderType={borderType}
+        $bordertype={bordertype}
+        $fontType={fontType}
+        $underline={underline}
         required={required}
         disabled={disabled}
         readOnly={readOnly}
-        type={canSee ? 'text' : 'password'}
         placeholder={placeholder}
+        style={{ ...props.style, width, height }}
+        type={canSee ? 'text' : 'password'}
         {...props}
       />
-      <Eye onClick={handleEye}>{canSee ? '*' : '&'}</Eye>
-      {/* <Eye className='material-symbols-outlined'>visibility</Eye> */}
+      <Eye onClick={handleEye} className='material-symbols-outlined'>
+        {canSee ? 'visibility_off' : 'visibility'}
+      </Eye>
     </Wrapper>
   );
 };

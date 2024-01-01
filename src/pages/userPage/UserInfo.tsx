@@ -24,10 +24,10 @@ const UserInfo = () => {
       <UserInfoContainer>
         <Avatar src={image} alt={username} size='large' />
         <UserInfoWrapper>
-          <Text tagType={'div'} fontType={'h1'} colorType={'black'}>
+          <Text tagType='span' fontType='h1' colorType='black'>
             {username}
           </Text>
-          <Text tagType={'div'} fontType={'body1'} colorType={'black'}>
+          <Text tagType='span' fontType='body1' colorType='black'>
             {bio === '' ? '한줄 소개가 없습니다' : bio}
           </Text>
           <UserButtonContainer>

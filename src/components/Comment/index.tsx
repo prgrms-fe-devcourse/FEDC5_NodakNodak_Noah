@@ -1,8 +1,13 @@
 import Avatar from './../Avatar/index';
 import Text from './../Text/index';
 import theme from '@/styles/theme';
+import { Comment } from '@/pages/DetailPage/Dummy';
 
-const Comment = () => {
+const CommentItem = ({ author, createdAt, comment }: Comment) => {
+  const { fullname, image } = author;
+  const content = { ...JSON.parse(comment) };
+  // any타입으로 추론되는데 왜그런거야,,
+
   return (
     <div
       className='commentItem'
@@ -14,13 +19,7 @@ const Comment = () => {
         height: '96px',
       }}>
       <div className='userData' style={{ display: 'inline-flex' }}>
-        <Avatar
-          src='https://via.placeholder.com/150'
-          shape='circle'
-          size='middle'
-          mode='cover'
-          alt='유저네임'
-        />
+        <Avatar src={image} size='middle' alt='유저네임' />
         <div
           style={{
             display: 'flex',
@@ -33,24 +32,23 @@ const Comment = () => {
             colorNumber='500'
             fontType='body1'
             tagType='span'>
-            nickname
+            {fullname}
           </Text>
           <Text
             tagType='span'
             fontType='caption'
             colorType='grayscale'
             colorNumber='300'>
-            2023.12.23 13:27
+            {createdAt}
           </Text>
           <hr />
         </div>
       </div>
-      <Text tagType='div' fontType='body3' colorType='black'>
-        Lorem Ipsum is simply dummy text of the printing and typesetting
-        industry.
+      <Text tagType='span' fontType='body3' colorType='black'>
+        {content}
       </Text>
     </div>
   );
 };
 
-export default Comment;
+export default CommentItem;

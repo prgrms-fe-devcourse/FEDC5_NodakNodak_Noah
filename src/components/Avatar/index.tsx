@@ -1,27 +1,24 @@
 import { AvatarWrapper } from './AvatarStyled';
+import { AvatarProps } from './AvatarProps';
 import Image from '../Image';
 import { useState, useEffect } from 'react';
-import { AvatarProps } from '@/types/AvatarProps';
 
+const avatarSizes = {
+  mini: '24px',
+  small: '40px',
+  middle: '48px',
+  large: '224px',
+};
 
 const Avatar = ({
   src,
   size = 'middle',
-  shape = 'circle',
   defaultSrc,
   alt,
-  mode = 'cover',
   ...props
 }: AvatarProps) => {
   const [loaded, setLoaded] = useState(false);
-
-  const AvatarSizes = {
-    small: 40,
-    middle: 48,
-    large: 224,
-  };
-
-  const avatarSize = AvatarSizes[size];
+  const avatarSize = avatarSizes[size];
 
   useEffect(() => {
     setLoaded(true);
@@ -30,22 +27,17 @@ const Avatar = ({
   return (
     <>
       <AvatarWrapper
-        {...props}
-        shape={shape}
         style={{
-          width: `${avatarSize}px`,
-          height: `${avatarSize}px`,
+          width: avatarSize,
+          height: avatarSize,
         }}>
-
         <Image
-          block
           width={avatarSize}
           height={avatarSize}
           src={src}
           defaultSrc={defaultSrc}
           alt={alt}
-          mode={mode}
-          style={{ opacity: loaded ? 1 : 0 }}
+          style={{ ...props.style, opacity: loaded ? 1 : 0 }}
         />
       </AvatarWrapper>
     </>

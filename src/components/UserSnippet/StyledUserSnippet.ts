@@ -6,6 +6,8 @@ export const UserSnippetBox = styled.div`
   align-items: center;
   gap: 10px;
   position: relative;
+
+  margin: 4px 0;
 `;
 export const Title = styled.h2`
   position: -webkit-sticky;

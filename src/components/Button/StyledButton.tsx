@@ -1,4 +1,5 @@
 import { styled, css } from 'styled-components';
+import theme from '@/styles/theme';
 
 export const ButtonSize = {
   mini: css`
@@ -37,140 +38,140 @@ export const ButtonSize = {
 export const ButtonTypeEvent = {
   primary: {
     enabled: css`
-      background: var(--Primary-200, #e3d4b3);
-      color: var(--Grayscale-400, #343a40);
+      background: ${theme.colors.primary[200]};
+      color: ${theme.colors.grayscale[400]};
     `,
     hover: css`
-      background: var(--Primary-300, #c8b593);
-      color: var(--Grayscale-400, #343a40);
+      background: ${theme.colors.primary[300]};
+      color: ${theme.colors.grayscale[400]};
     `,
     click: css`
-      background: var(--Primary-400, #8d714d);
-      color: var(--Grayscale-100, #f9f9f9);
+      background: ${theme.colors.primary[400]};
+      color: ${theme.colors.grayscale[100]};
     `,
     focus: css`
       align-self: stretch;
-      background: var(--Primary-300, #c8b593);
-      color: var(--Grayscale-500, #212529);
+      background: ${theme.colors.primary[300]};
+      color: ${theme.colors.grayscale[500]};
     `,
     disabled: css`
-      background: var(--Grayscale-200, #dee2e6);
-      color: var(--Grayscale-300, #868e96);
+      background: ${theme.colors.grayscale[200]};
+      color: ${theme.colors.grayscale[300]};
     `,
   },
   ghost: {
     enabled: css`
-      border: 1px solid var(--Primary-200, #e3d4b3);
-      background: var(--White, #fff);
-      color: var(--Primary-400, #8d714d);
+      border: 1px solid ${theme.colors.primary[200]};
+      background: ${theme.colors.white};
+      color: ${theme.colors.primary[400]};
     `,
     hover: css`
-      border: 1px solid var(--Primary-300, #c8b593);
-      background: var(--Primary-100, #faf6e8);
-      color: var(--Primary-400, #8d714d);
+      border: 1px solid ${theme.colors.primary[300]};
+      background: ${theme.colors.primary[100]};
+      color: ${theme.colors.primary[400]};
     `,
     click: css`
-      border: 1px solid var(--Primary-300, #c8b593);
-      background: var(--Primary-200, #e3d4b3);
-      color: var(--Primary-400, #8d714d);
+      border: 1px solid ${theme.colors.primary[300]};
+      background: ${theme.colors.primary[200]};
+      color: ${theme.colors.primary[400]};
     `,
     focus: css`
       align-self: stretch;
-      border: 1px solid var(--Primary-400, #8d714d);
-      background: var(--White, #fff);
-      color: var(--Primary-400, #8d714d);
+      border: 1px solid ${theme.colors.primary[400]};
+      background: ${theme.colors.white};
+      color: ${theme.colors.primary[400]};
     `,
     disabled: css`
-      border: 1px solid var(--Grayscale-300, #868e96);
-      background: var(--White, #fff);
-      color: var(--Grayscale-300, #868e96);
+      border: 1px solid ${theme.colors.grayscale[300]};
+      background: ${theme.colors.white};
+      color: ${theme.colors.grayscale[300]};
     `,
   },
   text: {
     enabled: css`
-      color: var(--Info-300, #5c7cfa);
+      color: ${theme.colors.info[300]};
     `,
     hover: css`
-      background: var(--Info-100, #edf2ff);
-      color: var(--Info-300, #5c7cfa);
+      background: ${theme.colors.info[100]};
+      color: ${theme.colors.info[300]};
     `,
     click: css`
-      background: var(--Info-100, #edf2ff);
-      color: var(--Info-300, #5c7cfa);
+      background: ${theme.colors.info[100]};
+      color: ${theme.colors.info[300]};
     `,
     focus: css`
       align-self: stretch;
-      background: var(--White, #fff);
-      color: var(--Info-300, #5c7cfa);
+      background: ${theme.colors.white};
+      color: ${theme.colors.info[300]};
     `,
     disabled: css`
-      background: var(--White, #fff);
-      color: var(--Grayscale-300, #868e96);
+      background: ${theme.colors.white};
+      color: ${theme.colors.grayscale[300]};
     `,
   },
   danger: {
     enabled: css`
-      background: var(--Error-300, #ff6b6b);
-      color: var(--White, #fff);
+      background: ${theme.colors.error[300]};
+      color: ${theme.colors.white};
     `,
     hover: css`
-      background: var(--Error-400, #f03e3e);
-      color: var(--White, #fff);
+      background: ${theme.colors.error[400]};
+      color: ${theme.colors.white};
     `,
     click: css`
-      background: var(--Error-500, #c92a2a);
-      color: var(--White, #fff);
+      background: ${theme.colors.error[500]};
+      color: ${theme.colors.white};
     `,
     focus: css`
       align-self: stretch;
-      background: var(--Error-400, #f03e3e);
-      color: var(--white, #fff);
+      background: ${theme.colors.error[400]};
+      color: ${theme.colors.white};
     `,
     disabled: css`
-      background: var(--Grayscale-200, #dee2e6);
-      color: var(--Grayscale-300, #868e96);
+      background: ${theme.colors.grayscale[200]};
+      color: ${theme.colors.grayscale[300]};
     `,
   },
 };
 
-export const ButtonLayout = styled.button<{
+interface ButtonLayoutProps {
   $size?: 'mini' | 'small' | 'regular' | 'wide';
   $styleType?: 'primary' | 'ghost' | 'text' | 'danger';
   $event?: 'enabled' | 'hover' | 'click' | 'focus' | 'disabled';
   $isArrow?: boolean;
   $disabled?: boolean;
-}>`
+}
+
+export const ButtonLayout = styled.button<ButtonLayoutProps>`
   border-radius: 8px;
   border: none;
-
   text-align: center;
-
   font-family: Pretendard;
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-
   cursor: pointer;
 
-  ${({ $size }) => $size && ButtonSize[$size]}
+  ${({ $size }) => $size && ButtonSize[$size]};
   ${({ $styleType, $event }) =>
-    $event && $styleType && ButtonTypeEvent[$styleType][$event]}
-  padding:${({ $isArrow }) => ($isArrow ? '13px 12px 13px 16px' : '13px 16px')};
+    $event && $styleType && ButtonTypeEvent[$styleType][$event]};
+  padding: ${({ $isArrow }) =>
+    $isArrow ? '13px 12px 13px 16px' : '13px 16px'};
 `;
 
 const ButtonWrapperBorderColor = {
   primary: css`
-    border: 3px solid var(--Primary-200, #e3d4b3);
+    border: 3px solid ${theme.colors.primary[200]};
   `,
   ghost: css`
-    border: 3px solid var(--Primary-100, #faf6e8);
+    border: 3px solid ${theme.colors.primary[100]};
   `,
   text: css`
-    border: 3px solid var(--Info-100, #edf2ff);
+    border: 3px solid ${theme.colors.info[100]};
   `,
   danger: css`
-    border: 3px solid var(--Error-100, #fff5f5);
+    border: 3px solid ${theme.colors.error[100]};
   `,
 };
 
@@ -190,22 +191,23 @@ const ButtonWrapperBackgroundSize = {
   `,
 };
 
-export const ButtonWrapper = styled.div<{
+interface ButtonWrapperProps {
   $isActive: boolean;
   $styleType?: 'primary' | 'ghost' | 'text' | 'danger';
   $size?: 'mini' | 'small' | 'regular' | 'wide';
-}>`
+}
+
+export const ButtonWrapper = styled.div<ButtonWrapperProps>`
   visibility: ${({ $isActive }) => ($isActive ? 'visible' : 'hidden')};
   padding: 1px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 10px;
-
   border-radius: 12px;
 
-  ${({ $styleType }) => $styleType && ButtonWrapperBorderColor[$styleType]}
-  ${({ $size }) => $size && ButtonWrapperBackgroundSize[$size]}
+  ${({ $styleType }) => $styleType && ButtonWrapperBorderColor[$styleType]};
+  ${({ $size }) => $size && ButtonWrapperBackgroundSize[$size]};
   & > * {
     visibility: visible;
   }
