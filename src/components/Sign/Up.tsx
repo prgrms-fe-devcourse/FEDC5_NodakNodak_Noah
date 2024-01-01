@@ -11,9 +11,34 @@ const Up = ({ isLogin, setIsLogin }: SignProps) => {
   const [confirmPW, setConfirmPW] = useState('');
   const [pwWarn, setPwWarn] = useState(false);
   const [warnText, setWarnText] = useState('');
+  const [emptyWarn, setEmptyWarn] = useState([false, false, false]);
+
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
+    const emptyCheck = [false, false, false];
+    let emptyFlag = false;
+    if (email.trim() === '') {
+      emptyCheck[0] = true;
+      emptyFlag = true;
+    }
+    if (pw.trim() === '') {
+      emptyCheck[1] = true;
+      emptyFlag = true;
+    }
+    if (confirmPW.trim() === '') {
+      emptyCheck[2] = true;
+      emptyFlag = true;
+    }
 
+    if (emptyFlag) {
+      setWarnText('항목을 모두 채워주세요.');
+      setEmptyWarn(emptyCheck);
+      setTimeout(() => {
+        setEmptyWarn([false, false, false]);
+        setWarnText('');
+      }, 3000);
+      return;
+    }
     if (pw !== confirmPW) {
       setWarnText('비밀번호가 일치하지 않습니다.');
       setPwWarn(true);
@@ -29,7 +54,7 @@ const Up = ({ isLogin, setIsLogin }: SignProps) => {
         path: 'signup',
         method: 'POST',
         data: {
-          fullName: 'sonhomin',
+          fullName: `익명#${Math.floor(Math.random() * 100000)}`,
           email: email,
           password: pw,
         },
@@ -49,6 +74,7 @@ const Up = ({ isLogin, setIsLogin }: SignProps) => {
         placeholder='Email'
         autoComplete='on'
         type='email'
+        bordertype={emptyWarn[0] ? 'error' : 'filled'}
         onChange={(e) => setEmail(e.target.value)}
       />
       <PasswordInput
@@ -57,7 +83,7 @@ const Up = ({ isLogin, setIsLogin }: SignProps) => {
         fontType='body3'
         placeholder='Password'
         autoComplete='off'
-        bordertype={pwWarn ? 'error' : 'filled'}
+        bordertype={pwWarn || emptyWarn[1] ? 'error' : 'filled'}
         onChange={(e) => setPW(e.target.value)}
       />
 
@@ -67,10 +93,10 @@ const Up = ({ isLogin, setIsLogin }: SignProps) => {
         fontType='body3'
         placeholder='Password'
         autoComplete='off'
-        bordertype={pwWarn ? 'error' : 'filled'}
+        bordertype={pwWarn || emptyWarn[2] ? 'error' : 'filled'}
         onChange={(e) => setConfirmPW(e.target.value)}
       />
-      {pwWarn ? <Warning>{warnText}</Warning> : ''}
+      {warnText !== '' ? <Warning>{warnText}</Warning> : ''}
       <Guide>
         이미 노닥노닥과 함께라면
         <Register onClick={() => setIsLogin(!isLogin)}>
@@ -79,10 +105,13 @@ const Up = ({ isLogin, setIsLogin }: SignProps) => {
         </Register>
       </Guide>
       <Button
-        onClick={handleRegister}
         size='wide'
         styleType='primary'
-        event='enabled'>
+        event='enabled'
+        onClick={handleRegister}
+        onKeyDown={(e) => {
+          if (e.key === 'enter') handleRegister(e);
+        }}>
         가입하기
       </Button>
     </Form>
