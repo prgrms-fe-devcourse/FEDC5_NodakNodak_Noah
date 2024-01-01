@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 type CallbackFunction = () => void;
 
-const useInterval = (fn: CallbackFunction, ms: number) => {
+const useInterval = (fn: CallbackFunction, ms: number): (() => void) => {
   const [run, clear] = useIntervalFn(fn, ms);
 
   useEffect(() => {
