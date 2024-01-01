@@ -9,9 +9,8 @@ const Up = ({ isLogin, setIsLogin }: SignProps) => {
   const [email, setEmail] = useState('');
   const [pw, setPW] = useState('');
   const [confirmPW, setConfirmPW] = useState('');
-  const [pwWarn, setPwWarn] = useState(false);
   const [warnText, setWarnText] = useState('');
-  const [emptyWarn, setEmptyWarn] = useState([false, false, false]);
+  const [warn, setWarn] = useState([false, false, false]);
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -32,18 +31,18 @@ const Up = ({ isLogin, setIsLogin }: SignProps) => {
 
     if (emptyFlag) {
       setWarnText('항목을 모두 채워주세요.');
-      setEmptyWarn(emptyCheck);
+      setWarn(emptyCheck);
       setTimeout(() => {
-        setEmptyWarn([false, false, false]);
+        setWarn([false, false, false]);
         setWarnText('');
       }, 3000);
       return;
     }
     if (pw !== confirmPW) {
       setWarnText('비밀번호가 일치하지 않습니다.');
-      setPwWarn(true);
+      setWarn([false, true, true]);
       setTimeout(() => {
-        setPwWarn(false);
+        setWarn([false, false, false]);
         setWarnText('');
       }, 3000);
       return;
@@ -74,7 +73,7 @@ const Up = ({ isLogin, setIsLogin }: SignProps) => {
         placeholder='Email'
         autoComplete='on'
         type='email'
-        bordertype={emptyWarn[0] ? 'error' : 'filled'}
+        bordertype={warn[0] ? 'error' : 'filled'}
         onChange={(e) => setEmail(e.target.value)}
       />
       <PasswordInput
@@ -83,7 +82,7 @@ const Up = ({ isLogin, setIsLogin }: SignProps) => {
         fontType='body3'
         placeholder='Password'
         autoComplete='off'
-        bordertype={pwWarn || emptyWarn[1] ? 'error' : 'filled'}
+        bordertype={warn[1] ? 'error' : 'filled'}
         onChange={(e) => setPW(e.target.value)}
       />
 
@@ -93,7 +92,7 @@ const Up = ({ isLogin, setIsLogin }: SignProps) => {
         fontType='body3'
         placeholder='Password'
         autoComplete='off'
-        bordertype={pwWarn || emptyWarn[2] ? 'error' : 'filled'}
+        bordertype={warn[2] ? 'error' : 'filled'}
         onChange={(e) => setConfirmPW(e.target.value)}
       />
       {warnText !== '' ? <Warning>{warnText}</Warning> : ''}
