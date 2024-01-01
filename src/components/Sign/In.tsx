@@ -68,7 +68,10 @@ const In = ({ isLogin, setIsLogin }: SignProps) => {
         size='wide'
         styleType='primary'
         event='enabled'
-        onClick={handleLogin}>
+        onClick={handleLogin}
+        onKeyDown={(e) => {
+          if (e.key === 'enter') handleLogin(e);
+        }}>
         로그인
       </Button>
     </Form>
