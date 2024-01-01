@@ -6,16 +6,20 @@ import {
   MenuForm,
 } from './DropdownMenuStyled';
 import { useState } from 'react';
-import { Channel } from '@/types/APIResponseTypes';
+
+export interface Channel {
+  _id: string;
+  name: string;
+}
 
 interface DropdownMenuProps {
-  itemList: Channel[];
-  title: string;
+  channelList: Channel[];
   onClick?: (itemName: Channel) => void;
 }
 
-const DropdownMenu = ({ itemList, title, onClick }: DropdownMenuProps) => {
+const DropdownMenu = ({ channelList, onClick }: DropdownMenuProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [channelTitle, setChannelTitle] = useState('채널 선택');
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -25,20 +29,25 @@ const DropdownMenu = ({ itemList, title, onClick }: DropdownMenuProps) => {
     if (onClick) {
       onClick(item);
     }
+    setChannelTitle(item.name);
     toggleMenu();
   };
 
   return (
     <MenuForm>
-      <DropdownButton onClick={toggleMenu} $ismenuopen={isMenuOpen}>
-        {title}
+      <DropdownButton
+        type='button'
+        onClick={toggleMenu}
+        $ismenuopen={isMenuOpen}>
+        {channelTitle}
         <BorderLine />
         {isMenuOpen ? '>' : '<'}
       </DropdownButton>
       {isMenuOpen && (
         <DropdownContent>
-          {itemList.map((item) => (
+          {channelList.map((item) => (
             <ListItemButton
+              type='button'
               key={item._id}
               onClick={() => handleItemClick(item)}>
               {item.name}

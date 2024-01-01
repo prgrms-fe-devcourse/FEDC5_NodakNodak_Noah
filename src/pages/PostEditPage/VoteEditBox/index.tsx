@@ -4,17 +4,24 @@ import {
   InputContainer,
   DeleteButton,
 } from './VoteEditBoxStyled';
-import React, { useState } from 'react';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
 import Card from '@/components/Card';
 
-const VotedBox = () => {
-  const [formData, setFormData] = useState({
-    voteTitle: '',
-    voteArray: ['', ''],
-  });
+interface FormProps {
+  formData: {
+    voteTitle: string;
+    voteArray: string[];
+  };
+  setFormData: React.Dispatch<
+    React.SetStateAction<{
+      voteTitle: string;
+      voteArray: string[];
+    }>
+  >;
+}
 
+const VotedBox = ({ formData, setFormData }: FormProps) => {
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData((prevData) => ({
       ...prevData,
@@ -23,14 +30,12 @@ const VotedBox = () => {
   };
 
   const handleCandidateChange = (index: number, value: string) => {
-    setFormData((prevData) => {
-      const newVoteArray = [...prevData.voteArray];
-      newVoteArray[index] = value;
-      return {
-        ...prevData,
-        voteArray: newVoteArray,
-      };
-    });
+    setFormData((prevData) => ({
+      ...prevData,
+      voteArray: prevData.voteArray.map((candidate, i) =>
+        i === index ? value : candidate,
+      ),
+    }));
   };
 
   const handleAddCandidate = () => {
@@ -41,19 +46,19 @@ const VotedBox = () => {
   };
 
   const handleRemoveCandidate = (index: number) => {
-    setFormData((prevData) => {
-      const newVoteArray = [...prevData.voteArray];
-      newVoteArray.splice(index, 1);
-      return {
-        ...prevData,
-        voteArray: newVoteArray,
-      };
-    });
+    setFormData((prevData) => ({
+      ...prevData,
+      voteArray: prevData.voteArray.filter((_, i) => i !== index),
+    }));
   };
 
   return (
     <>
-      <Card width='666px' height='auto' shadowType='medium'>
+      <Card
+        width='666px'
+        height='auto'
+        shadowType='medium'
+        style={{ margin: '0 auto' }}>
         <ContentWrapper>
           <Content>
             <Input
@@ -86,6 +91,7 @@ const VotedBox = () => {
                 />
                 <DeleteButton
                   $isshow={index >= 2}
+                  type='button'
                   onClick={() => handleRemoveCandidate(index)}>
                   삭제
                 </DeleteButton>

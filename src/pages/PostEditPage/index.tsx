@@ -1,56 +1,126 @@
-import DropdownMenu from './DropdownMenu';
+import DropdownMenu, { Channel } from './DropdownMenu';
 import VotedBox from './VoteEditBox';
 import styled from 'styled-components';
 import { useState } from 'react';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
-import { Channel } from '@/types/APIResponseTypes';
 import them from '@/styles/theme';
 
 const PostEditPage = () => {
   const [currentChannel, setCurrentChannel] = useState<Channel | null>(null);
+  const [title, setTitle] = useState<string>('');
+  const [content, setContent] = useState<string>('');
+  const [formData, setFormData] = useState({
+    voteTitle: '',
+    voteArray: ['', ''],
+  });
 
-  const handleChannelClick = (nextChannel: Channel) => {
+  const handleChannelChange = (nextChannel: Channel) => {
     setCurrentChannel(nextChannel);
-    currentChannel;
+  };
+
+  const handleTitleChange = ({
+    target,
+  }: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(target.value);
+  };
+
+  const handleContentChange = ({
+    target,
+  }: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setContent(target.value);
+  };
+
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault();
+
+    if (!currentChannel || !content) {
+      if (!currentChannel) {
+        alert('채널을 선택하세요.');
+      }
+      if (!content) {
+        alert('내용을 입력하세요.');
+      }
+      return;
+    }
+
+    const postData = {
+      title: {
+        title,
+        content,
+        voteTitle: formData.voteTitle,
+        voteArray: formData.voteArray,
+      },
+      channelID: currentChannel?._id,
+    };
   };
 
   return (
-    <>
-      <Button styleType='primary' size='small' type='submit' event='enabled'>
-        등록하기
-      </Button>
+    <FormContainer onSubmit={handleSubmit}>
       <FormArea>
         <Input
           required={true}
           placeholder='제목을 입력하세요'
           width='589px'
           height='70px'
+          value={title}
+          onChange={handleTitleChange}
         />
         <DropdownMenu
-          itemList={itemListData}
-          title='채널 선택'
-          onClick={handleChannelClick}
+          channelList={itemListData.map((item) => ({
+            _id: item._id,
+            name: item.name,
+          }))}
+          onClick={handleChannelChange}
         />
         <TextAreaWrapper>
-          <StyledTextArea name='content' placeholder='내용을 입력하세요' />
+          <StyledTextArea
+            name='content'
+            placeholder='내용을 입력하세요'
+            value={content}
+            onChange={handleContentChange}
+          />
         </TextAreaWrapper>
       </FormArea>
-      <VotedBox />
-    </>
+      <VotedBox formData={formData} setFormData={setFormData} />
+      <ButtonWrapper>
+        <Button styleType='primary' size='small' type='submit' event='enabled'>
+          등록하기
+        </Button>
+      </ButtonWrapper>
+    </FormContainer>
   );
 };
 
 export default PostEditPage;
 
+const FormContainer = styled.form`
+  display: flex;
+  width: 100%;
+  max-width: 954px;
+  flex-direction: column;
+  align-items: flex-end;
+  margin: 0 auto;
+  position: relative;
+`;
+
 const FormArea = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  width: 100%;
+  margin: 10px 0;
+
+  & > :nth-child(2) {
+    margin-bottom: 50px;
+  }
+
+  & > * {
+    margin-bottom: 15px;
+  }
 `;
 
 const TextAreaWrapper = styled.div`
-  width: 954px;
   height: 429px;
   background-color: ${them.colors.grayscale[100]};
   padding: 10px;
@@ -65,6 +135,15 @@ const StyledTextArea = styled.textarea`
   resize: none;
   outline: none;
   background-color: transparent;
+`;
+
+const ButtonWrapper = styled.div`
+  position: sticky;
+  display: flex;
+  justify-content: flex-end;
+  bottom: 0;
+  padding-bottom: 10px;
+  margin: 20px 0;
 `;
 
 //임시 더미 데이터
