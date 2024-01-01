@@ -9,20 +9,36 @@ const Setting = () => {
     <IndexContainer>
       <CardWrapper>
         <ButtonWrapper>
-          <Button styleType='ghost'>취소하기 x</Button>
+          <Button styleType='ghost' isArrow={true}>
+            취소하기
+          </Button>
         </ButtonWrapper>
         <RowGrid>
           <ColGrid>
-            <Avatar src='https://i.pravatar.cc/300' size='large' />
+            <Avatar
+              src='https://i.pravatar.cc/300'
+              size='large'
+              alt='userAvatar'
+            />
             <Button size='wide'>이미지 선택</Button>
             <Button size='wide' styleType='ghost'>
               이미지 삭제
             </Button>
           </ColGrid>
           <ColGrid>
-            <Input></Input>
-            <Input></Input>
-            <Text tagType='div' fontType='body1' colorType='black'>
+            <Input
+              underline={true}
+              placeholder='닉네임'
+              width='80%'
+              fontType='h1'
+            />
+            <Input
+              underline={true}
+              placeholder='한줄 소개'
+              width='80%'
+              fontType='body1'
+            />
+            <Text tagType='span' fontType='body1' colorType='black'>
               💌 nodaknodak@gmail.com
             </Text>
           </ColGrid>
