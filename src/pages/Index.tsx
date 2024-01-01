@@ -1,14 +1,25 @@
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import theme from '@/styles/theme';
 import Button from '@/components/Button';
 import Logo from '@/assets/Logo';
 
 const Index = () => {
+  const navigate = useNavigate();
+
+  const handleStart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const token = localStorage.getItem('auth-token');
+    navigate(token ? '/home' : '/sign');
+  };
+
   return (
     <IndexContainer>
       <IndexWrapper>
         <Logo />
-        <Button size='wide'>시작하기</Button>
+        <Button size='wide' onClick={handleStart}>
+          시작하기
+        </Button>
       </IndexWrapper>
     </IndexContainer>
   );
