@@ -66,7 +66,6 @@ const VotedBox = ({ formData, setFormData }: FormProps) => {
               placeholder='투표주제를 입력하세요'
               width='100%'
               height='48px'
-              $flex={true}
               value={formData.voteTitle}
               onChange={handleTitleChange}
             />
@@ -85,7 +84,6 @@ const VotedBox = ({ formData, setFormData }: FormProps) => {
                   placeholder={`투표 후보${index + 1}`}
                   width='100%'
                   height='48px'
-                  $flex={true}
                   value={candidate}
                   onChange={(e) => handleCandidateChange(index, e.target.value)}
                 />
