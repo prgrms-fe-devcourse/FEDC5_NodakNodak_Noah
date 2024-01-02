@@ -2,6 +2,7 @@ import {
   StyledHeaderWrapper,
   ChannelWrapper,
   AuthUiWrapper,
+  LogoWrapper,
 } from './StyledHeader';
 import HeaderProps from './HeaderProps';
 import Text from '../Text';
@@ -9,7 +10,9 @@ import Button from '../Button';
 import Avatar from '../Avatar';
 import Badge from '../Badge';
 import LogoWithFontSize from '../LogoWithFontSize';
+import Notification from '../Notification';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Bell from '@/assets/Bell';
 import Card from '@/components/Card';
 
@@ -18,6 +21,7 @@ const tempCount = 100000;
 const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
   const [seen, setSeen] = useState(false);
   const count = seen ? 0 : tempCount;
+  const navigate = useNavigate();
 
   return (
     <Card
@@ -25,7 +29,9 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
       height='80px'
       style={{ display: 'flex', justifyContent: 'center' }}>
       <StyledHeaderWrapper>
-        <LogoWithFontSize fontSize='24px' />
+        <LogoWrapper onClick={() => navigate('/home')}>
+          <LogoWithFontSize fontSize='24px' />
+        </LogoWrapper>
         <ChannelWrapper>
           {channels.map((channel) => (
             <Text key={channel._id} tagType='span' fontType='h4'>
@@ -38,6 +44,7 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
             <Badge count={count}>
               <Bell handleSeen={() => setSeen(true)} />
             </Badge>
+            <Notification />
             <Avatar size='small' src={userImage} />
           </AuthUiWrapper>
         ) : (
