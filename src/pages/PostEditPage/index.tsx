@@ -1,4 +1,4 @@
-import DropdownMenu, { Channel } from './DropdownMenu';
+import DropdownMenu from './DropdownMenu';
 import VotedBox from './VoteEditBox';
 import styled from 'styled-components';
 import { useState } from 'react';
@@ -6,18 +6,30 @@ import Button from '@/components/Button';
 import Input from '@/components/Input';
 import them from '@/styles/theme';
 
-const PostEditPage = () => {
-  const [currentChannel, setCurrentChannel] = useState<Channel | null>(null);
-  const [title, setTitle] = useState<string>('');
-  const [content, setContent] = useState<string>('');
-  const [formData, setFormData] = useState({
+const PostEditPage = ({
+  mode,
+  postId,
+}: {
+  mode: 'create' | 'edit';
+  postId?: string;
+}) => {
+  const initialData = {
+    title: '',
+    content: '',
     voteTitle: '',
     voteArray: ['', ''],
-  });
-
-  const handleChannelChange = (nextChannel: Channel) => {
-    setCurrentChannel(nextChannel);
+    channelId: '',
   };
+
+  const prevData = mode === 'edit' ? severData : { ...initialData };
+
+  const [channelId, setChannelId] = useState<string>(prevData.channelId);
+  const [title, setTitle] = useState<string>(prevData.title);
+  const [content, setContent] = useState<string>(prevData.content);
+  const [formData, setFormData] = useState({
+    voteTitle: prevData.voteTitle,
+    voteArray: prevData.voteArray,
+  });
 
   const handleTitleChange = ({
     target,
@@ -34,8 +46,8 @@ const PostEditPage = () => {
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
-    if (!currentChannel || !content) {
-      if (!currentChannel) {
+    if (!channelId || !content) {
+      if (!channelId) {
         alert('채널을 선택하세요.');
       }
       if (!content) {
@@ -51,8 +63,18 @@ const PostEditPage = () => {
         voteTitle: formData.voteTitle,
         voteArray: formData.voteArray,
       },
-      channelID: currentChannel?._id,
+      channelID: channelId,
     };
+
+    if (mode === 'create') {
+      postData; //create 서버 동작 예정
+    } else if (mode === 'edit' && postId) {
+      const PostData = {
+        ...postData,
+        postId: postId,
+      };
+      PostData; //postdata 서버 동작 예정
+    }
   };
 
   return (
@@ -66,13 +88,7 @@ const PostEditPage = () => {
           value={title}
           onChange={handleTitleChange}
         />
-        <DropdownMenu
-          channelList={itemListData.map((item) => ({
-            _id: item._id,
-            name: item.name,
-          }))}
-          onClick={handleChannelChange}
-        />
+        <DropdownMenu channelId={channelId} setChannelId={setChannelId} />
         <TextAreaWrapper>
           <StyledTextArea
             name='content'
@@ -85,7 +101,7 @@ const PostEditPage = () => {
       <VotedBox formData={formData} setFormData={setFormData} />
       <ButtonWrapper>
         <Button styleType='primary' size='small' type='submit' event='enabled'>
-          등록하기
+          {mode === 'edit' ? '수정하기' : '등록하기'}
         </Button>
       </ButtonWrapper>
     </FormContainer>
@@ -146,36 +162,14 @@ const ButtonWrapper = styled.div`
   margin: 20px 0;
 `;
 
-//임시 더미 데이터
-const itemListData = [
-  {
-    authRequired: false,
-    posts: [],
-    _id: '6587c05d83003970282b863e',
-    name: '연예',
-    description: 'Test',
-    createdAt: '2023-12-24T05:23:41.475Z',
-    updatedAt: '2023-12-24T05:23:41.475Z',
-    __v: 0,
-  },
-  {
-    authRequired: false,
-    posts: [],
-    _id: '6587s',
-    name: '스포츠',
-    description: 'Test',
-    createdAt: '2023-12-24T05:23:41.475Z',
-    updatedAt: '2023-12-24T05:23:41.475Z',
-    __v: 0,
-  },
-  {
-    authRequired: false,
-    posts: [],
-    _id: '6587c',
-    name: '잡담',
-    description: 'Test',
-    createdAt: '2023-12-24T05:23:41.475Z',
-    updatedAt: '2023-12-24T05:23:41.475Z',
-    __v: 0,
-  },
-];
+//임시 더미데이터, 추후 데이터 형태 변경에 따라 수정 예정
+const severData = {
+  title: '점메추',
+  content: '점심 메뉴 추천해주세요',
+  voteTitle: '점심 메뉴 투표',
+  voteArray: ['한식', '중식', '일식', '양식'],
+  postId: '123',
+  image: 0,
+  imageToDeletePublicId: 1,
+  channelId: '6587c',
+};

@@ -13,7 +13,7 @@ import { Provider } from 'react-redux';
 const router = createBrowserRouter([
   { path: '/', element: <Index />, errorElement: <NotFound /> },
   { path: '/sign', element: <Login /> },
-  { path: '/write', element: <PostEditPage /> },
+  { path: '/write', element: <PostEditPage mode='create' /> },
   { path: '/home', element: <Main /> },
   { path: '/user', element: <UserPage /> },
 ]);
