@@ -38,6 +38,7 @@ export interface Channel {
 }
 
 export interface Post {
+  avatar: string;
   likes: Like[];
   comments: Comment[];
   _id: string;
