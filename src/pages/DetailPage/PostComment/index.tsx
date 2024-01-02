@@ -1,10 +1,16 @@
 import { dummyPost } from '../Dummy';
+import { useSelector } from 'react-redux';
 import CommentItem from '@/components/Comment';
 import theme from '@/styles/theme';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
+import { RootState } from '@/store';
 
 const PostComment = () => {
+  const postDetailComment = useSelector(
+    (state: RootState) => state.postDetail.post.comments,
+  );
+
   return (
     <div
       style={{
@@ -22,7 +28,8 @@ const PostComment = () => {
             author={comment.author}
             createdAt={comment.createdAt}
             comment={comment.comment}
-            key={index}></CommentItem>
+            key={index}
+          />
         ))}
         <div
           className='userInput'
