@@ -2,6 +2,7 @@ import { MainWrapper, PostContentWrapper, MainFlexWrapper } from './StyledMain';
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+
 import PostCard from '@/components/PostCard';
 import Pagination from '@/components/Pagination';
 import UserListCard from '@/components/UserListCard';
@@ -28,7 +29,6 @@ const Main = () => {
 
   const handlePageChange = (page: number) => {
     if (page < 1 || page > totalPage) return;
-
     setPage(page);
   };
 
