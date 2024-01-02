@@ -3,12 +3,23 @@ import {
   PostContentAuthorWrapper,
 } from './PostContentStyled';
 import { dummyPost } from './../Dummy';
+import { useSelector } from 'react-redux';
 import Text from '@/components/Text';
 import Avatar from '@/components/Avatar';
 import Image from '@/components/Image';
+import { RootState } from '@/store';
 
 const PostContent = () => {
   const { title, content } = JSON.parse(dummyPost.title);
+
+  const postDetailContent = useSelector(
+    (state: RootState) => state.postDetail.post,
+  );
+  const postDetailAuthor = useSelector(
+    (state: RootState) => state.postDetail.post.author,
+  );
+
+  if (!postDetailContent.title) return null;
 
   return (
     <PostContentWrapper className='ContentTitle'>

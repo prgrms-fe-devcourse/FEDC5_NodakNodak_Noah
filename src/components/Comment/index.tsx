@@ -45,7 +45,7 @@ const CommentItem = ({ author, createdAt, comment }: Comment) => {
         </div>
       </div>
       <Text tagType='span' fontType='body3' colorType='black'>
-        {content}
+        {content.content}
       </Text>
     </div>
   );
