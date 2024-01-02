@@ -39,7 +39,10 @@ export const channelSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(getChannel.fulfilled, (state, action) => {
-      state.channels = action.payload;
+      state.channels = action.payload.filter(
+        (channel: Channel) =>
+          !['연예', '잡담', '스포츠'].includes(channel.name),
+      );
       state.currentChannel = action.payload[0];
       state.isLoading = false;
     });
