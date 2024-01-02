@@ -3,7 +3,10 @@
 type CallbackFunction = () => void;
 type IntervalId = NodeJS.Timeout | undefined;
 
-const useIntervalFn = (fn: CallbackFunction, ms: number) => {
+const useIntervalFn = (
+  fn: CallbackFunction,
+  ms: number,
+): [() => void, () => void] => {
   const intervalId = useRef<IntervalId>();
   const callback = useRef(fn);
 

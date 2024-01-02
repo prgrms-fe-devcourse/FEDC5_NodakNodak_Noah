@@ -1,6 +1,6 @@
 ﻿import { useCallback, useEffect, useState, useRef } from 'react';
 
-const useHover = () => {
+const useHover = (): [React.RefObject<HTMLElement>, boolean] => {
   const [state, setState] = useState(false);
   const ref = useRef<HTMLElement>(null);
 
