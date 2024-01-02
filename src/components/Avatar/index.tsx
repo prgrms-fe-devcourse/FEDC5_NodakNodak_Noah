@@ -13,7 +13,7 @@ const avatarSizes = {
 const Avatar = ({
   src,
   size = 'middle',
-  defaultSrc,
+  defaultSrc = '/public/DefaultProfile.jpg',
   alt,
   ...props
 }: AvatarProps) => {
