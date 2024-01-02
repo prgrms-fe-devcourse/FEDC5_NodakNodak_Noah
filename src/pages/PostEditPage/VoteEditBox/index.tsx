@@ -13,43 +13,38 @@ interface FormProps {
     voteTitle: string;
     voteArray: string[];
   };
-  setFormData: React.Dispatch<
-    React.SetStateAction<{
-      voteTitle: string;
-      voteArray: string[];
-    }>
-  >;
+  setFormData: (values: { voteTitle: string; voteArray: string[] }) => void;
 }
 
 const VotedBox = ({ formData, setFormData }: FormProps) => {
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData((prevData) => ({
-      ...prevData,
+    setFormData({
+      ...formData,
       voteTitle: e.target.value,
-    }));
+    });
   };
 
   const handleCandidateChange = (index: number, value: string) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      voteArray: prevData.voteArray.map((candidate, i) =>
+    setFormData({
+      ...formData,
+      voteArray: formData.voteArray.map((candidate, i) =>
         i === index ? value : candidate,
       ),
-    }));
+    });
   };
 
   const handleAddCandidate = () => {
-    setFormData((prevData) => ({
-      ...prevData,
-      voteArray: [...prevData.voteArray, ''],
-    }));
+    setFormData({
+      ...formData,
+      voteArray: [...formData.voteArray, ''],
+    });
   };
 
   const handleRemoveCandidate = (index: number) => {
-    setFormData((prevData) => ({
-      ...prevData,
-      voteArray: prevData.voteArray.filter((_, i) => i !== index),
-    }));
+    setFormData({
+      ...formData,
+      voteArray: formData.voteArray.filter((_, i) => i !== index),
+    });
   };
 
   return (

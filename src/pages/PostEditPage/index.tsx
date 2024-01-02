@@ -1,10 +1,18 @@
 import DropdownMenu from './DropdownMenu';
 import VotedBox from './VoteEditBox';
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useFormik } from 'formik';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 import them from '@/styles/theme';
+
+interface FormType {
+  title: string;
+  content: string;
+  voteTitle: string;
+  voteArray: string[];
+  channelId: string;
+}
 
 const PostEditPage = ({
   mode,
@@ -23,34 +31,12 @@ const PostEditPage = ({
 
   const prevData = mode === 'edit' ? severData : { ...initialData };
 
-  const [channelId, setChannelId] = useState<string>(prevData.channelId);
-  const [title, setTitle] = useState<string>(prevData.title);
-  const [content, setContent] = useState<string>(prevData.content);
-  const [formData, setFormData] = useState({
-    voteTitle: prevData.voteTitle,
-    voteArray: prevData.voteArray,
-  });
-
-  const handleTitleChange = ({
-    target,
-  }: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(target.value);
-  };
-
-  const handleContentChange = ({
-    target,
-  }: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setContent(target.value);
-  };
-
-  const handleSubmit = (event: React.FormEvent) => {
-    event.preventDefault();
-
-    if (!channelId || !content) {
-      if (!channelId) {
+  const handleFormSubmit = (values: FormType) => {
+    if (!values.channelId || !values.content) {
+      if (!values.channelId) {
         alert('채널을 선택하세요.');
       }
-      if (!content) {
+      if (!values.content) {
         alert('내용을 입력하세요.');
       }
       return;
@@ -58,24 +44,31 @@ const PostEditPage = ({
 
     const postData = {
       title: {
-        title,
-        content,
-        voteTitle: formData.voteTitle,
-        voteArray: formData.voteArray,
+        title: values.title,
+        content: values.content,
+        voteTitle: values.voteTitle,
+        voteArray: values.voteArray,
       },
-      channelID: channelId,
+      channelID: values.channelId,
     };
 
     if (mode === 'create') {
-      postData; //create 서버 동작 예정
+      postData; // create 서버 동작 예정
     } else if (mode === 'edit' && postId) {
       const PostData = {
         ...postData,
         postId: postId,
       };
-      PostData; //postdata 서버 동작 예정
+      PostData; // edit 서버 동작 예정
     }
   };
+
+  const formik = useFormik({
+    initialValues: prevData,
+    onSubmit: handleFormSubmit,
+  });
+
+  const { values, handleChange, handleSubmit, setFieldValue } = formik;
 
   return (
     <FormContainer onSubmit={handleSubmit}>
@@ -85,20 +78,33 @@ const PostEditPage = ({
           placeholder='제목을 입력하세요'
           width='589px'
           height='70px'
-          value={title}
-          onChange={handleTitleChange}
+          name='title'
+          value={values.title}
+          onChange={handleChange}
         />
-        <DropdownMenu channelId={channelId} setChannelId={setChannelId} />
+        <DropdownMenu
+          channelId={values.channelId}
+          setChannelId={(value) => setFieldValue('channelId', value)}
+        />
         <TextAreaWrapper>
           <StyledTextArea
             name='content'
             placeholder='내용을 입력하세요'
-            value={content}
-            onChange={handleContentChange}
+            value={values.content}
+            onChange={handleChange}
           />
         </TextAreaWrapper>
       </FormArea>
-      <VotedBox formData={formData} setFormData={setFormData} />
+      <VotedBox
+        formData={{
+          voteTitle: values.voteTitle,
+          voteArray: values.voteArray,
+        }}
+        setFormData={(values) => {
+          setFieldValue('voteTitle', values.voteTitle);
+          setFieldValue('voteArray', values.voteArray);
+        }}
+      />
       <ButtonWrapper>
         <Button styleType='primary' size='small' type='submit' event='enabled'>
           {mode === 'edit' ? '수정하기' : '등록하기'}

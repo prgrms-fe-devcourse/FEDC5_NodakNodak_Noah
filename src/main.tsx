@@ -7,7 +7,7 @@ import Main from './pages/mainPage';
 import UserPage from './pages/userPage/index.tsx';
 import App from './App.tsx';
 import store from './store';
-        
+
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
@@ -19,7 +19,7 @@ const router = createBrowserRouter([
     path: '/',
     element: <App />,
     children: [
-      { path: '/write', element: <PostEditPage /> },
+      { path: '/write', element: <PostEditPage mode='create' /> },
       { path: '/home', element: <Main /> },
       { path: '/user', element: <UserPage /> },
     ],

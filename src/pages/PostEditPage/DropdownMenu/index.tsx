@@ -14,7 +14,7 @@ export interface Channel {
 
 interface DropdownMenuProps {
   channelId: string;
-  setChannelId: React.Dispatch<string>;
+  setChannelId: (value: string) => void;
 }
 
 const DropdownMenu = ({ channelId, setChannelId }: DropdownMenuProps) => {
