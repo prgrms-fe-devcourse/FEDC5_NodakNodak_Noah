@@ -31,7 +31,7 @@ const PostEditPage = ({
 
   const prevData = mode === 'edit' ? severData : { ...initialData };
 
-  const handleSubmit = (values: FormType) => {
+  const handleFormSubmit = (values: FormType) => {
     if (!values.channelId || !values.content) {
       if (!values.channelId) {
         alert('채널을 선택하세요.');
@@ -65,11 +65,13 @@ const PostEditPage = ({
 
   const formik = useFormik({
     initialValues: prevData,
-    onSubmit: handleSubmit,
+    onSubmit: handleFormSubmit,
   });
 
+  const { values, handleChange, handleSubmit, setFieldValue } = formik;
+
   return (
-    <FormContainer onSubmit={formik.handleSubmit}>
+    <FormContainer onSubmit={handleSubmit}>
       <FormArea>
         <Input
           required={true}
@@ -77,30 +79,30 @@ const PostEditPage = ({
           width='589px'
           height='70px'
           name='title'
-          value={formik.values.title}
-          onChange={formik.handleChange}
+          value={values.title}
+          onChange={handleChange}
         />
         <DropdownMenu
-          channelId={formik.values.channelId}
-          setChannelId={(value) => formik.setFieldValue('channelId', value)}
+          channelId={values.channelId}
+          setChannelId={(value) => setFieldValue('channelId', value)}
         />
         <TextAreaWrapper>
           <StyledTextArea
             name='content'
             placeholder='내용을 입력하세요'
-            value={formik.values.content}
-            onChange={formik.handleChange}
+            value={values.content}
+            onChange={handleChange}
           />
         </TextAreaWrapper>
       </FormArea>
       <VotedBox
         formData={{
-          voteTitle: formik.values.voteTitle,
-          voteArray: formik.values.voteArray,
+          voteTitle: values.voteTitle,
+          voteArray: values.voteArray,
         }}
         setFormData={(values) => {
-          formik.setFieldValue('voteTitle', values.voteTitle);
-          formik.setFieldValue('voteArray', values.voteArray);
+          setFieldValue('voteTitle', values.voteTitle);
+          setFieldValue('voteArray', values.voteArray);
         }}
       />
       <ButtonWrapper>
