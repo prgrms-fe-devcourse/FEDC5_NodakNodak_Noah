@@ -1,44 +1,48 @@
 import GrassTable from './GrassTable';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { useEffect } from 'react';
 import Avatar from '@/components/Avatar';
 import Text from '@/components/Text';
 import Button from '@/components/Button';
-
-const sampleData = {
-  image: 'https://i.pravatar.cc/300',
-  isOnline: true,
-  isFollowing: false,
-  username: 'minsu',
-  bio: '',
-  follower: 10,
-  following: 13,
-  posts: 4,
-  _id: Math.random().toString() + Date.now().toString(),
-};
+import { RootState, useDispatch } from '@/store';
+import { getUser } from '@/slices/user';
 
 const UserInfo = () => {
-  const { image, username, bio, follower, following, posts } = sampleData;
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getUser());
+  }, []);
+
+  const currentUser = useSelector(
+    (state: RootState) => state.userInfo.currentUser,
+  );
+  if (!currentUser) {
+    return <div>Loading...</div>;
+  }
+  const { image, fullName, username, followers, following, posts } =
+    currentUser;
 
   return (
     <>
       <UserInfoContainer>
-        <Avatar src={image} alt={username} size='large' />
+        <Avatar src={image} alt={fullName} size='large' />
         <UserInfoWrapper>
           <Text tagType='span' fontType='h1' colorType='black'>
-            {username}
+            {fullName}
           </Text>
           <Text tagType='span' fontType='body1' colorType='black'>
-            {bio === '' ? '한줄 소개가 없습니다' : bio}
+            {username === '' ? '한줄 소개가 없습니다' : username}
           </Text>
           <UserButtonContainer>
             <Button size='regular' styleType='ghost'>
-              {follower} 팔로워
+              {followers.length} 팔로워
             </Button>
             <Button size='regular' styleType='ghost'>
-              {following} 팔로잉
+              {following.length} 팔로잉
             </Button>
             <Button size='regular' styleType='ghost'>
-              {posts} 포스트
+              {posts.length} 포스트
             </Button>
           </UserButtonContainer>
           <GrassTable />

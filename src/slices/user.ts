@@ -3,13 +3,11 @@ import axios from 'axios';
 import { User } from '@/types/APIResponseTypes';
 
 interface UserInfo {
-  users: User[];
   currentUser: User | undefined;
   isLoading: boolean;
 }
 
 const initialState: UserInfo = {
-  users: [],
   currentUser: undefined,
   isLoading: false,
 };
@@ -26,20 +24,13 @@ export const getUser = createAsyncThunk('user/getUser', async () => {
 export const userInfo = createSlice({
   name: 'user',
   initialState,
-  reducers: {
-    setUser: (state, action) => {
-      const currentUser = state.users.find(
-        (user) => user._id === action.payload,
-      );
-      state.currentUser = currentUser;
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getUser.pending, (state) => {
       state.isLoading = true;
     });
     builder.addCase(getUser.fulfilled, (state, action) => {
-      state.users = action.payload;
+      state.currentUser = action.payload;
       state.isLoading = false;
     });
     builder.addCase(getUser.rejected, (state) => {
@@ -47,7 +38,5 @@ export const userInfo = createSlice({
     });
   },
 });
-
-export const { setUser } = userInfo.actions;
 
 export default userInfo.reducer;
