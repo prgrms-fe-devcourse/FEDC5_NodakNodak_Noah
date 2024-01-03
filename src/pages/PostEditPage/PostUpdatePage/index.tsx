@@ -26,7 +26,7 @@ interface FormType {
 }
 
 const PostUpdatePage = () => {
-  const { postId, channelId } = useParams();
+  const { channelId, postId } = useParams();
   const dispatch = useDispatch();
 
   useEffect(() => {
