@@ -3,7 +3,8 @@ import Login from './pages/Login.tsx';
 import NotFound from './pages/NotFound.tsx';
 import PostEditPage from './pages/PostEditPage';
 import Main from './pages/mainPage';
-import UserPage from './pages/userPage/index.tsx';
+import UserPage from './pages/userPage/index';
+import Setting from './pages/SettingModal/Setting';
 import store from './store';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import React from 'react';
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
   { path: '/write', element: <PostEditPage mode='create' /> },
   { path: '/home', element: <Main /> },
   { path: '/user', element: <UserPage /> },
+  { path: '/user/setting', element: <Setting /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
