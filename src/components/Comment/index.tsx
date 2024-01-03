@@ -15,6 +15,8 @@ const CommentItem = ({ author, createdAt, comment }: CommentItemProps) => {
     <div
       className='commentItem'
       style={{
+        display: 'flex',
+        alignItems: 'center',
         margin: '8px',
         borderBottom: `2px solid ${theme.colors.grayscale[200]}`,
         paddingBottom: '8px',
@@ -22,7 +24,7 @@ const CommentItem = ({ author, createdAt, comment }: CommentItemProps) => {
         height: '96px',
       }}>
       <div className='userData' style={{ display: 'inline-flex' }}>
-        <Avatar src={image} size='middle' alt='유저네임' />
+        <Avatar size='middle' alt='유저네임' />
         <div
           style={{
             display: 'flex',
@@ -35,7 +37,7 @@ const CommentItem = ({ author, createdAt, comment }: CommentItemProps) => {
             colorNumber='500'
             fontType='body1'
             tagType='span'>
-            {fullname}
+            {author}
           </Text>
           <Text
             tagType='span'
@@ -47,7 +49,11 @@ const CommentItem = ({ author, createdAt, comment }: CommentItemProps) => {
           <hr />
         </div>
       </div>
-      <Text tagType='span' fontType='body3' colorType='black'>
+      <Text
+        tagType='p'
+        fontType='body3'
+        colorType='black'
+        style={{ paddingLeft: '3rem' }}>
         {content.content}
       </Text>
     </div>
