@@ -1,10 +1,9 @@
 import { PostSnippetBox } from './StyledPostCard';
+import { PostSnippetProps } from './PostCardTypes';
 import { UserSnippetBox } from '../UserSnippet/StyledUserSnippet';
 import Avatar from '../Avatar';
 import Image from '../Image';
 import Text from '../Text';
-
-import { PostSnippetProps } from '@/types/PostCardTypes';
 
 const PostSnippet = ({
   avatar,
@@ -15,15 +14,9 @@ const PostSnippet = ({
 }: PostSnippetProps) => {
   return (
     <PostSnippetBox>
-      <Image
-        width='280px'
-        height='146px'
-        block={true}
-        src={image}
-        mode='cover'
-      />
+      <Image width='280px' height='146px' src={image} />
       <div>
-        <Text fontType='body2' colorType='black' style={{ fontWeight: '700' }}>
+        <Text tagType='p' fontType='body2' colorType='black'>
           {title}
         </Text>
         <Text tagType='span' fontType='caption' colorType='black'>
@@ -42,7 +35,7 @@ const PostSnippet = ({
       </div>
       <UserSnippetBox>
         <Avatar size='mini' src={avatar} />
-        <Text fontType='caption' colorType='black'>
+        <Text tagType='span' fontType='caption' colorType='black'>
           {fullName}
         </Text>
       </UserSnippetBox>

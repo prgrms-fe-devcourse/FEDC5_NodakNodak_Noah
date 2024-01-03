@@ -2,13 +2,20 @@ import {
   PostContentWrapper,
   PostContentAuthorWrapper,
 } from './PostContentStyled';
-import { dummyPost } from './../Dummy';
+import { useSelectedPost } from '../useSelectedPost';
 import Text from '@/components/Text';
 import Avatar from '@/components/Avatar';
 import Image from '@/components/Image';
 
 const PostContent = () => {
-  const { title, content } = JSON.parse(dummyPost.title);
+  const postDetailContent = useSelectedPost();
+
+  const { author, createdAt } = postDetailContent;
+
+  if (!postDetailContent.title) return null;
+
+  const { content, title } = JSON.parse(postDetailContent.title);
+  const { fullName } = author;
 
   return (
     <PostContentWrapper className='ContentTitle'>
@@ -16,21 +23,21 @@ const PostContent = () => {
         {title}
       </Text>
       <PostContentAuthorWrapper className='Author'>
-        <Avatar src={dummyPost.author.image} size='middle' alt='유저네임' />
+        <Avatar size='middle' alt='유저네임' />
         <Text
           colorType='grayscale'
           colorNumber='500'
           fontType='body1'
           tagType='span'
           style={{ margin: '0 10px 0 10px' }}>
-          유저네임
+          {fullName}
         </Text>
         <Text
           tagType='span'
           fontType='caption'
           colorType='grayscale'
           colorNumber='300'>
-          {dummyPost.createdAt}
+          {createdAt}
         </Text>
       </PostContentAuthorWrapper>
       <Text
@@ -41,7 +48,6 @@ const PostContent = () => {
         {content}
       </Text>
       <Image
-        src={dummyPost.image}
         width='23.25rem'
         height='9.4375rem'
         style={{ marginTop: '1.25rem' }}

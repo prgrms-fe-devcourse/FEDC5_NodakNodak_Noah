@@ -1,17 +1,22 @@
 import Avatar from './../Avatar/index';
 import Text from './../Text/index';
+import { Comment } from '@/pages/DetailPage/PostComment/useSelectedComment';
 import theme from '@/styles/theme';
-import { Comment } from '@/pages/DetailPage/Dummy';
 
-const CommentItem = ({ author, createdAt, comment }: Comment) => {
-  const { fullname, image } = author;
-  const content = { ...JSON.parse(comment) };
-  // any타입으로 추론되는데 왜그런거야,,
+interface CommentItemProps {
+  author: string;
+  createdAt: string;
+  comment: string;
+}
+const CommentItem = ({ author, createdAt, comment }: CommentItemProps) => {
+  const content = { ...JSON.parse(comment) } as Comment;
 
   return (
     <div
       className='commentItem'
       style={{
+        display: 'flex',
+        alignItems: 'center',
         margin: '8px',
         borderBottom: `2px solid ${theme.colors.grayscale[200]}`,
         paddingBottom: '8px',
@@ -19,7 +24,7 @@ const CommentItem = ({ author, createdAt, comment }: Comment) => {
         height: '96px',
       }}>
       <div className='userData' style={{ display: 'inline-flex' }}>
-        <Avatar src={image} size='middle' alt='유저네임' />
+        <Avatar size='middle' alt='유저네임' />
         <div
           style={{
             display: 'flex',
@@ -32,7 +37,7 @@ const CommentItem = ({ author, createdAt, comment }: Comment) => {
             colorNumber='500'
             fontType='body1'
             tagType='span'>
-            {fullname}
+            {author}
           </Text>
           <Text
             tagType='span'
@@ -44,8 +49,12 @@ const CommentItem = ({ author, createdAt, comment }: Comment) => {
           <hr />
         </div>
       </div>
-      <Text tagType='span' fontType='body3' colorType='black'>
-        {content}
+      <Text
+        tagType='p'
+        fontType='body3'
+        colorType='black'
+        style={{ paddingLeft: '3rem' }}>
+        {content.content}
       </Text>
     </div>
   );

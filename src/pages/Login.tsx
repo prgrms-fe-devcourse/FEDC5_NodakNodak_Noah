@@ -32,7 +32,7 @@ const Content = styled.div`
 
   flex-direction: column;
 `;
-const Header = styled.h1`
+const SignText = styled.h1`
   display: flex;
   font-size: 48px;
   margin-top: 72px;
@@ -49,7 +49,7 @@ const Login = () => {
     <Container>
       <Card>
         <Content>
-          <Header>{isLogin ? '로그인' : '회원가입'}</Header>
+          <SignText>{isLogin ? '로그인' : '회원가입'}</SignText>
           {isLogin ? (
             <In isLogin={isLogin} setIsLogin={setIsLogin} />
           ) : (

@@ -1,10 +1,13 @@
-import { dummyPost } from '../Dummy';
+import { useSelectedComment } from './useSelectedComment';
+
 import CommentItem from '@/components/Comment';
 import theme from '@/styles/theme';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
 
 const PostComment = () => {
+  const postDetailComment = useSelectedComment();
+
   return (
     <div
       style={{
@@ -17,12 +20,13 @@ const PostComment = () => {
           flexDirection: 'column',
           alignItems: 'center',
         }}>
-        {dummyPost.comments.map((comment, index) => (
+        {postDetailComment.map((comment) => (
           <CommentItem
-            author={comment.author}
+            author={comment.author.fullName}
             createdAt={comment.createdAt}
             comment={comment.comment}
-            key={index}></CommentItem>
+            key={comment._id}
+          />
         ))}
         <div
           className='userInput'
