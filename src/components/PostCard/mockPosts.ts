@@ -1,4 +1,4 @@
-import { TempPost } from '@/types/PostCardTypes';
+import { TempPost } from './PostCardTypes';
 
 export const mockPosts: TempPost[] = Array.from({ length: 200 }).map(
   (_, index) => ({

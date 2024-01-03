@@ -1,6 +1,7 @@
 import { useDispatch as reduxUseDispatch } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import channelReducer from '@/slices/channel';
+import userInfoReducer from '@/slices/user';
 import postDetailReducer from '@/slices/postDetail';
 import postListReducer from '@/slices/postList';
 import userListReducer from '@/slices/userList';

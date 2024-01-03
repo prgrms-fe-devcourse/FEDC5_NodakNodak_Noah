@@ -1,15 +1,12 @@
-import { dummyPost } from '../Dummy';
-import { useSelector } from 'react-redux';
+import { useSelectedComment } from './useSelectedComment';
+
 import CommentItem from '@/components/Comment';
 import theme from '@/styles/theme';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
-import { RootState } from '@/store';
 
 const PostComment = () => {
-  const postDetailComment = useSelector(
-    (state: RootState) => state.postDetail.post.comments,
-  );
+  const postDetailComment = useSelectedComment();
 
   return (
     <div
@@ -23,12 +20,12 @@ const PostComment = () => {
           flexDirection: 'column',
           alignItems: 'center',
         }}>
-        {dummyPost.comments.map((comment, index) => (
+        {postDetailComment.map((comment) => (
           <CommentItem
-            author={comment.author}
+            author={comment.author.fullName}
             createdAt={comment.createdAt}
             comment={comment.comment}
-            key={index}
+            key={comment._id}
           />
         ))}
         <div

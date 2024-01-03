@@ -2,7 +2,7 @@ import { ImageProps } from './ImageProps';
 import { useRef, useState } from 'react';
 
 const Image = ({
-  defaultSrc,
+  defaultSrc = '/public/DefaultImage.jpg',
   src,
   width,
   height,

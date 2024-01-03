@@ -1,4 +1,4 @@
-import { dummyPost } from '../Dummy';
+import { useSelectedPost } from '../useSelectedPost';
 import styled from 'styled-components';
 import Card from '@/components/Card';
 import Input from '@/components/Input';
@@ -23,12 +23,19 @@ const InputWrapper = styled.div`
 `;
 
 const PostVote = () => {
-  const { voteArray, voteTitle } = JSON.parse(dummyPost.title);
+  const postDetailContent = useSelectedPost();
+
+  if (!postDetailContent.title) return null;
+  const { voteArray, voteTitle } = JSON.parse(postDetailContent.title);
 
   return (
     <Card width='44.375rem' height='31.25rem' shadowType='large'>
       <VoteTitleWrapper>
-        <Text tagType='span' fontType='h3' colorType='black'>
+        <Text
+          tagType='span'
+          fontType='h3'
+          colorType='black'
+          style={{ margin: '1rem 0' }}>
           {voteTitle}
         </Text>
         <Text tagType='span' fontType='body2' colorType='black'>
@@ -41,9 +48,8 @@ const PostVote = () => {
             key={index}
             placeholder={vote}
             bordertype='enabled'
-            width='466px'
-            height='48px'
             readOnly={true}
+            style={{ marginBottom: '1.5rem', width: '466px', height: '48px' }}
           />
         ))}
       </InputWrapper>
