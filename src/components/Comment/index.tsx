@@ -1,12 +1,15 @@
 import Avatar from './../Avatar/index';
 import Text from './../Text/index';
+import { Comment } from '@/pages/DetailPage/PostComment/useSelectedComment';
 import theme from '@/styles/theme';
-import { Comment } from '@/pages/DetailPage/Dummy';
 
-const CommentItem = ({ author, createdAt, comment }: Comment) => {
-  const { fullname, image } = author;
-  const content = { ...JSON.parse(comment) };
-  // any타입으로 추론되는데 왜그런거야,,
+interface CommentItemProps {
+  author: string;
+  createdAt: string;
+  comment: string;
+}
+const CommentItem = ({ author, createdAt, comment }: CommentItemProps) => {
+  const content = { ...JSON.parse(comment) } as Comment;
 
   return (
     <div
