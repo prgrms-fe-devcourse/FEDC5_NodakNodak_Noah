@@ -1,10 +1,15 @@
-import { MockUser } from '@/components/UserListCard/mockUsers';
-
+export interface UserSnippet {
+  image: string;
+  isOnline: boolean;
+  isFollowing: boolean;
+  fullName: string;
+  _id: string;
+}
 export interface UserListCardProps {
-  users: MockUser[];
+  users: UserSnippet[];
 }
 
 export type RenderUserSnippets = (
-  users: MockUser[],
+  users: UserSnippet[],
   title: string,
 ) => JSX.Element;
