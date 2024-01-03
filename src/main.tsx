@@ -22,13 +22,10 @@ const router = createBrowserRouter([
       { path: '/write', element: <PostEditPage mode='create' /> },
       { path: '/home', element: <Main /> },
       { path: '/user', element: <UserPage /> },
+      { path: '/detail', element: <DetailPage /> },
     ],
   },
   { path: '/sign', element: <Login /> },
-  { path: '/write', element: <PostEditPage mode='create' /> },
-  { path: '/home', element: <Main /> },
-  { path: '/user', element: <UserPage /> },
-  { path: '/detail', element: <DetailPage /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
