@@ -11,6 +11,7 @@ const store = configureStore({
     postDetail: postDetailReducer,
     postList: postListReducer,
     userList: userListReducer,
+    userInfo: userInfoReducer,
   },
 });
 type AppDispatch = typeof store.dispatch;
