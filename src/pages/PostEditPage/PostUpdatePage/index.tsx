@@ -68,7 +68,7 @@ const PostUpdatePage = () => {
   const { values, handleChange, handleSubmit, setFieldValue } = formik;
 
   useEffect(() => {
-    if (serverData && values.title === '') {
+    if (serverData && values.channelId === '') {
       formik.setValues({ ...serverData, channelId: channelId });
     }
   }, [serverData, formik, values, channelId]);
