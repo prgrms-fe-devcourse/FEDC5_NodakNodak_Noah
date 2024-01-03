@@ -2,9 +2,13 @@ import DropdownMenu from './DropdownMenu';
 import VotedBox from './VoteEditBox';
 import styled from 'styled-components';
 import { useFormik } from 'formik';
+import { useEffect } from 'react';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 import them from '@/styles/theme';
+import { useDispatch } from '@/store';
+import { getPostDetail } from '@/slices/postDetail';
+import { useSelectedPostTitle } from '@/slices/useSelectedPost';
 
 interface FormType {
   title: string;
@@ -21,16 +25,6 @@ const PostEditPage = ({
   mode: 'create' | 'edit';
   postId?: string;
 }) => {
-  const initialData = {
-    title: '',
-    content: '',
-    voteTitle: '',
-    voteArray: ['', ''],
-    channelId: '',
-  };
-
-  const prevData = mode === 'edit' ? severData : { ...initialData };
-
   const handleFormSubmit = (values: FormType) => {
     if (!values.channelId || !values.content) {
       if (!values.channelId) {
@@ -54,6 +48,7 @@ const PostEditPage = ({
 
     if (mode === 'create') {
       postData; // create 서버 동작 예정
+      //console.log(postData);
     } else if (mode === 'edit' && postId) {
       const PostData = {
         ...postData,
@@ -63,8 +58,30 @@ const PostEditPage = ({
     }
   };
 
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getPostDetail());
+  }, [dispatch]);
+
+  const serverData = useSelectedPostTitle();
+  if (!serverData) {
+    return null;
+  }
+  console.log(serverData);
+
+  const initialData = {
+    title: '',
+    content: '',
+    voteTitle: '',
+    voteArray: ['', ''],
+    channelId: '',
+  };
+
+  const initialFormValues = mode === 'create' ? initialData : serverData;
+
   const formik = useFormik({
-    initialValues: prevData,
+    initialValues: initialFormValues,
     onSubmit: handleFormSubmit,
   });
 
@@ -169,13 +186,13 @@ const ButtonWrapper = styled.div`
 `;
 
 //임시 더미데이터, 추후 데이터 형태 변경에 따라 수정 예정
-const severData = {
-  title: '점메추',
-  content: '점심 메뉴 추천해주세요',
-  voteTitle: '점심 메뉴 투표',
-  voteArray: ['한식', '중식', '일식', '양식'],
-  postId: '123',
-  image: 0,
-  imageToDeletePublicId: 1,
-  channelId: '6587c',
-};
+// const serverData = {
+//   title: '점메추',
+//   content: '점심 메뉴 추천해주세요',
+//   voteTitle: '점심 메뉴 투표',
+//   voteArray: ['한식', '중식', '일식', '양식'],
+//   postId: '123',
+//   image: 0,
+//   imageToDeletePublicId: 1,
+//   channelId: '6587c',
+// };
