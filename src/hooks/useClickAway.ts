@@ -4,18 +4,13 @@ const events = ['mousedown', 'touchstart'] as const;
 
 const useClickAway = (handler: (e: MouseEvent | TouchEvent) => void) => {
   const ref = useRef<HTMLElement>(null);
-  const savedHandler = useRef(handler);
-
-  useEffect(() => {
-    savedHandler.current = handler;
-  }, [handler]);
 
   useEffect(() => {
     const element = ref.current;
     if (!element) return;
 
     const handleEvent = (e: MouseEvent | TouchEvent) => {
-      !element.contains(e.target as Node) && savedHandler.current(e);
+      !element.contains(e.target as Node) && handler(e);
     };
 
     for (const eventName of events) {
@@ -27,7 +22,7 @@ const useClickAway = (handler: (e: MouseEvent | TouchEvent) => void) => {
         document.removeEventListener(eventName, handleEvent);
       }
     };
-  }, [ref]);
+  }, [ref, handler]);
 
   return ref;
 };
