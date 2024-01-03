@@ -13,7 +13,7 @@ const initialState: DetailPost = {
 };
 
 export const getPostDetail = createAsyncThunk(
-  'channel/getChannel',
+  'detailPost/getPostDetail',
   async () => {
     const response = await axios({
       url: 'https://kdt.frontend.5th.programmers.co.kr:5003/posts/6592c80a2a48542ca963b86d',
