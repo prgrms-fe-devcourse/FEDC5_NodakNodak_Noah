@@ -6,6 +6,7 @@ const Badge = ({
   children,
   count,
   dot = false,
+  onClick = () => {},
   ...props
 }: PropsWithChildren<BadgeProps>) => {
   let badge = null;
@@ -20,7 +21,7 @@ const Badge = ({
   }
 
   return (
-    <BadgeContainer style={{ ...props.style }}>
+    <BadgeContainer style={{ ...props.style }} onClick={onClick}>
       {children}
       {badge}
     </BadgeContainer>
