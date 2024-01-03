@@ -11,7 +11,10 @@ import { getUser } from '@/slices/user';
 const UserInfo = () => {
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getUser());
+    const isUserPage = window.location.pathname.startsWith('/user');
+    if (isUserPage) {
+      dispatch(getUser());
+    }
   }, []);
 
   const currentUser = useSelector(
