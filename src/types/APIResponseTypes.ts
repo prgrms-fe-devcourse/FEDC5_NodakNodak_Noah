@@ -21,6 +21,7 @@ export interface User {
   messages: Message[];
   _id: string;
   fullName: string;
+  username: string;
   email: string;
   createdAt: string;
   updatedAt: string;
@@ -37,6 +38,7 @@ export interface Channel {
 }
 
 export interface Post {
+  avatar: string;
   likes: Like[];
   comments: Comment[];
   _id: string;
