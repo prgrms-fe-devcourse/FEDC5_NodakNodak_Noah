@@ -18,7 +18,7 @@ const UserInfo = () => {
     (state: RootState) => state.userInfo.currentUser,
   );
   if (!currentUser) {
-    return <div>Loading...</div>;
+    return <></>;
   }
   const { image, fullName, username, followers, following, posts } =
     currentUser;

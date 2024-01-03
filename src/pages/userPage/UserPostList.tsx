@@ -15,7 +15,7 @@ const UserPostList = () => {
     (state: RootState) => state.userInfo.currentUser,
   );
   if (!currentUser) {
-    return <div>Loading...</div>;
+    return <></>;
   }
   const { fullName, posts } = currentUser;
 
