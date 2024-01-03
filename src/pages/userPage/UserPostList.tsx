@@ -33,17 +33,11 @@ const UserPostList = () => {
       </Text>
       <PostCard.Group>
         {posts.map((post) => {
-          let title;
-          try {
-            title = JSON.parse(post.title).title;
-          } catch (e) {
-            title = post.title;
-          }
           return (
             <PostCard
               key={post._id}
               post={{
-                title,
+                title: JSON.parse(post.title).title,
                 fullName: '',
                 avatar: '',
                 _id: '',
