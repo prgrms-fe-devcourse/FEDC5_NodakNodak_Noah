@@ -6,15 +6,10 @@ export const useSelectedPost = () =>
 
 export const useSelectedPostTitle = () => {
   const selectedPost = useSelectedPost();
-  console.log(1, selectedPost);
   if (selectedPost && selectedPost.title) {
-    try {
-      const parsedTitle = JSON.parse(selectedPost.title);
-      if (parsedTitle) {
-        return parsedTitle;
-      }
-    } catch (error) {
-      console.error('Error parsing title JSON:', error);
+    const parsedTitle = JSON.parse(selectedPost.title);
+    if (parsedTitle) {
+      return parsedTitle;
     }
   }
   return null;
