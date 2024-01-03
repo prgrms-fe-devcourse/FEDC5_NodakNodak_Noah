@@ -9,6 +9,7 @@ import {
 } from '../styledPostEdit';
 import { useFormik } from 'formik';
 import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 import Button from '@/components/Button';
 import Input from '@/components/Input';
@@ -25,6 +26,7 @@ interface FormType {
 }
 
 const PostUpdatePage = () => {
+  const { postId, channelId } = useParams();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -47,7 +49,7 @@ const PostUpdatePage = () => {
         voteArray: values.voteArray,
       },
       channelId: values.channelId,
-      //postId추가 예정,
+      postId: postId,
     };
     postData;
   };
@@ -67,9 +69,9 @@ const PostUpdatePage = () => {
 
   useEffect(() => {
     if (serverData && values.title === '') {
-      formik.setValues({ ...serverData });
+      formik.setValues({ ...serverData, channelId: channelId });
     }
-  }, [serverData, formik, values]);
+  }, [serverData, formik, values, channelId]);
 
   return (
     <FormContainer onSubmit={handleSubmit}>
