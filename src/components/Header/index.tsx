@@ -57,6 +57,10 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
     setFocus(!focus);
   });
 
+  const handleLogin = () => {
+    navigate('/sign');
+  };
+
   return (
     <Card
       width='100vw'
@@ -111,7 +115,7 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
             <Avatar size='small' src={userImage} />
           </AuthUiWrapper>
         ) : (
-          <Button styleType='primary' size='small'>
+          <Button styleType='primary' size='small' onClick={handleLogin}>
             로그인
           </Button>
         )}
