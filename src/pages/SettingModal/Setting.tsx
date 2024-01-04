@@ -1,21 +1,24 @@
+import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
 import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 import Avatar from '@/components/Avatar';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 import Text from '@/components/Text';
-import { RootState, useDispatch } from '@/store';
 import { getUser } from '@/slices/user';
+import { RootState, useDispatch } from '@/store';
 
 const Setting = () => {
   const [profileImage, setProfileImage] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const { userId } = useParams();
   const selectedFile = useRef<HTMLInputElement>(null);
-  const returnToMyPage = () => navigate(-1);
+  
 
   const onUploadImage = (e: ChangeEvent<HTMLInputElement>) => {
     const reader = new FileReader();
@@ -38,17 +41,79 @@ const Setting = () => {
   const currentUser = useSelector(
     (state: RootState) => state.userInfo.currentUser,
   );
+
+  const [updatedData, setUpdatedData] = useState({
+    fullName: currentUser?.fullName || '',
+    username: currentUser?.username || '',
+  });
+  const [isModified, setIsModified] = useState(false);
+
+  useEffect(() => {
+    dispatch(getUser());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (currentUser) {
+      setUpdatedData({
+        fullName: currentUser.fullName,
+        username: currentUser.username,
+      });
+    }
+  }, [currentUser]);
+
+  const handleUpdate = async () => {
+    try {
+      await axios.put(
+        'https://kdt.frontend.5th.programmers.co.kr:5003/settings/update-user',
+        {
+          fullName: updatedData.fullName,
+          username: updatedData.username,
+        },
+        {
+          headers: {
+            Authorization:
+              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1ODcwODQ3YjAzNTcyMWYyMzM1ODA2MiIsImVtYWlsIjoic29uaG9taW45OEBuYXZlci5jb20ifSwiaWF0IjoxNzAzMzQ4Mjk1fQ.m3mYBXsAdzJhvvyde3PJy9lbYYPIFMx_PJBMtYMTWKw',
+            'Content-Type': 'application/json',
+          },
+        },
+      );
+      navigate('/user');
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+  const handleCancel = () => {
+    if (currentUser) {
+      setUpdatedData({
+        fullName: currentUser.fullName,
+        username: currentUser.username,
+      });
+      setIsModified(false);
+    }
+    navigate(-1);
+  };
+
+  const handleInputChange = (field: string, value: string) => {
+    setUpdatedData({ ...updatedData, [field]: value });
+    setIsModified(true);
+  };
+
   if (!currentUser) {
-    return <div>Loading...</div>;
+    return <></>;
   }
-  const { fullName, username, email } = currentUser;
+  
+  const { fullName, email } = currentUser;
 
   return (
     <IndexContainer>
       <CardWrapper>
         <ButtonWrapper>
-          <Button styleType='ghost' isArrow={true} onClick={returnToMyPage}>
-            취소하기
+          <Button
+            styleType={isModified ? 'primary' : 'ghost'}
+            isArrow={true}
+            onClick={isModified ? handleUpdate : handleCancel}>
+            {isModified ? '수정하기' : '취소하기'}
           </Button>
         </ButtonWrapper>
         <RowGrid>
@@ -77,14 +142,16 @@ const Setting = () => {
               width='80%'
               fontType='h1'
               required={true}
-              value={fullName}
+              value={updatedData.fullName}
+              onChange={(e) => handleInputChange('fullName', e.target.value)}
             />
             <Input
               underline={true}
               placeholder='한줄 소개'
               width='80%'
               fontType='body1'
-              value={username}
+              value={updatedData.username}
+              onChange={(e) => handleInputChange('username', e.target.value)}
             />
             <RowGrid>
               <Text tagType='span' fontType='body1' colorType='black'>
