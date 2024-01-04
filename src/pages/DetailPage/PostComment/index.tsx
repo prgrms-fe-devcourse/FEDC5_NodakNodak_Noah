@@ -19,15 +19,13 @@ const PostComment = () => {
         data: {
           comment: JSON.stringify({
             type: 'comment',
-            voteArray: ['한식', '중식', '일식', '양식'], // 추후에 voteArray는 전부 없어도 될 것 같음
+            voteArray: ['한식', '중식', '일식', '양식'],
             content: comment,
           }),
-          postId: '6592c80a2a48542ca963b86d', // url의 params로 받아와야 함
+          postId: '6592c80a2a48542ca963b86d',
         },
         headers: {
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1ODcwODQ3YjAzNTcyMWYyMzM1ODA2MiIsImVtYWlsIjoic29uaG9taW45OEBuYXZlci5jb20ifSwiaWF0IjoxNzAzMzQ4Mjk1fQ.m3mYBXsAdzJhvvyde3PJy9lbYYPIFMx_PJBMtYMTWKw',
-          // userInfo 에서 토큰값 받아와야 함
+          Authorization: '',
         },
       });
     } catch (e) {
