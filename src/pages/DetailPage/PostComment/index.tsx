@@ -24,6 +24,11 @@ const PostComment = () => {
   };
   const inputRef = useClickAway(handleClickAway);
 
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setWarn(false);
+    setComment(e.target.value);
+  };
+
   const handleCommentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!comment) {
@@ -91,7 +96,7 @@ const PostComment = () => {
               width='538px'
               height='48px'
               underline={true}
-              onChange={(e) => setComment(e.target.value)}
+              onChange={handleInputChange}
             />
             {warn ? <Warning>댓글을 입력해주세요.</Warning> : ''}
           </FlexColumn>
