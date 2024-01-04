@@ -69,11 +69,12 @@ const PostCreatePage = () => {
         <Input
           required={true}
           placeholder='제목을 입력하세요'
-          width='589px'
-          height='70px'
           name='title'
           value={values.title}
           onChange={handleChange}
+          fontType='h1'
+          underline={true}
+          style={{ width: '584px', height: '72px', textAlign: 'center' }}
         />
         <DropdownMenu
           channelId={values.channelId}

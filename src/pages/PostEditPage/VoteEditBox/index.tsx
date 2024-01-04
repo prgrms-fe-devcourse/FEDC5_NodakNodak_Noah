@@ -58,19 +58,25 @@ const VotedBox = ({ formData, setFormData }: FormProps) => {
         <ContentWrapper>
           <Content>
             <Input
-              required={true}
               placeholder='투표주제를 입력하세요'
-              width='100%'
-              height='48px'
+              required={true}
+              underline={true}
+              fontType='h3'
               value={formData.voteTitle}
               onChange={handleTitleChange}
+              style={{
+                width: '100%',
+                height: '48px',
+                textAlign: 'center',
+              }}
             />
             <Button
               styleType='ghost'
               size='regular'
-              event='disabled'
+              event='hover'
               onClick={handleAddCandidate}
-              type='button'>
+              type='button'
+              style={{ margin: '8px 0' }}>
               <>선택지 추가 +</>
             </Button>
             {formData.voteArray.map((candidate, index) => (
@@ -78,10 +84,13 @@ const VotedBox = ({ formData, setFormData }: FormProps) => {
                 <Input
                   required={true}
                   placeholder={`투표 후보${index + 1}`}
-                  width='100%'
-                  height='48px'
                   value={candidate}
                   onChange={(e) => handleCandidateChange(index, e.target.value)}
+                  style={{
+                    width: '100%',
+                    height: '48px',
+                    marginTop: '8px',
+                  }}
                 />
                 <DeleteButton
                   $isshow={index >= 2}
