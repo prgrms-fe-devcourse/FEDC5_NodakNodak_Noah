@@ -14,6 +14,7 @@ import useClickAway from '@/hooks/useClickAway';
 
 const PostComment = () => {
   const postDetailComment = useSelectedComment();
+  const { postId } = useParams();
   const [comment, setComment] = useState('');
   const [warn, setWarn] = useState(false);
   const { postId } = useParams();
@@ -35,6 +36,7 @@ const PostComment = () => {
       setWarn(true);
       return;
     }
+    const token = localStorage.getItem('auth-token');
     try {
       await axios({
         url: 'https://kdt.frontend.5th.programmers.co.kr:5003/comments/create',
@@ -48,7 +50,7 @@ const PostComment = () => {
           postId,
         },
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
+          Authorization: `Bearer ${token}`,
         },
       });
 

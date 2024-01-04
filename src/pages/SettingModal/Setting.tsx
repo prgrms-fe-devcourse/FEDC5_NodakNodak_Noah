@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import { useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Avatar from '@/components/Avatar';
 import Button from '@/components/Button';
@@ -10,15 +10,30 @@ import { RootState, useDispatch } from '@/store';
 import { getUser } from '@/slices/user';
 
 const Setting = () => {
+  const [profileImage, setProfileImage] = useState('');
   const navigate = useNavigate();
-  const mypage = () => {
-    navigate('/user');
-  };
-
   const dispatch = useDispatch();
+  const { userId } = useParams();
+  const selectedFile = useRef<HTMLInputElement>(null);
+  const returnToMyPage = () => navigate(-1);
+
+  const onUploadImage = (e: ChangeEvent<HTMLInputElement>) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setProfileImage(reader.result as string);
+      }
+    };
+    reader.readAsDataURL(e.target.files![0]);
+  };
   useEffect(() => {
-    dispatch(getUser());
-  }, []);
+    if (userId) {
+      dispatch(getUser({ userId }));
+    } else {
+      alert('올바리지 않은 접근입니다.');
+      navigate(-1);
+    }
+  }, [dispatch, navigate, userId]);
 
   const currentUser = useSelector(
     (state: RootState) => state.userInfo.currentUser,
@@ -26,20 +41,31 @@ const Setting = () => {
   if (!currentUser) {
     return <div>Loading...</div>;
   }
-  const { image, fullName, username, email } = currentUser;
+  const { fullName, username, email } = currentUser;
 
   return (
     <IndexContainer>
       <CardWrapper>
         <ButtonWrapper>
-          <Button styleType='ghost' isArrow={true} onClick={mypage}>
+          <Button styleType='ghost' isArrow={true} onClick={returnToMyPage}>
             취소하기
           </Button>
         </ButtonWrapper>
         <RowGrid>
           <ColGrid>
-            <Avatar src={image} size='large' alt={fullName} />
-            <Button size='wide'>이미지 선택</Button>
+            <Avatar src={profileImage} size='large' alt={fullName} />
+            <Button size='wide' onClick={() => selectedFile.current?.click()}>
+              이미지 선택
+            </Button>
+
+            <InvisibleInput
+              type='file'
+              name='imageUpload'
+              id='imageUploader'
+              accept='image/*'
+              ref={selectedFile}
+              onChange={onUploadImage}
+            />
             <Button size='wide' styleType='ghost'>
               이미지 삭제
             </Button>
@@ -105,6 +131,10 @@ const RowGrid = styled.div`
 const ColGrid = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const InvisibleInput = styled.input`
+  display: none;
 `;
 
 const ButtonWrapper = styled.div`

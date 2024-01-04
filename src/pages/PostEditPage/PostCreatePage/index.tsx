@@ -8,6 +8,7 @@ import {
 import DropdownMenu from '../DropdownMenu';
 import VotedBox from '../VoteEditBox';
 import { useFormik } from 'formik';
+import axios from 'axios';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 
@@ -20,22 +21,33 @@ interface FormType {
 }
 
 const PostCreatePage = () => {
-  const handleFormSubmit = (values: FormType) => {
+  const handleFormSubmit = async (values: FormType) => {
     if (!values.channelId || !values.content) {
       alert(!values.channelId ? '채널을 선택하세요.' : '내용을 입력하세요.');
       return;
     }
+    const { title, content, voteTitle, voteArray, channelId } = values;
 
-    const postData = {
-      title: {
-        title: values.title,
-        content: values.content,
-        voteTitle: values.voteTitle,
-        voteArray: values.voteArray,
-      },
-      channelID: values.channelId,
-    };
-    postData;
+    try {
+      const postData = {
+        title: JSON.stringify({ title, content, voteTitle, voteArray }),
+        channelId,
+        image: '',
+      };
+
+      const response = axios({
+        url: 'https://kdt.frontend.5th.programmers.co.kr:5003/posts/create',
+        method: 'POST',
+        data: postData,
+        headers: {
+          Authorization: '',
+        },
+      });
+
+      alert('게시물이 생성되었습니다.');
+    } catch (error) {
+      alert(error);
+    }
   };
 
   const formik = useFormik({

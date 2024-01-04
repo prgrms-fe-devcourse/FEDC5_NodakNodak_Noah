@@ -26,7 +26,8 @@ const PostCard = ({ post }: PostCardProps) => {
   const navigate = useNavigate();
 
   const handleDetailClick = () => {
-    navigate(`/detail/${channel?._id}/${post._id}`);
+    const token = localStorage.getItem('auth-token');
+    navigate(token ? `/detail/${channel?._id}/${post._id}` : '/sign');
   };
 
   return (

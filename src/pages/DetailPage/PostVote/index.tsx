@@ -1,4 +1,5 @@
 import { useSelectedPost } from '../useSelectedPost';
+import { useSelectedVote } from '../PostComment/useSelectedComment';
 import styled from 'styled-components';
 import Card from '@/components/Card';
 import Input from '@/components/Input';
@@ -25,6 +26,7 @@ const InputWrapper = styled.div`
 
 const PostVote = () => {
   const postDetailContent = useSelectedPost();
+  const postDetailVote = useSelectedVote();
 
   if (!postDetailContent.title) return null;
   const { voteArray, voteTitle } = JSON.parse(postDetailContent.title);
@@ -41,7 +43,7 @@ const PostVote = () => {
             {voteTitle}
           </Text>
           <Text tagType='span' fontType='body2' colorType='black'>
-            0명 투표
+            {`${postDetailVote?.length}명 투표`}
           </Text>
         </VoteTitleWrapper>
         <InputWrapper>
