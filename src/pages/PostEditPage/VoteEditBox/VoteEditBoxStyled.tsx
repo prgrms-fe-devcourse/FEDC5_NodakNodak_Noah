@@ -19,19 +19,18 @@ export const InputContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 16px;
   display: flex;
   width: 100%;
 `;
 
 export const DeleteButton = styled.button<{ $isshow: boolean }>`
   margin-left: 10px;
+  align-items: center;
   position: absolute;
   left: 100%;
   cursor: pointer;
-  color: red;
   border: none;
   background: none;
-  font-size: 14px;
   visibility: ${({ $isshow }) => ($isshow ? 'visible' : 'hidden')};
 `;

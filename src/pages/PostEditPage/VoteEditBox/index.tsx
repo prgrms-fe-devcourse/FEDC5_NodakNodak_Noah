@@ -8,6 +8,7 @@ import Input from '@/components/Input';
 import Button from '@/components/Button';
 import Card from '@/components/Card';
 import ScrollBar from '@/components/ScrollBar';
+import DeleteIcon from '@/assets/DeleteIcon';
 
 interface FormProps {
   formData: {
@@ -76,7 +77,7 @@ const VotedBox = ({ formData, setFormData }: FormProps) => {
               event='hover'
               onClick={handleAddCandidate}
               type='button'
-              style={{ margin: '8px 0' }}>
+              style={{ margin: '4px 0 16px 0' }}>
               <>선택지 추가 +</>
             </Button>
             {formData.voteArray.map((candidate, index) => (
@@ -89,14 +90,13 @@ const VotedBox = ({ formData, setFormData }: FormProps) => {
                   style={{
                     width: '100%',
                     height: '48px',
-                    marginTop: '8px',
                   }}
                 />
                 <DeleteButton
                   $isshow={index >= 2}
                   type='button'
                   onClick={() => handleRemoveCandidate(index)}>
-                  삭제
+                  <DeleteIcon />
                 </DeleteButton>
               </InputContainer>
             ))}
