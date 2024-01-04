@@ -39,7 +39,6 @@ const PostCreatePage = () => {
         image: '',
       };
 
-      //const token = localStorage.getItem('auth-token');
       const response = axios({
         url: 'https://kdt.frontend.5th.programmers.co.kr:5003/posts/create',
         method: 'POST',
@@ -49,9 +48,9 @@ const PostCreatePage = () => {
         },
       });
 
-      console.log('등록 성공', response);
+      alert('게시물이 생성되었습니다.');
     } catch (error) {
-      console.error(error);
+      alert(error);
     }
   };
 
