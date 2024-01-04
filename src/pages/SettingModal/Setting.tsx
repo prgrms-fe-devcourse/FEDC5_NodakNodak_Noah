@@ -66,6 +66,7 @@ const Setting = () => {
       });
       setIsModified(false);
     }
+    navigate('/user');
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -74,7 +75,7 @@ const Setting = () => {
   };
 
   if (!currentUser) {
-    return <div>Loading...</div>;
+    return <></>;
   }
 
   const { image, fullName, email } = currentUser;
