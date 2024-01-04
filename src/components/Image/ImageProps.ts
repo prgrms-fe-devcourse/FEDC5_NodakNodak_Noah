@@ -1,3 +1,1 @@
-export interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
-  defaultSrc?: string;
-}
+export interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {}

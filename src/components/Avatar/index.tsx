@@ -10,13 +10,7 @@ const avatarSizes = {
   large: '224px',
 };
 
-const Avatar = ({
-  src,
-  size = 'middle',
-  defaultSrc = '/public/DefaultProfile.jpg',
-  alt,
-  ...props
-}: AvatarProps) => {
+const Avatar = ({ src, size = 'middle', alt, ...props }: AvatarProps) => {
   const [loaded, setLoaded] = useState(false);
   const avatarSize = avatarSizes[size];
 
@@ -34,8 +28,7 @@ const Avatar = ({
         <Image
           width={avatarSize}
           height={avatarSize}
-          src={src}
-          defaultSrc={defaultSrc}
+          src={src ? src : '/public/DefaultProfile.jpg'}
           alt={alt}
           style={{ ...props.style, opacity: loaded ? 1 : 0 }}
         />
