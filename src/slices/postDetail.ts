@@ -12,11 +12,14 @@ const initialState: DetailPost = {
   isLoading: false,
 };
 
+interface PostId {
+  postId: string | undefined;
+}
 export const getPostDetail = createAsyncThunk(
   'detailPost/getPostDetail',
-  async () => {
+  async ({ postId }: PostId) => {
     const response = await axios({
-      url: 'https://kdt.frontend.5th.programmers.co.kr:5003/posts/6592c80a2a48542ca963b86d',
+      url: `https://kdt.frontend.5th.programmers.co.kr:5003/posts/${postId}`,
       method: 'get',
     });
 
