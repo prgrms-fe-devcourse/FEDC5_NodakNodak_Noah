@@ -9,7 +9,7 @@ export interface GetPostsByChannelIdParams {
 }
 
 export const getPostListByChannelId = createAsyncThunk(
-  `${name}/getPostsByChannelId`,
+  `${name}/getPostListByChannelId`,
   async ({ channelId, offset, limit }: GetPostsByChannelIdParams) => {
     const queries = paginationClaculator(offset, limit);
 
