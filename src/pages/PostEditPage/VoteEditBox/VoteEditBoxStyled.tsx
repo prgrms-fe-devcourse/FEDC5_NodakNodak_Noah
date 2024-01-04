@@ -13,13 +13,21 @@ export const Content = styled.div`
   align-items: flex-end;
   width: 466px;
   max-width: 100%;
+
+  & > *:first-child {
+    margin-bottom: 16px;
+  }
+
+  & > *:nth-child(2) {
+    margin-bottom: 28px;
+  }
 `;
 
 export const InputContainer = styled.div`
   position: relative;
   display: flex;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 1.5rem;
   display: flex;
   width: 100%;
 `;

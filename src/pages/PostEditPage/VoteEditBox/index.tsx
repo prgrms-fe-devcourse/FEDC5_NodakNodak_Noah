@@ -76,8 +76,7 @@ const VotedBox = ({ formData, setFormData }: FormProps) => {
               size='regular'
               event='hover'
               onClick={handleAddCandidate}
-              type='button'
-              style={{ margin: '4px 0 16px 0' }}>
+              type='button'>
               <>선택지 추가 +</>
             </Button>
             {formData.voteArray.map((candidate, index) => (
