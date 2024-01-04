@@ -1,19 +1,19 @@
-export interface TempPost {
+export interface PostSnippet {
   fullName: string;
   avatar: string;
   _id: string;
-  image: string;
+  image?: string;
   title: string;
   count: string;
 }
 
 export interface PostCardProps {
-  post: TempPost;
+  post: PostSnippet;
 }
 
 export interface PostSnippetProps {
   avatar: string;
-  image: string;
+  image?: string;
   title: string;
   count: string;
   fullName: string;

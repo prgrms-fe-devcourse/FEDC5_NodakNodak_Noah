@@ -1,12 +1,6 @@
-export interface MockUser {
-  image: string;
-  isOnline: boolean;
-  isFollowing: boolean;
-  fullName: string;
-  _id: string;
-}
+import { UserSnippet } from '@/components/UserListCard/UserListCardTypes';
 
-export const mockUsers: MockUser[] = [
+export const mockUsers: UserSnippet[] = [
   {
     image: 'https://i.pravatar.cc/300',
     isOnline: true,
