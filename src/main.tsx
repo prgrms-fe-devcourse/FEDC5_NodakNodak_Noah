@@ -1,7 +1,8 @@
 import Index from './pages/Index.tsx';
 import Login from './pages/Login.tsx';
 import NotFound from './pages/NotFound.tsx';
-import PostEditPage from './pages/PostEditPage';
+import PostUpdatePage from './pages/PostEditPage/PostUpdatePage';
+import PostCreatePage from './pages/PostEditPage/PostCreatePage';
 import DetailPage from './pages/DetailPage';
 import Main from './pages/mainPage';
 import UserPage from './pages/userPage/index';
@@ -20,18 +21,15 @@ const router = createBrowserRouter([
     path: '/',
     element: <App />,
     children: [
-      { path: '/write', element: <PostEditPage mode='create' /> },
+      { path: '/update/:channelId/:postId', element: <PostUpdatePage /> },
+      { path: '/write', element: <PostCreatePage /> },
       { path: '/home', element: <Main /> },
-      { path: '/user', element: <UserPage /> },
+      { path: '/user/:userId', element: <UserPage /> },
+      { path: '/user/:userId/setting', element: <Setting /> },
+      { path: '/detail/:channelId/:postId', element: <DetailPage /> },
     ],
   },
   { path: '/sign', element: <Login /> },
-  { path: '/write', element: <PostEditPage mode='create' /> },
-  { path: '/home', element: <Main /> },
-  { path: '/user', element: <UserPage /> },
-  { path: '/user/setting', element: <Setting /> },
-  { path: '/detail', element: <DetailPage /> },
-
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

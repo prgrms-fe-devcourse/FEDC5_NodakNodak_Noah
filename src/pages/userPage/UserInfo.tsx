@@ -2,6 +2,7 @@ import GrassTable from './GrassTable';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import Avatar from '@/components/Avatar';
 import Text from '@/components/Text';
 import Button from '@/components/Button';
@@ -10,12 +11,12 @@ import { getUser } from '@/slices/user';
 
 const UserInfo = () => {
   const dispatch = useDispatch();
+  const { userId } = useParams();
   useEffect(() => {
-    const isUserPage = window.location.pathname.startsWith('/user');
-    if (isUserPage) {
-      dispatch(getUser());
+    if (userId) {
+      dispatch(getUser({ userId }));
     }
-  }, []);
+  }, [dispatch, userId]);
 
   const currentUser = useSelector(
     (state: RootState) => state.userInfo.currentUser,

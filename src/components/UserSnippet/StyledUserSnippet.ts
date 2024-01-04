@@ -8,6 +8,8 @@ export const UserSnippetBox = styled.div`
   position: relative;
 
   margin: 4px 0;
+
+  cursor: pointer;
 `;
 export const Title = styled.h2`
   position: -webkit-sticky;

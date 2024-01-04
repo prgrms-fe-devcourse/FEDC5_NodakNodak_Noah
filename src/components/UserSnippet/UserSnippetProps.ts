@@ -3,6 +3,7 @@ export interface UserSnippetProps {
   isOnline: boolean;
   isFollowing: boolean;
   image: string;
+  userId: string;
 }
 
 export interface UserSnippetGroupProps {
