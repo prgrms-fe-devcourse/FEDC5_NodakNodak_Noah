@@ -4,6 +4,7 @@ import { UserSnippetBox } from '../UserSnippet/StyledUserSnippet';
 import Avatar from '../Avatar';
 import Image from '../Image';
 import Text from '../Text';
+import { useNavigate } from 'react-router-dom';
 
 const PostSnippet = ({
   avatar,
@@ -11,7 +12,13 @@ const PostSnippet = ({
   title,
   count,
   fullName,
+  userId,
 }: PostSnippetProps) => {
+  const navigate = useNavigate();
+  const handleUserClick = () => {
+    navigate(`/user/${userId}`);
+  };
+
   return (
     <PostSnippetBox>
       <Image width='280px' height='146px' src={image} />
@@ -33,10 +40,10 @@ const PostSnippet = ({
           명 투표
         </Text>
       </div>
-      <UserSnippetBox>
+      <UserSnippetBox onClick={handleUserClick}>
         <Avatar size='mini' src={avatar} />
         <Text tagType='span' fontType='caption' colorType='black'>
-          {fullName}
+          {fullName ? fullName : 'loading...'}
         </Text>
       </UserSnippetBox>
     </PostSnippetBox>

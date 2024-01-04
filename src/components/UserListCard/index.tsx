@@ -15,6 +15,7 @@ const UserListCard = ({ users }: UserListCardProps) => {
           image={user.image}
           isFollowing={user.isFollowing}
           isOnline={user.isOnline}
+          userId={user._id}
           key={user._id}
         />
       ))}
