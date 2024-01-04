@@ -7,7 +7,7 @@ import Button from '@/components/Button';
 const UserPage = () => {
   const navigate = useNavigate();
   const setting = () => {
-    navigate('/user/setting');
+    navigate('./setting');
   };
 
   return (

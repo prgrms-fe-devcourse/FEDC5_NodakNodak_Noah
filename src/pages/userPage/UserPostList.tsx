@@ -13,7 +13,7 @@ const UserPostList = () => {
   useEffect(() => {
     if (!userId) return;
     dispatch(getUser({ userId }));
-  }, []);
+  }, [dispatch, userId]);
 
   const currentUser = useSelector(
     (state: RootState) => state.userInfo.currentUser,
