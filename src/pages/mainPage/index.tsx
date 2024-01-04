@@ -1,12 +1,13 @@
 import { MainWrapper, PostContentWrapper, MainFlexWrapper } from './StyledMain';
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import PostCard from '@/components/PostCard';
 import Pagination from '@/components/Pagination';
 import UserListCard from '@/components/UserListCard';
 import Text from '@/components/Text';
 import Button from '@/components/Button';
-import { useDispatch } from '@/store';
+import { RootState, useDispatch } from '@/store';
 import { getPostListByChannelId } from '@/slices/postList/thunks';
 import { getUserList } from '@/slices/userList/thunk';
 import { useSelectedPostList } from '@/hooks/useSelectedPostList';
@@ -18,6 +19,9 @@ import { useSelectedUserList } from '@/hooks/useSelectedUserList';
 // import useInterval from '@/hooks/useInterval'; // polling 방식 , 너무 많은 요청이 갈까봐 주석처리
 import { userListToUserSnippetList } from '@/slices/userList/utils';
 import { usePagination } from '@/hooks/usePagination';
+import { getMyInfo } from '@/slices/user';
+
+import { postListToPostSnippetList } from '@/slices/postList/utils';
 
 const Main = () => {
   const navigate = useNavigate();
@@ -27,7 +31,8 @@ const Main = () => {
   const channel = useSelectedChannel();
   const channelLoading = useSelectedChannelLoading();
   const { paginationedPostList, totalPage, currentPage, handlePageChange } =
-    usePagination(useSelectedPostList());
+    usePagination(postListToPostSnippetList(useSelectedPostList()));
+  const myInfo = useSelector((state: RootState) => state.userInfo.authUser);
 
   const handleWriteClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -52,6 +57,16 @@ const Main = () => {
   // useInterval(() => {
   //   dispatch(getUserList());
   // }, 6000);
+
+  useEffect(() => {
+    const token = localStorage.getItem('auth-token');
+    if (!token) {
+      alert('로그인이 필요한 서비스 입니다.');
+      navigate('/sign');
+    } else {
+      dispatch(getMyInfo({ token }));
+    }
+  }, [navigate, dispatch]);
 
   return (
     <>
@@ -78,7 +93,7 @@ const Main = () => {
             handlePageChange={handlePageChange}
           />
         </PostContentWrapper>
-        <UserListCard users={userListToUserSnippetList(userList)} />
+        <UserListCard users={userListToUserSnippetList(userList, myInfo)} />
       </MainWrapper>
     </>
   );
