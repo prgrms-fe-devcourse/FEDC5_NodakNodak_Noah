@@ -22,9 +22,9 @@ const router = createBrowserRouter([
     children: [
       { path: '/write', element: <PostEditPage mode='create' /> },
       { path: '/home', element: <Main /> },
-      { path: '/user', element: <UserPage /> },
-      { path: '/user/setting', element: <Setting /> },
-      { path: '/detail', element: <DetailPage /> },
+      { path: '/user/:userId', element: <UserPage /> },
+      { path: '/user/:userId/setting', element: <Setting /> },
+      { path: '/detail/:channelId/:postId', element: <DetailPage /> },
     ],
   },
   { path: '/sign', element: <Login /> },
