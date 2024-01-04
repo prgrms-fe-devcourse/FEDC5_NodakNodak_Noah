@@ -5,6 +5,7 @@ export interface PostSnippet {
   image?: string;
   title: string;
   count: string;
+  userId: string;
 }
 
 export interface PostCardProps {
@@ -16,5 +17,6 @@ export interface PostSnippetProps {
   image?: string;
   title: string;
   count: string;
-  fullName: string;
+  fullName?: string;
+  userId?: string;
 }

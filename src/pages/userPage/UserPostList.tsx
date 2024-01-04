@@ -1,14 +1,18 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import Text from '@/components/Text';
 import { RootState, useDispatch } from '@/store';
 import { getUser } from '@/slices/user';
 import PostCard from '@/components/PostCard';
+import { postListToPostSnippetList } from '@/slices/postList/utils';
 
 const UserPostList = () => {
   const dispatch = useDispatch();
+  const { userId } = useParams();
   useEffect(() => {
-    dispatch(getUser());
+    if (!userId) return;
+    dispatch(getUser({ userId }));
   }, []);
 
   const currentUser = useSelector(
@@ -18,6 +22,7 @@ const UserPostList = () => {
     return <></>;
   }
   const { fullName, posts } = currentUser;
+  const postSnippetList = postListToPostSnippetList(posts);
 
   return (
     <>
@@ -32,20 +37,8 @@ const UserPostList = () => {
         님의 게시글 목록
       </Text>
       <PostCard.Group>
-        {posts.map((post) => {
-          return (
-            <PostCard
-              key={post._id}
-              post={{
-                title: JSON.parse(post.title).title,
-                fullName: '',
-                avatar: '',
-                _id: '',
-                image: '',
-                count: '',
-              }}
-            />
-          );
+        {postSnippetList.map((post) => {
+          return <PostCard key={post._id} post={post} />;
         })}
       </PostCard.Group>
     </>
