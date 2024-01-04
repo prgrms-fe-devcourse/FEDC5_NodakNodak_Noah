@@ -11,6 +11,7 @@ import { getMyInfo } from '@/slices/user';
 
 const DetailPage = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const myInfo = useSelector((state: RootState) => state.userInfo.authUser);
   const postDetail = useSelectedPost();
   const { postId } = useParams();
@@ -19,6 +20,14 @@ const DetailPage = () => {
     dispatch(getPostDetail({ postId }));
   }, [dispatch, postId]);
 
+  useEffect(() => {
+    const token = localStorage.getItem('auth-token');
+    if (!token) {
+      navigate('/sign');
+    } else {
+      dispatch(getMyInfo({ token }));
+    }
+  }, [navigate, dispatch]);
 
   return (
     <div
