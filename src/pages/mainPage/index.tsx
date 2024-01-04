@@ -60,12 +60,8 @@ const Main = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('auth-token');
-    if (!token) {
-      alert('로그인이 필요한 서비스 입니다.');
-      navigate('/sign');
-    } else {
-      dispatch(getMyInfo({ token }));
-    }
+    if (!token) return;
+    dispatch(getMyInfo({ token }));
   }, [navigate, dispatch]);
 
   return (
