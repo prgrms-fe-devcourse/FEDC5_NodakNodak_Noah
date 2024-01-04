@@ -1,6 +1,7 @@
 import { useSelectedComment } from './useSelectedComment';
 import { useState } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import CommentItem from '@/components/Comment';
 import theme from '@/styles/theme';
 import Input from '@/components/Input';
@@ -8,10 +9,12 @@ import Button from '@/components/Button';
 
 const PostComment = () => {
   const postDetailComment = useSelectedComment();
+  const { postId } = useParams();
   const [comment, setComment] = useState('');
 
   const handleCommentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    const token = localStorage.getItem('auth-token');
     try {
       axios({
         url: 'https://kdt.frontend.5th.programmers.co.kr:5003/comments/create',
@@ -22,10 +25,10 @@ const PostComment = () => {
             voteArray: ['한식', '중식', '일식', '양식'],
             content: comment,
           }),
-          postId: '6592c80a2a48542ca963b86d',
+          postId,
         },
         headers: {
-          Authorization: '',
+          Authorization: `Bearer ${token}`,
         },
       });
     } catch (e) {
