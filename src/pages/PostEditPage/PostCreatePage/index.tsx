@@ -26,16 +26,12 @@ const PostCreatePage = () => {
       alert(!values.channelId ? '채널을 선택하세요.' : '내용을 입력하세요.');
       return;
     }
+    const { title, content, voteTitle, voteArray, channelId } = values;
 
     try {
       const postData = {
-        title: JSON.stringify({
-          title: values.title,
-          content: values.content,
-          voteTitle: values.voteTitle,
-          voteArray: values.voteArray,
-        }),
-        channelId: values.channelId,
+        title: JSON.stringify({ title, content, voteTitle, voteArray }),
+        channelId,
         image: '',
       };
 

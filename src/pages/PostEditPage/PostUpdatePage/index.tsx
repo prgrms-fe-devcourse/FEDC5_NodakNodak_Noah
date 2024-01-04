@@ -41,16 +41,13 @@ const PostUpdatePage = () => {
       return;
     }
 
+    const { title, content, voteTitle, voteArray, channelId } = values;
+
     try {
       const postData = {
-        title: JSON.stringify({
-          title: values.title,
-          content: values.content,
-          voteTitle: values.voteTitle,
-          voteArray: values.voteArray,
-        }),
-        channelId: values.channelId,
-        postId: postId,
+        title: JSON.stringify({ title, content, voteTitle, voteArray }),
+        channelId,
+        postId,
         image: '',
       };
 
