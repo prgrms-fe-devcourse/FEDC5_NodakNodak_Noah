@@ -3,7 +3,7 @@ import them from '@/styles/theme';
 
 export const FormContainer = styled.form`
   display: flex;
-  width: 100%;
+  width: 100vw;
   max-width: 954px;
   flex-direction: column;
   align-items: flex-end;

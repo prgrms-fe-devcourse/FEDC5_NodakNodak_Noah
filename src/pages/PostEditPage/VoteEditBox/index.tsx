@@ -7,6 +7,7 @@ import {
 import Input from '@/components/Input';
 import Button from '@/components/Button';
 import Card from '@/components/Card';
+import ScrollBar from '@/components/ScrollBar';
 
 interface FormProps {
   formData: {
@@ -48,12 +49,12 @@ const VotedBox = ({ formData, setFormData }: FormProps) => {
   };
 
   return (
-    <>
-      <Card
-        width='666px'
-        height='auto'
-        shadowType='medium'
-        style={{ margin: '0 auto' }}>
+    <Card
+      width='100%'
+      height='auto'
+      shadowType='medium'
+      style={{ margin: '0 auto', maxWidth: '666px' }}>
+      <ScrollBar>
         <ContentWrapper>
           <Content>
             <Input
@@ -92,8 +93,8 @@ const VotedBox = ({ formData, setFormData }: FormProps) => {
             ))}
           </Content>
         </ContentWrapper>
-      </Card>
-    </>
+      </ScrollBar>
+    </Card>
   );
 };
 
