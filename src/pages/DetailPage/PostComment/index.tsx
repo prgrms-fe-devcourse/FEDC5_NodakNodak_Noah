@@ -1,5 +1,6 @@
 import { useSelectedComment } from './useSelectedComment';
-
+import { useState } from 'react';
+import axios from 'axios';
 import CommentItem from '@/components/Comment';
 import theme from '@/styles/theme';
 import Input from '@/components/Input';
@@ -7,6 +8,30 @@ import Button from '@/components/Button';
 
 const PostComment = () => {
   const postDetailComment = useSelectedComment();
+  const [comment, setComment] = useState('');
+
+  const handleCommentSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      axios({
+        url: 'https://kdt.frontend.5th.programmers.co.kr:5003/comments/create',
+        method: 'POST',
+        data: {
+          comment: JSON.stringify({
+            type: 'comment',
+            voteArray: ['한식', '중식', '일식', '양식'],
+            content: comment,
+          }),
+          postId: '6592c80a2a48542ca963b86d',
+        },
+        headers: {
+          Authorization: '',
+        },
+      });
+    } catch (e) {
+      alert(e);
+    }
+  };
 
   return (
     <div
@@ -28,7 +53,7 @@ const PostComment = () => {
             key={comment._id}
           />
         ))}
-        <div
+        <form
           className='userInput'
           style={{
             display: 'flex',
@@ -44,15 +69,19 @@ const PostComment = () => {
             width='538px'
             height='48px'
             underline={true}
+            onChange={(e) => setComment(e.target.value)}
           />
           <Button
             event='enabled'
             size='regular'
             styleType='ghost'
-            type='button'>
+            onClick={handleCommentSubmit}
+            onKeyDown={(e) => {
+              if (e.key === 'enter') handleCommentSubmit(e);
+            }}>
             제출
           </Button>
-        </div>
+        </form>
       </div>
     </div>
   );

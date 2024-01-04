@@ -1,5 +1,5 @@
 import { ImageProps } from './ImageProps';
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 const Image = ({
   defaultSrc = '/public/DefaultImage.jpg',
@@ -10,7 +10,6 @@ const Image = ({
   ...props
 }: ImageProps) => {
   const [error, setError] = useState(false);
-
   const imgRef = useRef<HTMLImageElement | null>(null);
 
   const imageStyle = {
@@ -19,7 +18,11 @@ const Image = ({
     height,
     ...props.style,
   };
-
+  useEffect(() => {
+    if (!src) {
+      setError(true);
+    }
+  }, []);
   const handleImageError = () => {
     setError(true);
   };
