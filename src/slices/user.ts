@@ -21,6 +21,18 @@ export const getUser = createAsyncThunk('user/getUser', async () => {
   return response.data;
 });
 
+export const updateUser = createAsyncThunk(
+  'user/updateUser',
+  async (updateData) => {
+    const response = await axios.put(
+      'https://kdt.frontend.5th.programmers.co.kr:5003/users/65870847b035721f23358062',
+      updateData,
+    );
+
+    return response.data;
+  },
+);
+
 export const userInfo = createSlice({
   name: 'user',
   initialState,
