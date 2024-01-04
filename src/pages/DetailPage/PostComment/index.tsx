@@ -1,19 +1,37 @@
 import { useSelectedComment } from './useSelectedComment';
+import { FlexColumn } from './StyledPostComment';
 import { useState } from 'react';
 import axios from 'axios';
+import { useParams } from 'react-router-dom';
 import CommentItem from '@/components/Comment';
 import theme from '@/styles/theme';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
+import { useDispatch } from '@/store';
+import { getPostDetail } from '@/slices/postDetail';
+import { Warning } from '@/components/Sign/SignStyle';
+import useClickAway from '@/hooks/useClickAway';
 
 const PostComment = () => {
   const postDetailComment = useSelectedComment();
   const [comment, setComment] = useState('');
+  const [warn, setWarn] = useState(false);
+  const { postId } = useParams();
+  const dispatch = useDispatch();
+
+  const handleClickAway = () => {
+    setWarn(false);
+  };
+  const inputRef = useClickAway(handleClickAway);
 
   const handleCommentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!comment) {
+      setWarn(true);
+      return;
+    }
     try {
-      axios({
+      await axios({
         url: 'https://kdt.frontend.5th.programmers.co.kr:5003/comments/create',
         method: 'POST',
         data: {
@@ -22,12 +40,14 @@ const PostComment = () => {
             voteArray: ['한식', '중식', '일식', '양식'],
             content: comment,
           }),
-          postId: '6592c80a2a48542ca963b86d',
+          postId,
         },
         headers: {
-          Authorization: '',
+          Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
         },
       });
+
+      dispatch(getPostDetail({ postId }));
     } catch (e) {
       alert(e);
     }
@@ -62,15 +82,19 @@ const PostComment = () => {
             alignItems: 'center',
             justifyContent: 'space-between',
           }}>
-          <Input
-            bordertype='filled'
-            placeholder='플레이스 홀더 텍스트'
-            fontType='body2'
-            width='538px'
-            height='48px'
-            underline={true}
-            onChange={(e) => setComment(e.target.value)}
-          />
+          <FlexColumn>
+            <Input
+              ref={inputRef as React.RefObject<HTMLInputElement>}
+              bordertype={warn ? 'error' : 'filled'}
+              placeholder='플레이스 홀더 텍스트'
+              fontType='body2'
+              width='538px'
+              height='48px'
+              underline={true}
+              onChange={(e) => setComment(e.target.value)}
+            />
+            {warn ? <Warning>댓글을 입력해주세요.</Warning> : ''}
+          </FlexColumn>
           <Button
             event='enabled'
             size='regular'
