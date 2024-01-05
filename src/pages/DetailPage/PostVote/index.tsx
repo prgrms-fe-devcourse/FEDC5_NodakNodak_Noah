@@ -34,10 +34,19 @@ const InputWrapper = styled.div`
 const PostVote = () => {
   const postDetailContent = useSelectedPost();
   const postDetailVote = useSelectedVote();
+  const myInfo = useSelector((state: RootState) => state.userInfo.authUser);
+  const [reVote, setRevote] = useState(false);
+
+  useEffect(() => {
+    postDetailVote.some((vote) => vote.author._id === myInfo?._id)
+      ? setRevote(true)
+      : setRevote(false);
+  }, [myInfo, postDetailVote]);
 
   if (!postDetailContent.title) return null;
   const { voteArray, voteTitle } = JSON.parse(postDetailContent.title);
 
+    if (!voteContent || reVote) return;
   return (
     <Card width='44.375rem' height='31.25rem' shadowType='large'>
       <ScrollBar>
