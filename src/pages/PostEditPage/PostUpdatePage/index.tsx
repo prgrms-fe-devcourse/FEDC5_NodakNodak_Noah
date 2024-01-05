@@ -6,7 +6,7 @@ import {
   TextAreaWrapper,
   StyledTextArea,
   ButtonWrapper,
-} from '../styledPostEdit';
+} from '../StyledPostEdit';
 import { useFormik } from 'formik';
 import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
