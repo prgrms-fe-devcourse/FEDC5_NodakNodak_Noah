@@ -8,6 +8,12 @@ export interface GetPostsByChannelIdParams {
   limit?: number;
 }
 
+export interface GetPostsByUserIdParams {
+  userId: string;
+  offset?: number;
+  limit?: number;
+}
+
 export const getPostListByChannelId = createAsyncThunk(
   `${name}/getPostListByChannelId`,
   async ({ channelId, offset, limit }: GetPostsByChannelIdParams) => {
@@ -15,6 +21,20 @@ export const getPostListByChannelId = createAsyncThunk(
 
     const response = await axios({
       url: `https://kdt.frontend.5th.programmers.co.kr:5003/posts/channel/${channelId}/${queries}`,
+      method: 'get',
+    });
+
+    return response.data;
+  },
+);
+
+export const getPostListByUserId = createAsyncThunk(
+  `${name}/getPostListByUserId`,
+  async ({ userId, offset, limit }: GetPostsByUserIdParams) => {
+    const queries = paginationClaculator(offset, limit);
+
+    const response = await axios({
+      url: `https://kdt.frontend.5th.programmers.co.kr:5003/posts/author/${userId}/${queries}`,
       method: 'get',
     });
 
