@@ -6,3 +6,8 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   disabled?: boolean;
   isArrow?: boolean;
 }
+
+export interface ImageUnloadButtonProps extends ButtonProps {
+  setImage: (image: string) => void;
+  apiParam: string;
+}

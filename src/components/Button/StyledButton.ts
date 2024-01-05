@@ -212,3 +212,7 @@ export const ButtonWrapper = styled.div<ButtonWrapperProps>`
     visibility: visible;
   }
 `;
+
+export const InvisibleInput = styled.input`
+  display: none;
+`;

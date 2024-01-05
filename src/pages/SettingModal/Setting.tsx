@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import Avatar from '@/components/Avatar';
@@ -10,6 +9,7 @@ import Input from '@/components/Input';
 import Text from '@/components/Text';
 import { getUser } from '@/slices/user';
 import { RootState, useDispatch } from '@/store';
+import ImageUploader from '@/components/Button/ImageUploadButton';
 
 const Setting = () => {
   const [profileImage, setProfileImage] = useState('');
@@ -17,23 +17,12 @@ const Setting = () => {
   const dispatch = useDispatch();
 
   const { userId } = useParams();
-  const selectedFile = useRef<HTMLInputElement>(null);
-  
 
-  const onUploadImage = (e: ChangeEvent<HTMLInputElement>) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setProfileImage(reader.result as string);
-      }
-    };
-    reader.readAsDataURL(e.target.files![0]);
-  };
   useEffect(() => {
     if (userId) {
       dispatch(getUser({ userId }));
     } else {
-      alert('올바리지 않은 접근입니다.');
+      alert('올바르지 않은 접근입니다.');
       navigate(-1);
     }
   }, [dispatch, navigate, userId]);
@@ -47,10 +36,6 @@ const Setting = () => {
     username: currentUser?.username || '',
   });
   const [isModified, setIsModified] = useState(false);
-
-  useEffect(() => {
-    dispatch(getUser());
-  }, [dispatch]);
 
   useEffect(() => {
     if (currentUser) {
@@ -101,8 +86,9 @@ const Setting = () => {
 
   if (!currentUser) {
     return <></>;
+    return <></>;
   }
-  
+
   const { fullName, email } = currentUser;
 
   return (
@@ -114,22 +100,20 @@ const Setting = () => {
             isArrow={true}
             onClick={isModified ? handleUpdate : handleCancel}>
             {isModified ? '수정하기' : '취소하기'}
+          <Button
+            styleType={isModified ? 'primary' : 'ghost'}
+            isArrow={true}
+            onClick={isModified ? handleUpdate : handleCancel}>
+            {isModified ? '수정하기' : '취소하기'}
           </Button>
         </ButtonWrapper>
         <RowGrid>
           <ColGrid>
             <Avatar src={profileImage} size='large' alt={fullName} />
-            <Button size='wide' onClick={() => selectedFile.current?.click()}>
-              이미지 선택
-            </Button>
-
-            <InvisibleInput
-              type='file'
-              name='imageUpload'
-              id='imageUploader'
-              accept='image/*'
-              ref={selectedFile}
-              onChange={onUploadImage}
+            <ImageUploader
+              size='wide'
+              setImage={setProfileImage}
+              apiParam={'upload-photo'}
             />
             <Button size='wide' styleType='ghost'>
               이미지 삭제
@@ -144,12 +128,16 @@ const Setting = () => {
               required={true}
               value={updatedData.fullName}
               onChange={(e) => handleInputChange('fullName', e.target.value)}
+              value={updatedData.fullName}
+              onChange={(e) => handleInputChange('fullName', e.target.value)}
             />
             <Input
               underline={true}
               placeholder='한줄 소개'
               width='80%'
               fontType='body1'
+              value={updatedData.username}
+              onChange={(e) => handleInputChange('username', e.target.value)}
               value={updatedData.username}
               onChange={(e) => handleInputChange('username', e.target.value)}
             />
@@ -198,10 +186,6 @@ const RowGrid = styled.div`
 const ColGrid = styled.div`
   display: flex;
   flex-direction: column;
-`;
-
-const InvisibleInput = styled.input`
-  display: none;
 `;
 
 const ButtonWrapper = styled.div`
