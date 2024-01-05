@@ -26,7 +26,7 @@ const BarChart = ({
       {[...voteCountMap].map(([vote, count], index) => (
         <Input
           key={index}
-          placeholder={vote}
+          value={vote}
           bordertype='enabled'
           readOnly={true}
           style={{
