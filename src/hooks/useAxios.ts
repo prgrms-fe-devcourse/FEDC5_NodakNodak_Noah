@@ -25,7 +25,7 @@ const useAxios = (options: AxiosRequestConfig = {}) => {
 
   useEffect(() => {
     fetchData();
-  }, [trigger]);
+  }, [fetchData, trigger]);
 
   const refetch = () => {
     fetchData();
