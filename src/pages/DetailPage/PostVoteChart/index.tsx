@@ -1,18 +1,14 @@
-import {
-  VoteTitleWrapper,
-  InputWrapper,
-  ButtonWrapper,
-} from './StyledPostVote';
+import BarChart from './BarChart';
 import { useSelectedPost } from '../useSelectedPost';
 import { useSelectedVote } from '../PostComment/useSelectedComment';
+import { VoteTitleWrapper, ButtonWrapper } from '../PostVote/StyledPostVote';
 import { useNavigate } from 'react-router-dom';
 import Card from '@/components/Card';
-import Input from '@/components/Input';
 import Button from '@/components/Button';
 import Text from '@/components/Text';
 import ScrollBar from '@/components/ScrollBar';
 
-const PostVote = () => {
+const PostVoteChart = () => {
   const postDetailContent = useSelectedPost();
   const postDetailVote = useSelectedVote();
   const navigate = useNavigate();
@@ -20,8 +16,12 @@ const PostVote = () => {
   if (!postDetailContent.title) return null;
   const { voteArray, voteTitle } = JSON.parse(postDetailContent.title);
 
-  const handleViewResult = () => {
-    navigate('./result');
+  const votedArray = postDetailVote.map((vote) => {
+    return JSON.parse(vote.comment)?.content;
+  });
+
+  const handleToHome = () => {
+    navigate('/home');
   };
 
   return (
@@ -39,27 +39,14 @@ const PostVote = () => {
             {`${postDetailVote?.length}명 투표`}
           </Text>
         </VoteTitleWrapper>
-        <InputWrapper>
-          {voteArray.map((vote: string, index: number) => (
-            <Input
-              key={index}
-              placeholder={vote}
-              bordertype='enabled'
-              readOnly={true}
-              style={{ marginBottom: '1.5rem', width: '466px', height: '48px' }}
-            />
-          ))}
-        </InputWrapper>
+        <BarChart voteArray={voteArray} votedArray={votedArray} />
         <ButtonWrapper>
-          <Button event='enabled' styleType='primary' size='wide'>
-            투표 하기
-          </Button>
           <Button
             event='enabled'
             styleType='ghost'
             size='wide'
-            onClick={handleViewResult}>
-            결과 보기
+            onClick={handleToHome}>
+            홈 으로
           </Button>
         </ButtonWrapper>
       </ScrollBar>
@@ -67,4 +54,4 @@ const PostVote = () => {
   );
 };
 
-export default PostVote;
+export default PostVoteChart;
