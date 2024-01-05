@@ -7,6 +7,8 @@ import {
 import Input from '@/components/Input';
 import Button from '@/components/Button';
 import Card from '@/components/Card';
+import ScrollBar from '@/components/ScrollBar';
+import DeleteIcon from '@/assets/DeleteIcon';
 
 interface FormProps {
   formData: {
@@ -48,26 +50,31 @@ const VotedBox = ({ formData, setFormData }: FormProps) => {
   };
 
   return (
-    <>
-      <Card
-        width='666px'
-        height='auto'
-        shadowType='medium'
-        style={{ margin: '0 auto' }}>
+    <Card
+      width='100%'
+      height='auto'
+      shadowType='medium'
+      style={{ margin: '0 auto', maxWidth: '666px' }}>
+      <ScrollBar>
         <ContentWrapper>
           <Content>
             <Input
-              required={true}
               placeholder='투표주제를 입력하세요'
-              width='100%'
-              height='48px'
+              required={true}
+              underline={true}
+              fontType='h3'
               value={formData.voteTitle}
               onChange={handleTitleChange}
+              style={{
+                width: '100%',
+                height: '48px',
+                textAlign: 'center',
+              }}
             />
             <Button
               styleType='ghost'
               size='regular'
-              event='disabled'
+              event='hover'
               onClick={handleAddCandidate}
               type='button'>
               <>선택지 추가 +</>
@@ -77,23 +84,25 @@ const VotedBox = ({ formData, setFormData }: FormProps) => {
                 <Input
                   required={true}
                   placeholder={`투표 후보${index + 1}`}
-                  width='100%'
-                  height='48px'
                   value={candidate}
                   onChange={(e) => handleCandidateChange(index, e.target.value)}
+                  style={{
+                    width: '100%',
+                    height: '48px',
+                  }}
                 />
                 <DeleteButton
                   $isshow={index >= 2}
                   type='button'
                   onClick={() => handleRemoveCandidate(index)}>
-                  삭제
+                  <DeleteIcon />
                 </DeleteButton>
               </InputContainer>
             ))}
           </Content>
         </ContentWrapper>
-      </Card>
-    </>
+      </ScrollBar>
+    </Card>
   );
 };
 

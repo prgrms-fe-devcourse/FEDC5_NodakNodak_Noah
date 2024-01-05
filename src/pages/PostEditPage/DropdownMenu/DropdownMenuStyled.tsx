@@ -6,6 +6,8 @@ export const MenuForm = styled.div`
   height: 48px;
   max-width: 100%;
   position: relative;
+  margin-top: 48px;
+  margin-bottom: 16px;
 `;
 
 export const DropdownButton = styled.button<{ $ismenuopen: boolean }>`
@@ -20,6 +22,7 @@ export const DropdownButton = styled.button<{ $ismenuopen: boolean }>`
     $ismenuopen ? theme.colors.grayscale[200] : theme.colors.grayscale[100]};
   color: ${theme.colors.grayscale[300]};
   cursor: pointer;
+  border-radius: 4px;
 `;
 
 export const BorderLine = styled.div`
