@@ -17,7 +17,6 @@ const PostComment = () => {
   const { postId } = useParams();
   const [comment, setComment] = useState('');
   const [warn, setWarn] = useState(false);
-  const { postId } = useParams();
   const dispatch = useDispatch();
 
   const handleClickAway = () => {
