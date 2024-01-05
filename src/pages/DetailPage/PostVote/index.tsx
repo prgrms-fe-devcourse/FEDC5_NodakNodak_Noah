@@ -1,9 +1,13 @@
+import {
+  VoteTitleWrapper,
+  InputWrapper,
+  ButtonWrapper,
+} from './StyledPostVote';
 import { useSelectedPost } from '../useSelectedPost';
 import { useSelectedVote } from '../PostComment/useSelectedComment';
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import styled from 'styled-components';
 import axios from 'axios';
 import { RootState, useDispatch } from '@/store';
 import Card from '@/components/Card';
@@ -13,23 +17,6 @@ import Text from '@/components/Text';
 import ScrollBar from '@/components/ScrollBar';
 import theme from '@/styles/theme';
 import { getPostDetail } from '@/slices/postDetail';
-
-const VoteTitleWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 2.5rem;
-`;
-
-const ButtonWrapper = styled.div`
-  margin-top: 1.5rem;
-  display: flex;
-  justify-content: center;
-`;
-const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
 
 const PostVote = () => {
   const postDetailContent = useSelectedPost();
@@ -49,6 +36,10 @@ const PostVote = () => {
 
   if (!postDetailContent.title) return null;
   const { voteArray, voteTitle } = JSON.parse(postDetailContent.title);
+
+  const handleViewResult = () => {
+    navigate(`./result`);
+  };
 
   const handleVote = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -122,7 +113,11 @@ const PostVote = () => {
               onClick={handleVote}>
               투표 하기
             </Button>
-            <Button event='enabled' styleType='ghost' size='wide'>
+            <Button
+              event='enabled'
+              styleType='ghost'
+              size='wide'
+              onClick={handleViewResult}>
               결과 보기
             </Button>
           </ButtonWrapper>
