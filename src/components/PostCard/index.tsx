@@ -26,7 +26,13 @@ const PostCard = ({ post }: PostCardProps) => {
   const navigate = useNavigate();
 
   const handleDetailClick = () => {
-    navigate(`/detail/${channel?._id}/${post._id}`);
+    const token = localStorage.getItem('auth-token');
+    navigate(token ? `/detail/${channel?._id}/${post._id}` : '/sign');
+  };
+
+  const handleDetailResultClick = () => {
+    const token = localStorage.getItem('auth-token');
+    navigate(token ? `/detail/${channel?._id}/${post._id}/result` : '/sign');
   };
 
   return (
@@ -49,7 +55,7 @@ const PostCard = ({ post }: PostCardProps) => {
         <Button
           styleType='ghost'
           event={channelLoading ? 'disabled' : 'enabled'}
-          onClick={handleDetailClick}>
+          onClick={handleDetailResultClick}>
           결과 보기
         </Button>
       </FlexWrapper>

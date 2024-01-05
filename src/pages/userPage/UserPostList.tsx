@@ -6,6 +6,8 @@ import { RootState, useDispatch } from '@/store';
 import { getUser } from '@/slices/user';
 import PostCard from '@/components/PostCard';
 import { postListToPostSnippetList } from '@/slices/postList/utils';
+import { useSelectedPostList } from '@/hooks/useSelectedPostList';
+import { getPostListByUserId } from '@/slices/postList/thunks';
 
 const UserPostList = () => {
   const dispatch = useDispatch();
@@ -15,14 +17,22 @@ const UserPostList = () => {
     dispatch(getUser({ userId }));
   }, [dispatch, userId]);
 
+  useEffect(() => {
+    if (!userId) return;
+    dispatch(getPostListByUserId({ userId }));
+  }, [dispatch, userId]);
+
   const currentUser = useSelector(
     (state: RootState) => state.userInfo.currentUser,
   );
+
+  const postList = useSelectedPostList();
+
   if (!currentUser) {
     return <></>;
   }
-  const { fullName, posts } = currentUser;
-  const postSnippetList = postListToPostSnippetList(posts);
+  const { fullName } = currentUser;
+  const postSnippetList = postListToPostSnippetList(postList);
 
   return (
     <>

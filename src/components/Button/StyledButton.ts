@@ -151,7 +151,7 @@ export const ButtonLayout = styled.button<ButtonLayoutProps>`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  cursor: pointer;
+  cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
 
   ${({ $size }) => $size && ButtonSize[$size]};
   ${({ $styleType, $event }) =>

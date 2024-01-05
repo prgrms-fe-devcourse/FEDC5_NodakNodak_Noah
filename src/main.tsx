@@ -10,6 +10,8 @@ import Setting from './pages/SettingModal/Setting';
 import App from './App.tsx';
 import store from './store';
 
+import PostVote from './pages/DetailPage/PostVote/index.tsx';
+import PostVoteChart from './pages/DetailPage/PostVoteChart/index.tsx';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
@@ -26,7 +28,14 @@ const router = createBrowserRouter([
       { path: '/home', element: <Main /> },
       { path: '/user/:userId', element: <UserPage /> },
       { path: '/user/:userId/setting', element: <Setting /> },
-      { path: '/detail/:channelId/:postId', element: <DetailPage /> },
+      {
+        path: '/detail/:channelId/:postId/',
+        element: <DetailPage />,
+        children: [
+          { path: '', element: <PostVote /> },
+          { path: 'result', element: <PostVoteChart /> },
+        ],
+      },
     ],
   },
   { path: '/sign', element: <Login /> },
