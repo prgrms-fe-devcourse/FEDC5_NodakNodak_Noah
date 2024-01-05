@@ -9,7 +9,7 @@ import {
 } from '../styledPostEdit';
 import { useFormik } from 'formik';
 import { useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
@@ -28,6 +28,7 @@ interface FormType {
 const PostUpdatePage = () => {
   const { channelId, postId } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     dispatch(getPostDetail({ postId }));
@@ -35,7 +36,7 @@ const PostUpdatePage = () => {
 
   const serverData = useSelectedPostTitle();
 
-  const handleFormSubmit = (values: FormType) => {
+  const handleFormSubmit = async (values: FormType) => {
     if (!values.channelId || !values.content) {
       alert(!values.channelId ? '채널을 선택하세요.' : '내용을 입력하세요.');
       return;
@@ -52,7 +53,7 @@ const PostUpdatePage = () => {
       };
 
       const token = localStorage.getItem('auth-token');
-      axios({
+      await axios({
         url: 'https://kdt.frontend.5th.programmers.co.kr:5003/posts/update',
         method: 'PUT',
         data: postData,
@@ -60,8 +61,8 @@ const PostUpdatePage = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-
       alert('게시물이 수정되었습니다.');
+      navigate(`/detail/${channelId}/${postId}`);
     } catch (error) {
       alert(error);
     }

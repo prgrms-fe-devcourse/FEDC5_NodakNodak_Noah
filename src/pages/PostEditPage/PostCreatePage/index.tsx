@@ -7,6 +7,7 @@ import {
 } from '../styledPostEdit';
 import DropdownMenu from '../DropdownMenu';
 import VotedBox from '../VoteEditBox';
+import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import axios from 'axios';
 import Button from '@/components/Button';
@@ -21,6 +22,7 @@ interface FormType {
 }
 
 const PostCreatePage = () => {
+  const navigate = useNavigate();
   const handleFormSubmit = async (values: FormType) => {
     if (!values.channelId || !values.content) {
       alert(!values.channelId ? '채널을 선택하세요.' : '내용을 입력하세요.');
@@ -35,7 +37,7 @@ const PostCreatePage = () => {
         image: '',
       };
       const token = localStorage.getItem('auth-token');
-      axios({
+      await axios({
         url: 'https://kdt.frontend.5th.programmers.co.kr:5003/posts/create',
         method: 'POST',
         data: postData,
@@ -45,6 +47,7 @@ const PostCreatePage = () => {
       });
 
       alert('게시물이 생성되었습니다.');
+      navigate(`/home`);
     } catch (error) {
       alert(error);
     }
