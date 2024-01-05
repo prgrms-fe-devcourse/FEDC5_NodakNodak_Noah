@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import Avatar from '@/components/Avatar';
 import Button from '@/components/Button';
@@ -8,29 +8,20 @@ import Input from '@/components/Input';
 import Text from '@/components/Text';
 import { RootState, useDispatch } from '@/store';
 import { getUser } from '@/slices/user';
+import ImageUploader from '@/components/Button/ImageUploadButton';
 
 const Setting = () => {
   const [profileImage, setProfileImage] = useState('');
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { userId } = useParams();
-  const selectedFile = useRef<HTMLInputElement>(null);
   const returnToMyPage = () => navigate(-1);
 
-  const onUploadImage = (e: ChangeEvent<HTMLInputElement>) => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setProfileImage(reader.result as string);
-      }
-    };
-    reader.readAsDataURL(e.target.files![0]);
-  };
   useEffect(() => {
     if (userId) {
       dispatch(getUser({ userId }));
     } else {
-      alert('올바리지 않은 접근입니다.');
+      alert('올바르지 않은 접근입니다.');
       navigate(-1);
     }
   }, [dispatch, navigate, userId]);
@@ -54,17 +45,10 @@ const Setting = () => {
         <RowGrid>
           <ColGrid>
             <Avatar src={profileImage} size='large' alt={fullName} />
-            <Button size='wide' onClick={() => selectedFile.current?.click()}>
-              이미지 선택
-            </Button>
-
-            <InvisibleInput
-              type='file'
-              name='imageUpload'
-              id='imageUploader'
-              accept='image/*'
-              ref={selectedFile}
-              onChange={onUploadImage}
+            <ImageUploader
+              size='wide'
+              setImage={setProfileImage}
+              apiParam={'upload-photo'}
             />
             <Button size='wide' styleType='ghost'>
               이미지 삭제
@@ -131,10 +115,6 @@ const RowGrid = styled.div`
 const ColGrid = styled.div`
   display: flex;
   flex-direction: column;
-`;
-
-const InvisibleInput = styled.input`
-  display: none;
 `;
 
 const ButtonWrapper = styled.div`
