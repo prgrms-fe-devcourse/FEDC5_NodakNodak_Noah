@@ -30,6 +30,11 @@ const PostCard = ({ post }: PostCardProps) => {
     navigate(token ? `/detail/${channel?._id}/${post._id}` : '/sign');
   };
 
+  const handleDetailResultClick = () => {
+    const token = localStorage.getItem('auth-token');
+    navigate(token ? `/detail/${channel?._id}/${post._id}/result` : '/sign');
+  };
+
   return (
     <Card width='280px' height='280px' shadowType='medium'>
       <PostSnippet
@@ -50,7 +55,7 @@ const PostCard = ({ post }: PostCardProps) => {
         <Button
           styleType='ghost'
           event={channelLoading ? 'disabled' : 'enabled'}
-          onClick={handleDetailClick}>
+          onClick={handleDetailResultClick}>
           결과 보기
         </Button>
       </FlexWrapper>
