@@ -28,7 +28,7 @@ const Avatar = ({ src, size = 'middle', alt, ...props }: AvatarProps) => {
         <Image
           width={avatarSize}
           height={avatarSize}
-          src={src ? src : '/public/DefaultProfile.jpg'}
+          src={src ? src : '/DefaultProfile.jpg'}
           alt={alt}
           style={{ ...props.style, opacity: loaded ? 1 : 0 }}
         />
