@@ -3,5 +3,6 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   size?: 'mini' | 'small' | 'regular' | 'wide';
   event?: 'enabled' | 'hover' | 'click' | 'focus' | 'disabled';
   type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
   isArrow?: boolean;
 }

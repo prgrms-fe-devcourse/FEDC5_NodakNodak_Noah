@@ -7,6 +7,7 @@ import {
 } from '../styledPostEdit';
 import DropdownMenu from '../DropdownMenu';
 import VotedBox from '../VoteEditBox';
+import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import axios from 'axios';
 import Button from '@/components/Button';
@@ -21,12 +22,20 @@ interface FormType {
 }
 
 const PostCreatePage = () => {
-  const handleFormSubmit = async (values: FormType) => {
-    if (!values.channelId || !values.content) {
-      alert(!values.channelId ? '채널을 선택하세요.' : '내용을 입력하세요.');
+  const BASE_URL = 'https://kdt.frontend.5th.programmers.co.kr:5003';
+  const navigate = useNavigate();
+
+  const handleFormSubmit = async ({
+    title,
+    content,
+    voteTitle,
+    voteArray,
+    channelId,
+  }: FormType) => {
+    if (!channelId || !content) {
+      alert(!channelId ? '채널을 선택하세요.' : '내용을 입력하세요.');
       return;
     }
-    const { title, content, voteTitle, voteArray, channelId } = values;
 
     try {
       const postData = {
@@ -35,16 +44,18 @@ const PostCreatePage = () => {
         image: '',
       };
 
-      const response = axios({
-        url: 'https://kdt.frontend.5th.programmers.co.kr:5003/posts/create',
+      const token = localStorage.getItem('auth-token');
+      await axios({
+        url: `${BASE_URL}/posts/create`,
         method: 'POST',
         data: postData,
         headers: {
-          Authorization: '',
+          Authorization: `Bearer ${token}`,
         },
       });
 
       alert('게시물이 생성되었습니다.');
+      navigate(`/home`);
     } catch (error) {
       alert(error);
     }
@@ -69,11 +80,12 @@ const PostCreatePage = () => {
         <Input
           required={true}
           placeholder='제목을 입력하세요'
-          width='589px'
-          height='70px'
           name='title'
           value={values.title}
           onChange={handleChange}
+          fontType='h1'
+          underline={true}
+          style={{ width: '584px', height: '72px', textAlign: 'center' }}
         />
         <DropdownMenu
           channelId={values.channelId}
