@@ -51,12 +51,13 @@ const PostUpdatePage = () => {
         image: '',
       };
 
-      const response = axios({
+      const token = localStorage.getItem('auth-token');
+      axios({
         url: 'https://kdt.frontend.5th.programmers.co.kr:5003/posts/update',
         method: 'PUT',
         data: postData,
         headers: {
-          Authorization: '',
+          Authorization: `Bearer ${token}`,
         },
       });
 
