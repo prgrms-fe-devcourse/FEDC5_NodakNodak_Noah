@@ -4,7 +4,7 @@ import {
   TextAreaWrapper,
   StyledTextArea,
   ButtonWrapper,
-} from '../styledPostEdit';
+} from '../StyledPostEdit';
 import DropdownMenu from '../DropdownMenu';
 import VotedBox from '../VoteEditBox';
 import { useNavigate } from 'react-router-dom';
