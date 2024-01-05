@@ -10,6 +10,7 @@ const Button = ({
   type,
   isArrow = false,
   onClick,
+  disabled,
   ...props
 }: PropsWithChildren<ButtonProps>) => {
   return (
@@ -24,7 +25,8 @@ const Button = ({
         $size={size}
         $event={event}
         $isArrow={isArrow}
-        style={{ ...props.style }}>
+        style={{ ...props.style }}
+        $disabled={disabled}>
         {children}
         {isArrow && <span>{'>'}</span>}
       </ButtonLayout>
