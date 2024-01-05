@@ -35,6 +35,10 @@ const PostVote = () => {
   const postDetailContent = useSelectedPost();
   const postDetailVote = useSelectedVote();
   const myInfo = useSelector((state: RootState) => state.userInfo.authUser);
+  const { postId } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [voteContent, setVoteContent] = useState('');
   const [reVote, setRevote] = useState(false);
 
   useEffect(() => {
@@ -46,7 +50,33 @@ const PostVote = () => {
   if (!postDetailContent.title) return null;
   const { voteArray, voteTitle } = JSON.parse(postDetailContent.title);
 
+  const handleVote = async (e: React.FormEvent) => {
+    e.preventDefault();
     if (!voteContent || reVote) return;
+    const token = localStorage.getItem('auth-token');
+    try {
+      await axios({
+        url: 'https://kdt.frontend.5th.programmers.co.kr:5003/comments/create',
+        method: 'POST',
+        data: {
+          comment: JSON.stringify({
+            type: 'vote',
+            voteArray: ['한식', '중식', '일식', '양식'],
+            content: voteContent,
+          }),
+          postId,
+        },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      dispatch(getPostDetail({ postId }));
+      navigate(`./result`);
+    } catch (e) {
+      alert(e);
+    }
+  };
+
   return (
     <Card width='44.375rem' height='31.25rem' shadowType='large'>
       <ScrollBar>
@@ -62,25 +92,41 @@ const PostVote = () => {
             {`${postDetailVote?.length}명 투표`}
           </Text>
         </VoteTitleWrapper>
-        <InputWrapper>
-          {voteArray.map((vote: string, index: number) => (
-            <Input
-              key={index}
-              placeholder={vote}
-              bordertype='enabled'
-              readOnly={true}
-              style={{ marginBottom: '1.5rem', width: '466px', height: '48px' }}
-            />
-          ))}
-        </InputWrapper>
-        <ButtonWrapper>
-          <Button event='enabled' styleType='primary' size='wide'>
-            투표 하기
-          </Button>
-          <Button event='enabled' styleType='ghost' size='wide'>
-            결과 보기
-          </Button>
-        </ButtonWrapper>
+        <form>
+          <InputWrapper>
+            {voteArray.map((vote: string, index: number) => (
+              <Input
+                key={index}
+                value={vote}
+                bordertype='enabled'
+                readOnly={true}
+                style={{
+                  marginBottom: '1.5rem',
+                  width: '466px',
+                  height: '48px',
+                  backgroundColor: `${
+                    voteContent === vote ? theme.colors.primary[200] : ''
+                  }`,
+                  outline: 'none',
+                }}
+                onClick={() => setVoteContent(vote)}
+              />
+            ))}
+          </InputWrapper>
+          <ButtonWrapper>
+            <Button
+              event={voteContent === '' || reVote ? 'disabled' : 'enabled'}
+              styleType='primary'
+              size='wide'
+              disabled={voteContent === '' || reVote ? true : false}
+              onClick={handleVote}>
+              투표 하기
+            </Button>
+            <Button event='enabled' styleType='ghost' size='wide'>
+              결과 보기
+            </Button>
+          </ButtonWrapper>
+        </form>
       </ScrollBar>
     </Card>
   );
