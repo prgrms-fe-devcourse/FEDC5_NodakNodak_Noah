@@ -26,6 +26,7 @@ interface FormType {
 }
 
 const PostUpdatePage = () => {
+  const BASE_URL = 'https://kdt.frontend.5th.programmers.co.kr:5003';
   const { channelId, postId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -36,13 +37,17 @@ const PostUpdatePage = () => {
 
   const serverData = useSelectedPostTitle();
 
-  const handleFormSubmit = async (values: FormType) => {
-    if (!values.channelId || !values.content) {
-      alert(!values.channelId ? '채널을 선택하세요.' : '내용을 입력하세요.');
+  const handleFormSubmit = async ({
+    title,
+    content,
+    voteTitle,
+    voteArray,
+    channelId,
+  }: FormType) => {
+    if (!channelId || !content) {
+      alert(!channelId ? '채널을 선택하세요.' : '내용을 입력하세요.');
       return;
     }
-
-    const { title, content, voteTitle, voteArray, channelId } = values;
 
     try {
       const postData = {
@@ -54,7 +59,7 @@ const PostUpdatePage = () => {
 
       const token = localStorage.getItem('auth-token');
       await axios({
-        url: 'https://kdt.frontend.5th.programmers.co.kr:5003/posts/update',
+        url: `${BASE_URL}/posts/update`,
         method: 'PUT',
         data: postData,
         headers: {

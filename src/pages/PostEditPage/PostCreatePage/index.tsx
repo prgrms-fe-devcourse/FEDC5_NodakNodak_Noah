@@ -22,13 +22,20 @@ interface FormType {
 }
 
 const PostCreatePage = () => {
+  const BASE_URL = 'https://kdt.frontend.5th.programmers.co.kr:5003';
   const navigate = useNavigate();
-  const handleFormSubmit = async (values: FormType) => {
-    if (!values.channelId || !values.content) {
-      alert(!values.channelId ? '채널을 선택하세요.' : '내용을 입력하세요.');
+
+  const handleFormSubmit = async ({
+    title,
+    content,
+    voteTitle,
+    voteArray,
+    channelId,
+  }: FormType) => {
+    if (!channelId || !content) {
+      alert(!channelId ? '채널을 선택하세요.' : '내용을 입력하세요.');
       return;
     }
-    const { title, content, voteTitle, voteArray, channelId } = values;
 
     try {
       const postData = {
@@ -36,9 +43,10 @@ const PostCreatePage = () => {
         channelId,
         image: '',
       };
+
       const token = localStorage.getItem('auth-token');
       await axios({
-        url: 'https://kdt.frontend.5th.programmers.co.kr:5003/posts/create',
+        url: `${BASE_URL}/posts/create`,
         method: 'POST',
         data: postData,
         headers: {
