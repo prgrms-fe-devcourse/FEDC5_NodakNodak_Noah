@@ -1,11 +1,18 @@
 import { useSelectedPost } from '../useSelectedPost';
 import { useSelectedVote } from '../PostComment/useSelectedComment';
+import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate, useParams } from 'react-router-dom';
 import styled from 'styled-components';
+import axios from 'axios';
+import { RootState, useDispatch } from '@/store';
 import Card from '@/components/Card';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
 import Text from '@/components/Text';
 import ScrollBar from '@/components/ScrollBar';
+import theme from '@/styles/theme';
+import { getPostDetail } from '@/slices/postDetail';
 
 const VoteTitleWrapper = styled.div`
   display: flex;
