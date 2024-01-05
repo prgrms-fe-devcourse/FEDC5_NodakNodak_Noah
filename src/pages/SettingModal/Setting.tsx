@@ -100,6 +100,7 @@ const Setting = () => {
             isArrow={true}
             onClick={isModified ? handleUpdate : handleCancel}>
             {isModified ? '수정하기' : '취소하기'}
+          </Button>
           <Button
             styleType={isModified ? 'primary' : 'ghost'}
             isArrow={true}
@@ -128,16 +129,12 @@ const Setting = () => {
               required={true}
               value={updatedData.fullName}
               onChange={(e) => handleInputChange('fullName', e.target.value)}
-              value={updatedData.fullName}
-              onChange={(e) => handleInputChange('fullName', e.target.value)}
             />
             <Input
               underline={true}
               placeholder='한줄 소개'
               width='80%'
               fontType='body1'
-              value={updatedData.username}
-              onChange={(e) => handleInputChange('username', e.target.value)}
               value={updatedData.username}
               onChange={(e) => handleInputChange('username', e.target.value)}
             />
