@@ -25,6 +25,10 @@ const PostCreatePage = () => {
   const BASE_URL = 'https://kdt.frontend.5th.programmers.co.kr:5003';
   const navigate = useNavigate();
 
+  const hasDuplicates = (array: string[]) => {
+    return new Set(array).size !== array.length;
+  };
+
   const handleFormSubmit = async ({
     title,
     content,
@@ -34,6 +38,11 @@ const PostCreatePage = () => {
   }: FormType) => {
     if (!channelId || !content) {
       alert(!channelId ? '채널을 선택하세요.' : '내용을 입력하세요.');
+      return;
+    }
+
+    if (hasDuplicates(voteArray)) {
+      alert('중복된 후보가 있습니다. 중복을 제거해주세요.');
       return;
     }
 
