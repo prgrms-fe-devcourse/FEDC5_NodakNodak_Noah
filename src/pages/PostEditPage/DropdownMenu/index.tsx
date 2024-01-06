@@ -9,6 +9,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getChannel } from '@/slices/channel';
 import { useDispatch, RootState } from '@/store';
+import DownArrowIcon from '@/assets/DownArrowIcon';
 
 export interface Channel {
   _id: string;
@@ -53,7 +54,7 @@ const DropdownMenu = ({ channelId, setChannelId }: DropdownMenuProps) => {
         $ismenuopen={isMenuOpen}>
         {channelTitle}
         <BorderLine />
-        {isMenuOpen ? '>' : '<'}
+        <DownArrowIcon open={isMenuOpen} />
       </DropdownButton>
       {isMenuOpen && (
         <DropdownContent>
