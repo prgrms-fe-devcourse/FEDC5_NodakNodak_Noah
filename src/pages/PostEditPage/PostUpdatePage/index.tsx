@@ -48,9 +48,21 @@ const PostUpdatePage = () => {
     voteArray,
     channelId,
   }: FormType) => {
-    if (!channelId || !content) {
-      alert(!channelId ? '채널을 선택하세요.' : '내용을 입력하세요.');
-      return;
+    const validations = [
+      { value: title, message: '제목을 입력하세요.' },
+      { value: channelId, message: '채널을 선택하세요.' },
+      { value: content, message: '내용을 입력하세요.' },
+      { value: voteTitle, message: '투표 주제를 입력하세요.' },
+      {
+        value: voteArray.every((candidate) => candidate),
+        message: '투표 후보를 모두 작성하세요.',
+      },
+    ];
+    for (const validation of validations) {
+      if (!validation.value) {
+        alert(validation.message);
+        return;
+      }
     }
 
     if (hasDuplicates(voteArray)) {
@@ -102,7 +114,7 @@ const PostUpdatePage = () => {
   }, [serverData, formik, values, channelId]);
 
   return (
-    <FormContainer onSubmit={handleSubmit}>
+    <FormContainer onSubmit={handleSubmit} noValidate>
       <FormArea>
         <Input
           required={true}
