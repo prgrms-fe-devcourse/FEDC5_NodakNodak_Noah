@@ -46,10 +46,20 @@ const UserPostList = () => {
         colorNumber='400'>
         님의 게시글 목록
       </Text>
-      <PostCard.Group>
-        {postSnippetList.map((post) => {
-          return <PostCard key={post._id} post={post} />;
-        })}
+      <PostCard.Group style={{ width: '80vw', margin: '2rem 0' }}>
+        {postSnippetList.length === 0 ? (
+          <Text
+            tagType='span'
+            fontType='h4'
+            colorType='black'
+            style={{ margin: '8rem 0' }}>
+            게시글이 존재하지 않습니다.
+          </Text>
+        ) : (
+          postSnippetList.map((post) => {
+            return <PostCard key={post._id} post={post} />;
+          })
+        )}
       </PostCard.Group>
     </>
   );

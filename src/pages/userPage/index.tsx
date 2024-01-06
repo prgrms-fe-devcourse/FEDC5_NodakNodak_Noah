@@ -11,7 +11,7 @@ const UserPage = () => {
   };
 
   return (
-    <>
+    <UserInfoWrapper>
       <RightButton>
         <Button styleType='ghost' onClick={setting}>
           프로필 수정
@@ -19,10 +19,14 @@ const UserPage = () => {
       </RightButton>
       <UserInfo />
       <UserPostList />
-    </>
+    </UserInfoWrapper>
   );
 };
 
+const UserInfoWrapper = styled.div`
+  width: 80vw;
+  margin: 3rem auto;
+`;
 const RightButton = styled.div`
   display: flex;
   justify-content: flex-end;
