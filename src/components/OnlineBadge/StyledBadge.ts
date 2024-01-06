@@ -26,6 +26,8 @@ export const Super = styled.sup<{ isOnline: boolean; isFollowing: boolean }>`
     height: 8px;
     border-radius: 50%;
 
+    box-shadow: 0px 1px 2px ${theme.colors.grayscale[500]};
+
     border: 3px solid
       ${({ isFollowing }) =>
         isFollowing ? theme.colors.info[300] : theme.colors.white};
