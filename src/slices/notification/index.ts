@@ -40,9 +40,7 @@ const notificationSlice = createSlice({
         notification.seen = true;
         return notification;
       });
-      state.notifications = state.notifications.filter(
-        (notification) => !notification.seen,
-      );
+      state.notifications = [];
     });
 
     builder.addMatcher(
