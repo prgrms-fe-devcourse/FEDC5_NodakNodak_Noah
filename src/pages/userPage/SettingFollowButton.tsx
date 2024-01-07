@@ -37,7 +37,10 @@ const SettingFollowButton = () => {
     if (isMyPage) {
       navigate('setting');
     } else if (isFollower || isFollowing) {
-      if (!myInfo || !token) return;
+      if (!myInfo || !token) {
+        alert('로그인이 필요합니다.');
+        return;
+      }
       if (isFollower) {
         dispatch(follow({ myId: myInfo._id, token, userId }));
       }
@@ -45,7 +48,10 @@ const SettingFollowButton = () => {
         dispatch(unfollow({ myId: myInfo._id, token, followId }));
       }
     } else {
-      if (!myInfo || !token) return;
+      if (!myInfo || !token) {
+        alert('로그인이 필요합니다.');
+        return;
+      }
       dispatch(follow({ myId: myInfo._id, token, userId }));
     }
   };
