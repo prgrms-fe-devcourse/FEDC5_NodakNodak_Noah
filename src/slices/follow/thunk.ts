@@ -21,7 +21,7 @@ export const follow = createAsyncThunk(
     const myInfo = state.userInfo.authUser;
 
     if (!myInfo || myInfo._id !== myId) return;
-    const response = await axios({
+    const { data } = await axios({
       url: `https://kdt.frontend.5th.programmers.co.kr:5003/follow/create`,
       method: 'post',
       headers: {
@@ -32,7 +32,7 @@ export const follow = createAsyncThunk(
       },
     });
 
-    return response.data;
+    return data;
   },
 );
 
@@ -55,7 +55,7 @@ export const unfollow = createAsyncThunk(
 
     if (!myInfo || myInfo._id !== myId) return;
 
-    const response = await axios({
+    const { data } = await axios({
       url: `https://kdt.frontend.5th.programmers.co.kr:5003/follow/delete`,
       method: 'delete',
       headers: {
@@ -66,6 +66,6 @@ export const unfollow = createAsyncThunk(
       },
     });
 
-    return response.data;
+    return data;
   },
 );
