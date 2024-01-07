@@ -1,21 +1,13 @@
 import UserInfo from './UserInfo';
 import UserPostList from './UserPostList';
+import SettingFollowButton from './SettingFollowButton';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
-import Button from '@/components/Button';
 
 const UserPage = () => {
-  const navigate = useNavigate();
-  const setting = () => {
-    navigate('./setting');
-  };
-
   return (
     <>
       <RightButton>
-        <Button styleType='ghost' onClick={setting}>
-          프로필 수정
-        </Button>
+        <SettingFollowButton />
       </RightButton>
       <UserInfo />
       <UserPostList />

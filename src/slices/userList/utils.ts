@@ -10,7 +10,8 @@ export const userListToUserSnippetList = (
     fullName,
     isOnline,
     isFollowing: myInfo
-      ? myInfo.following.some(({ user }) => user === _id)
+      ? myInfo.following.some(({ user }) => user === _id) &&
+        myInfo.followers.some(({ follower }) => follower === _id)
       : false,
     image,
   }));
