@@ -38,11 +38,13 @@ const Main = () => {
   const { paginationedPostList, totalPage, currentPage, handlePageChange } =
     usePagination(postList);
   const myInfo = useSelector((state: RootState) => state.userInfo.authUser);
-  const channelTitle = channelLoading
-    ? '로딩중'
-    : channelId && channel
-      ? channel.name
-      : '전체 글';
+
+  const getChannelTitle = () => {
+    if (channelLoading) return '로딩중';
+    if (!channelId) return '전체 글';
+    if (!channel) return '채널을 찾을 수 없습니다.';
+    return channel.name;
+  };
 
   const handleWriteClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -84,7 +86,7 @@ const Main = () => {
         <PostContentWrapper>
           <MainFlexWrapper>
             <Text tagType='span' fontType='h2'>
-              {channelTitle}
+              {getChannelTitle()}
             </Text>
             <Button styleType='ghost' size='small' onClick={handleWriteClick}>
               글 쓰기
