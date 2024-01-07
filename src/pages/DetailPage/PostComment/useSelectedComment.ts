@@ -6,6 +6,7 @@ export interface Comment {
   type: 'comment' | 'vote';
   voteArray: string[];
   content: string;
+  _id: string;
 }
 
 export const useSelectedComment = () => {

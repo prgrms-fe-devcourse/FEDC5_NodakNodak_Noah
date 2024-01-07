@@ -36,6 +36,7 @@ const PostComment = () => {
       return;
     }
     const token = localStorage.getItem('auth-token');
+
     try {
       await axios({
         url: 'https://kdt.frontend.5th.programmers.co.kr:5003/comments/create',
@@ -52,7 +53,6 @@ const PostComment = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-
       dispatch(getPostDetail({ postId }));
     } catch (e) {
       alert(e);
@@ -74,8 +74,10 @@ const PostComment = () => {
         {postDetailComment.map((comment) => (
           <CommentItem
             author={comment.author.fullName}
+            authorId={comment.author._id}
             createdAt={comment.createdAt}
             comment={comment.comment}
+            commentId={comment._id}
             key={comment._id}
           />
         ))}
