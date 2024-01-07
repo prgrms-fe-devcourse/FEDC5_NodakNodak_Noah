@@ -36,7 +36,7 @@ export const userInfo = createSlice({
       state.targetUser = action.payload;
     });
     builder.addCase(getMyInfo.fulfilled, (state, action) => {
-      state.followData.isFollower = (action.payload as User)?.followers?.some(
+      state.followData.isFollower = (action.payload as User).followers.some(
         ({ user }) => user === state.targetUser?._id,
       );
       state.followData.isFollowing = (action.payload as User)?.following?.some(

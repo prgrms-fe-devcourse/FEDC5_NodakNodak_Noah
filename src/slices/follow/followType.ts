@@ -7,7 +7,7 @@ export interface FollowData {
 }
 
 export interface InitialState {
-  targetUser: User | undefined;
+  targetUser?: User;
   followData: FollowData;
   isLoading: boolean;
 }
