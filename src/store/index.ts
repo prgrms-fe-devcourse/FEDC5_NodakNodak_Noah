@@ -5,6 +5,7 @@ import userInfoReducer from '@/slices/user';
 import postDetailReducer from '@/slices/postDetail';
 import postListReducer from '@/slices/postList';
 import userListReducer from '@/slices/userList';
+import notificationReducer from '@/slices/notification';
 
 const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ const store = configureStore({
     postList: postListReducer,
     userList: userListReducer,
     userInfo: userInfoReducer,
+    notification: notificationReducer,
   },
 });
 type AppDispatch = typeof store.dispatch;
