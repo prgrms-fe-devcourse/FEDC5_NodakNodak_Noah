@@ -19,8 +19,6 @@ import { useNavigate, NavLink } from 'react-router-dom';
 import Bell from '@/assets/Bell';
 import Card from '@/components/Card';
 import useClickAway from '@/hooks/useClickAway';
-import { useDispatch } from '@/store';
-import { setChannel } from '@/slices/channel';
 
 const tempCount = 100000;
 
@@ -31,11 +29,6 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
   const [inputValue, setInputValue] = useState('');
   const count = seen ? 0 : tempCount;
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-
-  const handleClick = (id: string) => () => {
-    dispatch(setChannel(id));
-  };
 
   const handleFocus = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
@@ -72,10 +65,7 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
         </LogoWrapper>
         <ChannelWrapper>
           {channels.map((channel) => (
-            <NavLink
-              key={channel._id}
-              to='home'
-              onClick={handleClick(channel._id)}>
+            <NavLink key={channel._id} to={`/home/${channel._id}`}>
               <Text key={channel._id} tagType='span' fontType='h4'>
                 {channel.name}
               </Text>
