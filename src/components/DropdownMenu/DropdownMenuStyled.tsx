@@ -57,6 +57,7 @@ export const ListItemButton = styled.button`
 
 export const DropdownContent = styled.ul`
   width: 100%;
+  min-width: 100px;
   position: absolute;
   top: 100%;
   margin: 0px;
