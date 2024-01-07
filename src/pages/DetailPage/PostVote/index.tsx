@@ -17,6 +17,7 @@ import Text from '@/components/Text';
 import ScrollBar from '@/components/ScrollBar';
 import theme from '@/styles/theme';
 import { getPostDetail } from '@/slices/postDetail';
+import { Warning } from '@/components/Sign/SignStyle';
 
 const PostVote = () => {
   const postDetailContent = useSelectedPost();
@@ -122,6 +123,7 @@ const PostVote = () => {
             </Button>
           </ButtonWrapper>
         </form>
+        {reVote ? <Warning>이미 투표하셨습니다.</Warning> : ''}
       </ScrollBar>
     </Card>
   );
