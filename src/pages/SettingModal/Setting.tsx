@@ -56,13 +56,12 @@ const Setting = () => {
         },
         {
           headers: {
-            Authorization:
-              'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY1ODcwODQ3YjAzNTcyMWYyMzM1ODA2MiIsImVtYWlsIjoic29uaG9taW45OEBuYXZlci5jb20ifSwiaWF0IjoxNzAzMzQ4Mjk1fQ.m3mYBXsAdzJhvvyde3PJy9lbYYPIFMx_PJBMtYMTWKw',
+            Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
             'Content-Type': 'application/json',
           },
         },
       );
-      navigate('/user');
+      navigate(`/user/${userId}`);
     } catch (error) {
       alert(error);
     }
@@ -86,7 +85,6 @@ const Setting = () => {
 
   if (!currentUser) {
     return <></>;
-    return <></>;
   }
 
   const { fullName, email } = currentUser;
@@ -95,12 +93,6 @@ const Setting = () => {
     <IndexContainer>
       <CardWrapper>
         <ButtonWrapper>
-          <Button
-            styleType={isModified ? 'primary' : 'ghost'}
-            isArrow={true}
-            onClick={isModified ? handleUpdate : handleCancel}>
-            {isModified ? '수정하기' : '취소하기'}
-          </Button>
           <Button
             styleType={isModified ? 'primary' : 'ghost'}
             isArrow={true}
