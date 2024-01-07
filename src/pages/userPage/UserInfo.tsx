@@ -8,15 +8,17 @@ import Text from '@/components/Text';
 import Button from '@/components/Button';
 import { RootState, useDispatch } from '@/store';
 import { getUser } from '@/slices/user';
+import { useSelectedFollowData } from '@/hooks/useSelectedFollowData';
 
 const UserInfo = () => {
   const dispatch = useDispatch();
   const { userId } = useParams();
+  const { isFollower, isFollowing } = useSelectedFollowData();
   useEffect(() => {
     if (userId) {
       dispatch(getUser({ userId }));
     }
-  }, [dispatch, userId]);
+  }, [dispatch, userId, isFollower, isFollowing]);
 
   const currentUser = useSelector(
     (state: RootState) => state.userInfo.currentUser,
