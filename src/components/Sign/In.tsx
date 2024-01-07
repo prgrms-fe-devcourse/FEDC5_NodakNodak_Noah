@@ -3,26 +3,39 @@ import Input from '../Input';
 import Button from '../Button';
 import PasswordInput from '../Input/PasswordInput';
 import React, { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const In = ({ isLogin, setIsLogin }: SignProps) => {
   const [email, setEmail] = useState('');
-  const [pw, setPW] = useState('');
-  const [warn, setWarn] = useState(false);
+  const [password, setPassword] = useState('');
   const [warnText, setWarnText] = useState('');
+  const [warn, setWarn] = useState(false);
   const navigate = useNavigate();
+
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post('/api', {
-        path: 'login',
+      const axiosOptions = {
+        url: `https://kdt.frontend.5th.programmers.co.kr:5003/login`,
         method: 'POST',
-        data: {
-          email: email,
-          password: pw,
+        headers: {
+          'Content-Type': 'application/json',
         },
-      });
+        data: {
+          email,
+          password,
+        },
+      };
+      const { data } = await axios(axiosOptions);
+      // const { data } = await axios.post('/api', {
+      //   path: 'login',
+      //   method: 'POST',
+      //   data: {
+      //     email: email,
+      //     password: pw,
+      //   },
+      // });
       localStorage.setItem('auth-token', data.token);
       navigate('/home');
     } catch (e) {
@@ -54,7 +67,7 @@ const In = ({ isLogin, setIsLogin }: SignProps) => {
         placeholder='Password'
         autoComplete='off'
         bordertype={warn ? 'error' : 'filled'}
-        onChange={(e) => setPW(e.target.value)}
+        onChange={(e) => setPassword(e.target.value)}
       />
       {warn ? <Warning>{warnText}</Warning> : ''}
       <Guide>
