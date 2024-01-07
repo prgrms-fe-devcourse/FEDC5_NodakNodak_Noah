@@ -27,6 +27,28 @@ const PostContent = () => {
     if (!isConfirm) return;
     navigate(`/update/${channelId}/${postId}`);
   };
+  const handlePostDelete = async () => {
+    const isConfirm = window.confirm('게시글을 삭제하시겠습니까?');
+    if (!isConfirm) return;
+    const token = localStorage.getItem('auth-token');
+    try {
+      await axios({
+        url: `https://kdt.frontend.5th.programmers.co.kr:5003/posts/delete`,
+        method: 'DELETE',
+        data: {
+          id: postId,
+        },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      alert('게시글이 삭제되었습니다.');
+      navigate(`/home`);
+    } catch (e) {
+      alert(e);
+    }
+  };
+
   return (
     <PostContentWrapper className='ContentTitle'>
       <Text colorType='black' tagType='span' fontType='h1'>
@@ -39,6 +61,13 @@ const PostContent = () => {
             onClick={handlePostEdit}>
             수정하기
           </button>
+          <button
+            style={{ marginLeft: '20px', border: 'none', cursor: 'pointer' }}
+            onClick={handlePostDelete}>
+            삭제하기
+          </button>
+        </>
+      ) : null}
       <PostContentAuthorWrapper className='Author'>
         <Avatar size='middle' alt='유저네임' />
         <Text
