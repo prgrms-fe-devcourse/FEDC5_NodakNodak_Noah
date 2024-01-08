@@ -44,7 +44,7 @@ const UserPostList = () => {
         fontType='body1'
         colorType='grayscale'
         colorNumber='400'>
-        님의 게시글 목록
+        님의 최근 게시글
       </Text>
       <PostCard.Group style={{ width: '80vw', margin: '2rem 0' }}>
         {postSnippetList.length === 0 ? (
