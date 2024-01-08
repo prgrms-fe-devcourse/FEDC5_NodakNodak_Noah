@@ -30,15 +30,16 @@ const NotFoundWrapper = styled.div`
   justify-content: center;
   align-items: center;
   position: absolute;
-  gap: 24px;
+  gap: 2vh;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  width: 80vw;
 `;
 
 const TitleText = styled.span`
   font-family: 'LOTTERIACHAB', sans-serif;
-  font-size: 24px;
+  font-size: 5vw;
   color: ${theme.colors.primary[500]};
 `;
 export default NotFound;
