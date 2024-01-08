@@ -25,6 +25,7 @@ const Button = ({
         $size={size}
         $event={event}
         $isArrow={isArrow}
+        $disabled={disabled}
         disabled={disabled}
         style={{ ...props.style }}>
         {children}
