@@ -1,4 +1,6 @@
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
+import theme from '@/styles/theme';
 
 export const StyledHeaderWrapper = styled.nav`
   width: 80%;
@@ -17,6 +19,24 @@ export const ChannelWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 16px;
+  text-decoration: none;
+`;
+
+export const NavLinkWrapper = styled(NavLink)`
+  text-decoration: none;
+
+  &:hover {
+    color: ${theme.colors.primary[500]}; /* 마우스 호버 시 색을 red로 변경 */
+  }
+
+  &:active {
+    font-weight: 600;
+    color: ${theme.colors.primary[500]}; /* 클릭 중일 때 색을 red로 변경 */
+  }
+
+  &.active {
+    color: red; /* 현재 라우트와 일치할 때 색을 red로 변경 */
+  }
 `;
 
 export const FormContainer = styled.form`
