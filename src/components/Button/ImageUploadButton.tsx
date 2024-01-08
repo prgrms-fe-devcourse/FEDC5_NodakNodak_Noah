@@ -10,6 +10,7 @@ const ImageUploader = ({
   event = 'enabled',
   type,
   isArrow,
+  children,
   setImage,
   apiParam,
 }: ImageUnloadButtonProps) => {
@@ -51,15 +52,13 @@ const ImageUploader = ({
           type={type}
           isArrow={isArrow}
           onClick={() => selectedFile.current?.click()}>
-          이미지 선택
+          {children}
         </Button>
       ) : (
-        'uploading...'
+        'Uploading...'
       )}
       <InvisibleInput
         type='file'
-        name='imageUpload'
-        id='imageUploader'
         accept='image/*'
         ref={selectedFile}
         onChange={onUploadImage}
