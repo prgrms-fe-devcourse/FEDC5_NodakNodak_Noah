@@ -3,12 +3,12 @@ import Button from '../Button';
 import Input from '../Input';
 import PasswordInput from '../Input/PasswordInput';
 import { useState } from 'react';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 const Up = ({ isLogin, setIsLogin }: SignProps) => {
   const [email, setEmail] = useState('');
-  const [pw, setPW] = useState('');
-  const [confirmPW, setConfirmPW] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [warnText, setWarnText] = useState('');
   const [warn, setWarn] = useState([false, false, false]);
 
@@ -20,11 +20,11 @@ const Up = ({ isLogin, setIsLogin }: SignProps) => {
       emptyCheck[0] = true;
       emptyFlag = true;
     }
-    if (pw.trim() === '') {
+    if (password.trim() === '') {
       emptyCheck[1] = true;
       emptyFlag = true;
     }
-    if (confirmPW.trim() === '') {
+    if (confirmPassword.trim() === '') {
       emptyCheck[2] = true;
       emptyFlag = true;
     }
@@ -38,7 +38,7 @@ const Up = ({ isLogin, setIsLogin }: SignProps) => {
       }, 3000);
       return;
     }
-    if (pw !== confirmPW) {
+    if (password !== confirmPassword) {
       setWarnText('비밀번호가 일치하지 않습니다.');
       setWarn([false, true, true]);
       setTimeout(() => {
@@ -49,18 +49,24 @@ const Up = ({ isLogin, setIsLogin }: SignProps) => {
     }
 
     try {
-      await axios.post('/api', {
-        path: 'signup',
+      const axiosOptions = {
+        url: `https://kdt.frontend.5th.programmers.co.kr:5003/signup`,
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
         data: {
           fullName: `익명#${Math.floor(Math.random() * 100000)}`,
-          email: email,
-          password: pw,
+          email,
+          password,
         },
-      });
+      };
+      await axios(axiosOptions);
       alert('회원가입 성공');
-    } catch (e) {
-      alert(e);
+    } catch (e: unknown) {
+      if (e instanceof AxiosError) {
+        alert(e?.response?.data);
+      }
     }
   };
 
@@ -83,7 +89,7 @@ const Up = ({ isLogin, setIsLogin }: SignProps) => {
         placeholder='Password'
         autoComplete='off'
         bordertype={warn[1] ? 'error' : 'filled'}
-        onChange={(e) => setPW(e.target.value)}
+        onChange={(e) => setPassword(e.target.value)}
       />
 
       <PasswordInput
@@ -93,7 +99,7 @@ const Up = ({ isLogin, setIsLogin }: SignProps) => {
         placeholder='Password'
         autoComplete='off'
         bordertype={warn[2] ? 'error' : 'filled'}
-        onChange={(e) => setConfirmPW(e.target.value)}
+        onChange={(e) => setConfirmPassword(e.target.value)}
       />
       {warnText !== '' ? <Warning>{warnText}</Warning> : ''}
       <Guide>

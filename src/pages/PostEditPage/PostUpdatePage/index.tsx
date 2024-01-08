@@ -33,7 +33,7 @@ const PostUpdatePage = () => {
 
   useEffect(() => {
     dispatch(getPostDetail({ postId }));
-  }, [dispatch]);
+  }, [dispatch, postId]);
 
   const serverData = useSelectedPostTitle();
 
