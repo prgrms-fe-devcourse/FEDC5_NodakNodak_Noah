@@ -1,6 +1,6 @@
 import { MainWrapper, PostContentWrapper, MainFlexWrapper } from './StyledMain';
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PostCard from '@/components/PostCard';
 import Pagination from '@/components/Pagination';
@@ -21,18 +21,34 @@ import { userListToUserSnippetList } from '@/slices/userList/utils';
 import { usePagination } from '@/hooks/usePagination';
 import { getMyInfo } from '@/slices/user';
 
-import { postListToPostSnippetList } from '@/slices/postList/utils';
+import {
+  postListToPostSnippetList,
+  searchedPostListToPostSnippetList,
+} from '@/slices/postList/utils';
+import { searchAllData } from '@/slices/searchedData/thunk';
+import { useSelectedSearchedPostData } from '@/hooks/useSelectedSearchedData';
 
 const Main = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [searchParams] = useSearchParams();
+  const keyword = searchParams.get('search');
 
   const userList = useSelectedUserList();
   const channel = useSelectedChannel();
   const channelLoading = useSelectedChannelLoading();
+
+  const searchedPosts = useSelectedSearchedPostData();
+  const posts = useSelectedPostList();
+  const postSnippetList = keyword
+    ? searchedPostListToPostSnippetList(searchedPosts)
+    : postListToPostSnippetList(posts);
   const { paginationedPostList, totalPage, currentPage, handlePageChange } =
-    usePagination(postListToPostSnippetList(useSelectedPostList()));
+    usePagination(postSnippetList);
   const myInfo = useSelector((state: RootState) => state.userInfo.authUser);
+
+  const keywordToPostKeyword = (keyword: string) =>
+    `"title":"[^"]*${keyword}[^"]*"|"content":"[^"]*${keyword}[^"]*"`;
 
   const handleWriteClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -43,6 +59,11 @@ const Main = () => {
     }
     navigate('/write');
   };
+
+  useEffect(() => {
+    if (!keyword) return;
+    dispatch(searchAllData({ keyword: keywordToPostKeyword(keyword) }));
+  }, [dispatch, keyword]);
 
   useEffect(() => {
     if (!channel || !('_id' in channel)) return;
