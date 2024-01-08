@@ -111,7 +111,7 @@ const PostComment = () => {
             <Input
               ref={inputRef as React.RefObject<HTMLInputElement>}
               bordertype={warn ? 'error' : 'filled'}
-              placeholder='플레이스 홀더 텍스트'
+              placeholder='댓글을 입력해주세요.'
               fontType='body2'
               width='538px'
               height='48px'
