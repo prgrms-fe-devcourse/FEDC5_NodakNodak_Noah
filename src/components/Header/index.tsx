@@ -19,6 +19,7 @@ import Avatar from '../Avatar';
 import NotificationCardBell from '../NotificationCardBell';
 import { ChangeEvent, RefObject, useState, useEffect } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
+import axios from 'axios';
 import Card from '@/components/Card';
 import useClickAway from '@/hooks/useClickAway';
 import { useDispatch } from '@/store';
@@ -51,12 +52,21 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
     setShowMenu(!showMenu);
   };
 
-  const handleMenuItemClick = (item: string) => {
+  const handleMenuItemClick = async (item: string) => {
     if (item === '마이페이지') {
       navigate(`/user/${myInfo?._id}`);
     } else {
       localStorage.removeItem('auth-token');
-      navigate('/');
+      const axiosOptions = {
+        url: `https://kdt.frontend.5th.programmers.co.kr:5003/logout`,
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const { data } = await axios(axiosOptions);
+      alert(data);
+      location.reload();
     }
   };
 
