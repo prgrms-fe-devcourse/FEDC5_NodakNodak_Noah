@@ -59,7 +59,6 @@ const Setting = () => {
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
-            'Content-Type': 'application/json',
           },
         },
       );
@@ -95,7 +94,7 @@ const Setting = () => {
             event={isModified ? 'enabled' : 'disabled'}
             disabled={!isModified}
             isArrow={true}
-            onClick={isModified ? handleUpdate : handleCancel}>
+            onClick={handleUpdate}>
             수정하기
           </Button>
         </ButtonWrapper>
@@ -105,11 +104,9 @@ const Setting = () => {
             <ImageUploader
               size='wide'
               setImage={setProfileImage}
-              apiParam={'users/upload-photo'}
-            />
-            <Button size='wide' styleType='ghost'>
-              이미지 삭제
-            </Button>
+              apiParam={'users/upload-photo'}>
+              이미지 선택
+            </ImageUploader>
           </AvatarWrapper>
           <InputWrapper>
             <Input
@@ -175,6 +172,7 @@ const ContentContainer = styled.div`
 const AvatarWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 8px;
 `;
 
 const InputWrapper = styled.div`
