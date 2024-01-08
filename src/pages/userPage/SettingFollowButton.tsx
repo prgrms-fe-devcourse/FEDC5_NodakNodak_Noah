@@ -35,7 +35,7 @@ const SettingFollowButton = () => {
 
   const handleSettingOrFollow = () => {
     if (isMyPage) {
-      navigate('setting');
+      navigate('setting', { state: myInfo.image });
     } else if (isFollower || isFollowing) {
       if (!myInfo || !token) {
         alert('로그인이 필요합니다.');

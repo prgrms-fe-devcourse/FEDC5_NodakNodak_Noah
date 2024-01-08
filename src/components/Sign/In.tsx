@@ -19,9 +19,6 @@ const In = ({ isLogin, setIsLogin }: SignProps) => {
       const axiosOptions = {
         url: `https://kdt.frontend.5th.programmers.co.kr:5003/login`,
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         data: {
           email,
           password,
