@@ -1,7 +1,7 @@
 ---
 name: Fix
 about: 버그 수정, 단순 파일 수정 코드 포맷팅, 오탈자 수정
-title: ''
+title: "[FIX]"
 labels: fix
 assignees: ''
 
@@ -9,7 +9,9 @@ assignees: ''
 
 ## Description
 
-## Do
-- 
+### ✅Todo
+- [ ] Todo
+- [ ] Todo
+- [ ] Todo
 
-## ETC
+> Reference

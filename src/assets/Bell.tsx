@@ -1,13 +1,13 @@
 import theme from '@/styles/theme';
 
 interface BellProps {
-  handleSeen: () => void;
+  onToggleCard: () => void;
 }
 
-const Bell = ({ handleSeen }: BellProps) => {
+const Bell = ({ onToggleCard: handleToggleCard }: BellProps) => {
   return (
     <svg
-      onClick={handleSeen}
+      onClick={handleToggleCard}
       xmlns='http://www.w3.org/2000/svg'
       width='36'
       height='36'

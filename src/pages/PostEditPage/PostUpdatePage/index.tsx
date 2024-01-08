@@ -37,6 +37,10 @@ const PostUpdatePage = () => {
 
   const serverData = useSelectedPostTitle();
 
+  const hasDuplicates = (array: string[]) => {
+    return new Set(array).size !== array.length;
+  };
+
   const handleFormSubmit = async ({
     title,
     content,
@@ -44,8 +48,25 @@ const PostUpdatePage = () => {
     voteArray,
     channelId,
   }: FormType) => {
-    if (!channelId || !content) {
-      alert(!channelId ? '채널을 선택하세요.' : '내용을 입력하세요.');
+    const validations = [
+      { value: title, message: '제목을 입력하세요.' },
+      { value: channelId, message: '채널을 선택하세요.' },
+      { value: content, message: '내용을 입력하세요.' },
+      { value: voteTitle, message: '투표 주제를 입력하세요.' },
+      {
+        value: voteArray.every((candidate) => candidate),
+        message: '투표 후보를 모두 작성하세요.',
+      },
+    ];
+    for (const validation of validations) {
+      if (!validation.value) {
+        alert(validation.message);
+        return;
+      }
+    }
+
+    if (hasDuplicates(voteArray)) {
+      alert('중복된 후보가 있습니다. 중복을 제거해주세요.');
       return;
     }
 
@@ -93,7 +114,7 @@ const PostUpdatePage = () => {
   }, [serverData, formik, values, channelId]);
 
   return (
-    <FormContainer onSubmit={handleSubmit}>
+    <FormContainer onSubmit={handleSubmit} noValidate>
       <FormArea>
         <Input
           required={true}

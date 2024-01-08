@@ -1,46 +1,42 @@
 import {
   StyledHeaderWrapper,
   ChannelWrapper,
-  AuthUiWrapper,
   LogoWrapper,
   SearchIcon,
   FormContainer,
+  AuthUiWrapper,
 } from './StyledHeader';
 import HeaderProps from './HeaderProps';
 import Text from '../Text';
 import Button from '../Button';
-import Avatar from '../Avatar';
-import Badge from '../Badge';
 import LogoWithFontSize from '../LogoWithFontSize';
-import Notification from '../Notification';
+import NotificationCardBell from '../NotificationCardBell';
 import Input from '../Input';
-import { ChangeEvent, RefObject, useState } from 'react';
+import Avatar from '../Avatar';
+import { ChangeEvent, RefObject, useState, useEffect } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
-import Bell from '@/assets/Bell';
 import Card from '@/components/Card';
 import useClickAway from '@/hooks/useClickAway';
-
-const tempCount = 100000;
+import { useDispatch } from '@/store';
+import { setChannel } from '@/slices/channel';
+import { getNotificationArray } from '@/slices/notification/thunk';
 
 const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
-  const [seen, setSeen] = useState(false);
-  const [toggleNotification, setToggleNotification] = useState(false);
   const [focus, setFocus] = useState(false);
   const [inputValue, setInputValue] = useState('');
-  const count = seen ? 0 : tempCount;
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const token = localStorage.getItem('auth-token');
+
+  const handleClick = (id: string) => () => {
+    dispatch(setChannel(id));
+  };
 
   const handleFocus = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     if (value) return;
     setFocus(!focus);
   };
-
-  const notificationRef = useClickAway((e: MouseEvent | TouchEvent) => {
-    const { tagName } = e.target as HTMLElement;
-    if (tagName === 'path' || tagName === 'svg') return;
-    setToggleNotification(false);
-  });
 
   const inputRef = useClickAway((e: MouseEvent | TouchEvent) => {
     const { tagName } = e.target as HTMLElement;
@@ -53,6 +49,11 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
   const handleLogin = () => {
     navigate('/sign');
   };
+
+  useEffect(() => {
+    if (!token) return;
+    dispatch(getNotificationArray({ token }));
+  }, [dispatch, token]);
 
   return (
     <Card
@@ -91,17 +92,7 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
         </FormContainer>
         {isAuth ? (
           <AuthUiWrapper>
-            {toggleNotification && (
-              <Notification
-                ref={notificationRef as RefObject<HTMLDivElement>}
-              />
-            )}
-            <Badge
-              count={count}
-              onClick={() => setToggleNotification(!toggleNotification)}>
-              <Bell handleSeen={() => setSeen(true)} />
-            </Badge>
-
+            <NotificationCardBell />
             <Avatar size='small' src={userImage} />
           </AuthUiWrapper>
         ) : (
