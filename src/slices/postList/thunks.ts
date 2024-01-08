@@ -49,3 +49,15 @@ const paginationClaculator = (offset?: number, limit?: number) => {
 
   return `?offset=${offset}&limit=${limit}`;
 };
+
+export const getFullPostList = createAsyncThunk(
+  `${name}/getFullPostList`,
+  async () => {
+    const { data } = await axios({
+      url: 'https://kdt.frontend.5th.programmers.co.kr:5003/posts',
+      method: 'get',
+    });
+
+    return data;
+  },
+);

@@ -65,13 +65,10 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
           <LogoWithFontSize fontSize='24px' />
         </LogoWrapper>
         <ChannelWrapper>
-          {channels.map((channel) => (
-            <NavLink
-              key={channel._id}
-              to='home'
-              onClick={handleClick(channel._id)}>
-              <Text key={channel._id} tagType='span' fontType='h4'>
-                {channel.name}
+          {channels.map(({ _id, name }) => (
+            <NavLink key={_id} to={`/home/${_id}`}>
+              <Text key={_id} tagType='span' fontType='h4'>
+                {name}
               </Text>
             </NavLink>
           ))}
