@@ -5,6 +5,7 @@ import { useParams, useNavigate, Outlet } from 'react-router-dom';
 import { useDispatch } from '@/store';
 import { getPostDetail } from '@/slices/postDetail';
 import { getMyInfo } from '@/slices/user';
+import LikeButton from '@/components/LikeButton';
 
 const DetailPage = () => {
   const dispatch = useDispatch();
@@ -24,7 +25,6 @@ const DetailPage = () => {
       dispatch(getMyInfo({ token }));
     }
   }, [navigate, dispatch]);
-
   return (
     <div
       style={{
@@ -35,6 +35,7 @@ const DetailPage = () => {
       }}>
       <PostContent />
       <Outlet />
+      <LikeButton postId={postId} userId={myInfo?._id} />
       <PostComment />
     </div>
   );
