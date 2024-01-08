@@ -1,7 +1,7 @@
 import { getPostListByChannelId, getPostListByUserId } from './thunks';
 import { name } from './constants';
 import { PostList } from './postListType';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, isAnyOf } from '@reduxjs/toolkit';
 
 const initialState: PostList = {
   posts: [],
@@ -13,26 +13,31 @@ export const postSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getPostListByChannelId.pending, (state) => {
-      state.isLoading = true;
-    });
     builder.addCase(getPostListByChannelId.fulfilled, (state, action) => {
       state.posts = action.payload;
-      state.isLoading = false;
-    });
-    builder.addCase(getPostListByChannelId.rejected, (state) => {
-      state.isLoading = false;
-    });
-    builder.addCase(getPostListByUserId.pending, (state) => {
-      state.isLoading = true;
     });
     builder.addCase(getPostListByUserId.fulfilled, (state, action) => {
       state.posts = action.payload;
-      state.isLoading = false;
     });
-    builder.addCase(getPostListByUserId.rejected, (state) => {
-      state.isLoading = false;
-    });
+
+    builder.addMatcher(
+      isAnyOf(getPostListByChannelId.pending, getPostListByUserId.pending),
+      (state) => {
+        state.isLoading = true;
+      },
+    );
+    builder.addMatcher(
+      isAnyOf(
+        getPostListByChannelId.fulfilled,
+        getPostListByUserId.fulfilled,
+        getPostListByChannelId.rejected,
+        getPostListByUserId.rejected,
+      ),
+      (state, action) => {
+        state.posts = action.payload;
+        state.isLoading = false;
+      },
+    );
   },
 });
 
