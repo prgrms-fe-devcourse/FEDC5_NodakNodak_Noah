@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 import { getUser } from '@/slices/user';
@@ -14,11 +14,21 @@ import MailIcon from '@/assets/MailIcon';
 import Text from '@/components/Text';
 
 const Setting = () => {
-  const [profileImage, setProfileImage] = useState('');
+  const currentUser = useSelector(
+    (state: RootState) => state.userInfo.currentUser,
+  );
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
   const { userId } = useParams();
+  const { state } = useLocation();
+
+  const [profileImage, setProfileImage] = useState(state || '');
+  const [isModified, setIsModified] = useState(false);
+  const [updatedData, setUpdatedData] = useState({
+    fullName: currentUser?.fullName || '',
+    username: currentUser?.username || '',
+  });
 
   useEffect(() => {
     if (userId) {
@@ -28,16 +38,6 @@ const Setting = () => {
       navigate(-1);
     }
   }, [dispatch, navigate, userId]);
-
-  const currentUser = useSelector(
-    (state: RootState) => state.userInfo.currentUser,
-  );
-
-  const [updatedData, setUpdatedData] = useState({
-    fullName: currentUser?.fullName || '',
-    username: currentUser?.username || '',
-  });
-  const [isModified, setIsModified] = useState(false);
 
   useEffect(() => {
     if (currentUser) {
@@ -70,13 +70,6 @@ const Setting = () => {
   };
 
   const handleCancel = () => {
-    if (currentUser) {
-      setUpdatedData({
-        fullName: currentUser.fullName,
-        username: currentUser.username,
-      });
-      setIsModified(false);
-    }
     navigate(-1);
   };
 
@@ -86,7 +79,7 @@ const Setting = () => {
   };
 
   if (!currentUser) {
-    return <></>;
+    return <>Loading...</>;
   }
 
   const { fullName, email } = currentUser;
@@ -95,11 +88,15 @@ const Setting = () => {
     <Container>
       <CardWrapper>
         <ButtonWrapper>
+          <Button styleType='danger' isArrow={true} onClick={handleCancel}>
+            취소하기
+          </Button>
           <Button
-            styleType={isModified ? 'primary' : 'ghost'}
+            event={isModified ? 'enabled' : 'disabled'}
+            disabled={!isModified}
             isArrow={true}
             onClick={isModified ? handleUpdate : handleCancel}>
-            {isModified ? '수정하기' : '취소하기'}
+            수정하기
           </Button>
         </ButtonWrapper>
         <ContentContainer>
@@ -108,7 +105,7 @@ const Setting = () => {
             <ImageUploader
               size='wide'
               setImage={setProfileImage}
-              apiParam={'upload-photo'}
+              apiParam={'users/upload-photo'}
             />
             <Button size='wide' styleType='ghost'>
               이미지 삭제
@@ -121,7 +118,7 @@ const Setting = () => {
               width='80%'
               fontType='h1'
               required={true}
-              value={updatedData.fullName}
+              value={updatedData.fullName || ''}
               onChange={(e) => handleInputChange('fullName', e.target.value)}
             />
             <Input
@@ -129,7 +126,7 @@ const Setting = () => {
               placeholder='한줄 소개'
               width='80%'
               fontType='body1'
-              value={updatedData.username}
+              value={updatedData.username || ''}
               onChange={(e) => handleInputChange('username', e.target.value)}
             />
             <TextWrapper>

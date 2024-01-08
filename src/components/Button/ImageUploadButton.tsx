@@ -22,7 +22,7 @@ const ImageUploader = ({
     formData.append('image', e.target.files![0]);
     try {
       const axiosOptions = {
-        url: `https://kdt.frontend.5th.programmers.co.kr:5003/users/${apiParam}`,
+        url: `https://kdt.frontend.5th.programmers.co.kr:5003/${apiParam}`,
         method: 'POST',
         headers: {
           'Content-Type': 'multipart/form-data',
