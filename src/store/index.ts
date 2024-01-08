@@ -5,6 +5,7 @@ import userInfoReducer from '@/slices/user';
 import postDetailReducer from '@/slices/postDetail';
 import postListReducer from '@/slices/postList';
 import userListReducer from '@/slices/userList';
+import notificationReducer from '@/slices/notification';
 import followReducer from '@/slices/follow';
 import searchedDataReducer from '@/slices/searchedData';
 
@@ -15,6 +16,7 @@ const store = configureStore({
     postList: postListReducer,
     userList: userListReducer,
     userInfo: userInfoReducer,
+    notification: notificationReducer,
     follow: followReducer,
     searchedData: searchedDataReducer,
   },

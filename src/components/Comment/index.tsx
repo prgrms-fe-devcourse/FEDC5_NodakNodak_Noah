@@ -1,20 +1,57 @@
 import Avatar from './../Avatar/index';
 import Text from './../Text/index';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import { RootState, useDispatch } from '@/store';
 import { Comment } from '@/pages/DetailPage/PostComment/useSelectedComment';
 import theme from '@/styles/theme';
+import { getPostDetail } from '@/slices/postDetail';
 
 interface CommentItemProps {
   author: string;
   createdAt: string;
   comment: string;
+  authorId: string;
+  commentId: string;
 }
-const CommentItem = ({ author, createdAt, comment }: CommentItemProps) => {
+const CommentItem = ({
+  author,
+  createdAt,
+  comment,
+  authorId,
+  commentId,
+}: CommentItemProps) => {
   const content = { ...JSON.parse(comment) } as Comment;
+  const myInfo = useSelector((state: RootState) => state.userInfo.authUser);
+  const { postId } = useParams();
+  const dispatch = useDispatch();
+  const handleCommentRemove = async () => {
+    const token = localStorage.getItem('auth-token');
+    const isConfirm = window.confirm('댓글을 정말 삭제하시겠습니까?');
+    if (!isConfirm) return;
+    try {
+      await axios({
+        url: 'https://kdt.frontend.5th.programmers.co.kr:5003/comments/delete',
+        method: 'DELETE',
+        data: {
+          id: commentId,
+        },
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      dispatch(getPostDetail({ postId }));
+    } catch (e) {
+      alert(e);
+    }
+  };
 
   return (
     <div
       className='commentItem'
       style={{
+        position: 'relative',
         display: 'flex',
         alignItems: 'center',
         margin: '8px',
@@ -56,6 +93,13 @@ const CommentItem = ({ author, createdAt, comment }: CommentItemProps) => {
         style={{ paddingLeft: '3rem' }}>
         {content.content}
       </Text>
+      {authorId === myInfo?._id ? (
+        <button
+          style={{ position: 'absolute', right: '2px', border: 'none' }}
+          onClick={handleCommentRemove}>
+          삭제
+        </button>
+      ) : null}
     </div>
   );
 };

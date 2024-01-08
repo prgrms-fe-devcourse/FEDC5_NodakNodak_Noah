@@ -7,8 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "vercel": "vercel dev"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
@@ -39,15 +38,8 @@
     "eslint-plugin-unused-imports": "^3.0.0",
     "prettier": "3.1.1",
     "typescript": "^5.2.2",
-    "vercel": "^33.0.1",
     "vite": "^5.0.8",
     "vite-plugin-svgr": "^4.2.0",
     "vite-tsconfig-paths": "^4.2.2"
-  },
-  "overrides": {
-    "@vercel/node": {
-      "ts-node": "10.9.1",
-      "typescript": "5.2.2"
-    }
   }
 }

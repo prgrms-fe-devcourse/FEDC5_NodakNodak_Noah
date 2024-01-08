@@ -1,4 +1,8 @@
-import { getPostListByChannelId, getPostListByUserId } from './thunks';
+import {
+  getPostListByChannelId,
+  getPostListByUserId,
+  getFullPostList,
+} from './thunks';
 import { name } from './constants';
 import { PostList } from './postListType';
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
@@ -19,9 +23,16 @@ export const postSlice = createSlice({
     builder.addCase(getPostListByUserId.fulfilled, (state, action) => {
       state.posts = action.payload;
     });
+    builder.addCase(getFullPostList.fulfilled, (state, action) => {
+      state.posts = action.payload;
+    });
 
     builder.addMatcher(
-      isAnyOf(getPostListByChannelId.pending, getPostListByUserId.pending),
+      isAnyOf(
+        getPostListByChannelId.pending,
+        getPostListByUserId.pending,
+        getFullPostList.pending,
+      ),
       (state) => {
         state.isLoading = true;
       },
@@ -32,9 +43,10 @@ export const postSlice = createSlice({
         getPostListByUserId.fulfilled,
         getPostListByChannelId.rejected,
         getPostListByUserId.rejected,
+        getFullPostList.fulfilled,
+        getFullPostList.rejected,
       ),
-      (state, action) => {
-        state.posts = action.payload;
+      (state) => {
         state.isLoading = false;
       },
     );

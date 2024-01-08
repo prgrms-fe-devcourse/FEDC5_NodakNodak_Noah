@@ -7,6 +7,7 @@ export const AvatarWrapper = styled.div`
   border-radius: 50%;
   background-color: #eee;
   overflow: hidden;
+  cursor: pointer;
   > img {
     transition: opacity 0.2s ease-out;
   }

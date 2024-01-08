@@ -1,4 +1,3 @@
-import DropdownMenu from '../DropdownMenu';
 import VotedBox from '../VoteEditBox';
 import {
   FormContainer,
@@ -16,6 +15,7 @@ import Input from '@/components/Input';
 import { useDispatch } from '@/store';
 import { getPostDetail } from '@/slices/postDetail';
 import { useSelectedPostTitle } from '@/pages/PostEditPage/useSelectedPost';
+import DropdownMenu from '@/components/DropdownMenu';
 
 interface FormType {
   title: string;
@@ -33,7 +33,7 @@ const PostUpdatePage = () => {
 
   useEffect(() => {
     dispatch(getPostDetail({ postId }));
-  }, [dispatch]);
+  }, [dispatch, postId]);
 
   const serverData = useSelectedPostTitle();
 
