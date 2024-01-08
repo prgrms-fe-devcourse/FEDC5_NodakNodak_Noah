@@ -1,6 +1,7 @@
 import { InputWrapper } from '../PostVote/StyledPostVote';
 import theme from '@/styles/theme';
 import Input from '@/components/Input';
+import Text from '@/components/Text';
 
 const BarChart = ({
   voteArray,
@@ -24,24 +25,41 @@ const BarChart = ({
   return (
     <InputWrapper>
       {[...voteCountMap].map(([vote, count], index) => (
-        <Input
-          key={index}
-          value={vote}
-          bordertype='enabled'
-          readOnly={true}
+        <div
           style={{
+            display: 'inline-flex',
+            alignItems: 'center',
             marginBottom: '1.5rem',
-            width: '466px',
-            height: '48px',
             position: 'relative',
-            backgroundImage: `linear-gradient(to right, ${
-              theme.colors.primary[200]
-            } ${(count / voteArray.length) * 100}%, ${
-              theme.colors.primary[100]
-            } 0%)`,
-          }}
-          disabled={true}
-        />
+          }}>
+          <Input
+            key={index}
+            value={vote}
+            bordertype='enabled'
+            readOnly={true}
+            style={{
+              width: '466px',
+              height: '48px',
+              position: 'relative',
+              backgroundImage: `linear-gradient(to right, ${
+                theme.colors.primary[200]
+              } ${
+                votedArray.length ? (count / votedArray.length) * 100 : 0
+              }%, ${theme.colors.primary[100]} 0%)`,
+            }}
+            disabled={true}
+          />
+          <Text
+            tagType='span'
+            fontType='body1'
+            colorNumber='400'
+            colorType='primary'
+            style={{ position: 'absolute', right: '5px', zIndex: '3' }}>
+            {votedArray.length
+              ? (count / (votedArray.length + 3)).toString()
+              : '0'}
+          </Text>
+        </div>
       ))}
     </InputWrapper>
   );

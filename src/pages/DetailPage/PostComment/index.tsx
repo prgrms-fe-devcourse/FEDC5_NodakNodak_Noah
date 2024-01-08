@@ -52,7 +52,6 @@ const PostComment = () => {
           data: {
             comment: JSON.stringify({
               type: 'comment',
-              voteArray: ['한식', '중식', '일식', '양식'],
               content: comment,
             }),
             postId,
