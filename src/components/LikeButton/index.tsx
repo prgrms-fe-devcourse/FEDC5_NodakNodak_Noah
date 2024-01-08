@@ -31,7 +31,7 @@ const LikeButton = ({ postId, userId }: LikeButtonProps) => {
     }
   }, [likesDetail, userId]);
 
-  const sendLikeRequest = async () => {
+  const handleLikeToggle = async () => {
     const likeUrl = isLiked ? 'delete' : 'create';
     setLikeNumber((prevLikeNumber) =>
       isLiked ? prevLikeNumber - 1 : prevLikeNumber + 1,
@@ -48,16 +48,8 @@ const LikeButton = ({ postId, userId }: LikeButtonProps) => {
         },
       });
       setLikeId(response.data._id);
-      return response.data;
-    } catch (e) {
-      alert(e);
-    }
-  };
-
-  const handleLikeToggle = async () => {
-    try {
-      await sendLikeRequest();
       setIsLiked((prevIsLiked) => !prevIsLiked);
+      return response.data;
     } catch (e) {
       alert(e);
     }
