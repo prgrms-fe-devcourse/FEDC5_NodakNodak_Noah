@@ -16,7 +16,6 @@ const LikeButton = ({ postId, userId }: LikeButtonProps) => {
 
   const postDetail = useSelectedPost();
   const likesDetail = postDetail.likes;
-
   useEffect(() => {
     if (likesDetail) {
       const likedByUser = likesDetail.some((like) => {
@@ -39,7 +38,7 @@ const LikeButton = ({ postId, userId }: LikeButtonProps) => {
 
     try {
       const token = localStorage.getItem('auth-token');
-      const response = await axios({
+      const { data } = await axios({
         url: `${BASE_URL}/likes/${likeUrl}`,
         method: isLiked ? 'DELETE' : 'POST',
         data: isLiked ? { id: likeId } : { postId },
@@ -47,9 +46,8 @@ const LikeButton = ({ postId, userId }: LikeButtonProps) => {
           Authorization: `Bearer ${token}`,
         },
       });
-      setLikeId(response.data._id);
+      setLikeId(data._id);
       setIsLiked((prevIsLiked) => !prevIsLiked);
-      return response.data;
     } catch (e) {
       alert(e);
     }
