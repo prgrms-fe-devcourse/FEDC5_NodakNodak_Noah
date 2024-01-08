@@ -30,7 +30,7 @@ const NotFoundWrapper = styled.div`
   justify-content: center;
   align-items: center;
   position: absolute;
-  gap: 2rem;
+  gap: 2vh;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
