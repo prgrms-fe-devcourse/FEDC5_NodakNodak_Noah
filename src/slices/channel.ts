@@ -40,7 +40,6 @@ export const channelSlice = createSlice({
     });
     builder.addCase(getChannel.fulfilled, (state, action) => {
       state.channels = action.payload;
-      state.currentChannel = action.payload[0];
       state.isLoading = false;
     });
     builder.addCase(getChannel.rejected, (state) => {

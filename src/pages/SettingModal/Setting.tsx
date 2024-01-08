@@ -3,13 +3,15 @@ import styled from 'styled-components';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import Avatar from '@/components/Avatar';
-import Button from '@/components/Button';
-import Input from '@/components/Input';
-import Text from '@/components/Text';
 import { getUser } from '@/slices/user';
 import { RootState, useDispatch } from '@/store';
+import theme from '@/styles/theme';
+import Button from '@/components/Button';
+import Avatar from '@/components/Avatar';
 import ImageUploader from '@/components/Button/ImageUploadButton';
+import Input from '@/components/Input';
+import MailIcon from '@/assets/MailIcon';
+import Text from '@/components/Text';
 
 const Setting = () => {
   const [profileImage, setProfileImage] = useState('');
@@ -90,7 +92,7 @@ const Setting = () => {
   const { fullName, email } = currentUser;
 
   return (
-    <IndexContainer>
+    <Container>
       <CardWrapper>
         <ButtonWrapper>
           <Button
@@ -100,8 +102,8 @@ const Setting = () => {
             {isModified ? '수정하기' : '취소하기'}
           </Button>
         </ButtonWrapper>
-        <RowGrid>
-          <ColGrid>
+        <ContentContainer>
+          <AvatarWrapper>
             <Avatar src={profileImage} size='large' alt={fullName} />
             <ImageUploader
               size='wide'
@@ -111,8 +113,8 @@ const Setting = () => {
             <Button size='wide' styleType='ghost'>
               이미지 삭제
             </Button>
-          </ColGrid>
-          <ColGrid>
+          </AvatarWrapper>
+          <InputWrapper>
             <Input
               underline={true}
               placeholder='닉네임'
@@ -130,28 +132,23 @@ const Setting = () => {
               value={updatedData.username}
               onChange={(e) => handleInputChange('username', e.target.value)}
             />
-            <RowGrid>
-              <Text tagType='span' fontType='body1' colorType='black'>
-                💌
-              </Text>
+            <TextWrapper>
+              <MailIcon />
               <Text tagType='span' fontType='body1' colorType='black'>
                 {email}
               </Text>
-            </RowGrid>
-          </ColGrid>
-        </RowGrid>
-        <ButtonWrapper>
-          <Button styleType='danger'>탈퇴하기</Button>
-        </ButtonWrapper>
+            </TextWrapper>
+          </InputWrapper>
+        </ContentContainer>
       </CardWrapper>
-    </IndexContainer>
+    </Container>
   );
 };
 
-const IndexContainer = styled.div`
+const Container = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: ${theme.colors.primary[100]};
 `;
 
 const CardWrapper = styled.div`
@@ -159,27 +156,40 @@ const CardWrapper = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 600px;
-  height: 480px;
-  padding: 30px 40px;
+  width: 80vw;
+  max-width: 600px;
+  padding: 2rem 2rem 4rem 4rem;
   background-color: white;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-`;
-
-const RowGrid = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
-const ColGrid = styled.div`
-  display: flex;
-  flex-direction: column;
+  gap: 2rem;
 `;
 
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
+`;
+
+const ContentContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+`;
+
+const AvatarWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const InputWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+const TextWrapper = styled.div`
+  display: flex;
+  align-items: flex-end;
+  gap: 1rem;
 `;
 
 export default Setting;

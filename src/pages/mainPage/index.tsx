@@ -1,6 +1,6 @@
 import { MainWrapper, PostContentWrapper, MainFlexWrapper } from './StyledMain';
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PostCard from '@/components/PostCard';
 import Pagination from '@/components/Pagination';
@@ -8,12 +8,15 @@ import UserListCard from '@/components/UserListCard';
 import Text from '@/components/Text';
 import Button from '@/components/Button';
 import { RootState, useDispatch } from '@/store';
-import { getPostListByChannelId } from '@/slices/postList/thunks';
+import {
+  getFullPostList,
+  getPostListByChannelId,
+} from '@/slices/postList/thunks';
 import { getUserList } from '@/slices/userList/thunk';
 import { useSelectedPostList } from '@/hooks/useSelectedPostList';
 import {
-  useSelectedChannel,
   useSelectedChannelLoading,
+  useSelectedChannel,
 } from '@/hooks/useSelectedChannel';
 import { useSelectedUserList } from '@/hooks/useSelectedUserList';
 // import useInterval from '@/hooks/useInterval'; // polling 방식 , 너무 많은 요청이 갈까봐 주석처리
@@ -22,17 +25,26 @@ import { usePagination } from '@/hooks/usePagination';
 import { getMyInfo } from '@/slices/user';
 
 import { postListToPostSnippetList } from '@/slices/postList/utils';
+import { setChannel } from '@/slices/channel';
 
 const Main = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
-  const userList = useSelectedUserList();
+  const { channelId } = useParams();
   const channel = useSelectedChannel();
+  const userList = useSelectedUserList();
   const channelLoading = useSelectedChannelLoading();
+  const postList = postListToPostSnippetList(useSelectedPostList());
   const { paginationedPostList, totalPage, currentPage, handlePageChange } =
-    usePagination(postListToPostSnippetList(useSelectedPostList()));
+    usePagination(postList);
   const myInfo = useSelector((state: RootState) => state.userInfo.authUser);
+
+  const getChannelTitle = () => {
+    if (channelLoading) return '로딩중';
+    if (!channelId) return '전체 글';
+    if (!channel) return '채널을 찾을 수 없습니다.';
+    return channel.name;
+  };
 
   const handleWriteClick = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -45,9 +57,13 @@ const Main = () => {
   };
 
   useEffect(() => {
-    if (!channel || !('_id' in channel)) return;
-    dispatch(getPostListByChannelId({ channelId: channel._id }));
-  }, [dispatch, channel]);
+    if (!channelId) {
+      dispatch(getFullPostList());
+      return;
+    }
+    dispatch(getPostListByChannelId({ channelId }));
+    dispatch(setChannel(channelId));
+  }, [dispatch, channelId]);
 
   useEffect(() => {
     dispatch(getUserList());
@@ -70,9 +86,7 @@ const Main = () => {
         <PostContentWrapper>
           <MainFlexWrapper>
             <Text tagType='span' fontType='h2'>
-              {!channelLoading && channel
-                ? `${channel.name} 채널`
-                : 'loading...'}
+              {getChannelTitle()}
             </Text>
             <Button styleType='ghost' size='small' onClick={handleWriteClick}>
               글 쓰기

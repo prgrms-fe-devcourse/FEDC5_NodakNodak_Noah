@@ -28,14 +28,6 @@ const In = ({ isLogin, setIsLogin }: SignProps) => {
         },
       };
       const { data } = await axios(axiosOptions);
-      // const { data } = await axios.post('/api', {
-      //   path: 'login',
-      //   method: 'POST',
-      //   data: {
-      //     email: email,
-      //     password: pw,
-      //   },
-      // });
       localStorage.setItem('auth-token', data.token);
       navigate('/home');
     } catch (e) {

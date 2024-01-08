@@ -3,7 +3,7 @@ import Button from '../Button';
 import Input from '../Input';
 import PasswordInput from '../Input/PasswordInput';
 import { useState } from 'react';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 const Up = ({ isLogin, setIsLogin }: SignProps) => {
   const [email, setEmail] = useState('');
@@ -63,8 +63,10 @@ const Up = ({ isLogin, setIsLogin }: SignProps) => {
       };
       await axios(axiosOptions);
       alert('회원가입 성공');
-    } catch (e) {
-      alert(e);
+    } catch (e: unknown) {
+      if (e instanceof AxiosError) {
+        alert(e?.response?.data);
+      }
     }
   };
 
