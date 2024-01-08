@@ -31,6 +31,7 @@ import {
 import { searchAllData } from '@/slices/searchedData/thunk';
 import { useSelectedSearchedPostData } from '@/hooks/useSelectedSearchedData';
 import { setChannel } from '@/slices/channel';
+import useInterval from '@/hooks/useInterval';
 
 const Main = () => {
   const navigate = useNavigate();
@@ -89,10 +90,9 @@ const Main = () => {
     dispatch(getUserList());
   }, [dispatch]);
 
-  // polling 방식 , 너무 많은 요청이 갈까봐 주석처리
-  // useInterval(() => {
-  //   dispatch(getUserList());
-  // }, 6000);
+  useInterval(() => {
+    dispatch(getUserList());
+  }, 60000);
 
   useEffect(() => {
     const token = localStorage.getItem('auth-token');
