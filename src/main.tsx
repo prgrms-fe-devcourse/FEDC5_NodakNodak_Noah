@@ -19,15 +19,15 @@ import { Provider } from 'react-redux';
 
 const router = createBrowserRouter([
   { path: '/', element: <Index />, errorElement: <NotFound />, index: true },
+  { path: '/user/:userId/setting', element: <Setting /> },
   {
     path: '/',
     element: <App />,
     children: [
       { path: '/update/:channelId/:postId', element: <PostUpdatePage /> },
       { path: '/write', element: <PostCreatePage /> },
-      { path: '/home', element: <Main /> },
+      { path: '/home/:channelId?', element: <Main /> },
       { path: '/user/:userId', element: <UserPage /> },
-      { path: '/user/:userId/setting', element: <Setting /> },
       {
         path: '/detail/:channelId/:postId/',
         element: <DetailPage />,

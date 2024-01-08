@@ -1,37 +1,47 @@
 import {
   StyledHeaderWrapper,
   ChannelWrapper,
-  AuthUiWrapper,
   LogoWrapper,
   SearchIcon,
   FormContainer,
+  AuthUiWrapper,
 } from './StyledHeader';
 import HeaderProps from './HeaderProps';
 import Text from '../Text';
 import Button from '../Button';
-import Avatar from '../Avatar';
-import Badge from '../Badge';
 import LogoWithFontSize from '../LogoWithFontSize';
-import Notification from '../Notification';
 import Input from '../Input';
-import { ChangeEvent, RefObject, useState } from 'react';
+import {
+  DropdownContent,
+  ListItemButton,
+} from '../DropdownMenu/DropdownMenuStyled';
+import Avatar from '../Avatar';
+import NotificationCardBell from '../NotificationCardBell';
+import { ChangeEvent, RefObject, useState, useEffect, FormEvent } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
-import Bell from '@/assets/Bell';
+import axios from 'axios';
 import Card from '@/components/Card';
 import useClickAway from '@/hooks/useClickAway';
 import { useDispatch } from '@/store';
 import { setChannel } from '@/slices/channel';
-
-const tempCount = 100000;
+import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
+import { getNotificationArray } from '@/slices/notification/thunk';
 
 const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
-  const [seen, setSeen] = useState(false);
-  const [toggleNotification, setToggleNotification] = useState(false);
   const [focus, setFocus] = useState(false);
   const [inputValue, setInputValue] = useState('');
-  const count = seen ? 0 : tempCount;
+  const [showMenu, setShowMenu] = useState(false);
+  const myInfo = useSelectedMyInfo();
+  const menu = ['마이페이지', '로그아웃'];
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const token = localStorage.getItem('auth-token');
+
+  const handleSearch = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    navigate(`/home?search=${inputValue}`);
+  };
 
   const handleClick = (id: string) => () => {
     dispatch(setChannel(id));
@@ -43,11 +53,27 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
     setFocus(!focus);
   };
 
-  const notificationRef = useClickAway((e: MouseEvent | TouchEvent) => {
-    const { tagName } = e.target as HTMLElement;
-    if (tagName === 'path' || tagName === 'svg') return;
-    setToggleNotification(false);
-  });
+  const handleAvatarClick = () => {
+    setShowMenu(!showMenu);
+  };
+
+  const handleMenuItemClick = async (item: string) => {
+    if (item === '마이페이지') {
+      navigate(`/user/${myInfo?._id}`);
+    } else {
+      localStorage.removeItem('auth-token');
+      const axiosOptions = {
+        url: `https://kdt.frontend.5th.programmers.co.kr:5003/logout`,
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+      const { data } = await axios(axiosOptions);
+      alert(data);
+      location.reload();
+    }
+  };
 
   const inputRef = useClickAway((e: MouseEvent | TouchEvent) => {
     const { tagName } = e.target as HTMLElement;
@@ -57,9 +83,20 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
     setFocus(!focus);
   });
 
+  const menuRef = useClickAway((e: MouseEvent | TouchEvent) => {
+    const { tagName } = e.target as HTMLElement;
+    if (tagName === 'IMG') return;
+    setShowMenu(false);
+  });
+
   const handleLogin = () => {
     navigate('/sign');
   };
+
+  useEffect(() => {
+    if (!token) return;
+    dispatch(getNotificationArray({ token }));
+  }, [dispatch, token]);
 
   return (
     <Card
@@ -71,18 +108,15 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
           <LogoWithFontSize fontSize='24px' />
         </LogoWrapper>
         <ChannelWrapper>
-          {channels.map((channel) => (
-            <NavLink
-              key={channel._id}
-              to='home'
-              onClick={handleClick(channel._id)}>
-              <Text key={channel._id} tagType='span' fontType='h4'>
-                {channel.name}
+          {channels.map(({ _id, name }) => (
+            <NavLink key={_id} to={`/home/${_id}`} onClick={handleClick(_id)}>
+              <Text key={_id} tagType='span' fontType='h4'>
+                {name}
               </Text>
             </NavLink>
           ))}
         </ChannelWrapper>
-        <FormContainer>
+        <FormContainer onSubmit={handleSearch}>
           <Input
             ref={inputRef as RefObject<HTMLInputElement>}
             height={'32px'}
@@ -101,18 +135,23 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
         </FormContainer>
         {isAuth ? (
           <AuthUiWrapper>
-            {toggleNotification && (
-              <Notification
-                ref={notificationRef as RefObject<HTMLDivElement>}
-              />
-            )}
-            <Badge
-              count={count}
-              onClick={() => setToggleNotification(!toggleNotification)}>
-              <Bell handleSeen={() => setSeen(true)} />
-            </Badge>
+            <NotificationCardBell />
 
-            <Avatar size='small' src={userImage} />
+            <Avatar size='small' src={userImage} onClick={handleAvatarClick} />
+            {showMenu && (
+              <DropdownContent
+                ref={menuRef as RefObject<HTMLUListElement>}
+                style={{ borderRadius: '4px' }}>
+                {menu.map((item) => (
+                  <ListItemButton
+                    type='button'
+                    key={item}
+                    onClick={() => handleMenuItemClick(item)}>
+                    {item}
+                  </ListItemButton>
+                ))}
+              </DropdownContent>
+            )}
           </AuthUiWrapper>
         ) : (
           <Button styleType='primary' size='small' onClick={handleLogin}>

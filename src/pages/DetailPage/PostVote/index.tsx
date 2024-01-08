@@ -17,11 +17,19 @@ import Text from '@/components/Text';
 import ScrollBar from '@/components/ScrollBar';
 import theme from '@/styles/theme';
 import { getPostDetail } from '@/slices/postDetail';
+import { Warning } from '@/components/Sign/SignStyle';
+import {
+  CreateNotificationData,
+  createNotification,
+} from '@/slices/notification/thunk';
+import { Comment } from '@/types/APIResponseTypes';
+import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
 
 const PostVote = () => {
   const postDetailContent = useSelectedPost();
   const postDetailVote = useSelectedVote();
   const myInfo = useSelector((state: RootState) => state.userInfo.authUser);
+  const postDetail = useSelectedPostDetail();
   const { postId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -43,24 +51,35 @@ const PostVote = () => {
 
   const handleVote = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!voteContent || reVote) return;
     const token = localStorage.getItem('auth-token');
+    if (!voteContent || reVote || !token || !postId) return;
+
     try {
-      await axios({
-        url: 'https://kdt.frontend.5th.programmers.co.kr:5003/comments/create',
-        method: 'POST',
-        data: {
-          comment: JSON.stringify({
-            type: 'vote',
-            voteArray: ['한식', '중식', '일식', '양식'],
-            content: voteContent,
-          }),
-          postId,
-        },
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const { _id } = (
+        await axios({
+          url: 'https://kdt.frontend.5th.programmers.co.kr:5003/comments/create',
+          method: 'POST',
+          data: {
+            comment: JSON.stringify({
+              type: 'vote',
+              content: voteContent,
+            }),
+            postId,
+          },
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        })
+      ).data as Comment;
+
+      const notificationData: CreateNotificationData = {
+        notificationType: 'COMMENT',
+        notificationTypeId: _id,
+        postId,
+        userId: postDetail.author._id,
+      };
+
+      dispatch(createNotification({ token, notificationData }));
       dispatch(getPostDetail({ postId }));
       navigate(`./result`);
     } catch (e) {
@@ -122,6 +141,7 @@ const PostVote = () => {
             </Button>
           </ButtonWrapper>
         </form>
+        {reVote ? <Warning>이미 투표하셨습니다.</Warning> : ''}
       </ScrollBar>
     </Card>
   );

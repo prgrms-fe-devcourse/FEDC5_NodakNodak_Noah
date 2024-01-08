@@ -3,4 +3,5 @@ export interface AvatarProps {
   size?: 'mini' | 'small' | 'middle' | 'large';
   alt?: string;
   style?: React.CSSProperties;
+  onClick?: () => void;
 }

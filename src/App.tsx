@@ -1,6 +1,5 @@
 import Footer from './components/Footer';
 import Header from './components/Header';
-import { mockUsers } from './components/UserListCard/mockUsers';
 import { getChannel } from './slices/channel';
 import { useDispatch, RootState } from './store';
 import { Outlet } from 'react-router-dom';
@@ -9,6 +8,7 @@ import { useEffect } from 'react';
 
 const App = () => {
   const channels = useSelector((state: RootState) => state.channel.channels);
+  const myInfo = useSelector((state: RootState) => state.userInfo.authUser);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const App = () => {
       <Header
         channels={channels}
         isAuth={!!localStorage.getItem('auth-token')}
-        userImage={mockUsers[0].image}
+        userImage={myInfo?.image}
       />
       <Outlet />
       <Footer />
