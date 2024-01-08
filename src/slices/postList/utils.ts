@@ -33,7 +33,7 @@ export const searchedPostListToPostSnippetList = (
       avatar: '',
       userId: author,
       _id,
-      image: ' ',
+      image: undefined,
       title: JSON.parse(title).title,
       count: comments.length.toString(),
     };
