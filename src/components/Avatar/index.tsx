@@ -10,7 +10,13 @@ const avatarSizes = {
   large: '224px',
 };
 
-const Avatar = ({ src, size = 'middle', alt, ...props }: AvatarProps) => {
+const Avatar = ({
+  src,
+  size = 'middle',
+  alt,
+  onClick,
+  ...props
+}: AvatarProps) => {
   const [loaded, setLoaded] = useState(false);
   const avatarSize = avatarSizes[size];
 
@@ -21,6 +27,7 @@ const Avatar = ({ src, size = 'middle', alt, ...props }: AvatarProps) => {
   return (
     <>
       <AvatarWrapper
+        onClick={onClick}
         style={{
           width: avatarSize,
           height: avatarSize,
