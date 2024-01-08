@@ -55,9 +55,7 @@ const BarChart = ({
             colorNumber='400'
             colorType='primary'
             style={{ position: 'absolute', right: '5px', zIndex: '3' }}>
-            {votedArray.length
-              ? (count / (votedArray.length + 3)).toString()
-              : '0'}
+            {votedArray.length ? (count / votedArray.length).toString() : '0'}
           </Text>
         </div>
       ))}

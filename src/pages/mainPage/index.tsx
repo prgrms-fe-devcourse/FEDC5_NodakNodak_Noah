@@ -100,6 +100,13 @@ const Main = () => {
     dispatch(getMyInfo({ token }));
   }, [navigate, dispatch]);
 
+  useEffect(() => {
+    if (!channel) {
+      dispatch(setChannel(channelId));
+    }
+  }),
+    [dispatch, channel];
+
   return (
     <>
       <MainWrapper>
