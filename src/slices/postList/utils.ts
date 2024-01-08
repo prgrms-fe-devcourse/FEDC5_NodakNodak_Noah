@@ -23,17 +23,18 @@ export const postListToPostSnippetList = (postList: Post[]): PostSnippet[] =>
     };
   });
 
+// TODO: Refactor this function
 export const searchedPostListToPostSnippetList = (
   postList: SearchedPost[],
 ): PostSnippet[] =>
-  postList.map(({ author, _id, title }) => {
+  postList.map(({ author, _id, title, comments }) => {
     return {
-      fullName: '',
+      fullName: ' ',
       avatar: '',
       userId: author,
       _id,
-      image: '',
+      image: ' ',
       title: JSON.parse(title).title,
-      count: '',
+      count: comments.length.toString(),
     };
   });
