@@ -44,7 +44,6 @@ const PostComment = () => {
       return;
     }
 
-   const token = localStorage.getItem('auth-token');
     try {
       const { _id } = (
         await axios({
