@@ -59,6 +59,7 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
 
   const handleMenuItemClick = async (item: string) => {
     if (item === '마이페이지') {
+      setShowMenu(false);
       navigate(`/user/${myInfo?._id}`);
     } else {
       localStorage.removeItem('auth-token');
