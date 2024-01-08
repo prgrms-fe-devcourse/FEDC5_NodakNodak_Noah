@@ -43,6 +43,8 @@ const PostComment = () => {
       setWarn(true);
       return;
     }
+
+   const token = localStorage.getItem('auth-token');
     try {
       const { _id } = (
         await axios({
@@ -91,8 +93,10 @@ const PostComment = () => {
         {postDetailComment.map((comment) => (
           <CommentItem
             author={comment.author.fullName}
+            authorId={comment.author._id}
             createdAt={comment.createdAt}
             comment={comment.comment}
+            commentId={comment._id}
             key={comment._id}
           />
         ))}

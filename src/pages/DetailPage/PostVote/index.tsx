@@ -17,12 +17,14 @@ import Text from '@/components/Text';
 import ScrollBar from '@/components/ScrollBar';
 import theme from '@/styles/theme';
 import { getPostDetail } from '@/slices/postDetail';
+import { Warning } from '@/components/Sign/SignStyle';
 import {
   CreateNotificationData,
   createNotification,
 } from '@/slices/notification/thunk';
 import { Comment } from '@/types/APIResponseTypes';
 import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
+
 
 const PostVote = () => {
   const postDetailContent = useSelectedPost();
@@ -141,6 +143,7 @@ const PostVote = () => {
             </Button>
           </ButtonWrapper>
         </form>
+        {reVote ? <Warning>이미 투표하셨습니다.</Warning> : ''}
       </ScrollBar>
     </Card>
   );
