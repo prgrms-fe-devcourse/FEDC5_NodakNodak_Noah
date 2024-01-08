@@ -14,7 +14,7 @@ import Badge from '../Badge';
 import LogoWithFontSize from '../LogoWithFontSize';
 import Notification from '../Notification';
 import Input from '../Input';
-import { ChangeEvent, RefObject, useState } from 'react';
+import { ChangeEvent, FormEvent, RefObject, useState } from 'react';
 import { useNavigate, NavLink } from 'react-router-dom';
 import Bell from '@/assets/Bell';
 import Card from '@/components/Card';
@@ -32,6 +32,11 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
   const count = seen ? 0 : tempCount;
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  const handleSearch = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    navigate(`/home?search=${inputValue}`);
+  };
 
   const handleClick = (id: string) => () => {
     dispatch(setChannel(id));
@@ -82,7 +87,7 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
             </NavLink>
           ))}
         </ChannelWrapper>
-        <FormContainer>
+        <FormContainer onSubmit={handleSearch}>
           <Input
             ref={inputRef as RefObject<HTMLInputElement>}
             height={'32px'}
