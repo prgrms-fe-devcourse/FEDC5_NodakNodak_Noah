@@ -1,17 +1,20 @@
 import { useEffect } from 'react';
-import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import Text from '@/components/Text';
-import { RootState, useDispatch } from '@/store';
+import { useDispatch } from '@/store';
 import { getUser } from '@/slices/user';
 import PostCard from '@/components/PostCard';
 import { postListToPostSnippetList } from '@/slices/postList/utils';
 import { useSelectedPostList } from '@/hooks/useSelectedPostList';
 import { getPostListByUserId } from '@/slices/postList/thunks';
+import { useSelectedUser } from '@/hooks/useSelectedUser';
 
 const UserPostList = () => {
   const dispatch = useDispatch();
   const { userId } = useParams();
+  const currentUser = useSelectedUser();
+  const postList = useSelectedPostList();
+
   useEffect(() => {
     if (!userId) return;
     dispatch(getUser({ userId }));
@@ -21,12 +24,6 @@ const UserPostList = () => {
     if (!userId) return;
     dispatch(getPostListByUserId({ userId }));
   }, [dispatch, userId]);
-
-  const currentUser = useSelector(
-    (state: RootState) => state.userInfo.currentUser,
-  );
-
-  const postList = useSelectedPostList();
 
   if (!currentUser) {
     return <></>;
