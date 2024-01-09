@@ -1,3 +1,4 @@
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const StyledHeaderWrapper = styled.nav`
@@ -17,6 +18,11 @@ export const ChannelWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 16px;
+  text-decoration: none;
+`;
+
+export const NavLinkWrapper = styled(NavLink)`
+  text-decoration: none;
 `;
 
 export const FormContainer = styled.form`

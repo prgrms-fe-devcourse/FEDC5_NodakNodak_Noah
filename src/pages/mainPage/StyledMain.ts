@@ -4,7 +4,7 @@ export const MainWrapper = styled.div`
   display: flex;
   justify-content: center;
   gap: 24px;
-
+  min-height: 70vh;
   padding: 96px;
 `;
 

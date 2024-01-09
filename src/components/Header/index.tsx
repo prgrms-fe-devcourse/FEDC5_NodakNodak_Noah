@@ -5,6 +5,7 @@ import {
   SearchIcon,
   FormContainer,
   AuthUiWrapper,
+  NavLinkWrapper,
 } from './StyledHeader';
 import HeaderProps from './HeaderProps';
 import Text from '../Text';
@@ -18,7 +19,7 @@ import {
 import Avatar from '../Avatar';
 import NotificationCardBell from '../NotificationCardBell';
 import { ChangeEvent, RefObject, useState, useEffect, FormEvent } from 'react';
-import { useNavigate, NavLink } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Card from '@/components/Card';
 import useClickAway from '@/hooks/useClickAway';
@@ -110,11 +111,19 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
         </LogoWrapper>
         <ChannelWrapper>
           {channels.map(({ _id, name }) => (
-            <NavLink key={_id} to={`/home/${_id}`} onClick={handleClick(_id)}>
-              <Text key={_id} tagType='span' fontType='h4'>
+            <NavLinkWrapper
+              key={_id}
+              to={`/home/${_id}`}
+              onClick={handleClick(_id)}>
+              <Text
+                key={_id}
+                tagType='span'
+                fontType='h4'
+                colorType='primary'
+                colorNumber='400'>
                 {name}
               </Text>
-            </NavLink>
+            </NavLinkWrapper>
           ))}
         </ChannelWrapper>
         <FormContainer onSubmit={handleSearch}>
