@@ -11,7 +11,6 @@ export const NotificationContainer = styled.nav`
   top: 100%;
   right: 80%;
   z-index: 3;
-  overflow-y: scroll;
 `;
 
 export const NotificationHeader = styled.div`

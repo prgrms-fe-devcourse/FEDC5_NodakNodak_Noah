@@ -6,6 +6,7 @@ import {
 // import useInterval from '@/hooks/useInterval';
 import Button from '../Button';
 import Badge from '../Badge';
+import ScrollBar from '../ScrollBar';
 import { useState, useEffect } from 'react';
 import {
   seeNotifications,
@@ -16,11 +17,11 @@ import useClickAway from '@/hooks/useClickAway';
 import { useSelectedNotifications } from '@/hooks/useSelectedNotifications';
 import Bell from '@/assets/Bell';
 import { useSelectedUserList } from '@/hooks/useSelectedUserList';
-import { Comment, User } from '@/types/APIResponseTypes';
+import { Comment } from '@/types/APIResponseTypes';
 
 interface NotificationData {
   comment: Comment;
-  follow: User;
+  follower: string;
 }
 
 const NotificationCardBell = () => {
@@ -35,21 +36,28 @@ const NotificationCardBell = () => {
     ({ _id, comment, follow, author }) => {
       const notificationData = {
         comment,
-        follow: userList.find((element) => element._id === follow),
+        follower:
+          userList.find((user) => user._id === follow?.follower)?.fullName ||
+          '',
       } as NotificationData;
 
-      // TODO: follow 알림 구현
-      // notificationData.comment 가 없는지 확인 comment 는 객체 즉  빈 객체인지 화ㅏㄱ인
-      if ('comment' in notificationData.comment === false)
-        return { _id, text: '' };
+      if (comment && 'comment' in notificationData.comment) {
+        const isVote =
+          JSON.parse(notificationData.comment.comment).type === 'vote';
+        const text = isVote
+          ? `${author.fullName}님이 투표에 참여했습니다.`
+          : `${author.fullName}님이 댓글을 달았습니다.`;
 
-      const isVote =
-        JSON.parse(notificationData.comment.comment).type === 'vote';
-      const text = isVote
-        ? `${author.fullName}님이 투표에 참여했습니다.`
-        : `${author.fullName}님이 댓글을 달았습니다.`;
+        return { _id, text };
+      } else if (notificationData.follower) {
+        const text = `${notificationData.follower}님이 팔로우했습니다.`;
 
-      return { _id, text };
+        return { _id, text };
+      } else {
+        const text = `좋아요가 눌렸습니다.`;
+
+        return { _id, text };
+      }
     },
   );
 
@@ -82,21 +90,23 @@ const NotificationCardBell = () => {
       <Bell onToggleCard={handleToggleCard} />
       {toggleNotification && (
         <NotificationContainer ref={ref}>
-          <NotificationHeader>
-            알림
-            <Button
-              type='button'
-              size='small'
-              style={{ padding: '8px 4px' }}
-              onClick={handleSeeNotifications}>
-              모두 읽음
-            </Button>
-          </NotificationHeader>
-          <NotificationList>
-            {notificationsArray.map(({ _id, text }) => (
-              <li key={_id}>{text}</li>
-            ))}
-          </NotificationList>
+          <ScrollBar>
+            <NotificationHeader>
+              알림
+              <Button
+                type='button'
+                size='small'
+                style={{ padding: '8px 4px' }}
+                onClick={handleSeeNotifications}>
+                모두 읽음
+              </Button>
+            </NotificationHeader>
+            <NotificationList>
+              {notificationsArray.map(({ _id, text }) => (
+                <li key={_id}>{text}</li>
+              ))}
+            </NotificationList>
+          </ScrollBar>
         </NotificationContainer>
       )}
     </Badge>

@@ -1,4 +1,8 @@
 import { name } from './constants';
+import {
+  CreateNotificationData,
+  createNotification,
+} from '../notification/thunk';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 import { RootState } from '@/store';
@@ -15,7 +19,7 @@ export const follow = createAsyncThunk(
       token: string;
       userId: string;
     },
-    { getState },
+    { getState, dispatch },
   ) => {
     const state = getState() as RootState;
     const myInfo = state.userInfo.authUser;
@@ -31,6 +35,20 @@ export const follow = createAsyncThunk(
         userId,
       },
     });
+
+    const notificationData: CreateNotificationData = {
+      notificationType: 'FOLLOW',
+      notificationTypeId: data._id,
+      userId,
+      postId: null,
+    };
+
+    dispatch(
+      createNotification({
+        token,
+        notificationData,
+      }),
+    );
 
     return data;
   },

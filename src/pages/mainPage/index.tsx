@@ -1,13 +1,12 @@
 import { MainWrapper, PostContentWrapper, MainFlexWrapper } from './StyledMain';
 import React, { useEffect } from 'react';
 import { useNavigate, useSearchParams, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 import PostCard from '@/components/PostCard';
 import Pagination from '@/components/Pagination';
 import UserListCard from '@/components/UserListCard';
 import Text from '@/components/Text';
 import Button from '@/components/Button';
-import { RootState, useDispatch } from '@/store';
+import { useDispatch } from '@/store';
 import {
   getFullPostList,
   getPostListByChannelId,
@@ -15,49 +14,43 @@ import {
 import { getUserList } from '@/slices/userList/thunk';
 import { useSelectedPostList } from '@/hooks/useSelectedPostList';
 import {
-  useSelectedChannelLoading,
+  useSelectedChannelStatus,
   useSelectedChannel,
 } from '@/hooks/useSelectedChannel';
 import { useSelectedUserList } from '@/hooks/useSelectedUserList';
-// import useInterval from '@/hooks/useInterval'; // polling 방식 , 너무 많은 요청이 갈까봐 주석처리
 import { userListToUserSnippetList } from '@/slices/userList/utils';
 import { usePagination } from '@/hooks/usePagination';
 import { getMyInfo } from '@/slices/user';
-
-import {
-  postListToPostSnippetList,
-  searchedPostListToPostSnippetList,
-} from '@/slices/postList/utils';
+import { postListToPostSnippetList } from '@/slices/postList/utils';
 import { searchAllData } from '@/slices/searchedData/thunk';
 import { useSelectedSearchedPostData } from '@/hooks/useSelectedSearchedData';
-import { setChannel } from '@/slices/channel';
 import useInterval from '@/hooks/useInterval';
+import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 
 const Main = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const [searchParams] = useSearchParams();
   const keyword = searchParams.get('search');
-
-  const userList = useSelectedUserList();
   const { channelId } = useParams();
+
+  const myInfo = useSelectedMyInfo();
+  const userList = useSelectedUserList();
   const channel = useSelectedChannel();
-  const channelLoading = useSelectedChannelLoading();
-  const searchedPosts = useSelectedSearchedPostData();
+  const channelStatus = useSelectedChannelStatus();
   const posts = useSelectedPostList();
-  const postSnippetList = keyword
-    ? searchedPostListToPostSnippetList(searchedPosts)
-    : postListToPostSnippetList(posts);
+  const searchedPosts = useSelectedSearchedPostData();
+
+  const postList = keyword ? searchedPosts : posts;
+  const postSnippetList = postListToPostSnippetList(postList);
   const { paginationedPostList, totalPage, currentPage, handlePageChange } =
     usePagination(postSnippetList);
-  const myInfo = useSelector((state: RootState) => state.userInfo.authUser);
-
-  const keywordToPostKeyword = (keyword: string) =>
-    `"title":"[^"]*${keyword}[^"]*"|"content":"[^"]*${keyword}[^"]*"`;
 
   const getChannelTitle = () => {
-    if (channelLoading) return '로딩중';
-    if (!channelId) return '전체 글';
+    if (channelStatus === 'loading') return '로딩중';
+    if (channelStatus === 'failed') return '채널을 찾을 수 없습니다.';
+    if (!channelId && channelStatus === 'idle') return '전체 글';
     if (!channel) return '채널을 찾을 수 없습니다.';
     return channel.name;
   };
@@ -73,8 +66,15 @@ const Main = () => {
   };
 
   useEffect(() => {
+    const token = localStorage.getItem('auth-token');
+    if (!token) return;
+    dispatch(getMyInfo({ token }));
+  }, [dispatch]);
+
+  useEffect(() => {
     if (!keyword) return;
-    dispatch(searchAllData({ keyword: keywordToPostKeyword(keyword) }));
+    const postKeyword = `"title":"[^"]*${keyword}[^"]*"|"content":"[^"]*${keyword}[^"]*"`;
+    dispatch(searchAllData({ keyword: postKeyword }));
   }, [dispatch, keyword]);
 
   useEffect(() => {
@@ -83,7 +83,6 @@ const Main = () => {
       return;
     }
     dispatch(getPostListByChannelId({ channelId }));
-    dispatch(setChannel(channelId));
   }, [dispatch, channelId]);
 
   useEffect(() => {
@@ -93,19 +92,6 @@ const Main = () => {
   useInterval(() => {
     dispatch(getUserList());
   }, 60000);
-
-  useEffect(() => {
-    const token = localStorage.getItem('auth-token');
-    if (!token) return;
-    dispatch(getMyInfo({ token }));
-  }, [navigate, dispatch]);
-
-  useEffect(() => {
-    if (!channel) {
-      dispatch(setChannel(channelId));
-    }
-  }),
-    [dispatch, channel];
 
   return (
     <>
@@ -127,7 +113,7 @@ const Main = () => {
           <Pagination
             page={currentPage}
             totalPage={totalPage}
-            handlePageChange={handlePageChange}
+            onPageChange={handlePageChange}
           />
         </PostContentWrapper>
         <UserListCard users={userListToUserSnippetList(userList, myInfo)} />
