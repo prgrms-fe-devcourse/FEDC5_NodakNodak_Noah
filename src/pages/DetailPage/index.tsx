@@ -1,17 +1,18 @@
-import PostContent from './PostContent';
-import PostComment from './PostComment';
 import { useEffect } from 'react';
 import { useParams, useNavigate, Outlet } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { useDispatch, RootState } from '@/store';
-import { getPostDetail } from '@/slices/postDetail';
+
+import PostComment from '@/pages/DetailPage/PostComment';
+import PostContent from '@/pages/DetailPage/PostContent';
+import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
+import { useDispatch } from '@/store';
 import { getMyInfo } from '@/slices/user';
+import { getPostDetail } from '@/slices/postDetail';
 import LikeButton from '@/components/LikeButton';
 
 const DetailPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const myInfo = useSelector((state: RootState) => state.userInfo.authUser);
+  const myInfo = useSelectedMyInfo();
   const { postId } = useParams();
 
   useEffect(() => {
