@@ -6,10 +6,6 @@ const PasswordInput = ({
   bordertype = 'filled',
   fontType = 'body3',
   underline = false,
-  required = false,
-  disabled = false,
-  readOnly = false,
-  placeholder = '',
   height,
   width,
   wrapperStyle,
@@ -26,10 +22,6 @@ const PasswordInput = ({
         $bordertype={bordertype}
         $fontType={fontType}
         $underline={underline}
-        required={required}
-        disabled={disabled}
-        readOnly={readOnly}
-        placeholder={placeholder}
         style={{ ...props.style, width, height }}
         type={canSee ? 'text' : 'password'}
         {...props}
