@@ -2,14 +2,16 @@ import PostContent from './PostContent';
 import PostComment from './PostComment';
 import { useEffect } from 'react';
 import { useParams, useNavigate, Outlet } from 'react-router-dom';
-import { useDispatch } from '@/store';
+import { useSelector } from 'react-redux';
+import { useDispatch, RootState } from '@/store';
 import { getPostDetail } from '@/slices/postDetail';
 import { getMyInfo } from '@/slices/user';
+import LikeButton from '@/components/LikeButton';
 
 const DetailPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
+  const myInfo = useSelector((state: RootState) => state.userInfo.authUser);
   const { postId } = useParams();
 
   useEffect(() => {
@@ -24,7 +26,6 @@ const DetailPage = () => {
       dispatch(getMyInfo({ token }));
     }
   }, [navigate, dispatch]);
-
   return (
     <div
       style={{
@@ -35,6 +36,7 @@ const DetailPage = () => {
       }}>
       <PostContent />
       <Outlet />
+      <LikeButton postId={postId} userId={myInfo?._id} />
       <PostComment />
     </div>
   );

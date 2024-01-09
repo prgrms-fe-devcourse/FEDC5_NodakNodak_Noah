@@ -52,9 +52,6 @@ const Up = ({ isLogin, setIsLogin }: SignProps) => {
       const axiosOptions = {
         url: `https://kdt.frontend.5th.programmers.co.kr:5003/signup`,
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         data: {
           fullName: `익명#${Math.floor(Math.random() * 100000)}`,
           email,

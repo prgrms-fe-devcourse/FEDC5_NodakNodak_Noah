@@ -21,7 +21,11 @@ const PostSnippet = ({
 
   return (
     <PostSnippetBox>
-      <Image width='280px' height='146px' src={image} />
+      <Image
+        width='280px'
+        height='146px'
+        src={image ? image : '/DefaultImage.jpg'}
+      />
       <div>
         <Text tagType='p' fontType='body2' colorType='black'>
           {title}

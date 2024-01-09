@@ -1,6 +1,6 @@
 import { MainWrapper, PostContentWrapper, MainFlexWrapper } from './StyledMain';
 import React, { useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useSearchParams, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import PostCard from '@/components/PostCard';
 import Pagination from '@/components/Pagination';
@@ -24,20 +24,36 @@ import { userListToUserSnippetList } from '@/slices/userList/utils';
 import { usePagination } from '@/hooks/usePagination';
 import { getMyInfo } from '@/slices/user';
 
-import { postListToPostSnippetList } from '@/slices/postList/utils';
+import {
+  postListToPostSnippetList,
+  searchedPostListToPostSnippetList,
+} from '@/slices/postList/utils';
+import { searchAllData } from '@/slices/searchedData/thunk';
+import { useSelectedSearchedPostData } from '@/hooks/useSelectedSearchedData';
 import { setChannel } from '@/slices/channel';
+import useInterval from '@/hooks/useInterval';
 
 const Main = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [searchParams] = useSearchParams();
+  const keyword = searchParams.get('search');
+
+  const userList = useSelectedUserList();
   const { channelId } = useParams();
   const channel = useSelectedChannel();
-  const userList = useSelectedUserList();
   const channelLoading = useSelectedChannelLoading();
-  const postList = postListToPostSnippetList(useSelectedPostList());
+  const searchedPosts = useSelectedSearchedPostData();
+  const posts = useSelectedPostList();
+  const postSnippetList = keyword
+    ? searchedPostListToPostSnippetList(searchedPosts)
+    : postListToPostSnippetList(posts);
   const { paginationedPostList, totalPage, currentPage, handlePageChange } =
-    usePagination(postList);
+    usePagination(postSnippetList);
   const myInfo = useSelector((state: RootState) => state.userInfo.authUser);
+
+  const keywordToPostKeyword = (keyword: string) =>
+    `"title":"[^"]*${keyword}[^"]*"|"content":"[^"]*${keyword}[^"]*"`;
 
   const getChannelTitle = () => {
     if (channelLoading) return '로딩중';
@@ -57,6 +73,11 @@ const Main = () => {
   };
 
   useEffect(() => {
+    if (!keyword) return;
+    dispatch(searchAllData({ keyword: keywordToPostKeyword(keyword) }));
+  }, [dispatch, keyword]);
+
+  useEffect(() => {
     if (!channelId) {
       dispatch(getFullPostList());
       return;
@@ -69,16 +90,22 @@ const Main = () => {
     dispatch(getUserList());
   }, [dispatch]);
 
-  // polling 방식 , 너무 많은 요청이 갈까봐 주석처리
-  // useInterval(() => {
-  //   dispatch(getUserList());
-  // }, 6000);
+  useInterval(() => {
+    dispatch(getUserList());
+  }, 60000);
 
   useEffect(() => {
     const token = localStorage.getItem('auth-token');
     if (!token) return;
     dispatch(getMyInfo({ token }));
   }, [navigate, dispatch]);
+
+  useEffect(() => {
+    if (!channel) {
+      dispatch(setChannel(channelId));
+    }
+  }),
+    [dispatch, channel];
 
   return (
     <>

@@ -25,8 +25,9 @@ const Button = ({
         $size={size}
         $event={event}
         $isArrow={isArrow}
-        style={{ ...props.style }}
-        $disabled={disabled}>
+        $disabled={disabled}
+        disabled={disabled}
+        style={{ ...props.style }}>
         {children}
         {isArrow && <span>{'>'}</span>}
       </ButtonLayout>

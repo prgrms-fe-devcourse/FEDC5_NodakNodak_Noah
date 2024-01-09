@@ -25,7 +25,6 @@ import {
 import { Comment } from '@/types/APIResponseTypes';
 import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
 
-
 const PostVote = () => {
   const postDetailContent = useSelectedPost();
   const postDetailVote = useSelectedVote();
@@ -63,7 +62,6 @@ const PostVote = () => {
           data: {
             comment: JSON.stringify({
               type: 'vote',
-              voteArray: ['한식', '중식', '일식', '양식'],
               content: voteContent,
             }),
             postId,

@@ -10,6 +10,7 @@ const ImageUploader = ({
   event = 'enabled',
   type,
   isArrow,
+  children,
   setImage,
   apiParam,
 }: ImageUnloadButtonProps) => {
@@ -22,7 +23,7 @@ const ImageUploader = ({
     formData.append('image', e.target.files![0]);
     try {
       const axiosOptions = {
-        url: `https://kdt.frontend.5th.programmers.co.kr:5003/users/${apiParam}`,
+        url: `https://kdt.frontend.5th.programmers.co.kr:5003/${apiParam}`,
         method: 'POST',
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -51,15 +52,13 @@ const ImageUploader = ({
           type={type}
           isArrow={isArrow}
           onClick={() => selectedFile.current?.click()}>
-          이미지 선택
+          {children}
         </Button>
       ) : (
-        'uploading...'
+        'Uploading...'
       )}
       <InvisibleInput
         type='file'
-        name='imageUpload'
-        id='imageUploader'
         accept='image/*'
         ref={selectedFile}
         onChange={onUploadImage}

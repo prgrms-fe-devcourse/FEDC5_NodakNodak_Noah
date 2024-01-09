@@ -18,7 +18,7 @@ import {
 } from '../DropdownMenu/DropdownMenuStyled';
 import Avatar from '../Avatar';
 import NotificationCardBell from '../NotificationCardBell';
-import { ChangeEvent, RefObject, useState, useEffect } from 'react';
+import { ChangeEvent, RefObject, useState, useEffect, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Card from '@/components/Card';
@@ -39,6 +39,11 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
   const dispatch = useDispatch();
   const token = localStorage.getItem('auth-token');
 
+  const handleSearch = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    navigate(`/home?search=${inputValue}`);
+  };
+
   const handleClick = (id: string) => () => {
     dispatch(setChannel(id));
   };
@@ -55,6 +60,7 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
 
   const handleMenuItemClick = async (item: string) => {
     if (item === '마이페이지') {
+      setShowMenu(false);
       navigate(`/user/${myInfo?._id}`);
     } else {
       localStorage.removeItem('auth-token');
@@ -120,7 +126,7 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
             </NavLinkWrapper>
           ))}
         </ChannelWrapper>
-        <FormContainer>
+        <FormContainer onSubmit={handleSearch}>
           <Input
             ref={inputRef as RefObject<HTMLInputElement>}
             height={'32px'}

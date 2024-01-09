@@ -152,7 +152,10 @@ export const ButtonLayout = styled.button<ButtonLayoutProps>`
   font-weight: 400;
   line-height: normal;
   cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
-
+  &:hover {
+    opacity: ${({ $disabled }) => ($disabled ? 1 : 0.8)};
+    transition-duration: 0.5s;
+  }
   ${({ $size }) => $size && ButtonSize[$size]};
   ${({ $styleType, $event }) =>
     $event && $styleType && ButtonTypeEvent[$styleType][$event]};
