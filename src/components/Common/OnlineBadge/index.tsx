@@ -4,7 +4,7 @@ import {
   BadgeContainer,
   Super,
 } from '@/components/Common/OnlineBadge/styledBadge';
-import { OnlineBadgePropsTypes } from '@/components/Common/OnlineBadge/OnlineBadgePropsTypes';
+import { OnlineBadgePropsTypes } from '@/components/Common/OnlineBadge/OnlineBadgeProps';
 
 const OnLineBadge = ({
   children,

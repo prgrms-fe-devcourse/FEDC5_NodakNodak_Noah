@@ -6,7 +6,7 @@ import {
   TextWrapper,
   PageNumberWrapper,
 } from '@/components/Common/Pagination/styledPagination';
-import { PaginationProps } from '@/components/Common/Pagination/PaginationTypes';
+import { PaginationProps } from '@/components/Common/Pagination/PaginationProps';
 
 const Pagination = ({ page, totalPage, onPageChange }: PaginationProps) => {
   const pageArray = Array.from(

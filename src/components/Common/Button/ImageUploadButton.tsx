@@ -3,7 +3,7 @@ import { ChangeEvent, useRef, useState } from 'react';
 
 import Button from '@/components/Common/Button';
 import { InvisibleInput } from '@/components/Common/Button/styledButton';
-import { ImageUnloadButtonProps } from '@/components/Common/Button/ButtonPropsTypes';
+import { ImageUnloadButtonProps } from '@/components/Common/Button/ButtonProps';
 
 const ImageUploader = ({
   styleType = 'primary',

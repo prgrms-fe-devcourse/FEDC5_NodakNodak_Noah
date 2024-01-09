@@ -2,11 +2,7 @@ import { ChangeEvent, RefObject, useState, useEffect, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-import Text from '@/components/Common/Text';
-import Card from '@/components/Common/Card';
-import Input from '@/components/Common/Input';
-import Avatar from '@/components/Common/Avatar';
-import Button from '@/components/Common/Button';
+import { Text, Card, Input, Avatar, Button } from '@/components/Common';
 import HeaderProps from '@/components/Header/HeaderProps';
 import LogoWithFontSize from '@/components/LogoWithFontSize';
 import NotificationCardBell from '@/components/NotificationCardBell';

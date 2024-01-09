@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 
-import { ButtonProps } from '@/components/Common/Button/ButtonPropsTypes';
+import { ButtonProps } from '@/components/Common/Button/ButtonProps';
 import {
   ButtonLayout,
   ButtonWrapper,

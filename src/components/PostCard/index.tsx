@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Button from '@/components/Common/Button';
 import Card from '@/components/Common/Card';
-import { PostCardProps } from '@/components/PostCard/PostCardTypes';
+import { PostCardProps } from '@/components/PostCard/PostCardProps';
 import PostSnippet from '@/components/PostCard/PostSnippet';
 import { FlexWrapper } from '@/components/PostCard/styledPostCard';
 import { RootState } from '@/store';
