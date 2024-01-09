@@ -16,7 +16,8 @@ const UserPage = () => {
 };
 
 const UserInfoWrapper = styled.div`
-  width: 80vw;
+  width: 60vw;
+  max-width: 1440px;
   margin: 3rem auto;
 `;
 const RightButton = styled.div`

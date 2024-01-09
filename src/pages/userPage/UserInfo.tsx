@@ -55,6 +55,7 @@ const UserInfo = () => {
 const UserInfoContainer = styled.div`
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   margin-bottom: 64px;
   gap: 20px;
 `;
