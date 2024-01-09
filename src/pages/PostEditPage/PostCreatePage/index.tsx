@@ -6,6 +6,7 @@ import {
   ButtonWrapper,
 } from '../StyledPostEdit';
 import VotedBox from '../VoteEditBox';
+import { PLACEHOLDER, PROMPT, MESSAGE } from '../constants';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import axios from 'axios';
@@ -37,24 +38,24 @@ const PostCreatePage = () => {
     channelId,
   }: FormType) => {
     const validations = [
-      { value: title, message: '제목을 입력하세요.' },
-      { value: channelId, message: '채널을 선택하세요.' },
-      { value: content, message: '내용을 입력하세요.' },
-      { value: voteTitle, message: '투표 주제를 입력하세요.' },
+      { value: title, prompt: PROMPT.TITLE },
+      { value: channelId, prompt: PROMPT.CHANNEL },
+      { value: content, prompt: PROMPT.CONTENT },
+      { value: voteTitle, prompt: PROMPT.VOTE_SUBJECT },
       {
         value: voteArray.every((candidate) => candidate),
-        message: '투표 후보를 모두 작성하세요.',
+        prompt: PROMPT.CANDIDATES_INPUT,
       },
     ];
     for (const validation of validations) {
       if (!validation.value) {
-        alert(validation.message);
+        alert(validation.prompt);
         return;
       }
     }
 
     if (hasDuplicates(voteArray)) {
-      alert('중복된 후보가 있습니다. 중복을 제거해주세요.');
+      alert(PROMPT.DUPLICATE_CANDIDATES);
       return;
     }
 
@@ -75,9 +76,10 @@ const PostCreatePage = () => {
         },
       });
 
-      alert('게시물이 생성되었습니다.');
+      alert(MESSAGE.CREATE_POST);
       navigate(`/home`);
     } catch (error) {
+      alert(MESSAGE.CREATE_POST_FAIL);
       alert(error);
     }
   };
@@ -100,7 +102,7 @@ const PostCreatePage = () => {
       <FormArea>
         <Input
           required={true}
-          placeholder='제목을 입력하세요'
+          placeholder={PLACEHOLDER.TITLE}
           name='title'
           value={values.title}
           onChange={handleChange}
@@ -115,7 +117,7 @@ const PostCreatePage = () => {
         <TextAreaWrapper>
           <StyledTextArea
             name='content'
-            placeholder='내용을 입력하세요'
+            placeholder={PLACEHOLDER.CONTENT}
             value={values.content}
             onChange={handleChange}
           />
