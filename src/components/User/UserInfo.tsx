@@ -38,7 +38,7 @@ const UserInfo = () => {
             {fullName}
           </Text>
           <Text tagType='span' fontType='body1' colorType='black'>
-            {username === '' ? '한줄 소개가 없습니다' : username}
+            {username || '한줄 소개가 없습니다'}
           </Text>
           <UserButtonContainer>
             <Button size='regular' styleType='ghost'>
