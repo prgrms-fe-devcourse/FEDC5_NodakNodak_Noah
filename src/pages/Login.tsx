@@ -13,6 +13,8 @@ const Container = styled.div`
 `;
 
 const Card = styled.section`
+  display: flex;
+  flex-direction: column;
   background-color: white;
   width: 960px;
   height: 680px;
@@ -26,12 +28,6 @@ const Card = styled.section`
   }
 `;
 
-const Content = styled.div`
-  display: flex;
-  width: 100%;
-
-  flex-direction: column;
-`;
 const SignText = styled.h1`
   display: flex;
   font-size: 48px;
@@ -48,14 +44,12 @@ const Login = () => {
   return (
     <Container>
       <Card>
-        <Content>
-          <SignText>{isLogin ? '로그인' : '회원가입'}</SignText>
-          {isLogin ? (
-            <In isLogin={isLogin} setIsLogin={setIsLogin} />
-          ) : (
-            <Up isLogin={isLogin} setIsLogin={setIsLogin} />
-          )}
-        </Content>
+        <SignText>{isLogin ? '로그인' : '회원가입'}</SignText>
+        {isLogin ? (
+          <In isLogin={isLogin} setIsLogin={setIsLogin} />
+        ) : (
+          <Up isLogin={isLogin} setIsLogin={setIsLogin} />
+        )}
       </Card>
     </Container>
   );
