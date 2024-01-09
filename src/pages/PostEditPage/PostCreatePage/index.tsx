@@ -7,7 +7,7 @@ import {
 } from '../StyledPostEdit';
 import VotedBox from '../VoteEditBox';
 import { isValidatedForm } from '../formValidation';
-import { MESSAGE, PLACEHOLDER } from '../constants';
+import { MESSAGE, PLACEHOLDER, FORM_SIZE } from '../constants';
 import { sendPostRequest } from '../Api';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
@@ -83,7 +83,11 @@ const PostCreatePage = () => {
           onChange={handleChange}
           fontType='h1'
           underline={true}
-          style={{ width: '584px', height: '72px', textAlign: 'center' }}
+          style={{
+            width: FORM_SIZE.WIDTH,
+            height: FORM_SIZE.HEIGHT,
+            textAlign: 'center',
+          }}
         />
         <DropdownMenu
           channelId={values.channelId}

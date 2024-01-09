@@ -7,7 +7,7 @@ import {
   ButtonWrapper,
 } from '../StyledPostEdit';
 import { isValidatedForm } from '../formValidation';
-import { PLACEHOLDER, MESSAGE } from '../constants';
+import { PLACEHOLDER, MESSAGE, FORM_SIZE } from '../constants';
 import { sendPostRequest } from '../Api';
 import { useFormik } from 'formik';
 import { useEffect } from 'react';
@@ -102,7 +102,11 @@ const PostUpdatePage = () => {
           onChange={handleChange}
           fontType='h1'
           underline={true}
-          style={{ width: '584px', height: '72px', textAlign: 'center' }}
+          style={{
+            width: FORM_SIZE.WIDTH,
+            height: FORM_SIZE.HEIGHT,
+            textAlign: 'center',
+          }}
         />
         <DropdownMenu
           channelId={values.channelId}
