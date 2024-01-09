@@ -8,10 +8,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       bordertype = 'filled',
       fontType = 'body3',
       underline = false,
-      required = false,
-      disabled = false,
-      readOnly = false,
-      placeholder = '',
       height,
       width = '400px',
       wrapperStyle,
@@ -25,10 +21,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
           $bordertype={bordertype}
           $fontType={fontType}
           $underline={underline}
-          required={required}
-          disabled={disabled}
-          readOnly={readOnly}
-          placeholder={placeholder}
           style={{ ...props.style, width, height }}
           {...props}
         />
