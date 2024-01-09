@@ -1,34 +1,34 @@
+import { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
+
+import { Comment } from '@/types/APIResponseTypes';
 import {
   VoteTitleWrapper,
   InputWrapper,
   ButtonWrapper,
-} from './StyledPostVote';
-import { useSelectedPost } from '../useSelectedPost';
-import { useSelectedVote } from '../PostComment/useSelectedComment';
-import { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
-import { RootState, useDispatch } from '@/store';
-import Card from '@/components/Card';
-import Input from '@/components/Input';
-import Button from '@/components/Button';
-import Text from '@/components/Text';
-import ScrollBar from '@/components/ScrollBar';
+} from '@/pages/DetailPage/PostVote/StyledPostVote';
 import theme from '@/styles/theme';
+import { useDispatch } from '@/store';
 import { getPostDetail } from '@/slices/postDetail';
-import { Warning } from '@/components/Sign/SignStyle';
 import {
   CreateNotificationData,
   createNotification,
 } from '@/slices/notification/thunk';
-import { Comment } from '@/types/APIResponseTypes';
+import { useSelectedVote } from '@/hooks/useSelectedVote';
+import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
+import Card from '@/components/Card';
+import Text from '@/components/Text';
+import Input from '@/components/Input';
+import Button from '@/components/Button';
+import ScrollBar from '@/components/ScrollBar';
+import { Warning } from '@/components/Sign/SignStyle';
 
 const PostVote = () => {
-  const postDetailContent = useSelectedPost();
+  const postDetailContent = useSelectedPostDetail();
   const postDetailVote = useSelectedVote();
-  const myInfo = useSelector((state: RootState) => state.userInfo.authUser);
+  const myInfo = useSelectedMyInfo();
   const postDetail = useSelectedPostDetail();
   const { postId } = useParams();
   const dispatch = useDispatch();

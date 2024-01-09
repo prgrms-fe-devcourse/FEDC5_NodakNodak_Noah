@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useSelectedPost } from '@/pages/DetailPage/useSelectedPost';
+import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
 import LikeButtonIcon from '@/assets/LikeButtonIcon';
 
 interface LikeButtonProps {
@@ -14,7 +14,7 @@ const LikeButton = ({ postId, userId }: LikeButtonProps) => {
   const [likeNumber, setLikeNumber] = useState(0);
   const BASE_URL = 'https://kdt.frontend.5th.programmers.co.kr:5003';
 
-  const postDetail = useSelectedPost();
+  const postDetail = useSelectedPostDetail();
   const likesDetail = postDetail.likes;
   useEffect(() => {
     if (likesDetail) {

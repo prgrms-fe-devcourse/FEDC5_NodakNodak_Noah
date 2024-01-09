@@ -1,21 +1,22 @@
-import { useSelectedComment } from './useSelectedComment';
 import { FlexColumn } from './StyledPostComment';
 import { useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import CommentItem from '@/components/Comment';
-import theme from '@/styles/theme';
-import Input from '@/components/Input';
-import Button from '@/components/Button';
+
 import { useDispatch } from '@/store';
-import { getPostDetail } from '@/slices/postDetail';
-import { Warning } from '@/components/Sign/SignStyle';
-import useClickAway from '@/hooks/useClickAway';
 import {
   createNotification,
   CreateNotificationData,
 } from '@/slices/notification/thunk';
+import { getPostDetail } from '@/slices/postDetail';
+import CommentItem from '@/components/Comment';
+import Input from '@/components/Input';
+import Button from '@/components/Button';
+import { Warning } from '@/components/Sign/SignStyle';
+import theme from '@/styles/theme';
 import { Comment } from '@/types/APIResponseTypes';
+import useClickAway from '@/hooks/useClickAway';
+import { useSelectedComment } from '@/hooks/useSelectedComment';
 import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
 
 const PostComment = () => {
@@ -88,16 +89,25 @@ const PostComment = () => {
           flexDirection: 'column',
           alignItems: 'center',
         }}>
-        {postDetailComment.map((comment) => (
-          <CommentItem
-            author={comment.author.fullName}
-            authorId={comment.author._id}
-            createdAt={comment.createdAt}
-            comment={comment.comment}
-            commentId={comment._id}
-            key={comment._id}
-          />
-        ))}
+        {postDetailComment.map((comment) => {
+          const {
+            author: { _id: authorId, fullName },
+            _id: commentId,
+            createdAt,
+            comment: commentText,
+          } = comment;
+
+          return (
+            <CommentItem
+              author={fullName}
+              authorId={authorId}
+              createdAt={createdAt}
+              comment={commentText}
+              commentId={commentId}
+              key={commentId}
+            />
+          );
+        })}
         <form
           className='userInput'
           style={{

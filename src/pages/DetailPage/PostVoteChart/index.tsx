@@ -1,15 +1,19 @@
-import BarChart from './BarChart';
-import { useSelectedPost } from '../useSelectedPost';
-import { useSelectedVote } from '../PostComment/useSelectedComment';
-import { VoteTitleWrapper, ButtonWrapper } from '../PostVote/StyledPostVote';
 import { useNavigate } from 'react-router-dom';
+
+import {
+  VoteTitleWrapper,
+  ButtonWrapper,
+} from '@/pages/DetailPage/PostVote/StyledPostVote';
+import BarChart from '@/pages/DetailPage/PostVoteChart/BarChart';
 import Card from '@/components/Card';
-import Button from '@/components/Button';
 import Text from '@/components/Text';
+import Button from '@/components/Button';
 import ScrollBar from '@/components/ScrollBar';
+import { useSelectedVote } from '@/hooks/useSelectedVote';
+import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
 
 const PostVoteChart = () => {
-  const postDetailContent = useSelectedPost();
+  const postDetailContent = useSelectedPostDetail();
   const postDetailVote = useSelectedVote();
   const navigate = useNavigate();
 
