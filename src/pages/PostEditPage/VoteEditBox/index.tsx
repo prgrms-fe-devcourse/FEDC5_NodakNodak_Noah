@@ -4,6 +4,7 @@ import {
   InputContainer,
   DeleteButton,
 } from './VoteEditBoxStyled';
+import { PLACEHOLDER } from '../constants';
 import Input from '@/components/Input';
 import Button from '@/components/Button';
 import Card from '@/components/Card';
@@ -59,7 +60,7 @@ const VotedBox = ({ formData, setFormData }: FormProps) => {
         <ContentWrapper>
           <Content>
             <Input
-              placeholder='투표주제를 입력하세요'
+              placeholder={PLACEHOLDER.VOTE_SUBJECT}
               required={true}
               underline={true}
               fontType='h3'

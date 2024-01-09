@@ -25,7 +25,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: '/update/:channelId/:postId', element: <PostUpdatePage /> },
-      { path: '/write', element: <PostCreatePage /> },
+      { path: '/write/:channelId', element: <PostCreatePage /> },
       { path: '/home/:channelId?', element: <Main /> },
       { path: '/user/:userId', element: <UserPage /> },
       {

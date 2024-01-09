@@ -6,9 +6,11 @@ import {
   ButtonWrapper,
 } from '../StyledPostEdit';
 import VotedBox from '../VoteEditBox';
-import { useNavigate } from 'react-router-dom';
+import { isValidatedForm } from '../formValidation';
+import { MESSAGE, PLACEHOLDER, FORM_SIZE } from '../constants';
+import { sendPostRequest } from '../Api';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
-import axios from 'axios';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 import DropdownMenu from '@/components/DropdownMenu';
@@ -22,63 +24,39 @@ interface FormType {
 }
 
 const PostCreatePage = () => {
-  const BASE_URL = 'https://kdt.frontend.5th.programmers.co.kr:5003';
+  const { channelId } = useParams();
   const navigate = useNavigate();
 
-  const hasDuplicates = (array: string[]) => {
-    return new Set(array).size !== array.length;
-  };
+  const handleFormSubmit = async (forms: FormType) => {
+    const { title, content, voteTitle, voteArray, channelId } = forms;
 
-  const handleFormSubmit = async ({
-    title,
-    content,
-    voteTitle,
-    voteArray,
-    channelId,
-  }: FormType) => {
-    const validations = [
-      { value: title, message: '제목을 입력하세요.' },
-      { value: channelId, message: '채널을 선택하세요.' },
-      { value: content, message: '내용을 입력하세요.' },
-      { value: voteTitle, message: '투표 주제를 입력하세요.' },
-      {
-        value: voteArray.every((candidate) => candidate),
-        message: '투표 후보를 모두 작성하세요.',
-      },
-    ];
-    for (const validation of validations) {
-      if (!validation.value) {
-        alert(validation.message);
-        return;
-      }
-    }
-
-    if (hasDuplicates(voteArray)) {
-      alert('중복된 후보가 있습니다. 중복을 제거해주세요.');
+    if (!isValidatedForm(forms)) {
       return;
     }
 
+    const postData = {
+      title: JSON.stringify({ title, content, voteTitle, voteArray }),
+      channelId,
+      image: '',
+    };
+
     try {
-      const postData = {
-        title: JSON.stringify({ title, content, voteTitle, voteArray }),
-        channelId,
-        image: '',
-      };
-
       const token = localStorage.getItem('auth-token');
-      await axios({
-        url: `${BASE_URL}/posts/create`,
-        method: 'POST',
-        data: postData,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await sendPostRequest(
+        '/posts/create',
+        'POST',
+        postData,
+        token,
+      );
 
-      alert('게시물이 생성되었습니다.');
-      navigate(`/home`);
+      if (response) {
+        alert(MESSAGE.CREATE_POST);
+        navigate(`/home`);
+      } else {
+        alert(MESSAGE.CREATE_POST_FAIL);
+      }
     } catch (error) {
-      alert(error);
+      alert(MESSAGE.CREATE_POST_FAIL);
     }
   };
 
@@ -88,7 +66,7 @@ const PostCreatePage = () => {
       content: '',
       voteTitle: '',
       voteArray: ['', ''],
-      channelId: '',
+      channelId: channelId || '',
     },
     onSubmit: handleFormSubmit,
   });
@@ -100,13 +78,17 @@ const PostCreatePage = () => {
       <FormArea>
         <Input
           required={true}
-          placeholder='제목을 입력하세요'
+          placeholder={PLACEHOLDER.TITLE}
           name='title'
           value={values.title}
           onChange={handleChange}
           fontType='h1'
           underline={true}
-          style={{ width: '584px', height: '72px', textAlign: 'center' }}
+          style={{
+            width: FORM_SIZE.WIDTH,
+            height: FORM_SIZE.HEIGHT,
+            textAlign: 'center',
+          }}
         />
         <DropdownMenu
           channelId={values.channelId}
@@ -115,7 +97,7 @@ const PostCreatePage = () => {
         <TextAreaWrapper>
           <StyledTextArea
             name='content'
-            placeholder='내용을 입력하세요'
+            placeholder={PLACEHOLDER.CONTENT}
             value={values.content}
             onChange={handleChange}
           />
