@@ -1,10 +1,16 @@
-import { Form, Guide, Register, SignProps, Warning } from './SignStyle';
-import Input from '../Input';
-import Button from '../Button';
-import PasswordInput from '../Input/PasswordInput';
 import { FormEvent, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import PasswordInput from '@/components/Common/Input/PasswordInput';
+import Button from '@/components/Common/Button';
+import Input from '@/components/Common/Input';
+import {
+  Form,
+  Guide,
+  Register,
+  SignProps,
+  Warning,
+} from '@/components/Sign/SignStyle';
 
 const In = ({ isLogin, setIsLogin }: SignProps) => {
   const [email, setEmail] = useState('');

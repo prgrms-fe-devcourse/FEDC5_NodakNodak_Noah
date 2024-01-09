@@ -1,11 +1,11 @@
-import { FlexWrapper } from './StyledPostCard';
-import PostSnippet from './PostSnippet';
-import { PostCardProps } from './PostCardTypes';
-import Button from '../Button';
-import Card from '../Card';
 import styled from 'styled-components';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import Button from '@/components/Common/Button';
+import Card from '@/components/Common/Card';
+import { PostCardProps } from '@/components/PostCard/PostCardTypes';
+import PostSnippet from '@/components/PostCard/PostSnippet';
+import { FlexWrapper } from '@/components/PostCard/styledPostCard';
 import { RootState } from '@/store';
 
 import {

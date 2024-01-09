@@ -1,3 +1,25 @@
+import { ChangeEvent, RefObject, useState, useEffect, FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
+import Text from '@/components/Common/Text';
+import Card from '@/components/Common/Card';
+import Input from '@/components/Common/Input';
+import Avatar from '@/components/Common/Avatar';
+import Button from '@/components/Common/Button';
+import HeaderProps from '@/components/Header/HeaderProps';
+import LogoWithFontSize from '@/components/LogoWithFontSize';
+import NotificationCardBell from '@/components/NotificationCardBell';
+import {
+  DropdownContent,
+  ListItemButton,
+} from '@/components/Common/Dropdown/styledDropdown';
+import useClickAway from '@/hooks/useClickAway';
+import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
+
+import { useDispatch } from '@/store';
+import { setChannel } from '@/slices/channel';
+import { getNotificationArray } from '@/slices/notification/thunk';
 import {
   StyledHeaderWrapper,
   ChannelWrapper,
@@ -6,27 +28,7 @@ import {
   FormContainer,
   AuthUiWrapper,
   NavLinkWrapper,
-} from './StyledHeader';
-import HeaderProps from './HeaderProps';
-import Text from '../Text';
-import Button from '../Button';
-import LogoWithFontSize from '../LogoWithFontSize';
-import Input from '../Input';
-import {
-  DropdownContent,
-  ListItemButton,
-} from '../DropdownMenu/DropdownMenuStyled';
-import Avatar from '../Avatar';
-import NotificationCardBell from '../NotificationCardBell';
-import { ChangeEvent, RefObject, useState, useEffect, FormEvent } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import Card from '@/components/Card';
-import useClickAway from '@/hooks/useClickAway';
-import { useDispatch } from '@/store';
-import { setChannel } from '@/slices/channel';
-import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
-import { getNotificationArray } from '@/slices/notification/thunk';
+} from '@/components/Header/styledHeader';
 
 const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
   const [focus, setFocus] = useState(false);

@@ -1,10 +1,10 @@
-import { PostSnippetBox } from './StyledPostCard';
-import { PostSnippetProps } from './PostCardTypes';
-import { UserSnippetBox } from '../UserSnippet/StyledUserSnippet';
-import Avatar from '../Avatar';
-import Image from '../Image';
-import Text from '../Text';
 import { useNavigate } from 'react-router-dom';
+import { PostSnippetProps } from '@/components/PostCard/PostCardTypes';
+import Avatar from '@/components/Common/Avatar';
+import Image from '@/components/Common/Image';
+import Text from '@/components/Common/Text';
+import { PostSnippetBox } from '@/components/PostCard/styledPostCard';
+import { UserSnippetBox } from '@/components/Main/UserSnippet/styledUserSnippet';
 
 const PostSnippet = ({
   avatar,

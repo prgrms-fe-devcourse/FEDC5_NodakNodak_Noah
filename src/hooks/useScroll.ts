@@ -1,5 +1,6 @@
 ﻿import { useEffect, useRef } from 'react';
-import useRafState from './useRafState';
+
+import useRafState from '@/hooks/useRafState';
 
 interface ScrollState {
   x: number;
