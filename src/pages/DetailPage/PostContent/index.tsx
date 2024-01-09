@@ -1,20 +1,21 @@
+import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
+
 import {
   PostContentWrapper,
   PostContentAuthorWrapper,
-} from './PostContentStyled';
-import { useSelectedPost } from '../useSelectedPost';
-import { useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
+} from '@/pages/DetailPage/PostContent/PostContentStyled';
 import Text from '@/components/Text';
+import Button from '@/components/Button';
 import Avatar from '@/components/Avatar';
-import { RootState } from '@/store';
+import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
+import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
 
 const PostContent = () => {
-  const postDetailContent = useSelectedPost();
+  const postDetailContent = useSelectedPostDetail();
   const navigate = useNavigate();
   const { postId, channelId } = useParams();
-  const myInfo = useSelector((state: RootState) => state.userInfo.authUser);
+  const myInfo = useSelectedMyInfo();
   const { author, createdAt } = postDetailContent;
 
   if (!postDetailContent.title) return null;
@@ -51,23 +52,29 @@ const PostContent = () => {
 
   return (
     <PostContentWrapper className='ContentTitle'>
-      <Text colorType='black' tagType='span' fontType='h1'>
-        {title}
-      </Text>
-      {author?._id === myInfo?._id ? (
-        <>
-          <button
-            style={{ marginLeft: '20px', border: 'none', cursor: 'pointer' }}
-            onClick={handlePostEdit}>
-            수정하기
-          </button>
-          <button
-            style={{ marginLeft: '20px', border: 'none', cursor: 'pointer' }}
-            onClick={handlePostDelete}>
-            삭제하기
-          </button>
-        </>
-      ) : null}
+      <div style={{ display: 'inline-flex', marginLeft: '20px' }}>
+        <Text colorType='black' tagType='span' fontType='h1'>
+          {title}
+        </Text>
+        {author?._id === myInfo?._id ? (
+          <>
+            <Button
+              styleType='primary'
+              size='small'
+              style={{ border: 'none', cursor: 'pointer' }}
+              onClick={handlePostEdit}>
+              수정하기
+            </Button>
+            <Button
+              styleType='primary'
+              size='small'
+              style={{ border: 'none', cursor: 'pointer' }}
+              onClick={handlePostDelete}>
+              삭제하기
+            </Button>
+          </>
+        ) : null}
+      </div>
       <PostContentAuthorWrapper className='Author'>
         <Avatar size='middle' alt='유저네임' />
         <Text
