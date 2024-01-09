@@ -8,10 +8,10 @@ import {
 } from '../StyledPostEdit';
 import { isValidatedForm } from '../formValidation';
 import { PLACEHOLDER, MESSAGE } from '../constants';
+import { sendPostRequest } from '../Api';
 import { useFormik } from 'formik';
 import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 import { useDispatch } from '@/store';
@@ -28,7 +28,6 @@ interface FormType {
 }
 
 const PostUpdatePage = () => {
-  const BASE_URL = 'https://kdt.frontend.5th.programmers.co.kr:5003';
   const { channelId, postId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -46,28 +45,30 @@ const PostUpdatePage = () => {
       return;
     }
 
-    try {
-      const postData = {
-        title: JSON.stringify({ title, content, voteTitle, voteArray }),
-        channelId,
-        postId,
-        image: '',
-      };
+    const postData = {
+      title: JSON.stringify({ title, content, voteTitle, voteArray }),
+      channelId,
+      postId,
+      image: '',
+    };
 
+    try {
       const token = localStorage.getItem('auth-token');
-      await axios({
-        url: `${BASE_URL}/posts/update`,
-        method: 'PUT',
-        data: postData,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      alert(MESSAGE.CREATE_POST);
-      navigate(`/detail/${channelId}/${postId}`);
+      const response = await sendPostRequest(
+        '/posts/update',
+        'PUT',
+        postData,
+        token,
+      );
+
+      if (response) {
+        alert(MESSAGE.CREATE_POST);
+        navigate(`/detail/${channelId}/${postId}`);
+      } else {
+        alert(MESSAGE.CREATE_POST_FAIL);
+      }
     } catch (error) {
       alert(MESSAGE.CREATE_POST_FAIL);
-      alert(error);
     }
   };
 

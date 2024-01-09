@@ -8,9 +8,9 @@ import {
 import VotedBox from '../VoteEditBox';
 import { isValidatedForm } from '../formValidation';
 import { MESSAGE, PLACEHOLDER } from '../constants';
+import { sendPostRequest } from '../Api';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
-import axios from 'axios';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
 import DropdownMenu from '@/components/DropdownMenu';
@@ -24,7 +24,6 @@ interface FormType {
 }
 
 const PostCreatePage = () => {
-  const BASE_URL = 'https://kdt.frontend.5th.programmers.co.kr:5003';
   const navigate = useNavigate();
 
   const handleFormSubmit = async (forms: FormType) => {
@@ -34,28 +33,29 @@ const PostCreatePage = () => {
       return;
     }
 
+    const postData = {
+      title: JSON.stringify({ title, content, voteTitle, voteArray }),
+      channelId,
+      image: '',
+    };
+
     try {
-      const postData = {
-        title: JSON.stringify({ title, content, voteTitle, voteArray }),
-        channelId,
-        image: '',
-      };
-
       const token = localStorage.getItem('auth-token');
-      await axios({
-        url: `${BASE_URL}/posts/create`,
-        method: 'POST',
-        data: postData,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await sendPostRequest(
+        '/posts/create',
+        'POST',
+        postData,
+        token,
+      );
 
-      alert(MESSAGE.CREATE_POST);
-      navigate(`/home`);
+      if (response) {
+        alert(MESSAGE.CREATE_POST);
+        navigate(`/home`);
+      } else {
+        alert(MESSAGE.CREATE_POST_FAIL);
+      }
     } catch (error) {
       alert(MESSAGE.CREATE_POST_FAIL);
-      alert(error);
     }
   };
 
