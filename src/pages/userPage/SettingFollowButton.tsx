@@ -19,9 +19,9 @@ const SettingFollowButton = () => {
   const isMyPage = userId === myInfo?._id;
 
   const textMap = {
-    myPage: '사용자 설정',
+    myPage: '프로필 수정',
     follower: '팔로우',
-    following: '팔로우 취소',
+    following: '언팔로우',
     none: '팔로우',
   };
 
