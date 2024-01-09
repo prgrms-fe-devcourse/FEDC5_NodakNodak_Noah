@@ -5,8 +5,8 @@ import PostUpdatePage from './pages/PostEditPage/PostUpdatePage';
 import PostCreatePage from './pages/PostEditPage/PostCreatePage';
 import DetailPage from './pages/DetailPage';
 import Main from './pages/mainPage';
-import UserPage from './pages/userPage/index';
-import Setting from './pages/SettingModal/Setting';
+import UserPage from './pages/userPage';
+import Setting from './pages/SettingPage';
 import App from './App.tsx';
 import store from './store';
 
