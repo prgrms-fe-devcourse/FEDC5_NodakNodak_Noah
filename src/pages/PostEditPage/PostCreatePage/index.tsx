@@ -9,7 +9,7 @@ import VotedBox from '../VoteEditBox';
 import { isValidatedForm } from '../formValidation';
 import { MESSAGE, PLACEHOLDER, FORM_SIZE } from '../constants';
 import { sendPostRequest } from '../Api';
-import { useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import Button from '@/components/Button';
 import Input from '@/components/Input';
@@ -24,6 +24,7 @@ interface FormType {
 }
 
 const PostCreatePage = () => {
+  const { channelId } = useParams();
   const navigate = useNavigate();
 
   const handleFormSubmit = async (forms: FormType) => {
@@ -65,7 +66,7 @@ const PostCreatePage = () => {
       content: '',
       voteTitle: '',
       voteArray: ['', ''],
-      channelId: '',
+      channelId: channelId || '',
     },
     onSubmit: handleFormSubmit,
   });
