@@ -9,14 +9,14 @@ const UserListCard = ({ users }: UserListCardProps) => {
 
   const renderUserSnippets: RenderUserSnippets = (users, title) => (
     <UserSnippet.Group title={title}>
-      {users.map((user) => (
+      {users.map(({ fullName, image, isFollowing, isOnline, _id }) => (
         <UserSnippet
-          fullName={user.fullName}
-          image={user.image}
-          isFollowing={user.isFollowing}
-          isOnline={user.isOnline}
-          userId={user._id}
-          key={user._id}
+          fullName={fullName}
+          image={image}
+          isFollowing={isFollowing}
+          isOnline={isOnline}
+          userId={_id}
+          key={_id}
         />
       ))}
     </UserSnippet.Group>
