@@ -2,7 +2,7 @@ import { Form, Guide, Register, SignProps, Warning } from './SignStyle';
 import Input from '../Input';
 import Button from '../Button';
 import PasswordInput from '../Input/PasswordInput';
-import React, { useState } from 'react';
+import { FormEvent, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -13,29 +13,32 @@ const In = ({ isLogin, setIsLogin }: SignProps) => {
   const [warn, setWarn] = useState(false);
   const navigate = useNavigate();
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    try {
-      const axiosOptions = {
-        url: `https://kdt.frontend.5th.programmers.co.kr:5003/login`,
-        method: 'POST',
-        data: {
-          email,
-          password,
-        },
-      };
-      const { data } = await axios(axiosOptions);
-      localStorage.setItem('auth-token', data.token);
-      navigate('/home');
-    } catch (e) {
-      setWarnText('아이디 또는 비밀번호가 일치하지 않습니다.');
-      setWarn(true);
-      setTimeout(() => {
-        setWarn(false);
-        setWarnText('');
-      }, 3000);
-    }
-  };
+  const handleLogin = useCallback(
+    async (e: FormEvent) => {
+      e.preventDefault();
+      try {
+        const axiosOptions = {
+          url: `https://kdt.frontend.5th.programmers.co.kr:5003/login`,
+          method: 'POST',
+          data: {
+            email,
+            password,
+          },
+        };
+        const { data } = await axios(axiosOptions);
+        localStorage.setItem('auth-token', data.token);
+        navigate('/home');
+      } catch (e) {
+        setWarnText('아이디 또는 비밀번호가 일치하지 않습니다.');
+        setWarn(true);
+        setTimeout(() => {
+          setWarn(false);
+          setWarnText('');
+        }, 3000);
+      }
+    },
+    [email, navigate, password],
+  );
 
   return (
     <Form>

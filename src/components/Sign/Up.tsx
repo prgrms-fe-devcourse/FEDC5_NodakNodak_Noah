@@ -2,7 +2,7 @@ import { Form, Guide, Register, SignProps, Warning } from './SignStyle';
 import Button from '../Button';
 import Input from '../Input';
 import PasswordInput from '../Input/PasswordInput';
-import { useState } from 'react';
+import { FormEvent, useCallback, useState } from 'react';
 import axios, { AxiosError } from 'axios';
 
 const Up = ({ isLogin, setIsLogin }: SignProps) => {
@@ -12,60 +12,77 @@ const Up = ({ isLogin, setIsLogin }: SignProps) => {
   const [warnText, setWarnText] = useState('');
   const [warn, setWarn] = useState([false, false, false]);
 
-  const handleRegister = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const emptyCheck = [false, false, false];
-    let emptyFlag = false;
-    if (email.trim() === '') {
-      emptyCheck[0] = true;
-      emptyFlag = true;
-    }
-    if (password.trim() === '') {
-      emptyCheck[1] = true;
-      emptyFlag = true;
-    }
-    if (confirmPassword.trim() === '') {
-      emptyCheck[2] = true;
-      emptyFlag = true;
-    }
-
-    if (emptyFlag) {
-      setWarnText('항목을 모두 채워주세요.');
-      setWarn(emptyCheck);
-      setTimeout(() => {
-        setWarn([false, false, false]);
-        setWarnText('');
-      }, 3000);
-      return;
-    }
-    if (password !== confirmPassword) {
-      setWarnText('비밀번호가 일치하지 않습니다.');
-      setWarn([false, true, true]);
-      setTimeout(() => {
-        setWarn([false, false, false]);
-        setWarnText('');
-      }, 3000);
-      return;
-    }
-
-    try {
-      const axiosOptions = {
-        url: `https://kdt.frontend.5th.programmers.co.kr:5003/signup`,
-        method: 'POST',
-        data: {
-          fullName: `익명#${Math.floor(Math.random() * 100000)}`,
-          email,
-          password,
-        },
-      };
-      await axios(axiosOptions);
-      alert('회원가입 성공');
-    } catch (e: unknown) {
-      if (e instanceof AxiosError) {
-        alert(e?.response?.data);
+  const handleRegister = useCallback(
+    async (e: FormEvent) => {
+      e.preventDefault();
+      const emptyCheck = [false, false, false];
+      let emptyFlag = false;
+      if (email.trim() === '') {
+        emptyCheck[0] = true;
+        emptyFlag = true;
       }
-    }
-  };
+      if (password.trim() === '') {
+        emptyCheck[1] = true;
+        emptyFlag = true;
+      }
+      if (confirmPassword.trim() === '') {
+        emptyCheck[2] = true;
+        emptyFlag = true;
+      }
+
+      if (emptyFlag) {
+        setWarnText('항목을 모두 채워주세요.');
+        setWarn(emptyCheck);
+        setTimeout(() => {
+          setWarn([false, false, false]);
+          setWarnText('');
+        }, 3000);
+        return;
+      }
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+      if (!emailRegex.test(email)) {
+        setWarnText('올바른 이메일 형식이 아닙니다.');
+        setWarn([true, false, false]);
+        setTimeout(() => {
+          setWarn([false, false, false]);
+          setWarnText('');
+        }, 3000);
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        setWarnText('비밀번호가 일치하지 않습니다.');
+        setWarn([false, true, true]);
+        setTimeout(() => {
+          setWarn([false, false, false]);
+          setWarnText('');
+        }, 3000);
+        return;
+      }
+
+      try {
+        const axiosOptions = {
+          url: `https://kdt.frontend.5th.programmers.co.kr:5003/signup`,
+          method: 'POST',
+          data: {
+            fullName: `익명#${Math.floor(Math.random() * 100000)}`,
+            email,
+            password,
+          },
+        };
+        await axios(axiosOptions);
+        alert('회원가입 성공');
+        location.reload();
+      } catch (e: unknown) {
+        if (e instanceof AxiosError) {
+          alert(e?.response?.data);
+        }
+      }
+    },
+    [confirmPassword, email, password],
+  );
 
   return (
     <Form>
