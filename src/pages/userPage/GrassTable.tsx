@@ -2,12 +2,12 @@ import styled from 'styled-components';
 import theme from '@/styles/theme';
 import { useSelectedUser } from '@/hooks/useSelectedUser';
 
-type LightnesType = 100 | 200 | 300 | 400 | 500;
+type LightnessType = 100 | 200 | 300 | 400 | 500;
 
 const GrassTable = () => {
   const currentUser = useSelectedUser();
 
-  const grass = Array.from({ length: 30 }, (): LightnesType => 100);
+  const grass = Array.from({ length: 30 }, (): LightnessType => 100);
 
   currentUser?.posts.forEach((post) => {
     const date = new Date(post.createdAt);
@@ -48,7 +48,7 @@ const GrassWrapper = styled.div`
   border-radius: 4px;
 `;
 
-const GrassItem = styled.div<{ lightness: LightnesType }>`
+const GrassItem = styled.div<{ lightness: LightnessType }>`
   width: 20px;
   height: 20px;
   background-color: ${({ lightness }) => theme.colors.success[lightness]};
