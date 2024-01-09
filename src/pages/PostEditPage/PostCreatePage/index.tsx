@@ -6,7 +6,8 @@ import {
   ButtonWrapper,
 } from '../StyledPostEdit';
 import VotedBox from '../VoteEditBox';
-import { PLACEHOLDER, PROMPT, MESSAGE } from '../constants';
+import { isValidatedForm } from '../formValidation';
+import { MESSAGE, PLACEHOLDER } from '../constants';
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import axios from 'axios';
@@ -26,36 +27,10 @@ const PostCreatePage = () => {
   const BASE_URL = 'https://kdt.frontend.5th.programmers.co.kr:5003';
   const navigate = useNavigate();
 
-  const hasDuplicates = (array: string[]) => {
-    return new Set(array).size !== array.length;
-  };
+  const handleFormSubmit = async (forms: FormType) => {
+    const { title, content, voteTitle, voteArray, channelId } = forms;
 
-  const handleFormSubmit = async ({
-    title,
-    content,
-    voteTitle,
-    voteArray,
-    channelId,
-  }: FormType) => {
-    const validations = [
-      { value: title, prompt: PROMPT.TITLE },
-      { value: channelId, prompt: PROMPT.CHANNEL },
-      { value: content, prompt: PROMPT.CONTENT },
-      { value: voteTitle, prompt: PROMPT.VOTE_SUBJECT },
-      {
-        value: voteArray.every((candidate) => candidate),
-        prompt: PROMPT.CANDIDATES_INPUT,
-      },
-    ];
-    for (const validation of validations) {
-      if (!validation.value) {
-        alert(validation.prompt);
-        return;
-      }
-    }
-
-    if (hasDuplicates(voteArray)) {
-      alert(PROMPT.DUPLICATE_CANDIDATES);
+    if (!isValidatedForm(forms)) {
       return;
     }
 

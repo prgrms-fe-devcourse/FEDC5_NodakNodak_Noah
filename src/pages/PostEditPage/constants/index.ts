@@ -13,7 +13,6 @@ export const PROMPT = {
 };
 
 export const MESSAGE = {
-  CREATE_POST: '게시물이 생성되었습니다.',
-  UPDATE_POST: '게시물이 수정되었습니다.',
+  CREATE_POST: '게시물이 등록되었습니다.',
   CREATE_POST_FAIL: '게시물 등록에 실패했습니다.',
 };

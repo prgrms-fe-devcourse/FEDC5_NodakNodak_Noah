@@ -6,7 +6,8 @@ import {
   StyledTextArea,
   ButtonWrapper,
 } from '../StyledPostEdit';
-import { PLACEHOLDER, PROMPT, MESSAGE } from '../constants';
+import { isValidatedForm } from '../formValidation';
+import { PLACEHOLDER, MESSAGE } from '../constants';
 import { useFormik } from 'formik';
 import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
@@ -38,36 +39,10 @@ const PostUpdatePage = () => {
 
   const serverData = useSelectedPostTitle();
 
-  const hasDuplicates = (array: string[]) => {
-    return new Set(array).size !== array.length;
-  };
+  const handleFormSubmit = async (forms: FormType) => {
+    const { title, content, voteTitle, voteArray, channelId } = forms;
 
-  const handleFormSubmit = async ({
-    title,
-    content,
-    voteTitle,
-    voteArray,
-    channelId,
-  }: FormType) => {
-    const validations = [
-      { value: title, prompt: PROMPT.TITLE },
-      { value: channelId, prompt: PROMPT.CHANNEL },
-      { value: content, prompt: PROMPT.CONTENT },
-      { value: voteTitle, prompt: PROMPT.VOTE_SUBJECT },
-      {
-        value: voteArray.every((candidate) => candidate),
-        prompt: PROMPT.CANDIDATES_INPUT,
-      },
-    ];
-    for (const validation of validations) {
-      if (!validation.value) {
-        alert(validation.prompt);
-        return;
-      }
-    }
-
-    if (hasDuplicates(voteArray)) {
-      alert(PROMPT.DUPLICATE_CANDIDATES);
+    if (!isValidatedForm(forms)) {
       return;
     }
 
@@ -88,7 +63,7 @@ const PostUpdatePage = () => {
           Authorization: `Bearer ${token}`,
         },
       });
-      alert(MESSAGE.UPDATE_POST);
+      alert(MESSAGE.CREATE_POST);
       navigate(`/detail/${channelId}/${postId}`);
     } catch (error) {
       alert(MESSAGE.CREATE_POST_FAIL);
