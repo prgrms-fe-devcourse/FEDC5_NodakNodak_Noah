@@ -1,9 +1,15 @@
-import { Form, Guide, Register, SignProps, Warning } from './SignStyle';
-import Button from '../Button';
-import Input from '../Input';
-import PasswordInput from '../Input/PasswordInput';
 import { FormEvent, useCallback, useState } from 'react';
 import axios, { AxiosError } from 'axios';
+import PasswordInput from '@/components/Common/Input/PasswordInput';
+import Input from '@/components/Common/Input';
+import Button from '@/components/Common/Button';
+import {
+  Form,
+  Guide,
+  Register,
+  SignProps,
+  Warning,
+} from '@/components/Sign/SignStyle';
 
 const Up = ({ isLogin, setIsLogin }: SignProps) => {
   const [email, setEmail] = useState('');

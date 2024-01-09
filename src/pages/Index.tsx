@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import theme from '@/styles/theme';
-import Button from '@/components/Button';
+
 import Logo from '@/assets/Logo';
+import theme from '@/styles/theme';
+import Button from '@/components/Common/Button';
 
 const Index = () => {
   const navigate = useNavigate();

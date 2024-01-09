@@ -1,21 +1,21 @@
-import Index from './pages/Index.tsx';
-import Login from './pages/Login.tsx';
-import NotFound from './pages/NotFound.tsx';
-import PostUpdatePage from './pages/PostEditPage/PostUpdatePage';
-import PostCreatePage from './pages/PostEditPage/PostCreatePage';
-import DetailPage from './pages/DetailPage';
-import Main from './pages/mainPage';
-import UserPage from './pages/userPage';
-import Setting from './pages/SettingPage';
-import App from './App.tsx';
-import store from './store';
-
-import PostVote from './pages/DetailPage/PostVote/index.tsx';
-import PostVoteChart from './pages/DetailPage/PostVoteChart/index.tsx';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
+
+import App from '@/App';
+import store from '@/store';
+import Main from '@/pages/Main';
+import Login from '@/pages/Login';
+import Index from '@/pages/Index';
+import UserPage from '@/pages/User';
+import Setting from '@/pages/Setting';
+import NotFound from '@/pages/NotFound';
+import DetailPage from '@/pages/PostDetail';
+import PostCreatePage from '@/pages/PostCreate';
+import PostUpdatePage from '@/pages/PostUpdate';
+import PostVoteChart from '@/components/Post/Detail/Result';
+import PostVote from '@/components/Post/Detail/Vote';
 
 const router = createBrowserRouter([
   { path: '/', element: <Index />, errorElement: <NotFound />, index: true },

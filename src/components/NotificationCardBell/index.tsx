@@ -1,22 +1,23 @@
+// import useInterval from '@/hooks/useInterval';
+import { useState, useEffect } from 'react';
+
+import Bell from '@/assets/Bell';
+import Badge from '@/components/Common/Badge';
+import Button from '@/components/Common/Button';
+import ScrollBar from '@/components/Common/ScrollBar';
 import {
   NotificationContainer,
   NotificationHeader,
   NotificationList,
-} from './StyledNotification';
-// import useInterval from '@/hooks/useInterval';
-import Button from '../Button';
-import Badge from '../Badge';
-import ScrollBar from '../ScrollBar';
-import { useState, useEffect } from 'react';
+} from '@/components/NotificationCardBell/styledNotification';
+import { useDispatch } from '@/store';
 import {
   seeNotifications,
   getNotificationArray,
 } from '@/slices/notification/thunk';
-import { useDispatch } from '@/store';
 import useClickAway from '@/hooks/useClickAway';
-import { useSelectedNotifications } from '@/hooks/useSelectedNotifications';
-import Bell from '@/assets/Bell';
 import { useSelectedUserList } from '@/hooks/useSelectedUserList';
+import { useSelectedNotifications } from '@/hooks/useSelectedNotifications';
 import { Comment } from '@/types/APIResponseTypes';
 
 interface NotificationData {

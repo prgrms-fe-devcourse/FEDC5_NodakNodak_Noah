@@ -1,6 +1,6 @@
-import { StyledFooter } from './StyledFooter';
-import LogoWithFontSize from '../LogoWithFontSize';
-import Text from '../Text';
+import Text from '@/components/Common/Text';
+import LogoWithFontSize from '@/components/LogoWithFontSize';
+import { StyledFooter } from '@/components/Footer/styledFooter';
 
 const Footer = () => {
   return (
