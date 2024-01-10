@@ -57,6 +57,7 @@ axiosInstance.interceptors.request.use(
   },
   function (error: AxiosError) {
     store.dispatch(finishLoading());
+    // eslint-disable-next-line no-console
     console.error(`요청 인터셉터 에러: ${error.message}`);
 
     return Promise.reject(error);
@@ -68,15 +69,20 @@ axiosInstance.interceptors.response.use(
     return response;
   },
   (error: AxiosError) => {
+    // eslint-disable-next-line no-console
     console.error(error);
     store.dispatch(finishLoading());
     if (error.response) {
+      // eslint-disable-next-line no-console
       console.error(`응답 에러: ${error.response.status}`);
     } else if (error.request) {
+      // eslint-disable-next-line no-console
       console.error(`응답 없음: ${error}`);
     } else {
+      // eslint-disable-next-line no-console
       console.error(`네트워크 에러 ${error.message}`);
     }
+    // eslint-disable-next-line no-console
     console.error(`에러 메시지: ${error.message}`);
     return Promise.reject(error);
   },
