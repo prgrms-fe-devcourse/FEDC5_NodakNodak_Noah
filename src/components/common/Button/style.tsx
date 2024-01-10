@@ -136,8 +136,8 @@ export const ButtonTypeEvent = {
 
 interface ButtonLayoutProps {
   $size?: 'mini' | 'small' | 'regular' | 'wide';
-  $styleType?: 'primary' | 'ghost' | 'text' | 'danger';
-  $event?: 'enabled' | 'hover' | 'click' | 'focus' | 'disabled';
+  $styleType?: 'primary' | 'ghost' | 'danger';
+  $event?: 'enabled' | 'hover' | 'disabled';
   $isArrow?: boolean;
   $disabled?: boolean;
 }
@@ -195,13 +195,12 @@ const ButtonWrapperBackgroundSize = {
 };
 
 interface ButtonWrapperProps {
-  $isActive: boolean;
   $styleType?: 'primary' | 'ghost' | 'text' | 'danger';
   $size?: 'mini' | 'small' | 'regular' | 'wide';
 }
 
 export const ButtonWrapper = styled.div<ButtonWrapperProps>`
-  visibility: ${({ $isActive }) => ($isActive ? 'visible' : 'hidden')};
+  visibility: hidden;
   padding: 1px;
   flex-direction: column;
   justify-content: center;

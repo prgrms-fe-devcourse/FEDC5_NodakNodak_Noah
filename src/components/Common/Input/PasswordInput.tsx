@@ -9,7 +9,6 @@ const PasswordInput = ({
   underline = false,
   height,
   width,
-  wrapperStyle,
   ...props
 }: InputProps) => {
   const [canSee, setCanSee] = useState(false);
@@ -18,7 +17,7 @@ const PasswordInput = ({
   };
 
   return (
-    <Wrapper style={wrapperStyle}>
+    <Wrapper>
       <StyledInput
         $bordertype={bordertype}
         $fontType={fontType}

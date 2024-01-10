@@ -15,10 +15,7 @@ const Button = ({
   ...props
 }: PropsWithChildren<ButtonProps>) => {
   return (
-    <ButtonWrapper
-      $isActive={event === 'focus'}
-      $styleType={styleType}
-      $size={size}>
+    <ButtonWrapper $styleType={styleType} $size={size}>
       <ButtonLayout
         type={type}
         onClick={onClick}

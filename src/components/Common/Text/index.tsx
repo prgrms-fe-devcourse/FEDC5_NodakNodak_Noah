@@ -15,7 +15,7 @@ const Text = ({
 
   let color = '';
 
-  if (colorType === 'white' || colorType === 'black') {
+  if (colorType === 'black') {
     color = theme.colors[colorType];
   } else {
     colorNumber && (color = theme.colors[colorType][colorNumber]);

@@ -1,7 +1,7 @@
 export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
-  styleType?: 'primary' | 'ghost' | 'text' | 'danger';
+  styleType?: 'primary' | 'ghost' | 'danger';
   size?: 'mini' | 'small' | 'regular' | 'wide';
-  event?: 'enabled' | 'hover' | 'click' | 'focus' | 'disabled';
+  event?: 'enabled' | 'hover' | 'disabled';
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
   isArrow?: boolean;
