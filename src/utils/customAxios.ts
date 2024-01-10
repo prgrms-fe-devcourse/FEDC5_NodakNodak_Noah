@@ -75,9 +75,9 @@ axiosInstance.interceptors.response.use(
     } else if (error.request) {
       console.error(`응답 없음: ${error}`);
     } else {
-      console.error(`Error ${error.message}`);
+      console.error(`네트워크 에러 ${error.message}`);
     }
-    alert(`Error ${error.message}`);
+    console.error(`에러 메시지: ${error.message}`);
     return Promise.reject(error);
   },
 );
