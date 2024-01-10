@@ -61,8 +61,10 @@ const FollowButton = () => {
     dispatch(getMyInfo());
   }, [dispatch, token]);
 
+  const styleType = isFollower || isFollowing ? 'danger' : 'primary';
+
   return (
-    <Button styleType='ghost' onClick={handleSettingOrFollow}>
+    <Button styleType={styleType} onClick={handleSettingOrFollow}>
       {buttonText}
     </Button>
   );
