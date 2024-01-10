@@ -1,11 +1,11 @@
 import { useSelector } from 'react-redux';
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 import { RootState, useDispatch } from '@/store';
 import { getPostDetail } from '@/slices/postDetail';
 import theme from '@/styles/theme';
 import { Text, Avatar } from '@/components/common';
+import axiosInstance from '@/utils/customAxios';
 
 interface CommentItemProps {
   author: string;
@@ -32,20 +32,10 @@ const Item = ({
   const { postId } = useParams();
   const dispatch = useDispatch();
   const handleCommentRemove = async () => {
-    const token = localStorage.getItem('auth-token');
     const isConfirm = window.confirm('댓글을 정말 삭제하시겠습니까?');
     if (!isConfirm) return;
     try {
-      await axios({
-        url: 'https://kdt.frontend.5th.programmers.co.kr:5003/comments/delete',
-        method: 'DELETE',
-        data: {
-          id: commentId,
-        },
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      axiosInstance.delete(`comments/delete`, { data: { id: commentId } });
       dispatch(getPostDetail({ postId }));
     } catch (e) {
       alert(e);

@@ -1,6 +1,6 @@
 import { FormEvent, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+
 import PasswordInput from '@/components/common/Input/PasswordInput';
 import { Button, Input } from '@/components/common';
 import {
@@ -10,6 +10,7 @@ import {
   SignProps,
   Warning,
 } from '@/components/Sign/style';
+import axiosInstance from '@/utils/customAxios';
 
 const In = ({ isLogin, setIsLogin }: SignProps) => {
   const [email, setEmail] = useState('');
@@ -22,15 +23,10 @@ const In = ({ isLogin, setIsLogin }: SignProps) => {
     async (e: FormEvent) => {
       e.preventDefault();
       try {
-        const axiosOptions = {
-          url: `https://kdt.frontend.5th.programmers.co.kr:5003/login`,
-          method: 'POST',
-          data: {
-            email,
-            password,
-          },
-        };
-        const { data } = await axios(axiosOptions);
+        const { data } = await axiosInstance.post('login', {
+          email,
+          password,
+        });
         localStorage.setItem('auth-token', data.token);
         navigate('/home');
       } catch (e) {

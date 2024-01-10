@@ -42,23 +42,23 @@ const FollowButton = () => {
         return;
       }
       if (isFollower) {
-        dispatch(follow({ myId: myInfo._id, token, userId }));
+        dispatch(follow({ myId: myInfo._id, userId }));
       }
       if (isFollowing && followId) {
-        dispatch(unfollow({ myId: myInfo._id, token, followId }));
+        dispatch(unfollow({ myId: myInfo._id, followId }));
       }
     } else {
       if (!myInfo || !token) {
         alert('로그인이 필요합니다.');
         return;
       }
-      dispatch(follow({ myId: myInfo._id, token, userId }));
+      dispatch(follow({ myId: myInfo._id, userId }));
     }
   };
 
   useEffect(() => {
     if (!token) return;
-    dispatch(getMyInfo({ token }));
+    dispatch(getMyInfo());
   }, [dispatch, token]);
 
   return (

@@ -1,12 +1,9 @@
 import { name } from './contants';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import axiosInstance from '@/utils/customAxios';
 
 export const getUserList = createAsyncThunk(`${name}/getUserList`, async () => {
-  const response = await axios({
-    url: 'https://kdt.frontend.5th.programmers.co.kr:5003/users/get-users',
-    method: 'get',
-  });
+  const { data } = await axiosInstance.get('/users/get-users');
 
-  return response.data;
+  return data;
 });

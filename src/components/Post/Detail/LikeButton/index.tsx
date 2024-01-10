@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import axios from 'axios';
 
 import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
 import LikeButtonIcon from '@/assets/LikeButtonIcon';
+import axiosInstance from '@/utils/customAxios';
 
 interface LikeButtonProps {
   postId: string | undefined;
@@ -13,7 +13,6 @@ const LikeButton = ({ postId, userId }: LikeButtonProps) => {
   const [isLiked, setIsLiked] = useState(false);
   const [likeId, setLikeId] = useState('');
   const [likeNumber, setLikeNumber] = useState(0);
-  const BASE_URL = 'https://kdt.frontend.5th.programmers.co.kr:5003';
 
   const postDetail = useSelectedPostDetail();
   const likesDetail = postDetail.likes;
@@ -38,14 +37,10 @@ const LikeButton = ({ postId, userId }: LikeButtonProps) => {
     );
 
     try {
-      const token = localStorage.getItem('auth-token');
-      const { data } = await axios({
-        url: `${BASE_URL}/likes/${likeUrl}`,
+      const { data } = await axiosInstance({
+        url: `likes/${likeUrl}`,
         method: isLiked ? 'DELETE' : 'POST',
         data: isLiked ? { id: likeId } : { postId },
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
       });
       setLikeId(data._id);
       setIsLiked((prevIsLiked) => !prevIsLiked);

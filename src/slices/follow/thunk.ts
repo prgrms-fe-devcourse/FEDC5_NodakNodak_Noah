@@ -4,19 +4,18 @@ import {
   createNotification,
 } from '../notification/thunk';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+
 import { RootState } from '@/store';
+import axiosInstance from '@/utils/customAxios';
 
 export const follow = createAsyncThunk(
   `${name}/follow`,
   async (
     {
       myId,
-      token,
       userId,
     }: {
       myId: string;
-      token: string;
       userId: string;
     },
     { getState, dispatch },
@@ -25,16 +24,7 @@ export const follow = createAsyncThunk(
     const myInfo = state.userInfo.authUser;
 
     if (!myInfo || myInfo._id !== myId) return;
-    const { data } = await axios({
-      url: `https://kdt.frontend.5th.programmers.co.kr:5003/follow/create`,
-      method: 'post',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      data: {
-        userId,
-      },
-    });
+    const { data } = await axiosInstance.post('/follow/create', { userId });
 
     const notificationData: CreateNotificationData = {
       notificationType: 'FOLLOW',
@@ -45,7 +35,6 @@ export const follow = createAsyncThunk(
 
     dispatch(
       createNotification({
-        token,
         notificationData,
       }),
     );
@@ -59,11 +48,9 @@ export const unfollow = createAsyncThunk(
   async (
     {
       myId,
-      token,
       followId,
     }: {
       myId: string;
-      token: string;
       followId: string;
     },
     { getState },
@@ -73,12 +60,7 @@ export const unfollow = createAsyncThunk(
 
     if (!myInfo || myInfo._id !== myId) return;
 
-    const { data } = await axios({
-      url: `https://kdt.frontend.5th.programmers.co.kr:5003/follow/delete`,
-      method: 'delete',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+    const { data } = await axiosInstance.delete(`/follow/delete`, {
       data: {
         id: followId,
       },

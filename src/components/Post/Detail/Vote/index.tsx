@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
 
 import { Comment } from '@/types/APIResponseTypes';
 import {
@@ -20,6 +19,7 @@ import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
 import { Input, Button, Card, ScrollBar, Text } from '@/components/common';
 import { Warning } from '@/components/Sign/style';
+import axiosInstance from '@/utils/customAxios';
 
 const PostVote = () => {
   const postDetailContent = useSelectedPostDetail();
@@ -51,22 +51,15 @@ const PostVote = () => {
     if (!voteContent || reVote || !token || !postId) return;
 
     try {
-      const { _id } = (
-        await axios({
-          url: 'https://kdt.frontend.5th.programmers.co.kr:5003/comments/create',
-          method: 'POST',
-          data: {
-            comment: JSON.stringify({
-              type: 'vote',
-              content: voteContent,
-            }),
-            postId,
-          },
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-      ).data as Comment;
+      const {
+        data: { _id },
+      } = await axiosInstance.post<Comment>('comments/create', {
+        comment: JSON.stringify({
+          type: 'vote',
+          content: voteContent,
+        }),
+        postId,
+      });
 
       const notificationData: CreateNotificationData = {
         notificationType: 'COMMENT',
@@ -75,7 +68,7 @@ const PostVote = () => {
         userId: postDetail.author._id,
       };
 
-      dispatch(createNotification({ token, notificationData }));
+      dispatch(createNotification({ notificationData }));
       dispatch(getPostDetail({ postId }));
       navigate(`./result`);
     } catch (e) {

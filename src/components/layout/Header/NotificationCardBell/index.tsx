@@ -68,20 +68,20 @@ const NotificationCardBell = () => {
 
   const handleSeeNotifications = () => {
     if (!token) return;
-    dispatch(seeNotifications({ token }));
+    dispatch(seeNotifications());
   };
 
   const handleToggleCard = () => setToggleNotification(true);
 
   useEffect(() => {
     if (!token) return;
-    dispatch(getNotificationArray({ token }));
+    dispatch(getNotificationArray());
   }, [dispatch, token]);
 
   // polling 방식 , 너무 많은 요청이 갈까봐 주석처리
   // useInterval(() => {
   //   if (!token) return;
-  //   dispatch(getNotificationArray({ token }));
+  //   dispatch(getNotificationArray());
   // }, 10000);
 
   return (
