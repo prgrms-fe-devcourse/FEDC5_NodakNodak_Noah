@@ -20,11 +20,4 @@ export const Super = styled.sup`
   color: white;
   border-radius: 20px;
   transform: translate(50%, -50%);
-
-  &.dot {
-    padding: 0;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-  }
 `;
