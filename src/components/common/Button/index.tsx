@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 
-import { ButtonProps } from '@/components/_common/Button/ButtonProps';
-import { ButtonLayout, ButtonWrapper } from '@/components/_common/Button/style';
+import { ButtonProps } from '@/components/common/Button/ButtonProps';
+import { ButtonLayout, ButtonWrapper } from '@/components/common/Button/style';
 
 const Button = ({
   children,

@@ -7,7 +7,7 @@ import {
   UserInfoContainer,
 } from '@/components/User/UserInfo/style';
 import GrassTable from '@/components/User/GrassTable';
-import { Avatar, Button, Text } from '@/components/_common';
+import { Avatar, Button, Text } from '@/components/common';
 import { RootState, useDispatch } from '@/store';
 import { getUser } from '@/slices/user';
 import { useSelectedFollowData } from '@/hooks/useSelectedFollowData';

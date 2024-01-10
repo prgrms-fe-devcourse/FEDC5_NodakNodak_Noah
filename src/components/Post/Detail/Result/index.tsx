@@ -5,7 +5,7 @@ import {
   ButtonWrapper,
 } from '@/components/Post/Detail/Vote/style';
 import BarChart from '@/components/Post/Detail/Result/BarChart';
-import { Card, ScrollBar, Text, Button } from '@/components/_common';
+import { Card, ScrollBar, Text, Button } from '@/components/common';
 import { useSelectedVote } from '@/hooks/useSelectedVote';
 import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
 

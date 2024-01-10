@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
 import Logo from '@/assets/Logo';
-import Button from '@/components/_common/Button';
+import Button from '@/components/common/Button';
 import { IndexContainer, IndexWrapper } from '@/pages/IndexPage/style';
 
 const Index = () => {

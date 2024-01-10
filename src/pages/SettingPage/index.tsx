@@ -13,9 +13,9 @@ import {
 } from '@/pages/SettingPage/style';
 import { getUser } from '@/slices/user';
 import { RootState, useDispatch } from '@/store';
-import { Avatar, Input, Text, Button } from '@/components/_common';
+import { Avatar, Input, Text, Button } from '@/components/common';
 
-import ImageUploader from '@/components/_common/Button/ImageUploadButton';
+import ImageUploader from '@/components/common/Button/ImageUploadButton';
 import MailIcon from '@/assets/MailIcon';
 import axiosInstance from '@/utils/customAxios';
 

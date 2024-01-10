@@ -1,8 +1,8 @@
 import { FormEvent, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import PasswordInput from '@/components/_common/Input/PasswordInput';
-import { Button, Input } from '@/components/_common';
+import PasswordInput from '@/components/common/Input/PasswordInput';
+import { Button, Input } from '@/components/common';
 import {
   Form,
   Guide,

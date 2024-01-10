@@ -1,4 +1,4 @@
-import { Card, ScrollBar } from '@/components/_common';
+import { Card, ScrollBar } from '@/components/common';
 import UserSnippet from '@/components/Main/UserListCard/UserSnippet';
 import {
   UserListCardProps,

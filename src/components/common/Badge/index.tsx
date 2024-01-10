@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 
-import { BadgeProps } from '@/components/_common/Badge/BadgeProps';
-import { BadgeContainer, Super } from '@/components/_common/Badge/style';
+import { BadgeProps } from '@/components/common/Badge/BadgeProps';
+import { BadgeContainer, Super } from '@/components/common/Badge/style';
 
 const Badge = ({
   children,

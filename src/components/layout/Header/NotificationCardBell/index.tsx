@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 
 import Bell from '@/assets/Bell';
-import { Badge, Button, ScrollBar } from '@/components/_common';
+import { Badge, Button, ScrollBar } from '@/components/common';
 import {
   NotificationContainer,
   NotificationHeader,

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import Button from '@/components/_common/Button';
+import Button from '@/components/common/Button';
 import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 import { useSelectedFollowData } from '@/hooks/useSelectedFollowData';
 import { unfollow, follow } from '@/slices/follow/thunk';

@@ -1,8 +1,8 @@
 import { ChangeEvent, useRef, useState } from 'react';
 
-import Button from '@/components/_common/Button';
-import { InvisibleInput } from '@/components/_common/Button/style';
-import { ImageUnloadButtonProps } from '@/components/_common/Button/ButtonProps';
+import Button from '@/components/common/Button';
+import { InvisibleInput } from '@/components/common/Button/style';
+import { ImageUnloadButtonProps } from '@/components/common/Button/ButtonProps';
 import axiosInstance from '@/utils/customAxios';
 
 const ImageUploader = ({

@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { RootState, useDispatch } from '@/store';
 import { getPostDetail } from '@/slices/postDetail';
 import theme from '@/styles/theme';
-import { Text, Avatar } from '@/components/_common';
+import { Text, Avatar } from '@/components/common';
 import axiosInstance from '@/utils/customAxios';
 
 interface CommentItemProps {

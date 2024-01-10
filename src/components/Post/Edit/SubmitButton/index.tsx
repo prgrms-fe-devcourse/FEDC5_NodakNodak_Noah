@@ -1,4 +1,4 @@
-import { Button } from '@/components/_common';
+import { Button } from '@/components/common';
 import { ButtonWrapper } from '@/pages/PostPage/style';
 
 interface SubmitButtonProps {

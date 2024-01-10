@@ -1,14 +1,14 @@
 import { ChangeEvent, RefObject, useState, useEffect, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Text, Card, Input, Avatar, Button } from '@/components/_common';
+import { Text, Card, Input, Avatar, Button } from '@/components/common';
 import HeaderProps from '@/components/layout/Header/HeaderProps';
 import LogoWithFontSize from '@/components/layout/LogoWithFontSize';
 import NotificationCardBell from '@/components/layout/Header/NotificationCardBell';
 import {
   DropdownContent,
   ListItemButton,
-} from '@/components/_common/Dropdown/style';
+} from '@/components/common/Dropdown/style';
 import useClickAway from '@/hooks/useClickAway';
 import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 
