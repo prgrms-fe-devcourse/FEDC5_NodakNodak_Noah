@@ -27,7 +27,7 @@ export const isValidatedForm = (forms: FormType) => {
   ];
 
   for (const validation of validations) {
-    if (!validation.value) {
+    if (!validation.value || validation.value == 'undefined') {
       alert(validation.prompt);
       return false;
     }

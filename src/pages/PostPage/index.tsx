@@ -1,18 +1,13 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 
-import {
-  FormContainer,
-  FormArea,
-  TextAreaWrapper,
-  StyledTextArea,
-  ButtonWrapper,
-} from '@/pages/PostPage/style';
-import VotedBox from '@/components/Post/Edit/VoteEditBox';
-import { isValidatedForm } from '@/components/Post/Edit/formValidation';
-import { MESSAGE, PLACEHOLDER, FORM_SIZE } from '@/utils/constants';
+import VoteBox from '@/components/Post/Edit/VoteBox';
+import { isValidatedForm } from '@/utils/Validations/formValidation';
+import { MESSAGE } from '@/utils/constants';
 import { sendPostRequest } from '@/components/Post/Edit/api';
-import { Input, Button, Dropdown } from '@/components/common';
+import { FormContainer } from '@/pages/PostPage/style';
+import SubmitButton from '@/components/Post/Edit/SubmitButton';
+import FormContent from '@/components/Post/Edit/FormContent';
 
 interface FormType {
   title: string;
@@ -74,49 +69,19 @@ const PostCreatePage = () => {
 
   return (
     <FormContainer onSubmit={handleSubmit} noValidate>
-      <FormArea>
-        <Input
-          required={true}
-          placeholder={PLACEHOLDER.TITLE}
-          name='title'
-          value={values.title}
-          onChange={handleChange}
-          fontType='h1'
-          underline={true}
-          style={{
-            width: FORM_SIZE.WIDTH,
-            height: FORM_SIZE.HEIGHT,
-            textAlign: 'center',
-          }}
-        />
-        <Dropdown
-          channelId={values.channelId}
-          setChannelId={(value) => setFieldValue('channelId', value)}
-        />
-        <TextAreaWrapper>
-          <StyledTextArea
-            name='content'
-            placeholder={PLACEHOLDER.CONTENT}
-            value={values.content}
-            onChange={handleChange}
-          />
-        </TextAreaWrapper>
-      </FormArea>
-      <VotedBox
-        formData={{
+      <FormContent
+        values={values}
+        handleChange={handleChange}
+        setFieldValue={setFieldValue}
+      />
+      <VoteBox
+        values={{
           voteTitle: values.voteTitle,
           voteArray: values.voteArray,
         }}
-        setFormData={(values) => {
-          setFieldValue('voteTitle', values.voteTitle);
-          setFieldValue('voteArray', values.voteArray);
-        }}
+        setFieldValue={setFieldValue}
       />
-      <ButtonWrapper>
-        <Button styleType='primary' size='small' type='submit' event='enabled'>
-          등록하기
-        </Button>
-      </ButtonWrapper>
+      <SubmitButton onSubmit={handleSubmit} message='등록하기' />
     </FormContainer>
   );
 };
