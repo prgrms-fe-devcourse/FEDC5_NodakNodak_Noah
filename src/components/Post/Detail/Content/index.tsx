@@ -19,7 +19,12 @@ const PostContent = () => {
   if (!postDetailContent.title) return null;
 
   const { content, title } = JSON.parse(postDetailContent.title);
-  const { fullName } = author;
+  const { fullName, image } = author;
+
+  const dataObject = new Date(createdAt);
+  const year = dataObject.getFullYear();
+  const month = dataObject.getMonth() + 1;
+  const date = dataObject.getDate();
 
   const handlePostEdit = () => {
     const isConfirm = window.confirm('수정하시겠습니까?');
@@ -64,7 +69,7 @@ const PostContent = () => {
         ) : null}
       </div>
       <PostContentAuthorWrapper className='Author'>
-        <Avatar size='middle' alt='유저네임' />
+        <Avatar size='middle' alt='유저네임' src={image} />
         <Text
           colorType='grayscale'
           colorNumber='500'
@@ -78,7 +83,7 @@ const PostContent = () => {
           fontType='caption'
           colorType='grayscale'
           colorNumber='300'>
-          {createdAt}
+          {`${year}년 ${month}월 ${date}일`}
         </Text>
       </PostContentAuthorWrapper>
       <Text

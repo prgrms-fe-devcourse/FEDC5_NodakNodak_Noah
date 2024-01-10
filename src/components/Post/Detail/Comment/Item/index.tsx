@@ -23,6 +23,11 @@ const Item = ({
   const { postId } = useParams();
   const dispatch = useDispatch();
 
+  const dateObject = new Date(createdAt);
+  const year = dateObject.getFullYear();
+  const month = dateObject.getMonth() + 1;
+  const date = dateObject.getDate();
+
   const { content } = { ...JSON.parse(comment) } as CommentContent;
   const handleCommentRemove = async () => {
     const isConfirm = window.confirm('댓글을 정말 삭제하시겠습니까?');
@@ -68,8 +73,9 @@ const Item = ({
             tagType='span'
             fontType='caption'
             colorType='grayscale'
-            colorNumber='300'>
-            {createdAt}
+            colorNumber='300'
+            style={{ marginTop: '10px' }}>
+            {`${year}년 ${month}월 ${date}일`}
           </Text>
           <hr />
         </div>
