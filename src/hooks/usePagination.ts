@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { PostSnippet } from '@/components/Main/PostCard/PostCardProps';
+import { PostSnippet } from '@/components/Main/PostCard/type';
 
 export const usePagination = (postList: PostSnippet[], limit: number = 12) => {
   const [page, setPage] = useState(1);
