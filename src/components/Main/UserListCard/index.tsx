@@ -4,7 +4,7 @@ import UserSnippet from '@/components/Main/UserSnippet';
 import {
   UserListCardProps,
   RenderUserSnippets,
-} from '@/components/Main/UserListCard/UserListCardTypes';
+} from '@/components/Main/UserListCard/UserListCardProps';
 
 const UserListCard = ({ users }: UserListCardProps) => {
   const onlineUsers = users.filter((user) => user.isOnline);

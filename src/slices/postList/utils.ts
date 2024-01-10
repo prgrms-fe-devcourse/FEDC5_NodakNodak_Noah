@@ -1,5 +1,5 @@
 import { SearchedPost } from '../searchedData/searchedDataType';
-import { PostSnippet } from '@/components/PostCard/PostCardTypes';
+import { PostSnippet } from '@/components/PostCard/PostCardProps';
 import { Post } from '@/types/APIResponseTypes';
 
 export const postListToPostSnippetList = (

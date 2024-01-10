@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { PostSnippetProps } from '@/components/PostCard/PostCardTypes';
+import { PostSnippetProps } from '@/components/PostCard/PostCardProps';
 import Avatar from '@/components/Common/Avatar';
 import Image from '@/components/Common/Image';
 import Text from '@/components/Common/Text';

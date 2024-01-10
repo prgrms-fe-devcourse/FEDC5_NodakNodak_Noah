@@ -8,10 +8,10 @@ import {
   TextAreaWrapper,
   StyledTextArea,
   ButtonWrapper,
-} from '@/components/Post/Edit/StyledPostEdit';
+} from '@/components/Post/Edit/styledPostEdit';
 import { isValidatedForm } from '@/components/Post/Edit/formValidation';
 import { PLACEHOLDER, MESSAGE, FORM_SIZE } from '@/utils/constants';
-import { sendPostRequest } from '@/components/Post/Edit/Api';
+import { sendPostRequest } from '@/components/Post/Edit/api';
 import Button from '@/components/Common/Button';
 import Input from '@/components/Common/Input';
 import { useDispatch } from '@/store';
