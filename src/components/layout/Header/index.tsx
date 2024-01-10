@@ -145,7 +145,12 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
           <AuthUiWrapper>
             <NotificationCardBell />
 
-            <Avatar size='small' src={userImage} onClick={handleAvatarClick} />
+            <Avatar
+              size='small'
+              src={userImage}
+              onClick={handleAvatarClick}
+              alt='유저네임'
+            />
             {showMenu && (
               <DropdownContent
                 ref={menuRef as RefObject<HTMLUListElement>}
