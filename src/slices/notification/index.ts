@@ -6,23 +6,10 @@ import {
 } from './thunk';
 import { InitialState } from './notificationType';
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { Comment, Notification, User, Follow } from '@/types/APIResponseTypes';
+import { Notification } from '@/types/APIResponseTypes';
 
 const initialState: InitialState = {
-  notifications: [
-    {
-      seen: false,
-      _id: '',
-      author: {} as User,
-      user: '',
-      post: '',
-      follow: {} as Follow,
-      comment: {} as Comment,
-      message: '',
-      createdAt: '',
-      updatedAt: '',
-    },
-  ],
+  notifications: [],
   isLoading: false,
 };
 const notificationSlice = createSlice({
