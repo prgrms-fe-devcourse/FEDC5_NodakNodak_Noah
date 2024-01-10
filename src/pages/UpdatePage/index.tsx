@@ -5,7 +5,7 @@ import VoteBox from '@/components/Post/Edit/VoteBox';
 import { FormContainer } from '@/pages/PostPage/style';
 import { isValidatedForm } from '@/utils/Validations/formValidation';
 import { MESSAGE } from '@/utils/constants';
-import { sendPostRequest } from '@/components/Post/Edit/api';
+import { sendPostRequest } from '@/components/Post/Edit/Api';
 import { useDispatch } from '@/store';
 import { getPostDetail } from '@/slices/postDetail';
 import { useSelectedPostTitle } from '@/components/Post/Edit/useSelectedPost';
