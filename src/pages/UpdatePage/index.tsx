@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import VoteBox from '@/components/Post/Edit/VoteBox';
 import { FormContainer } from '@/pages/PostPage/style';
-import { isValidatedForm } from '@/components/Post/Edit/formValidation';
+import { isValidatedForm } from '@/utils/Validations/formValidation';
 import { MESSAGE } from '@/utils/constants';
 import { sendPostRequest } from '@/components/Post/Edit/api';
 import { useDispatch } from '@/store';

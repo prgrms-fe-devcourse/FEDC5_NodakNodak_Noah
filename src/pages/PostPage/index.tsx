@@ -2,7 +2,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 
 import VoteBox from '@/components/Post/Edit/VoteBox';
-import { isValidatedForm } from '@/components/Post/Edit/formValidation';
+import { isValidatedForm } from '@/utils/Validations/formValidation';
 import { MESSAGE } from '@/utils/constants';
 import { sendPostRequest } from '@/components/Post/Edit/api';
 import { FormContainer } from '@/pages/PostPage/style';
