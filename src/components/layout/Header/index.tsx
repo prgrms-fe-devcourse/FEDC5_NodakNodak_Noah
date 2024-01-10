@@ -96,7 +96,10 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
     <Card
       width='100vw'
       height='80px'
-      style={{ display: 'flex', justifyContent: 'center' }}>
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+      }}>
       <StyledHeaderWrapper>
         <LogoWrapper onClick={() => navigate('/home')}>
           <LogoWithFontSize fontSize='24px' />

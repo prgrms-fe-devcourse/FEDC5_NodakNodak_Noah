@@ -1,5 +1,6 @@
 import { PropsWithChildren } from 'react';
 import CardProps from '@/components/common/Card/CardProps';
+import theme from '@/styles/theme';
 
 const Card = ({
   width = '100px',
@@ -9,16 +10,22 @@ const Card = ({
   ...props
 }: PropsWithChildren<CardProps>) => {
   const ShadowSizes = {
-    medium:
-      '0px 4px 6px 0px rgba(0, 0, 0, 0.10),0px 2px 4px 0px rgba(0, 0, 0, 0.10)',
-    large:
-      '0px 10px 15px 0px rgba(0, 0, 0, 0.10),0px 4px 6px 0px rgba(0, 0, 0, 0.10)',
+    medium: theme.isDark
+      ? '0px 4px 6px 0px rgba(100, 100, 100, 0.10),0px 2px 4px 0px rgba(100, 100, 100, 0.10)'
+      : '0px 4px 6px 0px rgba(0, 0, 0, 0.10),0px 2px 4px 0px rgba(0, 0, 0, 0.10)',
+    large: theme.isDark
+      ? '0px 4px 6px 0px rgba(100, 100, 100, 0.10),0px 2px 4px 0px rgba(100, 100, 100, 0.10)'
+      : '0px 4px 6px 0px rgba(0, 0, 0, 0.10),0px 2px 4px 0px rgba(0, 0, 0, 0.10)',
+  };
+  const getBackgroundColor = () => {
+    return theme.isDark ? theme.colors.grayscale[400] : theme.colors.white;
   };
 
   const CardStyle = {
     width,
     height,
     boxShadow: ShadowSizes[shadowType],
+    backgroundColor: getBackgroundColor(),
     ...props.style,
   };
 

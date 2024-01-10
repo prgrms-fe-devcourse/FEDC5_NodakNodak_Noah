@@ -38,11 +38,15 @@ export const ListItemButton = styled.button`
   width: 100%;
   height: 48px;
   text-align: left;
-  background-color: ${theme.colors.primary[100]};
   border: none;
   border-bottom: 1px solid ${theme.colors.primary[200]};
   padding: 0 20px;
-  color: ${theme.colors.primary[400]};
+  background-color: ${theme.isDark
+    ? theme.colors.primary[400]
+    : theme.colors.primary[100]};
+  color: ${theme.isDark
+    ? theme.colors.primary[200]
+    : theme.colors.primary[400]};
   cursor: pointer;
   &:last-child {
     border-bottom-left-radius: 8px;
@@ -51,7 +55,9 @@ export const ListItemButton = styled.button`
   }
 
   &:hover {
-    background-color: ${theme.colors.primary[200]};
+    background-color: ${theme.isDark
+      ? theme.colors.primary[500]
+      : theme.colors.primary[200]};
   }
 `;
 
