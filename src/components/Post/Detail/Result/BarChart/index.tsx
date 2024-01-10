@@ -1,4 +1,7 @@
-import { InputWrapper } from '@/components/Post/Detail/Result/style';
+import {
+  InputWrapper,
+  BarChartContainer,
+} from '@/components/Post/Detail/Result/BarChart/style';
 import theme from '@/styles/theme';
 import { Text, Input } from '@/components/common';
 
@@ -24,7 +27,7 @@ const BarChart = ({
   return (
     <InputWrapper>
       {[...voteCountMap].map(([vote, count], index) => (
-        <div
+        <BarChartContainer
           style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -54,13 +57,9 @@ const BarChart = ({
             colorNumber='400'
             colorType='primary'
             style={{ position: 'absolute', right: '5px', zIndex: '3' }}>
-            {votedArray.length
-              ? `${Math.round(
-                  (((count / votedArray.length) * 10) / 10) * 100,
-                ).toString()}%`
-              : '0'}
+            {votedArray.length ? `${count}/${votedArray.length}` : '0'}
           </Text>
-        </div>
+        </BarChartContainer>
       ))}
     </InputWrapper>
   );

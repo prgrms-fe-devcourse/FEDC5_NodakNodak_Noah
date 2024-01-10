@@ -1,7 +1,11 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { FlexColumn } from '@/components/Post/Detail/Comment/style';
+import {
+  FlexColumn,
+  CommentBoundaryLine,
+  CommentContainer,
+} from '@/components/Post/Detail/Comment/style';
 import { useDispatch } from '@/store';
 import { createNotification } from '@/slices/notification/thunk';
 import { CreateNotificationData } from '@/slices/notification/type';
@@ -67,12 +71,12 @@ const PostComment = () => {
   };
 
   return (
-    <div
+    <CommentBoundaryLine
       style={{
         margin: '3rem 15.19rem',
         borderTop: `solid 1px ${theme.colors.grayscale[200]}`,
       }}>
-      <div
+      <CommentContainer
         style={{
           display: 'flex',
           flexDirection: 'column',
@@ -131,8 +135,8 @@ const PostComment = () => {
             제출
           </Button>
         </form>
-      </div>
-    </div>
+      </CommentContainer>
+    </CommentBoundaryLine>
   );
 };
 

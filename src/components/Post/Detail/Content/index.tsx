@@ -1,8 +1,9 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
 import {
-  PostContentWrapper,
+  PostContentContainer,
   PostContentAuthorWrapper,
+  PostContentTitleContainer,
 } from '@/components/Post/Detail/Content/style';
 import { Text, Button, Avatar } from '@/components/common';
 import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
@@ -44,8 +45,9 @@ const PostContent = () => {
   };
 
   return (
-    <PostContentWrapper className='ContentTitle'>
-      <div style={{ display: 'inline-flex', marginLeft: '20px' }}>
+    <PostContentContainer>
+      <PostContentTitleContainer
+        style={{ display: 'inline-flex', marginLeft: '20px' }}>
         <Text colorType='black' tagType='span' fontType='h1'>
           {title}
         </Text>
@@ -67,7 +69,7 @@ const PostContent = () => {
             </Button>
           </>
         ) : null}
-      </div>
+      </PostContentTitleContainer>
       <PostContentAuthorWrapper className='Author'>
         <Avatar size='middle' alt='유저네임' src={image} />
         <Text
@@ -98,7 +100,7 @@ const PostContent = () => {
         height='9.4375rem'
         style={{ marginTop: '1.25rem' }}
       /> */}
-    </PostContentWrapper>
+    </PostContentContainer>
   );
 };
 

@@ -6,10 +6,14 @@ import {
 } from '@/components/Post/Detail/Comment/Item/type';
 import { useDispatch } from '@/store';
 import { getPostDetail } from '@/slices/postDetail';
-import theme from '@/styles/theme';
-import { Text, Avatar } from '@/components/common';
+import { Text, Avatar, Button } from '@/components/common';
 import axiosInstance from '@/utils/customAxios';
 import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
+import {
+  CommentItemContainer,
+  CommentAuthorContainer,
+  CommentAuthorWrapper,
+} from '@/components/Post/Detail/Comment/Item/style';
 
 const Item = ({
   authorName,
@@ -42,26 +46,10 @@ const Item = ({
   };
 
   return (
-    <div
-      style={{
-        position: 'relative',
-        display: 'flex',
-        alignItems: 'center',
-        margin: '8px',
-        borderBottom: `2px solid ${theme.colors.grayscale[200]}`,
-        paddingBottom: '8px',
-        width: '712px',
-        height: '96px',
-      }}>
-      <div style={{ display: 'inline-flex' }}>
+    <CommentItemContainer>
+      <CommentAuthorContainer>
         <Avatar size='middle' alt='유저네임' src={authorImage} />
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            marginTop: '8px',
-            marginLeft: '8px',
-          }}>
+        <CommentAuthorWrapper>
           <Text
             colorType='grayscale'
             colorNumber='500'
@@ -78,8 +66,8 @@ const Item = ({
             {`${year}년 ${month}월 ${date}일`}
           </Text>
           <hr />
-        </div>
-      </div>
+        </CommentAuthorWrapper>
+      </CommentAuthorContainer>
       <Text
         tagType='p'
         fontType='body3'
@@ -88,13 +76,18 @@ const Item = ({
         {content}
       </Text>
       {authorId === myInfo?._id ? (
-        <button
-          style={{ position: 'absolute', right: '2px', border: 'none' }}
+        <Button
+          style={{
+            position: 'absolute',
+            right: '2px',
+            bottom: '40px',
+            border: 'none',
+          }}
           onClick={handleCommentRemove}>
           삭제
-        </button>
+        </Button>
       ) : null}
-    </div>
+    </CommentItemContainer>
   );
 };
 
