@@ -16,7 +16,7 @@ interface FormProps {
   setFieldValue: (field: string, values: string | string[]) => void;
 }
 
-const VotedBox = ({ values, setFieldValue }: FormProps) => {
+const VoteBox = ({ values, setFieldValue }: FormProps) => {
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFieldValue('voteTitle', e.target.value);
   };
@@ -91,4 +91,4 @@ const VotedBox = ({ values, setFieldValue }: FormProps) => {
   );
 };
 
-export default VotedBox;
+export default VoteBox;

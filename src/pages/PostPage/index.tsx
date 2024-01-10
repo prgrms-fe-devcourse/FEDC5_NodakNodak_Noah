@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 
-import VotedBox from '@/components/Post/Edit/VoteBox';
+import VoteBox from '@/components/Post/Edit/VoteBox';
 import { isValidatedForm } from '@/components/Post/Edit/formValidation';
 import { MESSAGE } from '@/utils/constants';
 import { sendPostRequest } from '@/components/Post/Edit/api';
@@ -74,7 +74,7 @@ const PostCreatePage = () => {
         handleChange={handleChange}
         setFieldValue={setFieldValue}
       />
-      <VotedBox
+      <VoteBox
         values={{
           voteTitle: values.voteTitle,
           voteArray: values.voteArray,
