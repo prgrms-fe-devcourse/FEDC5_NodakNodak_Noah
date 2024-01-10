@@ -4,11 +4,11 @@ import theme from '@/styles/theme';
 type LightnessType = 100 | 200 | 300 | 400 | 500;
 
 export const GrassWrapper = styled.div`
-  width: 224px;
-  height: 80px;
+  width: 152px;
+  height: 112px;
   background-color: ${theme.colors.grayscale[100]};
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
   gap: 2px;
