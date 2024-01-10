@@ -1,6 +1,5 @@
 import { ChangeEvent, RefObject, useState, useEffect, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 import { Text, Card, Input, Avatar, Button } from '@/components/common';
 import HeaderProps from '@/components/layout/Header/HeaderProps';
@@ -25,6 +24,7 @@ import {
   AuthUiWrapper,
   NavLinkWrapper,
 } from '@/components/layout/Header/style';
+import axiosInstance from '@/utils/customAxios';
 
 const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
   const [focus, setFocus] = useState(false);
@@ -62,14 +62,7 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
       navigate(`/user/${myInfo?._id}`);
     } else {
       localStorage.removeItem('auth-token');
-      const axiosOptions = {
-        url: `https://kdt.frontend.5th.programmers.co.kr:5003/logout`,
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
-      const { data } = await axios(axiosOptions);
+      const { data } = await axiosInstance.post('/logout');
       alert(data);
       location.reload();
     }

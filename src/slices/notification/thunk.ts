@@ -1,17 +1,11 @@
 import { name } from './constants';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import axiosInstance from '@/utils/customAxios';
 
 export const getNotificationArray = createAsyncThunk(
   `${name}/getNotificationArray`,
   async ({ token }: { token: string }) => {
-    const { data } = await axios({
-      url: 'https://kdt.frontend.5th.programmers.co.kr:5003/notifications',
-      method: 'get',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const { data } = await axiosInstance.get('/notifications');
 
     return data;
   },
@@ -20,13 +14,7 @@ export const getNotificationArray = createAsyncThunk(
 export const seeNotifications = createAsyncThunk(
   `${name}/seenNotifications`,
   async ({ token }: { token: string }) => {
-    const { data } = await axios({
-      url: 'https://kdt.frontend.5th.programmers.co.kr:5003/notifications/seen',
-      method: 'put',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    const { data } = await axiosInstance.put('/notifications/seen');
 
     return data;
   },
@@ -48,14 +36,10 @@ export const createNotification = createAsyncThunk(
     token: string;
     notificationData: CreateNotificationData;
   }) => {
-    const { data } = await axios({
-      url: 'https://kdt.frontend.5th.programmers.co.kr:5003/notifications/create',
-      method: 'post',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      data: notificationData,
-    });
+    const { data } = await axiosInstance.post(
+      '/notifications/create',
+      notificationData,
+    );
 
     return data;
   },

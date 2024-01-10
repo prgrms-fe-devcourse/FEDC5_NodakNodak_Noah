@@ -1,5 +1,5 @@
 import { FormEvent, useCallback, useState } from 'react';
-import axios, { AxiosError } from 'axios';
+import { AxiosError } from 'axios';
 import PasswordInput from '@/components/common/Input/PasswordInput';
 import { Button, Input } from '@/components/common';
 import {
@@ -9,6 +9,7 @@ import {
   SignProps,
   Warning,
 } from '@/components/Sign/style';
+import axiosInstance from '@/utils/customAxios';
 
 const Up = ({ isLogin, setIsLogin }: SignProps) => {
   const [email, setEmail] = useState('');
@@ -68,16 +69,11 @@ const Up = ({ isLogin, setIsLogin }: SignProps) => {
       }
 
       try {
-        const axiosOptions = {
-          url: `https://kdt.frontend.5th.programmers.co.kr:5003/signup`,
-          method: 'POST',
-          data: {
-            fullName: `익명#${Math.floor(Math.random() * 100000)}`,
-            email,
-            password,
-          },
-        };
-        await axios(axiosOptions);
+        await axiosInstance.post('signup', {
+          fullName: `익명#${Math.floor(Math.random() * 100000)}`,
+          email,
+          password,
+        });
         alert('회원가입 성공');
         location.reload();
       } catch (e: unknown) {

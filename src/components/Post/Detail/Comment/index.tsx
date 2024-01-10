@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
 import { FlexColumn } from '@/components/Post/Detail/Comment/style';
@@ -17,6 +16,7 @@ import { Comment } from '@/types/APIResponseTypes';
 import useClickAway from '@/hooks/useClickAway';
 import { useSelectedComment } from '@/hooks/useSelectedComment';
 import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
+import axiosInstance from '@/utils/customAxios';
 
 const PostComment = () => {
   const postDetailComment = useSelectedComment();
@@ -45,23 +45,15 @@ const PostComment = () => {
     }
 
     try {
-      const { _id } = (
-        await axios({
-          url: 'https://kdt.frontend.5th.programmers.co.kr:5003/comments/create',
-          method: 'POST',
-          data: {
-            comment: JSON.stringify({
-              type: 'comment',
-              content: comment,
-            }),
-            postId,
-          },
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-      ).data as Comment;
-
+      const {
+        data: { _id },
+      } = await axiosInstance.post<Comment>('comments/create', {
+        comment: JSON.stringify({
+          type: 'comment',
+          content: comment,
+        }),
+        postId,
+      });
       const notificationData: CreateNotificationData = {
         notificationType: 'COMMENT',
         notificationTypeId: _id,

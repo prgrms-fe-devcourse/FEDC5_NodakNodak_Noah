@@ -4,6 +4,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import followReducer from '@/slices/follow';
 import userInfoReducer from '@/slices/user';
 import channelReducer from '@/slices/channel';
+import loadingReducer from '@/slices/loading';
 import postListReducer from '@/slices/postList';
 import userListReducer from '@/slices/userList';
 import postDetailReducer from '@/slices/postDetail';
@@ -20,6 +21,7 @@ const store = configureStore({
     notification: notificationReducer,
     follow: followReducer,
     searchedData: searchedDataReducer,
+    loading: loadingReducer,
   },
 });
 type AppDispatch = typeof store.dispatch;
