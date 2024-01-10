@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input, Dropdown } from '@/components/common';
+import { Input, Dropdown } from '@/components/_common';
 import {
   FormArea,
   TextAreaWrapper,

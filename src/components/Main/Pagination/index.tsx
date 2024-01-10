@@ -1,5 +1,5 @@
 import RightArrowIcon from '@/assets/RightArrowIcon';
-import { Button, Text } from '@/components/common';
+import { Button, Text } from '@/components/_common';
 import {
   PaginationWrapper,
   TextWrapper,

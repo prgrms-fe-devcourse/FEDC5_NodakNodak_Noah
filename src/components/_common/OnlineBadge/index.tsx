@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 
-import { BadgeContainer, Super } from '@/components/common/OnlineBadge/style';
-import { OnlineBadgePropsTypes } from '@/components/common/OnlineBadge/OnlineBadgeProps';
+import { BadgeContainer, Super } from '@/components/_common/OnlineBadge/style';
+import { OnlineBadgePropsTypes } from '@/components/_common/OnlineBadge/OnlineBadgeProps';
 
 const OnLineBadge = ({
   children,

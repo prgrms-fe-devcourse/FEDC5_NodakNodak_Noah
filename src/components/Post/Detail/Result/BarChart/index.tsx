@@ -1,6 +1,6 @@
 import { InputWrapper } from '@/components/Post/Detail/Result/style';
 import theme from '@/styles/theme';
-import { Text, Input } from '@/components/common';
+import { Text, Input } from '@/components/_common';
 
 const BarChart = ({
   voteArray,

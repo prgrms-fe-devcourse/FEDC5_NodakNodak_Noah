@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Text from '@/components/common/Text';
+import Text from '@/components/_common/Text';
 import { useDispatch } from '@/store';
 import { getUser } from '@/slices/user';
 import PostCard from '@/components/Main/PostCard';

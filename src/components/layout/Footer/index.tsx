@@ -1,4 +1,4 @@
-import { Text } from '@/components/common';
+import { Text } from '@/components/_common';
 import LogoWithFontSize from '@/components/layout/LogoWithFontSize';
 import { StyledFooter } from '@/components/layout/Footer/style';
 

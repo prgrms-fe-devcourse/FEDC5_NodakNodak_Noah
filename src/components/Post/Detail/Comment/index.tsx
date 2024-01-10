@@ -9,7 +9,7 @@ import {
 } from '@/slices/notification/thunk';
 import { getPostDetail } from '@/slices/postDetail';
 import Item from '@/components/Post/Detail/Comment/Item/Item';
-import { Input, Button } from '@/components/common';
+import { Input, Button } from '@/components/_common';
 import { Warning } from '@/components/Sign/style';
 import theme from '@/styles/theme';
 import { Comment } from '@/types/APIResponseTypes';

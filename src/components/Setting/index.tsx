@@ -12,8 +12,8 @@ import {
 } from '@/components/Setting/style';
 import { getUser } from '@/slices/user';
 import { useDispatch } from '@/store';
-import { Button, Avatar, Input, Text } from '@/components/common';
-import ImageUploader from '@/components/common/Button/ImageUploadButton';
+import { Button, Avatar, Input, Text } from '@/components/_common';
+import ImageUploader from '@/components/_common/Button/ImageUploadButton';
 import MailIcon from '@/assets/MailIcon';
 import { useSelectedUser } from '@/hooks/useSelectedUser';
 import axiosInstance from '@/utils/customAxios';

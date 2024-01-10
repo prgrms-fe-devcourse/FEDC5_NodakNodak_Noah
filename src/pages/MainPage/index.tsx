@@ -9,7 +9,7 @@ import {
 import UserListCard from '@/components/Main/UserListCard';
 import PostCard from '@/components/Main/PostCard';
 import Pagination from '@/components/Main/Pagination';
-import { Text, Button } from '@/components/common';
+import { Text, Button } from '@/components/_common';
 
 import { useDispatch } from '@/store';
 import { getMyInfo } from '@/slices/user';

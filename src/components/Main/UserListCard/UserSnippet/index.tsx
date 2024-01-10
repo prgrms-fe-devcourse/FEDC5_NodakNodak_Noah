@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Avatar, OnLineBadge } from '@/components/common';
+import { Avatar, OnLineBadge } from '@/components/_common';
 import { UserSnippetBox } from '@/components/Main/style';
 import {
   UserSnippetProps,

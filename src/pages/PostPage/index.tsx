@@ -4,7 +4,7 @@ import { useFormik } from 'formik';
 import VoteBox from '@/components/Post/Edit/VoteBox';
 import { isValidatedForm } from '@/utils/Validations/formValidation';
 import { MESSAGE } from '@/utils/constants';
-import { sendPostRequest } from '@/components/Post/Edit/api';
+import { sendPostRequest } from '@/components/Post/Edit/Api';
 import { FormContainer } from '@/pages/PostPage/style';
 import SubmitButton from '@/components/Post/Edit/SubmitButton';
 import FormContent from '@/components/Post/Edit/FormContent';

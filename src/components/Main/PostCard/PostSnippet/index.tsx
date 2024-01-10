@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { Text, Image, Avatar } from '@/components/common';
+import { Text, Image, Avatar } from '@/components/_common';
 import { UserSnippetBox } from '@/components/Main/style';
 import { PostSnippetProps } from '@/components/Main/PostCard/PostSnippet/type';
 import {

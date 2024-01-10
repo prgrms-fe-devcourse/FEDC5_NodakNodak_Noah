@@ -5,7 +5,7 @@ import {
   DeleteButton,
 } from '@/components/Post/Edit/VoteBox/style';
 import { PLACEHOLDER } from '@/utils/constants';
-import { Card, Input, Button, ScrollBar } from '@/components/common';
+import { Card, Input, Button, ScrollBar } from '@/components/_common';
 import DeleteIcon from '@/assets/DeleteIcon';
 
 interface FormProps {

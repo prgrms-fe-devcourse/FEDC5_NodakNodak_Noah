@@ -1,7 +1,7 @@
 import { FormEvent, useCallback, useState } from 'react';
 import { AxiosError } from 'axios';
-import PasswordInput from '@/components/common/Input/PasswordInput';
-import { Button, Input } from '@/components/common';
+import PasswordInput from '@/components/_common/Input/PasswordInput';
+import { Button, Input } from '@/components/_common';
 import {
   Form,
   Guide,

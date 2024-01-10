@@ -1,5 +1,5 @@
 import theme from '@/styles/theme';
-import { TextProps } from '@/components/common/Text/TextProps';
+import { TextProps } from '@/components/_common/Text/TextProps';
 
 const Text = ({
   tagType = 'span',

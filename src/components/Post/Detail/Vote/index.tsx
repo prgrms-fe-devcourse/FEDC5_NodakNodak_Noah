@@ -17,7 +17,7 @@ import {
 import { useSelectedVote } from '@/hooks/useSelectedVote';
 import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
-import { Input, Button, Card, ScrollBar, Text } from '@/components/common';
+import { Input, Button, Card, ScrollBar, Text } from '@/components/_common';
 import { Warning } from '@/components/Sign/style';
 import axiosInstance from '@/utils/customAxios';
 
