@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import Image from '@/components/common/Image';
-import { AvatarProps } from '@/components/common/Avatar/AvatarProps';
+import { AvatarProps } from '@/components/common/Avatar/type';
 import { AvatarWrapper } from '@/components/common/Avatar/style';
 
 const avatarSizes = {

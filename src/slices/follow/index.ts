@@ -1,8 +1,8 @@
-import { follow, unfollow } from './thunk';
-import { name } from './constants';
-import { InitialState } from './followType';
-import { getUser, getMyInfo } from '../user';
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { getUser, getMyInfo } from '@/slices/user';
+import { InitialState } from '@/slices/follow/type';
+import { name } from '@/slices/follow/constants';
+import { follow, unfollow } from '@/slices/follow/thunk';
 import { User } from '@/types/APIResponseTypes';
 
 const initialState: InitialState = {

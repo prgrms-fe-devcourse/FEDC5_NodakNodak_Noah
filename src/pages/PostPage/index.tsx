@@ -8,14 +8,7 @@ import { sendPostRequest } from '@/components/Post/Edit/Api';
 import { FormContainer } from '@/pages/PostPage/style';
 import SubmitButton from '@/components/Post/Edit/SubmitButton';
 import FormContent from '@/components/Post/Edit/FormContent';
-
-interface FormType {
-  title: string;
-  content: string;
-  voteTitle: string;
-  voteArray: string[];
-  channelId: string;
-}
+import { FormType } from '@/pages/PostPage/type';
 
 const PostCreatePage = () => {
   const { channelId } = useParams();

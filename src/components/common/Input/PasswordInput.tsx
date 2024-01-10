@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { Wrapper, StyledInput, Eye } from '@/components/common/Input/style';
-import { InputProps } from '@/components/common/Input/InputProps';
+import { InputProps } from '@/components/common/Input/type';
 
 const PasswordInput = ({
   bordertype = 'filled',

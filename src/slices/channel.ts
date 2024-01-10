@@ -6,14 +6,8 @@ import {
   isAnyOf,
 } from '@reduxjs/toolkit';
 import axiosInstance from '@/utils/customAxios';
-import { Channel, Post } from '@/types/APIResponseTypes';
-
-interface ChannelState {
-  channels: Channel[];
-  currentChannel: Channel | undefined;
-  isLoading: boolean;
-  status: 'idle' | 'loading' | 'failed';
-}
+import { Post } from '@/types/APIResponseTypes';
+import { ChannelState } from '@/slices/channel/type';
 
 const initialState: ChannelState = {
   channels: [],

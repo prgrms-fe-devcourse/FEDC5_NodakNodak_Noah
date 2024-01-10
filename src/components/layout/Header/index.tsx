@@ -2,7 +2,7 @@ import { ChangeEvent, RefObject, useState, useEffect, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Text, Card, Input, Avatar, Button } from '@/components/common';
-import HeaderProps from '@/components/layout/Header/HeaderProps';
+import HeaderProps from '@/components/layout/Header/type';
 import LogoWithFontSize from '@/components/layout/LogoWithFontSize';
 import NotificationCardBell from '@/components/layout/Header/NotificationCardBell';
 import {

@@ -1,7 +1,7 @@
-import { name } from './constants';
-import { searchAllData, searchUserData } from './thunk';
-import { SearchedPost, SearchedData } from './searchedDataType';
 import { createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { SearchedPost, SearchedData } from '@/slices/searchedData/type';
+import { searchAllData, searchUserData } from '@/slices/searchedData/thunk';
+import { name } from '@/slices/searchedData/constants';
 import { User } from '@/types/APIResponseTypes';
 
 const initialState: SearchedData = {

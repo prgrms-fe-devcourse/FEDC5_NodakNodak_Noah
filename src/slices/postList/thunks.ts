@@ -1,18 +1,10 @@
 import { name } from './constants';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axiosInstance from '@/utils/customAxios';
-
-export interface GetPostsByChannelIdParams {
-  channelId: string;
-  offset?: number;
-  limit?: number;
-}
-
-export interface GetPostsByUserIdParams {
-  userId: string;
-  offset?: number;
-  limit?: number;
-}
+import {
+  GetPostsByChannelIdParams,
+  GetPostsByUserIdParams,
+} from '@/slices/postList/type';
 
 export const getPostListByChannelId = createAsyncThunk(
   `${name}/getPostListByChannelId`,

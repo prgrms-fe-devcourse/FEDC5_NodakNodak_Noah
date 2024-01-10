@@ -1,11 +1,11 @@
+import { createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { PostList } from '@/slices/postList/type';
+import { name } from '@/slices/postList/constants';
 import {
   getPostListByChannelId,
   getPostListByUserId,
   getFullPostList,
-} from './thunks';
-import { name } from './constants';
-import { PostList } from './postListType';
-import { createSlice, isAnyOf } from '@reduxjs/toolkit';
+} from '@/slices/postList/thunks';
 
 const initialState: PostList = {
   posts: [],

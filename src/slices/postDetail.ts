@@ -2,20 +2,13 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { Post } from '@/types/APIResponseTypes';
 import axiosInstance from '@/utils/customAxios';
-
-interface DetailPost {
-  post: Post;
-  isLoading: boolean;
-}
+import { DetailPost, PostId } from '@/slices/postDetail/type';
 
 const initialState: DetailPost = {
   post: {} as Post,
   isLoading: false,
 };
 
-interface PostId {
-  postId: string | undefined;
-}
 export const getPostDetail = createAsyncThunk(
   'detailPost/getPostDetail',
   async ({ postId }: PostId) => {

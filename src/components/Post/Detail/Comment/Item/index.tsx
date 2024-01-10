@@ -1,39 +1,33 @@
-import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
-import { RootState, useDispatch } from '@/store';
+import {
+  CommentItemProps,
+  CommentContent,
+} from '@/components/Post/Detail/Comment/Item/type';
+import { useDispatch } from '@/store';
 import { getPostDetail } from '@/slices/postDetail';
 import theme from '@/styles/theme';
 import { Text, Avatar } from '@/components/common';
 import axiosInstance from '@/utils/customAxios';
-
-interface CommentItemProps {
-  author: string;
-  createdAt: string;
-  comment: string;
-  authorId: string;
-  commentId: string;
-}
-
-interface Comment {
-  type: string;
-  content: string;
-}
+import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 
 const Item = ({
-  author,
+  authorName,
+  authorImage,
+  authorId,
   createdAt,
   comment,
-  authorId,
   commentId,
 }: CommentItemProps) => {
-  const content = { ...JSON.parse(comment) } as Comment;
-  const myInfo = useSelector((state: RootState) => state.userInfo.authUser);
+  const myInfo = useSelectedMyInfo();
   const { postId } = useParams();
   const dispatch = useDispatch();
+
+  const { content } = { ...JSON.parse(comment) } as CommentContent;
   const handleCommentRemove = async () => {
     const isConfirm = window.confirm('댓글을 정말 삭제하시겠습니까?');
     if (!isConfirm) return;
+
     try {
       axiosInstance.delete(`comments/delete`, { data: { id: commentId } });
       dispatch(getPostDetail({ postId }));
@@ -44,7 +38,6 @@ const Item = ({
 
   return (
     <div
-      className='commentItem'
       style={{
         position: 'relative',
         display: 'flex',
@@ -55,8 +48,8 @@ const Item = ({
         width: '712px',
         height: '96px',
       }}>
-      <div className='userData' style={{ display: 'inline-flex' }}>
-        <Avatar size='middle' alt='유저네임' />
+      <div style={{ display: 'inline-flex' }}>
+        <Avatar size='middle' alt='유저네임' src={authorImage} />
         <div
           style={{
             display: 'flex',
@@ -69,7 +62,7 @@ const Item = ({
             colorNumber='500'
             fontType='body1'
             tagType='span'>
-            {author}
+            {authorName}
           </Text>
           <Text
             tagType='span'
@@ -86,7 +79,7 @@ const Item = ({
         fontType='body3'
         colorType='black'
         style={{ paddingLeft: '3rem' }}>
-        {content.content}
+        {content}
       </Text>
       {authorId === myInfo?._id ? (
         <button

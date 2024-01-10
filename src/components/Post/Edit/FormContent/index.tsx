@@ -1,4 +1,3 @@
-import React from 'react';
 import { Input, Dropdown } from '@/components/common';
 import {
   FormArea,
@@ -6,18 +5,7 @@ import {
   StyledTextArea,
 } from '@/pages/PostPage/style';
 import { PLACEHOLDER, FORM_SIZE } from '@/utils/constants';
-
-interface FormContentProps {
-  values: {
-    title: string;
-    content: string;
-    channelId: string;
-  };
-  handleChange: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => void;
-  setFieldValue: (field: string, value: string) => void;
-}
+import { FormContentProps } from '@/components/Post/Edit/FormContent/type';
 
 const FormContent = ({
   values,

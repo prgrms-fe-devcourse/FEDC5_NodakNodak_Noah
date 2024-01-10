@@ -3,12 +3,10 @@ import { useParams } from 'react-router-dom';
 
 import { FlexColumn } from '@/components/Post/Detail/Comment/style';
 import { useDispatch } from '@/store';
-import {
-  createNotification,
-  CreateNotificationData,
-} from '@/slices/notification/thunk';
+import { createNotification } from '@/slices/notification/thunk';
+import { CreateNotificationData } from '@/slices/notification/type';
 import { getPostDetail } from '@/slices/postDetail';
-import Item from '@/components/Post/Detail/Comment/Item/Item';
+import Item from '@/components/Post/Detail/Comment/Item';
 import { Input, Button } from '@/components/common';
 import { Warning } from '@/components/Sign/style';
 import theme from '@/styles/theme';
@@ -82,7 +80,7 @@ const PostComment = () => {
         }}>
         {postDetailComment.map((comment) => {
           const {
-            author: { _id: authorId, fullName },
+            author: { _id: authorId, fullName, image },
             _id: commentId,
             createdAt,
             comment: commentText,
@@ -90,7 +88,8 @@ const PostComment = () => {
 
           return (
             <Item
-              author={fullName}
+              authorName={fullName}
+              authorImage={image}
               authorId={authorId}
               createdAt={createdAt}
               comment={commentText}

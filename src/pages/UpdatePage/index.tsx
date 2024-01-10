@@ -11,14 +11,7 @@ import { getPostDetail } from '@/slices/postDetail';
 import { useSelectedPostTitle } from '@/components/Post/Edit/useSelectedPost';
 import FormContent from '@/components/Post/Edit/FormContent';
 import SubmitButton from '@/components/Post/Edit/SubmitButton';
-
-interface FormType {
-  title: string;
-  content: string;
-  voteTitle: string;
-  voteArray: string[];
-  channelId: string;
-}
+import { FormType } from '@/pages/PostPage/type';
 
 const PostUpdatePage = () => {
   const { channelId, postId } = useParams();
