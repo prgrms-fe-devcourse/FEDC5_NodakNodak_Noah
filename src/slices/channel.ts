@@ -5,7 +5,7 @@ import {
   createSlice,
   isAnyOf,
 } from '@reduxjs/toolkit';
-import axios from 'axios';
+import axiosInstance from '@/utils/customAxios';
 import { Channel, Post } from '@/types/APIResponseTypes';
 
 interface ChannelState {
@@ -23,12 +23,9 @@ const initialState: ChannelState = {
 };
 
 export const getChannel = createAsyncThunk('channel/getChannel', async () => {
-  const response = await axios({
-    url: 'https://kdt.frontend.5th.programmers.co.kr:5003/channels',
-    method: 'get',
-  });
+  const { data } = await axiosInstance.get('/channels');
 
-  return response.data;
+  return data;
 });
 
 export const channelSlice = createSlice({

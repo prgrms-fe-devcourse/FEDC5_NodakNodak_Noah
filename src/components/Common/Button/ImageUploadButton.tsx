@@ -1,9 +1,9 @@
-import axios from 'axios';
 import { ChangeEvent, useRef, useState } from 'react';
 
 import Button from '@/components/common/Button';
 import { InvisibleInput } from '@/components/common/Button/style';
 import { ImageUnloadButtonProps } from '@/components/common/Button/ButtonProps';
+import axiosInstance from '@/utils/customAxios';
 
 const ImageUploader = ({
   styleType = 'primary',
@@ -23,18 +23,9 @@ const ImageUploader = ({
     formData.append('isCover', 'false');
     formData.append('image', e.target.files![0]);
     try {
-      const axiosOptions = {
-        url: `https://kdt.frontend.5th.programmers.co.kr:5003/${apiParam}`,
-        method: 'POST',
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
-        },
-        data: formData,
-      };
       const {
         data: { image },
-      } = await axios(axiosOptions);
+      } = await axiosInstance.post(`/${apiParam}`, formData);
       setImage(image);
       setLoading(false);
     } catch (error) {

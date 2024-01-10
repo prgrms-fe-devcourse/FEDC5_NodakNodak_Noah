@@ -9,8 +9,6 @@ const Index = () => {
 
   const handleStart = (e: React.MouseEvent) => {
     e.preventDefault();
-    // const token = localStorage.getItem('auth-token'); // 나중에 바낄지도 모름
-    // navigate(token ? '/home' : '/sign');
     navigate('/home');
   };
 

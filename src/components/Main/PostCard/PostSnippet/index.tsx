@@ -47,7 +47,7 @@ const PostSnippet = ({
         </Text>
       </ContentBox>
       <UserSnippetBox onClick={handleUserClick}>
-        <Avatar size='mini' src={avatar} />
+        <Avatar size='mini' src={avatar} alt={fullName} />
         <Text tagType='span' fontType='caption' colorType='black'>
           {fullName ? fullName : 'loading...'}
         </Text>

@@ -11,13 +11,12 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       underline = false,
       height,
       width = '400px',
-      wrapperStyle,
       ...props
     }: InputProps,
     ref: Ref<HTMLInputElement>,
   ) => {
     return (
-      <Wrapper style={wrapperStyle} ref={ref}>
+      <Wrapper ref={ref}>
         <StyledInput
           $bordertype={bordertype}
           $fontType={fontType}

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
+
 import {
   AvatarWrapper,
   ButtonWrapper,
@@ -16,6 +16,7 @@ import { Button, Avatar, Input, Text } from '@/components/common';
 import ImageUploader from '@/components/common/Button/ImageUploadButton';
 import MailIcon from '@/assets/MailIcon';
 import { useSelectedUser } from '@/hooks/useSelectedUser';
+import axiosInstance from '@/utils/customAxios';
 
 const Setting = () => {
   const currentUser = useSelectedUser();
@@ -52,18 +53,10 @@ const Setting = () => {
 
   const handleUpdate = async () => {
     try {
-      await axios.put(
-        'https://kdt.frontend.5th.programmers.co.kr:5003/settings/update-user',
-        {
-          fullName: updatedData.fullName,
-          username: updatedData.username,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('auth-token')}`,
-          },
-        },
-      );
+      await axiosInstance.put('settings/update-user', {
+        fullName: updatedData.fullName,
+        username: updatedData.username,
+      });
       navigate(`/user/${userId}`);
     } catch (error) {
       alert(error);

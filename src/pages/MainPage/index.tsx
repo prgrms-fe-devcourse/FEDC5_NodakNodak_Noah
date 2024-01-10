@@ -74,7 +74,7 @@ const Main = () => {
   useEffect(() => {
     const token = localStorage.getItem('auth-token');
     if (!token) return;
-    dispatch(getMyInfo({ token }));
+    dispatch(getMyInfo());
   }, [dispatch]);
 
   useEffect(() => {

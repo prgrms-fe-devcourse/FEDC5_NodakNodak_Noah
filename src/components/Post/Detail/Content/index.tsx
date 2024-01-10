@@ -1,5 +1,4 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import axios from 'axios';
 
 import {
   PostContentWrapper,
@@ -8,6 +7,7 @@ import {
 import { Text, Button, Avatar } from '@/components/common';
 import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
+import axiosInstance from '@/utils/customAxios';
 
 const PostContent = () => {
   const postDetailContent = useSelectedPostDetail();
@@ -29,18 +29,8 @@ const PostContent = () => {
   const handlePostDelete = async () => {
     const isConfirm = window.confirm('게시글을 삭제하시겠습니까?');
     if (!isConfirm) return;
-    const token = localStorage.getItem('auth-token');
     try {
-      await axios({
-        url: `https://kdt.frontend.5th.programmers.co.kr:5003/posts/delete`,
-        method: 'DELETE',
-        data: {
-          id: postId,
-        },
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await axiosInstance.delete(`posts/delete`, { data: { id: postId } });
       alert('게시글이 삭제되었습니다.');
       navigate(`/home`);
     } catch (e) {
