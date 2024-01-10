@@ -1,5 +1,5 @@
 import { User } from '@/types/APIResponseTypes';
-import { UserSnippet } from '@/components/UserListCard/UserListCardTypes';
+import { UserSnippet } from '@/components/Main/UserListCard/type';
 
 export const userListToUserSnippetList = (
   userList: User[],
