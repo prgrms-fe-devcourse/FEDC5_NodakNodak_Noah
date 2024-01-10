@@ -1,26 +1,31 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
-import { Channel } from '@/types/APIResponseTypes';
+import { getPostListByChannelId } from './postList/thunks';
+import {
+  PayloadAction,
+  createAsyncThunk,
+  createSlice,
+  isAnyOf,
+} from '@reduxjs/toolkit';
+import axiosInstance from '@/utils/customAxios';
+import { Channel, Post } from '@/types/APIResponseTypes';
 
 interface ChannelState {
   channels: Channel[];
   currentChannel: Channel | undefined;
   isLoading: boolean;
+  status: 'idle' | 'loading' | 'failed';
 }
 
 const initialState: ChannelState = {
   channels: [],
   currentChannel: undefined,
   isLoading: false,
+  status: 'idle',
 };
 
 export const getChannel = createAsyncThunk('channel/getChannel', async () => {
-  const response = await axios({
-    url: 'https://kdt.frontend.5th.programmers.co.kr:5003/channels',
-    method: 'get',
-  });
+  const { data } = await axiosInstance.get('/channels');
 
-  return response.data;
+  return data;
 });
 
 export const channelSlice = createSlice({
@@ -35,16 +40,37 @@ export const channelSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(getChannel.pending, (state) => {
-      state.isLoading = true;
-    });
     builder.addCase(getChannel.fulfilled, (state, action) => {
       state.channels = action.payload;
-      state.isLoading = false;
     });
-    builder.addCase(getChannel.rejected, (state) => {
-      state.isLoading = false;
-    });
+    builder.addCase(
+      getPostListByChannelId.fulfilled,
+      (state, action: PayloadAction<Post[]>) => {
+        state.currentChannel = action.payload[0].channel;
+      },
+    );
+
+    builder.addMatcher(
+      isAnyOf(getChannel.pending, getPostListByChannelId.pending),
+      (state) => {
+        state.isLoading = true;
+        state.status = 'loading';
+      },
+    );
+    builder.addMatcher(
+      isAnyOf(getChannel.fulfilled, getPostListByChannelId.fulfilled),
+      (state) => {
+        state.isLoading = false;
+        state.status = 'idle';
+      },
+    );
+    builder.addMatcher(
+      isAnyOf(getChannel.rejected, getPostListByChannelId.rejected),
+      (state) => {
+        state.isLoading = false;
+        state.status = 'failed';
+      },
+    );
   },
 });
 

@@ -1,10 +1,11 @@
-import Footer from './components/Footer';
-import Header from './components/Header';
-import { getChannel } from './slices/channel';
-import { useDispatch, RootState } from './store';
 import { Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
+
+import { useDispatch, RootState } from '@/store';
+import { getChannel } from '@/slices/channel';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
 
 const App = () => {
   const channels = useSelector((state: RootState) => state.channel.channels);

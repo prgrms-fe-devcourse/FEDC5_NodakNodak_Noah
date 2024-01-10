@@ -1,6 +1,6 @@
 import { name } from './constants';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
+import axiosInstance from '@/utils/customAxios';
 
 export interface GetPostsByChannelIdParams {
   channelId: string;
@@ -19,12 +19,11 @@ export const getPostListByChannelId = createAsyncThunk(
   async ({ channelId, offset, limit }: GetPostsByChannelIdParams) => {
     const queries = paginationClaculator(offset, limit);
 
-    const response = await axios({
-      url: `https://kdt.frontend.5th.programmers.co.kr:5003/posts/channel/${channelId}/${queries}`,
-      method: 'get',
-    });
+    const { data } = await axiosInstance.get(
+      `posts/channel/${channelId}/${queries}`,
+    );
 
-    return response.data;
+    return data;
   },
 );
 
@@ -33,12 +32,11 @@ export const getPostListByUserId = createAsyncThunk(
   async ({ userId, offset, limit }: GetPostsByUserIdParams) => {
     const queries = paginationClaculator(offset, limit);
 
-    const response = await axios({
-      url: `https://kdt.frontend.5th.programmers.co.kr:5003/posts/author/${userId}/${queries}`,
-      method: 'get',
-    });
+    const { data } = await axiosInstance.get(
+      `posts/author/${userId}/${queries}`,
+    );
 
-    return response.data;
+    return data;
   },
 );
 
@@ -53,10 +51,7 @@ const paginationClaculator = (offset?: number, limit?: number) => {
 export const getFullPostList = createAsyncThunk(
   `${name}/getFullPostList`,
   async () => {
-    const { data } = await axios({
-      url: 'https://kdt.frontend.5th.programmers.co.kr:5003/posts',
-      method: 'get',
-    });
+    const { data } = await axiosInstance.get('/posts');
 
     return data;
   },

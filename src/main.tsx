@@ -1,21 +1,21 @@
-import Index from './pages/Index.tsx';
-import Login from './pages/Login.tsx';
-import NotFound from './pages/NotFound.tsx';
-import PostUpdatePage from './pages/PostEditPage/PostUpdatePage';
-import PostCreatePage from './pages/PostEditPage/PostCreatePage';
-import DetailPage from './pages/DetailPage';
-import Main from './pages/mainPage';
-import UserPage from './pages/userPage/index';
-import Setting from './pages/SettingModal/Setting';
-import App from './App.tsx';
-import store from './store';
-
-import PostVote from './pages/DetailPage/PostVote/index.tsx';
-import PostVoteChart from './pages/DetailPage/PostVoteChart/index.tsx';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
+
+import App from '@/App';
+import store from '@/store';
+import Main from '@/pages/MainPage';
+import Login from '@/pages/SignPage';
+import Index from '@/pages/IndexPage';
+import UserPage from '@/pages/UserPage';
+import Setting from '@/pages/SettingPage';
+import NotFound from '@/pages/NotFoundPage';
+import DetailPage from '@/pages/DetailPage';
+import PostCreatePage from '@/pages/PostPage';
+import PostUpdatePage from '@/pages/UpdatePage';
+import PostVoteChart from '@/components/Post/Detail/Result';
+import PostVote from '@/components/Post/Detail/Vote';
 
 const router = createBrowserRouter([
   { path: '/', element: <Index />, errorElement: <NotFound />, index: true },
@@ -25,7 +25,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { path: '/update/:channelId/:postId', element: <PostUpdatePage /> },
-      { path: '/write', element: <PostCreatePage /> },
+      { path: '/write/:channelId', element: <PostCreatePage /> },
       { path: '/home/:channelId?', element: <Main /> },
       { path: '/user/:userId', element: <UserPage /> },
       {

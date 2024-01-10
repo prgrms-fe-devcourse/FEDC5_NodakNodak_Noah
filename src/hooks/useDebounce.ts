@@ -1,5 +1,6 @@
-﻿import useTimeoutFn from './useTimeoutFn';
-import { useEffect } from 'react';
+﻿import { useEffect } from 'react';
+
+import useTimeoutFn from '@/hooks/useTimeoutFn';
 
 const useDebounce = (
   fn: () => void,

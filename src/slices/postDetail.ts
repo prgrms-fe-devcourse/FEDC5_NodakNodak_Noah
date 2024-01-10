@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+
 import { Post } from '@/types/APIResponseTypes';
+import axiosInstance from '@/utils/customAxios';
 
 interface DetailPost {
   post: Post;
@@ -18,12 +19,9 @@ interface PostId {
 export const getPostDetail = createAsyncThunk(
   'detailPost/getPostDetail',
   async ({ postId }: PostId) => {
-    const response = await axios({
-      url: `https://kdt.frontend.5th.programmers.co.kr:5003/posts/${postId}`,
-      method: 'get',
-    });
+    const { data } = await axiosInstance.get(`/posts/${postId}`);
 
-    return response.data;
+    return data;
   },
 );
 
