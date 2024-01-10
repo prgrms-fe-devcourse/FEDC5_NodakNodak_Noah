@@ -16,6 +16,7 @@ import PostCreatePage from '@/pages/PostPage';
 import PostUpdatePage from '@/pages/UpdatePage';
 import PostVoteChart from '@/components/Post/Detail/Result';
 import PostVote from '@/components/Post/Detail/Vote';
+import GlobalStyle from '@/styles/GlobalStyle';
 
 const router = createBrowserRouter([
   { path: '/', element: <Index />, errorElement: <NotFound />, index: true },
@@ -45,6 +46,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <Provider store={store}>
       <RouterProvider router={router} />
+      <GlobalStyle />
     </Provider>
   </React.StrictMode>,
 );

@@ -182,6 +182,7 @@ const ButtonWrapperBackgroundSize = {
   mini: css`
     width: 36px;
     height: 36px;
+    padding: 0px;
   `,
   small: css`
     width: 80px;

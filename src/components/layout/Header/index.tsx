@@ -24,6 +24,7 @@ import {
   AuthUiWrapper,
   NavLinkWrapper,
 } from '@/components/layout/Header/style';
+import DarkModeToggle from '@/components/layout/Header/DarkModeToggle';
 import axiosInstance from '@/utils/customAxios';
 
 const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
@@ -134,10 +135,10 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
             </SearchIcon>
           )}
         </FormContainer>
+        <DarkModeToggle />
         {isAuth ? (
           <AuthUiWrapper>
             <NotificationCardBell />
-
             <Avatar
               size='small'
               src={userImage}
