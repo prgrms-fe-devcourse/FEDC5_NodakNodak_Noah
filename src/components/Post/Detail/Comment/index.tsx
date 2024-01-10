@@ -2,17 +2,16 @@ import { useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 
-import { FlexColumn } from '@/components/Post/Detail/Comment/styledComment';
+import { FlexColumn } from '@/components/Post/Detail/Comment/style';
 import { useDispatch } from '@/store';
 import {
   createNotification,
   CreateNotificationData,
 } from '@/slices/notification/thunk';
 import { getPostDetail } from '@/slices/postDetail';
-import CommentItem from '@/components/Post/Detail/Comment/CommentItem';
-import Input from '@/components/Common/Input';
-import Button from '@/components/Common/Button';
-import { Warning } from '@/components/Sign/SignStyle';
+import Item from '@/components/Post/Detail/Comment/Item/Item';
+import { Input, Button } from '@/components/common';
+import { Warning } from '@/components/Sign/style';
 import theme from '@/styles/theme';
 import { Comment } from '@/types/APIResponseTypes';
 import useClickAway from '@/hooks/useClickAway';
@@ -98,7 +97,7 @@ const PostComment = () => {
           } = comment;
 
           return (
-            <CommentItem
+            <Item
               author={fullName}
               authorId={authorId}
               createdAt={createdAt}

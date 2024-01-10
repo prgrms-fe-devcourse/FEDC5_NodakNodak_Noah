@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react';
-import CardProps from '@/components/Common/Card/CardProps';
+import CardProps from '@/components/common/Card/CardProps';
 
 const Card = ({
   width = '100px',

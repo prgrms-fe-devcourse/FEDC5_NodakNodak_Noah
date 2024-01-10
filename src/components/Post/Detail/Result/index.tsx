@@ -3,12 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import {
   VoteTitleWrapper,
   ButtonWrapper,
-} from '@/components/Post/Detail/Vote/styledVote';
+} from '@/components/Post/Detail/Vote/style';
 import BarChart from '@/components/Post/Detail/Result/BarChart';
-import Card from '@/components/Common/Card';
-import Text from '@/components/Common/Text';
-import Button from '@/components/Common/Button';
-import ScrollBar from '@/components/Common/ScrollBar';
+import { Card, ScrollBar, Text, Button } from '@/components/common';
 import { useSelectedVote } from '@/hooks/useSelectedVote';
 import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
 

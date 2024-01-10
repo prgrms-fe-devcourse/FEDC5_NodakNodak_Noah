@@ -9,14 +9,11 @@ import {
   ContentContainer,
   InputWrapper,
   TextWrapper,
-} from '@/components/Setting/styledSetting';
+} from '@/components/Setting/style';
 import { getUser } from '@/slices/user';
 import { useDispatch } from '@/store';
-import Button from '@/components/Common/Button';
-import Avatar from '@/components/Common/Avatar';
-import ImageUploader from '@/components/Common/Button/ImageUploadButton';
-import Input from '@/components/Common/Input';
-import Text from '@/components/Common/Text';
+import { Button, Avatar, Input, Text } from '@/components/common';
+import ImageUploader from '@/components/common/Button/ImageUploadButton';
 import MailIcon from '@/assets/MailIcon';
 import { useSelectedUser } from '@/hooks/useSelectedUser';
 

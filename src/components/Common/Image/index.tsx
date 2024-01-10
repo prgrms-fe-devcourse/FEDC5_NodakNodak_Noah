@@ -1,10 +1,6 @@
-const Image = ({
-  src,
-  width,
-  height,
-  alt,
-  ...props
-}: React.ImgHTMLAttributes<HTMLImageElement>) => {
+import { ImageProps } from '@/components/common/Image/ImageProps';
+
+const Image = ({ src, width, height, alt, ...props }: ImageProps) => {
   const imageStyle = {
     display: 'block',
     width,

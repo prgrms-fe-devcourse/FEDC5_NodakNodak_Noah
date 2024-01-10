@@ -1,7 +1,7 @@
 ﻿import { forwardRef, Ref } from 'react';
 
-import { InputProps } from '@/components/Common/Input/InputProps';
-import { Wrapper, StyledInput } from '@/components/Common/Input/styledInput';
+import { InputProps } from '@/components/common/Input/InputProps';
+import { Wrapper, StyledInput } from '@/components/common/Input/style';
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
   (

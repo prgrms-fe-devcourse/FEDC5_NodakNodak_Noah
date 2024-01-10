@@ -1,9 +1,9 @@
 import axios from 'axios';
 import { ChangeEvent, useRef, useState } from 'react';
 
-import Button from '@/components/Common/Button';
-import { InvisibleInput } from '@/components/Common/Button/styledButton';
-import { ImageUnloadButtonProps } from '@/components/Common/Button/ButtonProps';
+import Button from '@/components/common/Button';
+import { InvisibleInput } from '@/components/common/Button/style';
+import { ImageUnloadButtonProps } from '@/components/common/Button/ButtonProps';
 
 const ImageUploader = ({
   styleType = 'primary',

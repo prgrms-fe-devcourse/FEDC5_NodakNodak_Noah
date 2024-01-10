@@ -5,15 +5,15 @@ import { Provider } from 'react-redux';
 
 import App from '@/App';
 import store from '@/store';
-import Main from '@/pages/Main';
-import Login from '@/pages/Login';
-import Index from '@/pages/Index';
-import UserPage from '@/pages/User';
-import Setting from '@/pages/Setting';
-import NotFound from '@/pages/NotFound';
-import DetailPage from '@/pages/PostDetail';
-import PostCreatePage from '@/pages/PostCreate';
-import PostUpdatePage from '@/pages/PostUpdate';
+import Main from '@/pages/MainPage';
+import Login from '@/pages/SignPage';
+import Index from '@/pages/IndexPage';
+import UserPage from '@/pages/UserPage';
+import Setting from '@/pages/SettingPage';
+import NotFound from '@/pages/NotFoundPage';
+import DetailPage from '@/pages/DetailPage';
+import PostCreatePage from '@/pages/PostPage';
+import PostUpdatePage from '@/pages/UpdatePage';
 import PostVoteChart from '@/components/Post/Detail/Result';
 import PostVote from '@/components/Post/Detail/Vote';
 
