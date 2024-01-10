@@ -24,7 +24,7 @@ const DetailPage = () => {
     if (!token) {
       navigate('/sign');
     } else {
-      dispatch(getMyInfo({ token }));
+      dispatch(getMyInfo());
     }
   }, [navigate, dispatch]);
   return (

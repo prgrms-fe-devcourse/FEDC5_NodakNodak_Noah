@@ -61,7 +61,7 @@ const PostComment = () => {
         userId: postDetail.author._id,
       };
 
-      dispatch(createNotification({ token, notificationData }));
+      dispatch(createNotification({ notificationData }));
       dispatch(getPostDetail({ postId }));
     } catch (e) {
       alert(e);

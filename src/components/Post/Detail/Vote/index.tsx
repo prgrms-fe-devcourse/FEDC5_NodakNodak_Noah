@@ -68,7 +68,7 @@ const PostVote = () => {
         userId: postDetail.author._id,
       };
 
-      dispatch(createNotification({ token, notificationData }));
+      dispatch(createNotification({ notificationData }));
       dispatch(getPostDetail({ postId }));
       navigate(`./result`);
     } catch (e) {

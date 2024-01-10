@@ -4,7 +4,7 @@ import axiosInstance from '@/utils/customAxios';
 
 export const getNotificationArray = createAsyncThunk(
   `${name}/getNotificationArray`,
-  async ({ token }: { token: string }) => {
+  async () => {
     const { data } = await axiosInstance.get('/notifications');
 
     return data;
@@ -13,7 +13,7 @@ export const getNotificationArray = createAsyncThunk(
 
 export const seeNotifications = createAsyncThunk(
   `${name}/seenNotifications`,
-  async ({ token }: { token: string }) => {
+  async () => {
     const { data } = await axiosInstance.put('/notifications/seen');
 
     return data;
@@ -30,10 +30,8 @@ export interface CreateNotificationData {
 export const createNotification = createAsyncThunk(
   `${name}/createNotification`,
   async ({
-    token,
     notificationData,
   }: {
-    token: string;
     notificationData: CreateNotificationData;
   }) => {
     const { data } = await axiosInstance.post(

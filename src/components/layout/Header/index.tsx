@@ -88,7 +88,7 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
 
   useEffect(() => {
     if (!token) return;
-    dispatch(getNotificationArray({ token }));
+    dispatch(getNotificationArray());
   }, [dispatch, token]);
 
   return (

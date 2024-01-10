@@ -24,14 +24,11 @@ export const getUser = createAsyncThunk(
   },
 );
 
-export const getMyInfo = createAsyncThunk(
-  'user/getMyInfo',
-  async ({ token }: { token: string }) => {
-    const { data } = await axiosInstance.get('auth-user');
+export const getMyInfo = createAsyncThunk('user/getMyInfo', async () => {
+  const { data } = await axiosInstance.get('auth-user');
 
-    return data;
-  },
-);
+  return data;
+});
 
 export const userInfo = createSlice({
   name: 'user',

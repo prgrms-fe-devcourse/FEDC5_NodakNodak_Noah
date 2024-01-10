@@ -13,11 +13,9 @@ export const follow = createAsyncThunk(
   async (
     {
       myId,
-      token,
       userId,
     }: {
       myId: string;
-      token: string;
       userId: string;
     },
     { getState, dispatch },
@@ -37,7 +35,6 @@ export const follow = createAsyncThunk(
 
     dispatch(
       createNotification({
-        token,
         notificationData,
       }),
     );
@@ -51,11 +48,9 @@ export const unfollow = createAsyncThunk(
   async (
     {
       myId,
-      token,
       followId,
     }: {
       myId: string;
-      token: string;
       followId: string;
     },
     { getState },
