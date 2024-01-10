@@ -3,7 +3,7 @@ import { HtmlHTMLAttributes, PropsWithChildren } from 'react';
 import {
   ScrollBarWrapper,
   PaddingWrapper,
-} from '@/components/Common/ScrollBar/styledScrollBar';
+} from '@/components/common/ScrollBar/style';
 
 const ScrollBar = ({
   children,

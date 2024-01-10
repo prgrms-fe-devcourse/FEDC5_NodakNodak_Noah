@@ -10,9 +10,9 @@ import {
   ListItemButton,
   DropdownContent,
   MenuForm,
-} from '@/components/Common/Dropdown/styledDropdown';
+} from '@/components/common/Dropdown/style';
 import useClickAway from '@/hooks/useClickAway';
-import { DropdownProps } from '@/components/Common/Dropdown/DropdownProps';
+import { DropdownProps } from '@/components/common/Dropdown/DropdownProps';
 
 export interface Channel {
   _id: string;

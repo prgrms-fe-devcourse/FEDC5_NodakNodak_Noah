@@ -7,7 +7,7 @@ import {
   VoteTitleWrapper,
   InputWrapper,
   ButtonWrapper,
-} from '@/components/Post/Detail/Vote/styledVote';
+} from '@/components/Post/Detail/Vote/style';
 import theme from '@/styles/theme';
 import { useDispatch } from '@/store';
 import { getPostDetail } from '@/slices/postDetail';
@@ -18,12 +18,8 @@ import {
 import { useSelectedVote } from '@/hooks/useSelectedVote';
 import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
-import Card from '@/components/Common/Card';
-import Text from '@/components/Common/Text';
-import Input from '@/components/Common/Input';
-import Button from '@/components/Common/Button';
-import ScrollBar from '@/components/Common/ScrollBar';
-import { Warning } from '@/components/Sign/SignStyle';
+import { Input, Button, Card, ScrollBar, Text } from '@/components/common';
+import { Warning } from '@/components/Sign/style';
 
 const PostVote = () => {
   const postDetailContent = useSelectedPostDetail();

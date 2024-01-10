@@ -4,10 +4,8 @@ import axios from 'axios';
 import {
   PostContentWrapper,
   PostContentAuthorWrapper,
-} from '@/components/Post/Detail/Content/styledContent';
-import Text from '@/components/Common/Text';
-import Button from '@/components/Common/Button';
-import Avatar from '@/components/Common/Avatar';
+} from '@/components/Post/Detail/Content/style';
+import { Text, Button, Avatar } from '@/components/common';
 import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
 

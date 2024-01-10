@@ -1,16 +1,12 @@
 import { PropsWithChildren } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Avatar from '@/components/Common/Avatar';
-import OnLineBadge from '@/components/Common/OnlineBadge';
+import { Avatar, OnLineBadge } from '@/components/common';
 import {
   UserSnippetProps,
   UserSnippetGroupProps,
 } from '@/components/Main/UserSnippet/UserSnippetProps';
-import {
-  UserSnippetBox,
-  Title,
-} from '@/components/Main/UserSnippet/styledUserSnippet';
+import { UserSnippetBox, Title } from '@/components/Main/UserSnippet/style';
 
 const UserSnippet = ({
   isOnline,

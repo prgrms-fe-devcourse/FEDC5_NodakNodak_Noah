@@ -1,13 +1,12 @@
 import { PropsWithChildren } from 'react';
 
-import { BadgeProps } from '@/components/Common/Badge/BadgeProps';
-import { BadgeContainer, Super } from '@/components/Common/Badge/styledBadge';
+import { BadgeProps } from '@/components/common/Badge/BadgeProps';
+import { BadgeContainer, Super } from '@/components/common/Badge/style';
 
 const Badge = ({
   children,
   count,
   dot = false,
-  onClick = () => {},
   ...props
 }: PropsWithChildren<BadgeProps>) => {
   let badge = null;
@@ -22,7 +21,7 @@ const Badge = ({
   }
 
   return (
-    <BadgeContainer style={{ ...props.style }} onClick={onClick}>
+    <BadgeContainer style={{ ...props.style }}>
       {children}
       {badge}
     </BadgeContainer>

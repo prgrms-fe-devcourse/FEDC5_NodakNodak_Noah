@@ -3,12 +3,9 @@ import {
   Content,
   InputContainer,
   DeleteButton,
-} from '@/components/Post/Edit/VoteEditBox/styledVoteEditBox';
+} from '@/components/Post/Edit/VoteEditBox/style';
 import { PLACEHOLDER } from '@/utils/constants';
-import Card from '@/components/Common/Card';
-import Input from '@/components/Common/Input';
-import Button from '@/components/Common/Button';
-import ScrollBar from '@/components/Common/ScrollBar';
+import { Card, Input, Button, ScrollBar } from '@/components/common';
 import DeleteIcon from '@/assets/DeleteIcon';
 
 interface FormProps {
