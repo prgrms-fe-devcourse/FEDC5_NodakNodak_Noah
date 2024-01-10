@@ -1,9 +1,9 @@
 import { Card, ScrollBar } from '@/components/common';
-import UserSnippet from '@/components/Main/UserSnippet';
+import UserSnippet from '@/components/Main/UserListCard/UserSnippet';
 import {
   UserListCardProps,
   RenderUserSnippets,
-} from '@/components/Main/UserListCard/UserListCardProps';
+} from '@/components/Main/UserListCard/type';
 
 const UserListCard = ({ users }: UserListCardProps) => {
   const onlineUsers = users.filter((user) => user.isOnline);

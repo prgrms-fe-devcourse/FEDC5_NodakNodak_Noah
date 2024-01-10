@@ -3,10 +3,10 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { RootState } from '@/store';
-import PostSnippet from '@/components/Main/PostCard/PostSnippet';
 import { Button, Card } from '@/components/common';
 import { FlexWrapper } from '@/components/Main/PostCard/style';
-import { PostCardProps } from '@/components/Main/PostCard/PostCardProps';
+import { PostCardProps } from '@/components/Main/PostCard/type';
+import PostSnippet from '@/components/Main/PostCard/PostSnippet';
 import {
   useSelectedChannel,
   useSelectedChannelLoading,

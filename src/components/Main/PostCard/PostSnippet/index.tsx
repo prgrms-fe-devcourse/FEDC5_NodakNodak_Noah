@@ -1,9 +1,12 @@
 import { useNavigate } from 'react-router-dom';
 
 import { Text, Image, Avatar } from '@/components/common';
-import { PostSnippetProps } from '@/components/Main/PostCard/PostCardProps';
-import { PostSnippetBox } from '@/components/Main/PostCard/style';
-import { UserSnippetBox } from '@/components/Main/UserSnippet/style';
+import { UserSnippetBox } from '@/components/Main/style';
+import { PostSnippetProps } from '@/components/Main/PostCard/PostSnippet/type';
+import {
+  PostSnippetBox,
+  ContentBox,
+} from '@/components/Main/PostCard/PostSnippet/style';
 
 const PostSnippet = ({
   avatar,
@@ -25,7 +28,7 @@ const PostSnippet = ({
         height='146px'
         src={image ? image : '/DefaultImage.jpg'}
       />
-      <div>
+      <ContentBox>
         <Text tagType='p' fontType='body2' colorType='black'>
           {title}
         </Text>
@@ -42,7 +45,7 @@ const PostSnippet = ({
         <Text tagType='span' fontType='caption' colorType='black'>
           명 투표
         </Text>
-      </div>
+      </ContentBox>
       <UserSnippetBox onClick={handleUserClick}>
         <Avatar size='mini' src={avatar} />
         <Text tagType='span' fontType='caption' colorType='black'>
