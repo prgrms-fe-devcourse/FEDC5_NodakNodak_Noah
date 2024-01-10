@@ -3,48 +3,35 @@ import {
   Content,
   InputContainer,
   DeleteButton,
-} from '@/components/Post/Edit/VoteEditBox/style';
+} from '@/components/Post/Edit/VoteBox/style';
 import { PLACEHOLDER } from '@/utils/constants';
 import { Card, Input, Button, ScrollBar } from '@/components/common';
 import DeleteIcon from '@/assets/DeleteIcon';
 
 interface FormProps {
-  formData: {
+  values: {
     voteTitle: string;
     voteArray: string[];
   };
-  setFormData: (values: { voteTitle: string; voteArray: string[] }) => void;
+  setFieldValue: (field: string, values: string | string[]) => void;
 }
 
-const VotedBox = ({ formData, setFormData }: FormProps) => {
+const VotedBox = ({ values, setFieldValue }: FormProps) => {
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      voteTitle: e.target.value,
-    });
+    setFieldValue('voteTitle', e.target.value);
   };
 
   const handleCandidateChange = (index: number, value: string) => {
-    setFormData({
-      ...formData,
-      voteArray: formData.voteArray.map((candidate, i) =>
-        i === index ? value : candidate,
-      ),
-    });
+    setFieldValue(`voteArray[${index}]`, value);
   };
 
   const handleAddCandidate = () => {
-    setFormData({
-      ...formData,
-      voteArray: [...formData.voteArray, ''],
-    });
+    setFieldValue('voteArray', [...values.voteArray, '']);
   };
 
   const handleRemoveCandidate = (index: number) => {
-    setFormData({
-      ...formData,
-      voteArray: formData.voteArray.filter((_, i) => i !== index),
-    });
+    const updatedVoteArray = values.voteArray.filter((_, i) => i !== index);
+    setFieldValue('voteArray', updatedVoteArray);
   };
 
   return (
@@ -61,7 +48,7 @@ const VotedBox = ({ formData, setFormData }: FormProps) => {
               required={true}
               underline={true}
               fontType='h3'
-              value={formData.voteTitle}
+              value={values.voteTitle}
               onChange={handleTitleChange}
               style={{
                 width: '100%',
@@ -77,7 +64,7 @@ const VotedBox = ({ formData, setFormData }: FormProps) => {
               type='button'>
               <>선택지 추가 +</>
             </Button>
-            {formData.voteArray.map((candidate, index) => (
+            {values.voteArray.map((candidate, index) => (
               <InputContainer key={index}>
                 <Input
                   required={true}

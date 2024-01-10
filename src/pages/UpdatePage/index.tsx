@@ -1,22 +1,16 @@
 import { useFormik } from 'formik';
 import { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import VotedBox from '@/components/Post/Edit/VoteEditBox';
-import {
-  FormContainer,
-  FormArea,
-  TextAreaWrapper,
-  StyledTextArea,
-  ButtonWrapper,
-} from '@/pages/PostPage/style';
+import VotedBox from '@/components/Post/Edit/VoteBox';
+import { FormContainer } from '@/pages/PostPage/style';
 import { isValidatedForm } from '@/components/Post/Edit/formValidation';
-import { PLACEHOLDER, MESSAGE, FORM_SIZE } from '@/utils/constants';
+import { MESSAGE } from '@/utils/constants';
 import { sendPostRequest } from '@/components/Post/Edit/api';
-import { Input, Button } from '@/components/common';
 import { useDispatch } from '@/store';
 import { getPostDetail } from '@/slices/postDetail';
 import { useSelectedPostTitle } from '@/components/Post/Edit/useSelectedPost';
-import DropdownMenu from '@/components/common/Dropdown';
+import FormContent from '@/components/Post/Edit/FormContent';
+import SubmitButton from '@/components/Post/Edit/SubmitButton';
 
 interface FormType {
   title: string;
@@ -92,49 +86,19 @@ const PostUpdatePage = () => {
 
   return (
     <FormContainer onSubmit={handleSubmit} noValidate>
-      <FormArea>
-        <Input
-          required={true}
-          placeholder={PLACEHOLDER.TITLE}
-          name='title'
-          value={values.title}
-          onChange={handleChange}
-          fontType='h1'
-          underline={true}
-          style={{
-            width: FORM_SIZE.WIDTH,
-            height: FORM_SIZE.HEIGHT,
-            textAlign: 'center',
-          }}
-        />
-        <DropdownMenu
-          channelId={values.channelId}
-          setChannelId={(value) => setFieldValue('channelId', value)}
-        />
-        <TextAreaWrapper>
-          <StyledTextArea
-            name='content'
-            placeholder={PLACEHOLDER.CONTENT}
-            value={values.content}
-            onChange={handleChange}
-          />
-        </TextAreaWrapper>
-      </FormArea>
+      <FormContent
+        values={values}
+        handleChange={handleChange}
+        setFieldValue={setFieldValue}
+      />
       <VotedBox
-        formData={{
+        values={{
           voteTitle: values.voteTitle,
           voteArray: values.voteArray,
         }}
-        setFormData={(values) => {
-          setFieldValue('voteTitle', values.voteTitle);
-          setFieldValue('voteArray', values.voteArray);
-        }}
+        setFieldValue={setFieldValue}
       />
-      <ButtonWrapper>
-        <Button styleType='primary' size='small' type='submit' event='enabled'>
-          수정하기
-        </Button>
-      </ButtonWrapper>
+      <SubmitButton onSubmit={handleSubmit} message='수정하기' />
     </FormContainer>
   );
 };
