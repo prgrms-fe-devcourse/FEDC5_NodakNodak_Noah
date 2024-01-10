@@ -26,6 +26,7 @@ import {
 } from '@/components/layout/Header/style';
 import DarkModeToggle from '@/components/layout/Header/DarkModeToggle';
 import axiosInstance from '@/utils/customAxios';
+import theme from '@/styles/theme';
 
 const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
   const [focus, setFocus] = useState(false);
@@ -99,6 +100,7 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
       style={{
         display: 'flex',
         justifyContent: 'center',
+        backgroundColor: 'transparent',
       }}>
       <StyledHeaderWrapper>
         <LogoWrapper onClick={() => navigate('/home')}>
@@ -115,7 +117,7 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
                 tagType='span'
                 fontType='h4'
                 colorType='primary'
-                colorNumber='400'>
+                colorNumber={theme.isDark ? '200' : '500'}>
                 {name}
               </Text>
             </NavLinkWrapper>
