@@ -8,10 +8,7 @@ import { MESSAGE } from '@/utils/constants';
 import { sendPostRequest } from '@/components/Post/Edit/Api';
 import { useDispatch } from '@/store';
 import { getPostDetail } from '@/slices/postDetail';
-import {
-  useSelectedPostTitle,
-  useSelectedPost,
-} from '@/components/Post/Edit/useSelectedPost';
+import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
 import FormContent from '@/components/Post/Edit/FormContent';
 import SubmitButton from '@/components/Post/Edit/SubmitButton';
 import { FormType } from '@/pages/UpdatePage/type';
@@ -26,9 +23,8 @@ const PostUpdatePage = () => {
     dispatch(getPostDetail({ postId }));
   }, [dispatch, postId]);
 
-  const imageSrc = useSelectedPost().image;
-  const imagePublicId = useSelectedPost().imagePublicId;
-  const serverData = useSelectedPostTitle();
+  const { image, imagePublicId, title } = useSelectedPostDetail();
+  const serverData = JSON.parse(title);
   const postDetailVote = useSelectedVote();
   const isVoteEmpty = postDetailVote.length === 0;
 
@@ -40,7 +36,7 @@ const PostUpdatePage = () => {
   };
 
   const someFunction = async () => {
-    const imageBlob = await convertToBlob(imageSrc || '');
+    const imageBlob = await convertToBlob(image || '');
     const imageFile = new File([imageBlob], 'image.jpg', {
       type: 'image/jpeg',
     });
@@ -123,12 +119,12 @@ const PostUpdatePage = () => {
     if (serverData && values.channelId === '') {
       formik.setValues({
         ...serverData,
-        imageSrc: imageSrc,
+        imageSrc: image,
         image: imageFile,
         channelId: channelId,
       });
     }
-  }, [serverData, formik, values, channelId, imageFile, imageSrc]);
+  }, [serverData, formik, values, channelId, imageFile, image]);
 
   return (
     <FormContainer onSubmit={handleSubmit} noValidate>
