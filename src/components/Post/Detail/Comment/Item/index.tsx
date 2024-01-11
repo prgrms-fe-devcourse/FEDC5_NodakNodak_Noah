@@ -1,11 +1,9 @@
-import { useParams } from 'react-router-dom';
-
 import {
   CommentItemProps,
   CommentContent,
 } from '@/components/Post/Detail/Comment/Item/type';
 import { useDispatch } from '@/store';
-import { getPostDetail } from '@/slices/postDetail';
+import { deleteComment } from '@/slices/postDetail';
 import { Text, Avatar, Button } from '@/components/common';
 import axiosInstance from '@/utils/customAxios';
 import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
@@ -24,7 +22,6 @@ const Item = ({
   commentId,
 }: CommentItemProps) => {
   const myInfo = useSelectedMyInfo();
-  const { postId } = useParams();
   const dispatch = useDispatch();
 
   const dateObject = new Date(createdAt);
@@ -39,7 +36,7 @@ const Item = ({
 
     try {
       axiosInstance.delete(`comments/delete`, { data: { id: commentId } });
-      dispatch(getPostDetail({ postId }));
+      dispatch(deleteComment(commentId));
     } catch (e) {
       alert(e);
     }
