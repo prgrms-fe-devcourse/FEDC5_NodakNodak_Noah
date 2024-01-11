@@ -70,12 +70,14 @@ const VoteBox = ({ values, setFieldValue, isEditable }: FormProps) => {
                     height: '48px',
                   }}
                 />
-                <DeleteButton
-                  $isshow={index >= 2}
-                  type='button'
-                  onClick={() => handleRemoveCandidate(index)}>
-                  <DeleteIcon />
-                </DeleteButton>
+                {isEditable && (
+                  <DeleteButton
+                    $isshow={index >= 2}
+                    type='button'
+                    onClick={() => handleRemoveCandidate(index)}>
+                    <DeleteIcon />
+                  </DeleteButton>
+                )}
               </InputContainer>
             ))}
             {!isEditable && (
