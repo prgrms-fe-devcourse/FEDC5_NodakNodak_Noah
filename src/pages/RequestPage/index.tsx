@@ -38,7 +38,7 @@ const MessageContent = styled.textarea`
   height: 400px;
 `;
 
-const RequestPage = () => {
+const Request = () => {
   const [content, setContent] = useState('');
 
   const handleMessageSend = useCallback(async () => {
@@ -72,4 +72,4 @@ const RequestPage = () => {
   );
 };
 
-export default RequestPage;
+export default Request;
