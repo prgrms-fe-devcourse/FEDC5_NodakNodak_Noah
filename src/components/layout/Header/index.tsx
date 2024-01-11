@@ -79,9 +79,7 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
     setFocus(!focus);
   });
 
-  const menuRef = useClickAway((e: MouseEvent | TouchEvent) => {
-    const { tagName } = e.target as HTMLElement;
-    if (tagName === 'IMG') return;
+  const menuRef = useClickAway(() => {
     setShowMenu(false);
   });
 
