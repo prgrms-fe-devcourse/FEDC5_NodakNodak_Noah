@@ -1,6 +1,7 @@
 import { name } from './constants';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axiosInstance from '@/utils/customAxios';
+import { CreateNotificationData } from '@/slices/notification/type';
 
 export const getNotificationArray = createAsyncThunk(
   `${name}/getNotificationArray`,
@@ -19,13 +20,6 @@ export const seeNotifications = createAsyncThunk(
     return data;
   },
 );
-
-export interface CreateNotificationData {
-  notificationType: 'COMMENT' | 'FOLLOW' | 'LIKE' | 'MESSAGE';
-  notificationTypeId: string;
-  userId: string;
-  postId: string | null;
-}
 
 export const createNotification = createAsyncThunk(
   `${name}/createNotification`,

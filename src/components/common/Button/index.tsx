@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 
-import { ButtonProps } from '@/components/common/Button/ButtonProps';
+import { ButtonProps } from '@/components/common/Button/types';
 import { ButtonLayout, ButtonWrapper } from '@/components/common/Button/style';
 
 const Button = ({

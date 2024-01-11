@@ -3,14 +3,9 @@ import { useNavigate } from 'react-router-dom';
 
 import PasswordInput from '@/components/common/Input/PasswordInput';
 import { Button, Input } from '@/components/common';
-import {
-  Form,
-  Guide,
-  Register,
-  SignProps,
-  Warning,
-} from '@/components/Sign/style';
+import { Form, Guide, Register, Warning } from '@/components/Sign/style';
 import axiosInstance from '@/utils/customAxios';
+import { SignProps } from '@/components/Sign/type';
 
 const In = ({ isLogin, setIsLogin }: SignProps) => {
   const [email, setEmail] = useState('');

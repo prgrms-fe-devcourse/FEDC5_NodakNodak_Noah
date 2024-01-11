@@ -1,27 +1,22 @@
 // import useInterval from '@/hooks/useInterval';
 import { useState, useEffect } from 'react';
 
+import {
+  seeNotifications,
+  getNotificationArray,
+} from '@/slices/notification/thunk';
 import Bell from '@/assets/Bell';
+import { useDispatch } from '@/store';
+import useClickAway from '@/hooks/useClickAway';
+import { useSelectedUserList } from '@/hooks/useSelectedUserList';
+import { useSelectedNotifications } from '@/hooks/useSelectedNotifications';
 import { Badge, Button, ScrollBar } from '@/components/common';
 import {
   NotificationContainer,
   NotificationHeader,
   NotificationList,
 } from '@/components/layout/Header/NotificationCardBell/style';
-import { useDispatch } from '@/store';
-import {
-  seeNotifications,
-  getNotificationArray,
-} from '@/slices/notification/thunk';
-import useClickAway from '@/hooks/useClickAway';
-import { useSelectedUserList } from '@/hooks/useSelectedUserList';
-import { useSelectedNotifications } from '@/hooks/useSelectedNotifications';
-import { Comment } from '@/types/APIResponseTypes';
-
-interface NotificationData {
-  comment: Comment;
-  follower: string;
-}
+import { NotificationData } from '@/components/layout/Header/NotificationCardBell/type';
 
 const NotificationCardBell = () => {
   const token = localStorage.getItem('auth-token');

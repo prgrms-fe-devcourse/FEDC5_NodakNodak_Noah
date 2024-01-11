@@ -1,4 +1,4 @@
-import { ImageProps } from '@/components/common/Image/ImageProps';
+import { ImageProps } from '@/components/common/Image/type';
 
 const Image = ({ src, width, height, alt, ...props }: ImageProps) => {
   const imageStyle = {

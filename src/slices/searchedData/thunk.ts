@@ -1,5 +1,5 @@
-import { name } from './constants';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { name } from '@/slices/searchedData/constants';
 import axiosInstance from '@/utils/customAxios';
 
 export const searchAllData = createAsyncThunk(

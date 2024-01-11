@@ -5,3 +5,10 @@ export const InputWrapper = styled.div`
   align-items: center;
   flex-direction: column;
 `;
+
+export const BarChartContainer = styled.div`
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  position: relative;
+`;

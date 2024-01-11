@@ -29,8 +29,3 @@ export const Register = styled.span`
   color: #5c7cfa;
   cursor: pointer;
 `;
-
-export interface SignProps {
-  isLogin: boolean;
-  setIsLogin: (isLogin: boolean) => void;
-}

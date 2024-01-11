@@ -1,10 +1,7 @@
-import { name } from './constants';
-import {
-  CreateNotificationData,
-  createNotification,
-} from '../notification/thunk';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
+import { name } from '@/slices/follow/constants';
+import { createNotification } from '@/slices/notification/thunk';
+import { CreateNotificationData } from '@/slices/notification/type';
 import { RootState } from '@/store';
 import axiosInstance from '@/utils/customAxios';
 

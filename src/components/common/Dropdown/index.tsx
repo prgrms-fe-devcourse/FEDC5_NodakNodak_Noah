@@ -12,7 +12,7 @@ import {
   MenuForm,
 } from '@/components/common/Dropdown/style';
 import useClickAway from '@/hooks/useClickAway';
-import { DropdownProps } from '@/components/common/Dropdown/DropdownProps';
+import { DropdownProps } from '@/components/common/Dropdown/type';
 
 export interface Channel {
   _id: string;

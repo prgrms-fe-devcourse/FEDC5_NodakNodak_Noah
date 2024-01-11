@@ -25,9 +25,7 @@ const UserPostList = () => {
     dispatch(getPostListByUserId({ userId }));
   }, [dispatch, userId]);
 
-  if (!currentUser) {
-    return <></>;
-  }
+  if (!currentUser) return null;
   const { fullName } = currentUser;
   const postSnippetList = postListToPostSnippetList(postList);
 

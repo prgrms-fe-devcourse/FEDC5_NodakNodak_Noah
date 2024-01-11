@@ -10,10 +10,8 @@ import {
 import theme from '@/styles/theme';
 import { useDispatch } from '@/store';
 import { getPostDetail } from '@/slices/postDetail';
-import {
-  CreateNotificationData,
-  createNotification,
-} from '@/slices/notification/thunk';
+import { createNotification } from '@/slices/notification/thunk';
+import { CreateNotificationData } from '@/slices/notification/type';
 import { useSelectedVote } from '@/hooks/useSelectedVote';
 import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';

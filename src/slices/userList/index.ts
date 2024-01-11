@@ -1,7 +1,7 @@
-import { UserList } from './userListType';
-import { getUserList } from './thunk';
-import { name } from './contants';
 import { createSlice } from '@reduxjs/toolkit';
+import { name } from '@/slices/userList/contants';
+import { getUserList } from '@/slices/userList/thunk';
+import { UserList } from '@/slices/userList/type';
 
 const initialState: UserList = {
   users: [],

@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import theme from '@/styles/theme';
-
-type LightnessType = 100 | 200 | 300 | 400 | 500;
+import { LightnessType } from '@/components/User/GrassTable/type';
 
 export const GrassWrapper = styled.div`
   width: 152px;

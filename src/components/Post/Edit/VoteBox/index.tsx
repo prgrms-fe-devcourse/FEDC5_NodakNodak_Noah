@@ -7,14 +7,7 @@ import {
 import { PLACEHOLDER } from '@/utils/constants';
 import { Card, Input, Button, ScrollBar } from '@/components/common';
 import DeleteIcon from '@/assets/DeleteIcon';
-
-interface FormProps {
-  values: {
-    voteTitle: string;
-    voteArray: string[];
-  };
-  setFieldValue: (field: string, values: string | string[]) => void;
-}
+import { FormProps } from '@/components/Post/Edit/VoteBox/type';
 
 const VoteBox = ({ values, setFieldValue }: FormProps) => {
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

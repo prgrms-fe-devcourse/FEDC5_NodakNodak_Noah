@@ -1,7 +1,6 @@
 import { GrassWrapper, GrassItem } from '@/components/User/GrassTable/style';
 import { useSelectedUser } from '@/hooks/useSelectedUser';
-
-type LightnessType = 100 | 200 | 300 | 400 | 500;
+import { LightnessType } from '@/components/User/GrassTable/type';
 
 const GrassTable = () => {
   const currentUser = useSelectedUser();
