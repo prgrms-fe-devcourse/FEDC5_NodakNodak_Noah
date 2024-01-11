@@ -124,15 +124,15 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
             width={focus ? '160px' : '100px'}
             bordertype={focus ? 'focus' : 'filled'}
             underline={true}
-            placeholder={focus ? '' : '     Find'}
+            placeholder='Find'
             onChange={(e) => setInputValue(e.target.value)}
             onFocus={handleFocus}
           />
-          {!focus && (
+          <Button type='submit' styleType='ghost' size='mini'>
             <SearchIcon className='material-symbols-outlined'>
               search
             </SearchIcon>
-          )}
+          </Button>
         </FormContainer>
         {isAuth ? (
           <AuthUiWrapper>
