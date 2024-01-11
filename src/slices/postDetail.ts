@@ -24,10 +24,9 @@ export const detailPostSlice = createSlice({
   reducers: {
     deleteComment: (state, action) => {
       const commentId = action.payload;
-      const commentIndex = state.post.comments.findIndex(
-        (comment) => comment._id === commentId,
+      state.post.comments = state.post.comments.filter(
+        (comment) => comment._id !== commentId,
       );
-      state.post.comments.splice(commentIndex, 1);
     },
   },
   extraReducers: (builder) => {

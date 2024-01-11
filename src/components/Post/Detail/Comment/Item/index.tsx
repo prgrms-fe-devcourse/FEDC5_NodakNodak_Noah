@@ -36,7 +36,7 @@ const Item = ({
 
     try {
       axiosInstance.delete(`comments/delete`, { data: { id: commentId } });
-      dispatch(deleteComment({ commentId }));
+      dispatch(deleteComment(commentId));
     } catch (e) {
       alert(e);
     }
