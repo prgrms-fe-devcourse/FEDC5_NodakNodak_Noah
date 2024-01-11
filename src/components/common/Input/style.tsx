@@ -56,6 +56,7 @@ export const StyledInput = styled.input<StyledInputProps>`
   padding: 4px 8px;
   box-sizing: border-box;
   background-color: #f9f9f9;
+  font-family: Prentendard;
 `;
 
 const borderMap = {

@@ -1,3 +1,5 @@
+import theme from '@/styles/theme';
+
 const LikeButton = ({
   onClick,
   isLiked,
@@ -36,7 +38,7 @@ const LikeButton = ({
             cx='50'
             cy='50'
             r='49'
-            fill='white'
+            fill='transparent'
             stroke='#C8B593'
             strokeWidth='2'
           />
@@ -46,13 +48,13 @@ const LikeButton = ({
             strokeWidth='2'
             strokeLinecap='round'
             strokeLinejoin='round'
-            fill={isLiked ? '#C8B593' : 'white'}
+            fill={isLiked ? '#C8B593' : 'transparent'}
           />
         </svg>
         <span
           style={{
             fontSize: '20px',
-            color: 'black',
+            color: theme.isDark ? 'white' : 'black',
             position: 'absolute',
             transform: 'translate(-50%, 320%)',
           }}>

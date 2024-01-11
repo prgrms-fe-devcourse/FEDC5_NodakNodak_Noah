@@ -8,6 +8,7 @@ import { Text, Button, Avatar } from '@/components/common';
 import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
 import axiosInstance from '@/utils/customAxios';
+import theme from '@/styles/theme';
 
 const PostContent = () => {
   const postDetailContent = useSelectedPostDetail();
@@ -67,7 +68,7 @@ const PostContent = () => {
         <Avatar size='middle' alt='유저네임' />
         <Text
           colorType='grayscale'
-          colorNumber='500'
+          colorNumber={theme.isDark ? '100' : '500'}
           fontType='body1'
           tagType='span'
           style={{ margin: '0 10px 0 10px' }}>

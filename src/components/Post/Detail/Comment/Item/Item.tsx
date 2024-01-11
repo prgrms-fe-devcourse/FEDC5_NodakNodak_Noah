@@ -50,7 +50,11 @@ const Item = ({
         display: 'flex',
         alignItems: 'center',
         margin: '8px',
-        borderBottom: `2px solid ${theme.colors.grayscale[200]}`,
+        borderBottom: `2px solid ${
+          theme.isDark
+            ? theme.colors.grayscale[400]
+            : theme.colors.grayscale[200]
+        }`,
         paddingBottom: '8px',
         width: '712px',
         height: '96px',
@@ -66,7 +70,7 @@ const Item = ({
           }}>
           <Text
             colorType='grayscale'
-            colorNumber='500'
+            colorNumber={theme.isDark ? '100' : '500'}
             fontType='body1'
             tagType='span'>
             {author}
@@ -78,7 +82,6 @@ const Item = ({
             colorNumber='300'>
             {createdAt}
           </Text>
-          <hr />
         </div>
       </div>
       <Text

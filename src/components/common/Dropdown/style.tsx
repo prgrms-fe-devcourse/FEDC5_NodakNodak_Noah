@@ -21,6 +21,7 @@ export const DropdownButton = styled.button<{ $ismenuopen: boolean }>`
   background-color: ${({ $ismenuopen }) =>
     $ismenuopen ? theme.colors.grayscale[200] : theme.colors.grayscale[100]};
   color: ${theme.colors.grayscale[300]};
+  font-family: Pretendard;
   cursor: pointer;
   border-radius: 4px;
 `;
@@ -47,6 +48,7 @@ export const ListItemButton = styled.button`
   color: ${theme.isDark
     ? theme.colors.primary[200]
     : theme.colors.primary[400]};
+  font-family: Prentendard;
   cursor: pointer;
   &:last-child {
     border-bottom-left-radius: 8px;

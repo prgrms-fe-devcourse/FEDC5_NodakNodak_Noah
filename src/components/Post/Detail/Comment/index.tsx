@@ -72,7 +72,11 @@ const PostComment = () => {
     <div
       style={{
         margin: '3rem 15.19rem',
-        borderTop: `solid 1px ${theme.colors.grayscale[200]}`,
+        borderTop: `solid 1px ${
+          theme.isDark
+            ? theme.colors.grayscale[400]
+            : theme.colors.grayscale[200]
+        }`,
       }}>
       <div
         style={{
