@@ -25,9 +25,9 @@ export interface StyledInputProps {
     | 'caption';
 }
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<{ justifyContent?: 'center' | 'flex-start' }>`
   display: flex;
-  justify-content: center;
+  justify-content: ${({ justifyContent }) => justifyContent || 'center'};
   align-items: center;
   position: relative;
   width: 100%;

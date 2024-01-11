@@ -47,7 +47,6 @@ const VoteBox = ({ values, setFieldValue, isEditable }: FormProps) => {
               style={{
                 width: '100%',
                 height: '48px',
-                textAlign: 'center',
               }}
             />
             <Button
