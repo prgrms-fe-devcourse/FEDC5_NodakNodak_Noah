@@ -8,8 +8,9 @@ import { PLACEHOLDER } from '@/utils/constants';
 import { Card, Input, Button, ScrollBar } from '@/components/common';
 import DeleteIcon from '@/assets/DeleteIcon';
 import { FormProps } from '@/components/Post/Edit/VoteBox/type';
+import Text from '@/components/common/Text';
 
-const VoteBox = ({ values, setFieldValue }: FormProps) => {
+const VoteBox = ({ values, setFieldValue, isEditable }: FormProps) => {
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFieldValue('voteTitle', e.target.value);
   };
@@ -34,7 +35,7 @@ const VoteBox = ({ values, setFieldValue }: FormProps) => {
       shadowType='medium'
       style={{ margin: '0 auto', maxWidth: '666px' }}>
       <ScrollBar>
-        <ContentWrapper>
+        <ContentWrapper isEditable={isEditable}>
           <Content>
             <Input
               placeholder={PLACEHOLDER.VOTE_SUBJECT}
@@ -77,6 +78,11 @@ const VoteBox = ({ values, setFieldValue }: FormProps) => {
                 </DeleteButton>
               </InputContainer>
             ))}
+            {!isEditable && (
+              <Text tagType='span' style={{ color: 'red' }}>
+                {'투표가 진행되어 수정할 수 없습니다.'}
+              </Text>
+            )}
           </Content>
         </ContentWrapper>
       </ScrollBar>

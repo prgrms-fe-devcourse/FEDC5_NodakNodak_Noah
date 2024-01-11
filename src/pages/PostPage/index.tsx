@@ -82,6 +82,7 @@ const PostCreatePage = () => {
           voteArray: values.voteArray,
         }}
         setFieldValue={setFieldValue}
+        isEditable={true}
       />
       <SubmitButton onSubmit={handleSubmit} message='등록하기' />
     </FormContainer>

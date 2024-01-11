@@ -15,7 +15,7 @@ import {
 import FormContent from '@/components/Post/Edit/FormContent';
 import SubmitButton from '@/components/Post/Edit/SubmitButton';
 import { FormType } from '@/pages/UpdatePage/type';
-
+import { useSelectedVote } from '@/hooks/useSelectedVote';
 
 const PostUpdatePage = () => {
   const { channelId, postId } = useParams();
@@ -28,6 +28,9 @@ const PostUpdatePage = () => {
 
   const imageSrc = useSelectedPost().image;
   const imagePublicId = useSelectedPost().imagePublicId;
+  const serverData = useSelectedPostTitle();
+  const postDetailVote = useSelectedVote();
+  const isVoteEmpty = postDetailVote.length === 0;
 
   const convertToBlob = async (url: string) => {
     const response = await fetch(url);
@@ -46,8 +49,6 @@ const PostUpdatePage = () => {
   };
 
   const imageFile = someFunction();
-
-  const serverData = useSelectedPostTitle();
 
   const handleFormSubmit = async (forms: FormType) => {
     const {
@@ -143,6 +144,7 @@ const PostUpdatePage = () => {
           voteArray: values.voteArray,
         }}
         setFieldValue={setFieldValue}
+        isEditable={isVoteEmpty}
       />
       <SubmitButton onSubmit={handleSubmit} message='수정하기' />
     </FormContainer>
