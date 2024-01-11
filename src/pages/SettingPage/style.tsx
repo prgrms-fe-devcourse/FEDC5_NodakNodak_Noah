@@ -5,7 +5,9 @@ import theme from '@/styles/theme';
 export const Container = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: ${theme.colors.primary[100]};
+  background-color: ${theme.isDark
+    ? theme.colors.grayscale[500]
+    : theme.colors.primary[100]};
 `;
 
 export const CardWrapper = styled.div`
@@ -16,7 +18,9 @@ export const CardWrapper = styled.div`
   width: 80vw;
   max-width: 600px;
   padding: 2rem 2rem 4rem 4rem;
-  background-color: white;
+  background-color: ${theme.isDark
+    ? theme.colors.grayscale[400]
+    : theme.colors.white};
   display: flex;
   flex-direction: column;
   gap: 2rem;
