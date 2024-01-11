@@ -8,7 +8,7 @@ export const usePagination = (postList: PostSnippet[], limit: number = 12) => {
     setPage(1);
   }, [postList.length]);
 
-  const paginationedPostList: PostSnippet[] = postList.slice(
+  const paginatedPostList: PostSnippet[] = postList.slice(
     (page - 1) * limit,
     page * limit,
   );
@@ -21,7 +21,7 @@ export const usePagination = (postList: PostSnippet[], limit: number = 12) => {
   };
 
   return {
-    paginationedPostList,
+    paginatedPostList,
     totalPage,
     currentPage: page,
     handlePageChange,
