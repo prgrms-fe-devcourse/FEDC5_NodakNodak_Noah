@@ -36,7 +36,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: '/update/:channelId/:postId',
+        path: '/update/:postId',
         element: (
           <ProtectedRoute>
             <PostUpdatePage />
