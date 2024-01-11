@@ -6,7 +6,9 @@ type LightnessType = 100 | 200 | 300 | 400 | 500;
 export const GrassWrapper = styled.div`
   width: 224px;
   height: 80px;
-  background-color: ${theme.colors.grayscale[100]};
+  background-color: ${theme.isDark
+    ? theme.colors.grayscale[300]
+    : theme.colors.grayscale[100]};
   display: flex;
   justify-content: center;
   align-items: center;

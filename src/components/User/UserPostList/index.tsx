@@ -8,6 +8,7 @@ import { postListToPostSnippetList } from '@/slices/postList/utils';
 import { useSelectedPostList } from '@/hooks/useSelectedPostList';
 import { getPostListByUserId } from '@/slices/postList/thunks';
 import { useSelectedUser } from '@/hooks/useSelectedUser';
+import theme from '@/styles/theme';
 
 const UserPostList = () => {
   const dispatch = useDispatch();
@@ -40,7 +41,7 @@ const UserPostList = () => {
         tagType='span'
         fontType='body1'
         colorType='grayscale'
-        colorNumber='400'>
+        colorNumber={theme.isDark ? '200' : '400'}>
         님의 최근 게시글
       </Text>
       <PostCard.Group style={{ width: '60vw', margin: '2rem 0' }}>
