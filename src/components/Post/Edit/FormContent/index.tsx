@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Input, Dropdown, Image, Button } from '@/components/common';
 import {
@@ -8,21 +8,7 @@ import {
 } from '@/pages/PostPage/style';
 import { PLACEHOLDER, FORM_SIZE } from '@/utils/constants';
 import ImageUploader from '@/components/common/Button/ImageUploadButton';
-
-interface FormContentProps {
-  values: {
-    title: string;
-    content: string;
-    channelId: string;
-    image: File | null;
-    imageSrc?: string;
-  };
-  handleChange: (
-    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => void;
-  setFieldValue: (field: string, value: string | File | null) => void;
-  handleDeleteImage: () => void;
-}
+import { FormContentProps } from '@/components/Post/Edit/FormContent/type';
 
 const FormContent = ({
   values,

@@ -14,18 +14,7 @@ import {
 } from '@/components/Post/Edit/useSelectedPost';
 import FormContent from '@/components/Post/Edit/FormContent';
 import SubmitButton from '@/components/Post/Edit/SubmitButton';
-
-interface FormType {
-  title: string;
-  content: string;
-  voteTitle: string;
-  voteArray: string[];
-  channelId: string;
-
-  image: File | null;
-  imageSrc: string;
-  imageToDeletePublicId: string;
-}
+import { FormType } from '@/pages/UpdatePage/type';
 
 const PostUpdatePage = () => {
   const { channelId, postId } = useParams();
