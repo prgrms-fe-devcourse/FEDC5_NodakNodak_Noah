@@ -56,8 +56,8 @@ const Setting = () => {
 
   const handleUpdate = async () => {
     try {
-      if (!updatedData.fullName) {
-        alert('닉네임은 필수 입력되어야 합니다.');
+      if (updatedData.fullName.length < 2) {
+        alert('닉네임은 2글자 이상이어야 합니다.');
         return;
       }
       await axiosInstance.put('settings/update-user', {
