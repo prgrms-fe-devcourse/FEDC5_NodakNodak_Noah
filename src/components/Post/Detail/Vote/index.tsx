@@ -29,6 +29,7 @@ const PostVote = () => {
   const navigate = useNavigate();
   const [voteContent, setVoteContent] = useState('');
   const [reVote, setRevote] = useState(false);
+  const [myVote, setMyvote] = useState('');
 
   useEffect(() => {
     postDetailVote.some((vote) => vote.author._id === myInfo?._id)
@@ -36,11 +37,24 @@ const PostVote = () => {
       : setRevote(false);
   }, [myInfo, postDetailVote]);
 
+  useEffect(() => {
+    const myVote = postDetailVote.filter(
+      (vote) => vote.author._id === myInfo?._id,
+    )[0]?.comment;
+    if (!myVote) return;
+    setMyvote(JSON.parse(myVote).content);
+  }, [myInfo, postDetailVote]);
+
   if (!postDetailContent.title) return null;
   const { voteArray, voteTitle } = JSON.parse(postDetailContent.title);
 
   const handleViewResult = () => {
     navigate(`./result`);
+  };
+
+  const handleVoteContent = (voteItem: string) => {
+    if (reVote) return;
+    setVoteContent(voteItem);
   };
 
   const handleVote = async (e: React.FormEvent) => {
@@ -88,6 +102,13 @@ const PostVote = () => {
           <Text tagType='span' fontType='body2' colorType='black'>
             {`${postDetailVote?.length}명 투표`}
           </Text>
+          {reVote ? (
+            <Warning style={{ margin: '20px 0 0 0' }}>
+              이미 투표하셨습니다.
+            </Warning>
+          ) : (
+            ''
+          )}
         </VoteTitleWrapper>
         <form>
           <InputWrapper>
@@ -101,12 +122,17 @@ const PostVote = () => {
                   marginBottom: '1.5rem',
                   width: '466px',
                   height: '48px',
+                  cursor: reVote ? 'not-allowed' : 'pointer',
                   backgroundColor: `${
-                    voteContent === vote ? theme.colors.primary[200] : ''
+                    vote === myVote
+                      ? theme.colors.primary[200]
+                      : voteContent === vote
+                        ? theme.colors.primary[200]
+                        : ''
                   }`,
                   outline: 'none',
                 }}
-                onClick={() => setVoteContent(vote)}
+                onClick={() => handleVoteContent(vote)}
               />
             ))}
           </InputWrapper>
@@ -128,7 +154,6 @@ const PostVote = () => {
             </Button>
           </ButtonWrapper>
         </form>
-        {reVote ? <Warning>이미 투표하셨습니다.</Warning> : ''}
       </ScrollBar>
     </Card>
   );
