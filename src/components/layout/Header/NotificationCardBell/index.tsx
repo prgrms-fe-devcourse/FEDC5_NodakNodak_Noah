@@ -49,9 +49,7 @@ const NotificationCardBell = () => {
     },
   );
 
-  const ref = useClickAway((e: MouseEvent | TouchEvent) => {
-    const { tagName } = e.target as HTMLElement;
-    if (tagName === 'path' || tagName === 'svg') return;
+  const ref = useClickAway(() => {
     setToggleNotification(false);
   });
 

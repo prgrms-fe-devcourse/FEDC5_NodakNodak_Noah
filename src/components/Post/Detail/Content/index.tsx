@@ -14,7 +14,7 @@ import theme from '@/styles/theme';
 const PostContent = () => {
   const postDetailContent = useSelectedPostDetail();
   const navigate = useNavigate();
-  const { postId, channelId } = useParams();
+  const { postId } = useParams();
   const myInfo = useSelectedMyInfo();
   const { author, createdAt } = postDetailContent;
 
@@ -31,7 +31,7 @@ const PostContent = () => {
   const handlePostEdit = () => {
     const isConfirm = window.confirm('수정하시겠습니까?');
     if (!isConfirm) return;
-    navigate(`/update/${channelId}/${postId}`);
+    navigate(`/update/${postId}`);
   };
   const handlePostDelete = async () => {
     const isConfirm = window.confirm('게시글을 삭제하시겠습니까?');

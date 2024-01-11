@@ -15,7 +15,7 @@ import { FormType } from '@/pages/UpdatePage/type';
 import { useSelectedVote } from '@/hooks/useSelectedVote';
 
 const PostUpdatePage = () => {
-  const { channelId, postId } = useParams();
+  const { postId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -23,7 +23,8 @@ const PostUpdatePage = () => {
     dispatch(getPostDetail({ postId }));
   }, [dispatch, postId]);
 
-  const { image, imagePublicId, title } = useSelectedPostDetail();
+  const { image, imagePublicId, title, channel } = useSelectedPostDetail();
+  const channelId = channel._id;
   const serverData = JSON.parse(title);
   const postDetailVote = useSelectedVote();
   const isVoteEmpty = postDetailVote.length === 0;
