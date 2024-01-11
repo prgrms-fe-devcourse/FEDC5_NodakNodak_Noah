@@ -56,6 +56,10 @@ const Setting = () => {
 
   const handleUpdate = async () => {
     try {
+      if (!updatedData.fullName) {
+        alert('닉네임은 필수 입력되어야 합니다.');
+        return;
+      }
       await axiosInstance.put('settings/update-user', {
         fullName: updatedData.fullName,
         username: updatedData.username,
@@ -114,6 +118,7 @@ const Setting = () => {
               fontType='h1'
               required={true}
               value={updatedData.fullName || ''}
+              maxLength={8}
               onChange={(e) => handleInputChange('fullName', e.target.value)}
             />
             <Input
@@ -122,6 +127,7 @@ const Setting = () => {
               width='80%'
               fontType='body1'
               value={updatedData.username || ''}
+              maxLength={20}
               onChange={(e) => handleInputChange('username', e.target.value)}
             />
             <TextWrapper>
