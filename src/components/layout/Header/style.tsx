@@ -26,15 +26,13 @@ export const NavLinkWrapper = styled(NavLink)`
 `;
 
 export const FormContainer = styled.form`
+  display: flex;
   position: relative;
   width: 160px;
+  flex-wrap: nowrap;
 `;
 
-export const SearchIcon = styled.span`
-  position: absolute;
-  left: 32px;
-  top: 4px;
-`;
+export const SearchIcon = styled.span``;
 export const AuthUiWrapper = styled.div`
   display: flex;
   position: relative;
