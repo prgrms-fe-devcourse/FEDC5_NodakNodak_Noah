@@ -8,6 +8,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
 }
 
 export interface ImageUnloadButtonProps extends ButtonProps {
+  setFile?: (file: File | null) => void;
   setImage: (image: string) => void;
-  apiParam: string;
+  apiParam?: string;
 }

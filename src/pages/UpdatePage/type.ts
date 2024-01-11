@@ -4,5 +4,8 @@ export interface FormType {
   voteTitle: string;
   voteArray: string[];
   channelId: string;
+
   image: File | null;
+  imageSrc: string;
+  imageToDeletePublicId: string;
 }
