@@ -57,20 +57,29 @@ const FormContent = ({
         channelId={values.channelId}
         setChannelId={(value) => setFieldValue('channelId', value)}
       />
-      <ImageUploader
-        size='wide'
-        setFile={(value) => setFieldValue('image', value)}
-        setImage={(value) => setFieldValue('imageSrc', value)}
-        type='button'>
-        이미지 선택
-      </ImageUploader>
-      <Button
-        styleType='primary'
-        size='small'
-        type='button'
-        onClick={handleDeleteImage}>
-        이미지 삭제하기
-      </Button>
+      <div
+        style={{
+          display: 'flex',
+          gap: '8px',
+          marginBottom: '10px',
+        }}>
+        <ImageUploader
+          size='regular'
+          setFile={(value) => setFieldValue('image', value)}
+          setImage={(value) => setFieldValue('imageSrc', value)}
+          type='button'>
+          이미지 선택
+        </ImageUploader>
+        {image && (
+          <Button
+            styleType='primary'
+            size='regular'
+            type='button'
+            onClick={handleDeleteImage}>
+            이미지 삭제
+          </Button>
+        )}
+      </div>
       <Image src={image} style={{ objectFit: 'contain', maxHeight: '500px' }} />
       <TextAreaWrapper>
         <StyledTextArea
