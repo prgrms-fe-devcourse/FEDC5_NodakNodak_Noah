@@ -24,7 +24,7 @@ interface FormType {
 
   image: File | null;
   imageSrc: string;
-  imagePublicId: string;
+  imageToDeletePublicId: string;
 }
 
 const PostUpdatePage = () => {
@@ -37,6 +37,8 @@ const PostUpdatePage = () => {
   }, [dispatch, postId]);
 
   const imageSrc = useSelectedPost().image;
+  const imagePublicId = useSelectedPost().imagePublicId;
+
   const convertToBlob = async (url: string) => {
     const response = await fetch(url);
     const blob = await response.blob();
@@ -65,7 +67,7 @@ const PostUpdatePage = () => {
       voteArray,
       channelId,
       image,
-      imagePublicId,
+      imageToDeletePublicId,
     } = forms;
 
     if (!isValidatedForm(forms)) {
@@ -81,8 +83,8 @@ const PostUpdatePage = () => {
     postData.append('channelId', channelId);
     postData.append('postId', postId || '');
     postData.append('image', image || '');
-    if (imagePublicId) {
-      postData.append('imagePublicId', imagePublicId || '');
+    if (imageToDeletePublicId) {
+      postData.append('imageToDeletePublicId', imagePublicId || '');
     }
 
     try {
@@ -104,6 +106,11 @@ const PostUpdatePage = () => {
       alert(MESSAGE.CREATE_POST_FAIL);
     }
   };
+  const handleDeleteImage = () => {
+    setFieldValue('imageSrc', undefined);
+    setFieldValue('image', null);
+    setFieldValue('imageToDeletePublicId', imagePublicId);
+  };
 
   const formik = useFormik({
     initialValues: {
@@ -114,7 +121,7 @@ const PostUpdatePage = () => {
       channelId: '',
       image: null,
       imageSrc: '',
-      imagePublicId: '',
+      imageToDeletePublicId: '',
     },
     onSubmit: handleFormSubmit,
   });
@@ -138,6 +145,7 @@ const PostUpdatePage = () => {
         values={values}
         handleChange={handleChange}
         setFieldValue={setFieldValue}
+        handleDeleteImage={handleDeleteImage}
       />
       <VoteBox
         values={{

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { Input, Dropdown, Image } from '@/components/common';
+import { Input, Dropdown, Image, Button } from '@/components/common';
 import {
   FormArea,
   TextAreaWrapper,
@@ -21,12 +21,14 @@ interface FormContentProps {
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
   setFieldValue: (field: string, value: string | File | null) => void;
+  handleDeleteImage: () => void;
 }
 
 const FormContent = ({
   values,
   handleChange,
   setFieldValue,
+  handleDeleteImage,
 }: FormContentProps) => {
   const { state } = useLocation();
   const [image, setImage] = useState(state || '');
@@ -62,6 +64,13 @@ const FormContent = ({
         type='button'>
         이미지 선택
       </ImageUploader>
+      <Button
+        styleType='primary'
+        size='small'
+        type='button'
+        onClick={handleDeleteImage}>
+        이미지 삭제하기
+      </Button>
       <Image src={image} style={{ objectFit: 'contain', maxHeight: '500px' }} />
       <TextAreaWrapper>
         <StyledTextArea

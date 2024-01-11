@@ -70,6 +70,11 @@ const PostCreatePage = () => {
     onSubmit: handleFormSubmit,
   });
 
+  const handleDeleteImage = () => {
+    setFieldValue('imageSrc', undefined);
+    setFieldValue('image', null);
+  };
+
   const { values, handleChange, handleSubmit, setFieldValue } = formik;
 
   return (
@@ -78,6 +83,7 @@ const PostCreatePage = () => {
         values={values}
         handleChange={handleChange}
         setFieldValue={setFieldValue}
+        handleDeleteImage={handleDeleteImage}
       />
       <VoteBox
         values={{
