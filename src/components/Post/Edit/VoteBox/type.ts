@@ -4,4 +4,5 @@ export interface FormProps {
     voteArray: string[];
   };
   setFieldValue: (field: string, values: string | string[]) => void;
+  isEditable: boolean;
 }

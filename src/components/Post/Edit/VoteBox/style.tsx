@@ -1,10 +1,15 @@
 import styled from 'styled-components';
 
-export const ContentWrapper = styled.div`
+interface ContentWrapperProps {
+  isEditable: boolean;
+}
+export const ContentWrapper = styled.div<ContentWrapperProps>`
   display: flex;
   padding: 40px 20px;
   justify-content: center;
   max-height: 400px;
+  cursor: ${(props) => (props.isEditable ? 'auto' : 'not-allowed')};
+  pointer-events: ${(props) => (props.isEditable ? 'auto' : 'none')};
 `;
 
 export const Content = styled.div`
