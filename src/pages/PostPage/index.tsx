@@ -15,6 +15,8 @@ interface FormType {
   voteTitle: string;
   voteArray: string[];
   channelId: string;
+
+  image: File | null;
 }
 
 const PostCreatePage = () => {
@@ -22,17 +24,19 @@ const PostCreatePage = () => {
   const navigate = useNavigate();
 
   const handleFormSubmit = async (forms: FormType) => {
-    const { title, content, voteTitle, voteArray, channelId } = forms;
+    const { title, content, voteTitle, voteArray, channelId, image } = forms;
 
     if (!isValidatedForm(forms)) {
       return;
     }
 
-    const postData = {
-      title: JSON.stringify({ title, content, voteTitle, voteArray }),
-      channelId,
-      image: '',
-    };
+    const postData = new FormData();
+    postData.append(
+      'title',
+      JSON.stringify({ title, content, voteTitle, voteArray }),
+    );
+    postData.append('channelId', channelId);
+    postData.append('image', image || '');
 
     try {
       const token = localStorage.getItem('auth-token');
@@ -61,6 +65,7 @@ const PostCreatePage = () => {
       voteTitle: '',
       voteArray: ['', ''],
       channelId: channelId || '',
+      image: null,
     },
     onSubmit: handleFormSubmit,
   });

@@ -1,22 +1,26 @@
-import React from 'react';
-import { Input, Dropdown } from '@/components/common';
+import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { Input, Dropdown, Image } from '@/components/common';
 import {
   FormArea,
   TextAreaWrapper,
   StyledTextArea,
 } from '@/pages/PostPage/style';
 import { PLACEHOLDER, FORM_SIZE } from '@/utils/constants';
+import ImageUploader from '@/components/common/Button/ImageUploadButton';
 
 interface FormContentProps {
   values: {
     title: string;
     content: string;
     channelId: string;
+    image: File | null;
+    imageSrc?: string;
   };
   handleChange: (
     event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
-  setFieldValue: (field: string, value: string) => void;
+  setFieldValue: (field: string, value: string | File | null) => void;
 }
 
 const FormContent = ({
@@ -24,6 +28,13 @@ const FormContent = ({
   handleChange,
   setFieldValue,
 }: FormContentProps) => {
+  const { state } = useLocation();
+  const [image, setImage] = useState(state || '');
+
+  useEffect(() => {
+    setImage(values.imageSrc);
+  }, [values.imageSrc]);
+
   return (
     <FormArea>
       <Input
@@ -44,6 +55,14 @@ const FormContent = ({
         channelId={values.channelId}
         setChannelId={(value) => setFieldValue('channelId', value)}
       />
+      <ImageUploader
+        size='wide'
+        setFile={(value) => setFieldValue('image', value)}
+        setImage={(value) => setFieldValue('imageSrc', value)}
+        type='button'>
+        이미지 선택
+      </ImageUploader>
+      <Image src={image} style={{ objectFit: 'contain', maxHeight: '500px' }} />
       <TextAreaWrapper>
         <StyledTextArea
           name='content'

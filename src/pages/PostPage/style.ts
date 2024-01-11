@@ -24,6 +24,7 @@ export const TextAreaWrapper = styled.div`
   padding: 10px;
   border: 1px solid ${them.colors.grayscale[300]};
   border-radius: 4px;
+  margin: 12px;
 `;
 
 export const StyledTextArea = styled.textarea`

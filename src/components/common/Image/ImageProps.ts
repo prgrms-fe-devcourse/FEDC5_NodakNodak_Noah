@@ -1,1 +1,3 @@
-export interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {}
+export interface ImageProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+  objectFit?: 'contain' | 'cover';
+}
