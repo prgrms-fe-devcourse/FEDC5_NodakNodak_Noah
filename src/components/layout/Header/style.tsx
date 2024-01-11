@@ -40,3 +40,13 @@ export const AuthUiWrapper = styled.div`
   align-items: center;
   gap: 16px;
 `;
+
+export const AdminSettings = styled.span`
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s linear;
+
+  &:hover {
+    transform: scale(1.4);
+  }
+`;
