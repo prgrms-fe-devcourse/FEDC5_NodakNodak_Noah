@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const UserInfoWrapper = styled.div`
-  width: 60vw;
+  width: 80vw;
   max-width: 1440px;
   margin: 3rem auto;
 `;
