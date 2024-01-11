@@ -3,7 +3,10 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 
+import ProtectedRoute from '@/components/common/ProtectedRoute';
+
 import App from '@/App';
+import Admin from '@/pages/AdminPage';
 import store from '@/store';
 import Main from '@/pages/MainPage';
 import Login from '@/pages/SignPage';
@@ -19,15 +22,44 @@ import PostVote from '@/components/Post/Detail/Vote';
 
 const router = createBrowserRouter([
   { path: '/', element: <Index />, errorElement: <NotFound />, index: true },
-  { path: '/user/:userId/setting', element: <Setting /> },
+  {
+    path: '/user/:userId/setting',
+    element: (
+      <ProtectedRoute>
+        <Setting />
+      </ProtectedRoute>
+    ),
+  },
   {
     path: '/',
     element: <App />,
     children: [
-      { path: '/update/:channelId/:postId', element: <PostUpdatePage /> },
-      { path: '/write/:channelId', element: <PostCreatePage /> },
+      {
+        path: '/update/:channelId/:postId',
+        element: (
+          <ProtectedRoute>
+            <PostUpdatePage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/write/:channelId',
+        element: (
+          <ProtectedRoute>
+            <PostCreatePage />
+          </ProtectedRoute>
+        ),
+      },
       { path: '/home/:channelId?', element: <Main /> },
       { path: '/user/:userId', element: <UserPage /> },
+      {
+        path: '/admin',
+        element: (
+          <ProtectedRoute admin>
+            <Admin />
+          </ProtectedRoute>
+        ),
+      },
       {
         path: '/detail/:channelId/:postId/',
         element: <DetailPage />,

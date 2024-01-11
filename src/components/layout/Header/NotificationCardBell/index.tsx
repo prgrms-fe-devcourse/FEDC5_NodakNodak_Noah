@@ -16,7 +16,6 @@ import {
   NotificationHeader,
   NotificationList,
 } from '@/components/layout/Header/NotificationCardBell/style';
-import { NotificationData } from '@/components/layout/Header/NotificationCardBell/type';
 
 const NotificationCardBell = () => {
   const token = localStorage.getItem('auth-token');
@@ -28,23 +27,17 @@ const NotificationCardBell = () => {
 
   const notificationsArray = notifications.map(
     ({ _id, comment, follow, author }) => {
-      const notificationData = {
-        comment,
-        follower:
-          userList.find((user) => user._id === follow?.follower)?.fullName ||
-          '',
-      } as NotificationData;
-
-      if (comment && 'comment' in notificationData.comment) {
-        const isVote =
-          JSON.parse(notificationData.comment.comment).type === 'vote';
+      const follower =
+        userList.find((user) => user._id === follow?.follower)?.fullName || '';
+      if (comment && 'comment' in comment) {
+        const isVote = JSON.parse(comment.comment).type === 'vote';
         const text = isVote
           ? `${author.fullName}님이 투표에 참여했습니다.`
           : `${author.fullName}님이 댓글을 달았습니다.`;
 
         return { _id, text };
-      } else if (notificationData.follower) {
-        const text = `${notificationData.follower}님이 팔로우했습니다.`;
+      } else if (follower) {
+        const text = `${follower}님이 팔로우했습니다.`;
 
         return { _id, text };
       } else {

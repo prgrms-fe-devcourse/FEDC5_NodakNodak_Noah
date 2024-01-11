@@ -23,6 +23,7 @@ import {
   FormContainer,
   AuthUiWrapper,
   NavLinkWrapper,
+  AdminSettings,
 } from '@/components/layout/Header/style';
 import axiosInstance from '@/utils/customAxios';
 
@@ -136,6 +137,14 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
         </FormContainer>
         {isAuth ? (
           <AuthUiWrapper>
+            {myInfo?.role === 'SuperAdmin' && (
+              <AdminSettings
+                onClick={() => navigate('/admin')}
+                className='material-symbols-outlined'>
+                settings
+              </AdminSettings>
+            )}
+
             <NotificationCardBell />
 
             <Avatar
