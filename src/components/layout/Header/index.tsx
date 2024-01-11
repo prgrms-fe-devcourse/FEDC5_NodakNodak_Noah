@@ -129,7 +129,6 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
             ref={inputRef as RefObject<HTMLInputElement>}
             height={'32px'}
             width={focus ? '160px' : '100px'}
-            bordertype={focus ? 'focus' : 'filled'}
             underline={true}
             placeholder='Find'
             onChange={(e) => setInputValue(e.target.value)}
