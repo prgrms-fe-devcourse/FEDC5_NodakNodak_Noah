@@ -1,4 +1,3 @@
-import { useSelector } from 'react-redux';
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import {
@@ -8,9 +7,10 @@ import {
 } from '@/components/User/UserInfo/style';
 import GrassTable from '@/components/User/GrassTable';
 import { Avatar, Button, Text } from '@/components/common';
-import { RootState, useDispatch } from '@/store';
+import { useDispatch } from '@/store';
 import { getUser } from '@/slices/user';
 import { useSelectedFollowData } from '@/hooks/useSelectedFollowData';
+import { useSelectedUser } from '@/hooks/useSelectedUser';
 
 const UserInfo = () => {
   const dispatch = useDispatch();
@@ -22,12 +22,8 @@ const UserInfo = () => {
     }
   }, [dispatch, userId, isFollower, isFollowing]);
 
-  const currentUser = useSelector(
-    (state: RootState) => state.userInfo.currentUser,
-  );
-  if (!currentUser) {
-    return <></>;
-  }
+  const currentUser = useSelectedUser();
+  if (!currentUser) return null;
   const { image, fullName, username, followers, following, posts } =
     currentUser;
 

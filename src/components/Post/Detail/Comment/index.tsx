@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { FlexColumn } from '@/components/Post/Detail/Comment/style';
-import { useDispatch } from '@/store';
 import {
-  createNotification,
-  CreateNotificationData,
-} from '@/slices/notification/thunk';
+  FlexColumn,
+  CommentBoundaryLine,
+  CommentContainer,
+} from '@/components/Post/Detail/Comment/style';
+import { useDispatch } from '@/store';
+import { createNotification } from '@/slices/notification/thunk';
+import { CreateNotificationData } from '@/slices/notification/type';
 import { getPostDetail } from '@/slices/postDetail';
-import Item from '@/components/Post/Detail/Comment/Item/Item';
+import Item from '@/components/Post/Detail/Comment/Item';
 import { Input, Button } from '@/components/common';
 import { Warning } from '@/components/Sign/style';
 import theme from '@/styles/theme';
@@ -63,13 +65,14 @@ const PostComment = () => {
 
       dispatch(createNotification({ notificationData }));
       dispatch(getPostDetail({ postId }));
+      setComment('');
     } catch (e) {
       alert(e);
     }
   };
 
   return (
-    <div
+    <CommentBoundaryLine
       style={{
         margin: '3rem 15.19rem',
         borderTop: `solid 1px ${
@@ -78,7 +81,7 @@ const PostComment = () => {
             : theme.colors.grayscale[200]
         }`,
       }}>
-      <div
+      <CommentContainer
         style={{
           display: 'flex',
           flexDirection: 'column',
@@ -86,7 +89,7 @@ const PostComment = () => {
         }}>
         {postDetailComment.map((comment) => {
           const {
-            author: { _id: authorId, fullName },
+            author: { _id: authorId, fullName, image },
             _id: commentId,
             createdAt,
             comment: commentText,
@@ -94,7 +97,8 @@ const PostComment = () => {
 
           return (
             <Item
-              author={fullName}
+              authorName={fullName}
+              authorImage={image}
               authorId={authorId}
               createdAt={createdAt}
               comment={commentText}
@@ -116,6 +120,7 @@ const PostComment = () => {
             <Input
               ref={inputRef as React.RefObject<HTMLInputElement>}
               bordertype={warn ? 'error' : 'filled'}
+              value={comment}
               placeholder='댓글을 입력해주세요.'
               fontType='body2'
               width='538px'
@@ -136,8 +141,8 @@ const PostComment = () => {
             제출
           </Button>
         </form>
-      </div>
-    </div>
+      </CommentContainer>
+    </CommentBoundaryLine>
   );
 };
 

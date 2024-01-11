@@ -1,25 +1,33 @@
 import { GrassWrapper, GrassItem } from '@/components/User/GrassTable/style';
 import { useSelectedUser } from '@/hooks/useSelectedUser';
-
-type LightnessType = 100 | 200 | 300 | 400 | 500;
+import { LightnessType } from '@/components/User/GrassTable/type';
 
 const GrassTable = () => {
   const currentUser = useSelectedUser();
+  const year = new Date().getFullYear();
+  const month = new Date().getMonth();
 
-  const grass = Array.from({ length: 30 }, (): LightnessType => 100);
+  const lastDayOfMonth = new Date(year, month + 1, 0).getDate();
+  const grass = Array.from(
+    { length: lastDayOfMonth },
+    (): LightnessType => 100,
+  );
 
   currentUser?.posts.forEach((post) => {
-    const date = new Date(post.createdAt);
+    const postDate = new Date(post.createdAt);
+    const postYear = postDate.getFullYear();
+    const postMonth = postDate.getMonth();
+    const postDay = postDate.getDate();
 
-    const year = date.getFullYear();
-    const month = date.getMonth();
+    const currentYear = new Date().getFullYear();
+    const currentMonth = new Date().getMonth();
 
-    const thisMonth = new Date().getMonth();
-    const thisYear = new Date().getFullYear();
-    const day = date.getDay();
-
-    if (year === thisYear && month === thisMonth && grass[day] < 500) {
-      grass[day] += 100;
+    if (
+      postYear === currentYear &&
+      postMonth === currentMonth &&
+      grass[postDay] < 500
+    ) {
+      grass[postDay] += 100;
     }
   });
 

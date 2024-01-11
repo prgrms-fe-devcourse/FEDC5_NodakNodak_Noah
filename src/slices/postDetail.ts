@@ -2,20 +2,13 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import { Post } from '@/types/APIResponseTypes';
 import axiosInstance from '@/utils/customAxios';
-
-interface DetailPost {
-  post: Post;
-  isLoading: boolean;
-}
+import { DetailPost, PostId } from '@/slices/postDetail/type';
 
 const initialState: DetailPost = {
   post: {} as Post,
   isLoading: false,
 };
 
-interface PostId {
-  postId: string | undefined;
-}
 export const getPostDetail = createAsyncThunk(
   'detailPost/getPostDetail',
   async ({ postId }: PostId) => {
@@ -28,7 +21,14 @@ export const getPostDetail = createAsyncThunk(
 export const detailPostSlice = createSlice({
   name: 'detailPost',
   initialState,
-  reducers: {},
+  reducers: {
+    deleteComment: (state, action) => {
+      const commentId = action.payload;
+      state.post.comments = state.post.comments.filter(
+        (comment) => comment._id !== commentId,
+      );
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getPostDetail.pending, (state) => {
       state.isLoading = true;
@@ -43,4 +43,5 @@ export const detailPostSlice = createSlice({
   },
 });
 
+export const { deleteComment } = detailPostSlice.actions;
 export default detailPostSlice.reducer;

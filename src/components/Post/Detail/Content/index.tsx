@@ -1,8 +1,9 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
 import {
-  PostContentTitleContainer,
+  PostContentContainer,
   PostContentAuthorWrapper,
+  PostContentTitleContainer,
 } from '@/components/Post/Detail/Content/style';
 import { Text, Button, Avatar } from '@/components/common';
 import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
@@ -20,7 +21,12 @@ const PostContent = () => {
   if (!postDetailContent.title) return null;
 
   const { content, title } = JSON.parse(postDetailContent.title);
-  const { fullName } = author;
+  const { fullName, image } = author;
+
+  const dataObject = new Date(createdAt);
+  const year = dataObject.getFullYear();
+  const month = dataObject.getMonth() + 1;
+  const date = dataObject.getDate();
 
   const handlePostEdit = () => {
     const isConfirm = window.confirm('수정하시겠습니까?');
@@ -40,8 +46,9 @@ const PostContent = () => {
   };
 
   return (
-    <PostContentTitleContainer className='ContentTitle'>
-      <div style={{ display: 'inline-flex', marginLeft: '20px' }}>
+    <PostContentContainer>
+      <PostContentTitleContainer
+        style={{ display: 'inline-flex', marginLeft: '20px' }}>
         <Text colorType='black' tagType='span' fontType='h1'>
           {title}
         </Text>
@@ -63,15 +70,15 @@ const PostContent = () => {
             </Button>
           </>
         ) : null}
-      </div>
+      </PostContentTitleContainer>
       <PostContentAuthorWrapper className='Author'>
-        <Avatar size='middle' alt='유저네임' />
+        <Avatar size='middle' alt='유저네임' src={image} />
         <Text
           colorType='grayscale'
           colorNumber={theme.isDark ? '100' : '500'}
           fontType='body1'
           tagType='span'
-          style={{ margin: '0 10px 0 10px' }}>
+          style={{ margin: '0 10px' }}>
           {fullName}
         </Text>
         <Text
@@ -79,7 +86,7 @@ const PostContent = () => {
           fontType='caption'
           colorType='grayscale'
           colorNumber='300'>
-          {createdAt}
+          {`${year}년 ${month}월 ${date}일`}
         </Text>
       </PostContentAuthorWrapper>
       <Text
@@ -90,11 +97,11 @@ const PostContent = () => {
         {content}
       </Text>
       {/* <Image
-        width='23.25rem'
-        height='9.4375rem'
-        style={{ marginTop: '1.25rem' }}
-      /> */}
-    </PostContentTitleContainer>
+          width='23.25rem'
+          height='9.4375rem'
+          style={{ marginTop: '1.25rem' }}
+        /> */}
+    </PostContentContainer>
   );
 };
 

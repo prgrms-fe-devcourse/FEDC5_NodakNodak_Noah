@@ -2,14 +2,9 @@ import { FormEvent, useCallback, useState } from 'react';
 import { AxiosError } from 'axios';
 import PasswordInput from '@/components/common/Input/PasswordInput';
 import { Button, Input } from '@/components/common';
-import {
-  Form,
-  Guide,
-  Register,
-  SignProps,
-  Warning,
-} from '@/components/Sign/style';
+import { Form, Guide, Register, Warning } from '@/components/Sign/style';
 import axiosInstance from '@/utils/customAxios';
+import { SignProps } from '@/components/Sign/type';
 
 const Up = ({ isLogin, setIsLogin }: SignProps) => {
   const [email, setEmail] = useState('');

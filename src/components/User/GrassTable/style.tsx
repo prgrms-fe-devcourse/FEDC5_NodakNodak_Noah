@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import theme from '@/styles/theme';
-
-type LightnessType = 100 | 200 | 300 | 400 | 500;
+import { LightnessType } from '@/components/User/GrassTable/type';
 
 export const GrassWrapper = styled.div`
   width: 152px;
@@ -10,7 +9,7 @@ export const GrassWrapper = styled.div`
     ? theme.colors.grayscale[300]
     : theme.colors.grayscale[100]};
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
   gap: 2px;

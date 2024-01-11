@@ -2,7 +2,7 @@ import { ChangeEvent, RefObject, useState, useEffect, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Text, Card, Input, Avatar, Button } from '@/components/common';
-import HeaderProps from '@/components/layout/Header/HeaderProps';
+import HeaderProps from '@/components/layout/Header/type';
 import LogoWithFontSize from '@/components/layout/LogoWithFontSize';
 import NotificationCardBell from '@/components/layout/Header/NotificationCardBell';
 import {
@@ -23,6 +23,7 @@ import {
   FormContainer,
   AuthUiWrapper,
   NavLinkWrapper,
+  AdminSettings,
 } from '@/components/layout/Header/style';
 import DarkModeToggle from '@/components/layout/Header/DarkModeToggle';
 import axiosInstance from '@/utils/customAxios';
@@ -130,19 +131,27 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
             width={focus ? '160px' : '100px'}
             bordertype={focus ? 'focus' : 'filled'}
             underline={true}
-            placeholder={focus ? '' : '     Find'}
+            placeholder='Find'
             onChange={(e) => setInputValue(e.target.value)}
             onFocus={handleFocus}
           />
-          {!focus && (
+          <Button type='submit' styleType='ghost' size='mini'>
             <SearchIcon className='material-symbols-outlined'>
               search
             </SearchIcon>
-          )}
+          </Button>
         </FormContainer>
         <DarkModeToggle />
         {isAuth ? (
           <AuthUiWrapper>
+            {myInfo?.role === 'SuperAdmin' && (
+              <AdminSettings
+                onClick={() => navigate('/admin')}
+                className='material-symbols-outlined'>
+                settings
+              </AdminSettings>
+            )}
+
             <NotificationCardBell />
             <Avatar
               size='small'

@@ -30,6 +30,18 @@ export const Card = styled.section`
   }
 `;
 
+export const GoHome = styled.span`
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  cursor: pointer;
+  user-select: none;
+  &:hover {
+    opacity: 0.8;
+    transition-duration: 0.5s;
+  }
+`;
+
 export const SignText = styled.h1`
   display: flex;
   font-size: 48px;

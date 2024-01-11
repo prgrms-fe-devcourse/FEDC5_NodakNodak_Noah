@@ -1,4 +1,4 @@
-import { SearchedPost } from '../searchedData/searchedDataType';
+import { SearchedPost } from '../searchedData/type';
 import { PostSnippet } from '@/components/Main/PostCard/type';
 import { Post } from '@/types/APIResponseTypes';
 

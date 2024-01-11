@@ -1,28 +1,22 @@
 // import useInterval from '@/hooks/useInterval';
 import { useState, useEffect } from 'react';
 
+import {
+  seeNotifications,
+  getNotificationArray,
+} from '@/slices/notification/thunk';
 import Bell from '@/assets/Bell';
+import { useDispatch } from '@/store';
+import useClickAway from '@/hooks/useClickAway';
+import { useSelectedUserList } from '@/hooks/useSelectedUserList';
+import { useSelectedNotifications } from '@/hooks/useSelectedNotifications';
+import { Badge, Button, ScrollBar, Text } from '@/components/common';
+import theme from '@/styles/theme';
 import {
   NotificationContainer,
   NotificationHeader,
   NotificationList,
 } from '@/components/layout/Header/NotificationCardBell/style';
-import { Badge, Button, ScrollBar, Text } from '@/components/common';
-import { useDispatch } from '@/store';
-import {
-  seeNotifications,
-  getNotificationArray,
-} from '@/slices/notification/thunk';
-import useClickAway from '@/hooks/useClickAway';
-import { useSelectedUserList } from '@/hooks/useSelectedUserList';
-import { useSelectedNotifications } from '@/hooks/useSelectedNotifications';
-import { Comment } from '@/types/APIResponseTypes';
-import theme from '@/styles/theme';
-
-interface NotificationData {
-  comment: Comment;
-  follower: string;
-}
 
 const NotificationCardBell = () => {
   const token = localStorage.getItem('auth-token');
@@ -34,23 +28,17 @@ const NotificationCardBell = () => {
 
   const notificationsArray = notifications.map(
     ({ _id, comment, follow, author }) => {
-      const notificationData = {
-        comment,
-        follower:
-          userList.find((user) => user._id === follow?.follower)?.fullName ||
-          '',
-      } as NotificationData;
-
-      if (comment && 'comment' in notificationData.comment) {
-        const isVote =
-          JSON.parse(notificationData.comment.comment).type === 'vote';
+      const follower =
+        userList.find((user) => user._id === follow?.follower)?.fullName || '';
+      if (comment && 'comment' in comment) {
+        const isVote = JSON.parse(comment.comment).type === 'vote';
         const text = isVote
           ? `${author.fullName}님이 투표에 참여했습니다.`
           : `${author.fullName}님이 댓글을 달았습니다.`;
 
         return { _id, text };
-      } else if (notificationData.follower) {
-        const text = `${notificationData.follower}님이 팔로우했습니다.`;
+      } else if (follower) {
+        const text = `${follower}님이 팔로우했습니다.`;
 
         return { _id, text };
       } else {

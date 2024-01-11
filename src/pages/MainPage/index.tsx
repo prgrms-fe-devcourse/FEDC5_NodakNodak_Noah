@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { MouseEvent, useEffect } from 'react';
 import { useNavigate, useSearchParams, useParams } from 'react-router-dom';
 import {
   MainWrapper,
@@ -50,8 +50,8 @@ const Main = () => {
 
   const postList = keyword ? searchedPosts : posts;
   const postSnippetList = postListToPostSnippetList(postList);
-  const { paginationedPostList, totalPage, currentPage, handlePageChange } =
-    usePagination(postSnippetList);
+  const { paginatedPostList, totalPage, currentPage, handlePageChange } =
+    usePagination(postSnippetList, 9);
 
   const getChannelTitle = () => {
     if (channelStatus === 'loading') return '로딩중';
@@ -61,14 +61,14 @@ const Main = () => {
     return channel.name;
   };
 
-  const handleWriteClick = (e: React.MouseEvent) => {
+  const handleWriteClick = (e: MouseEvent) => {
     e.preventDefault();
     const token = localStorage.getItem('auth-token');
     if (!token) {
       alert('로그인이 필요한 서비스 입니다.');
       return;
     }
-    navigate(`/write/${channelId}`);
+    navigate(`/write/${channelId ? channelId : 'unselected'}`);
   };
 
   useEffect(() => {
@@ -100,31 +100,29 @@ const Main = () => {
   }, 60000);
 
   return (
-    <>
-      <MainWrapper>
-        <PostContentWrapper>
-          <MainFlexWrapper>
-            <Text tagType='span' fontType='h2'>
-              {getChannelTitle()}
-            </Text>
-            <Button styleType='ghost' size='small' onClick={handleWriteClick}>
-              글 쓰기
-            </Button>
-          </MainFlexWrapper>
-          <PostCard.Group>
-            {paginationedPostList.map((post) => (
-              <PostCard key={post._id} post={post} />
-            ))}
-          </PostCard.Group>
-          <Pagination
-            page={currentPage}
-            totalPage={totalPage}
-            onPageChange={handlePageChange}
-          />
-        </PostContentWrapper>
-        <UserListCard users={userListToUserSnippetList(userList, myInfo)} />
-      </MainWrapper>
-    </>
+    <MainWrapper>
+      <PostContentWrapper>
+        <MainFlexWrapper>
+          <Text tagType='span' fontType='h2'>
+            {getChannelTitle()}
+          </Text>
+          <Button styleType='ghost' size='small' onClick={handleWriteClick}>
+            글 쓰기
+          </Button>
+        </MainFlexWrapper>
+        <PostCard.Group>
+          {paginatedPostList.map((post) => (
+            <PostCard key={post._id} post={post} />
+          ))}
+        </PostCard.Group>
+        <Pagination
+          page={currentPage}
+          totalPage={totalPage}
+          onPageChange={handlePageChange}
+        />
+      </PostContentWrapper>
+      <UserListCard users={userListToUserSnippetList(userList, myInfo)} />
+    </MainWrapper>
   );
 };
 

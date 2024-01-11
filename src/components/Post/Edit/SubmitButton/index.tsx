@@ -1,10 +1,6 @@
 import { Button } from '@/components/common';
 import { ButtonWrapper } from '@/pages/PostPage/style';
-
-interface SubmitButtonProps {
-  onSubmit: () => void;
-  message: string;
-}
+import { SubmitButtonProps } from '@/components/Post/Edit/SubmitButton/type';
 
 const SubmitButton = ({ onSubmit, message }: SubmitButtonProps) => {
   return (

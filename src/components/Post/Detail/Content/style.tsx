@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 
-export const PostContentTitleContainer = styled.div`
+export const PostContentContainer = styled.div`
   margin: 3rem;
 `;
 
+export const PostContentTitleContainer = styled.div`
+  display: inline-flex;
+  margin-left: 20px;
+`;
 export const PostContentAuthorWrapper = styled.div`
   display: flex;
   align-items: center;

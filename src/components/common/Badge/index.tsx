@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 
-import { BadgeProps } from '@/components/common/Badge/BadgeProps';
+import { BadgeProps } from '@/components/common/Badge/type';
 import { BadgeContainer, Super } from '@/components/common/Badge/style';
 
 const Badge = ({

@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 import {
   Container,
@@ -12,17 +11,15 @@ import {
   TextWrapper,
 } from '@/pages/SettingPage/style';
 import { getUser } from '@/slices/user';
-import { RootState, useDispatch } from '@/store';
+import { useDispatch } from '@/store';
 import { Avatar, Input, Text, Button } from '@/components/common';
-
+import { useSelectedUser } from '@/hooks/useSelectedUser';
 import ImageUploader from '@/components/common/Button/ImageUploadButton';
 import MailIcon from '@/assets/MailIcon';
 import axiosInstance from '@/utils/customAxios';
 
 const Setting = () => {
-  const currentUser = useSelector(
-    (state: RootState) => state.userInfo.currentUser,
-  );
+  const currentUser = useSelectedUser();
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
