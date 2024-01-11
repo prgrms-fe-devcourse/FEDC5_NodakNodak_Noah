@@ -25,7 +25,9 @@ import {
   NavLinkWrapper,
   AdminSettings,
 } from '@/components/layout/Header/style';
+import DarkModeToggle from '@/components/layout/Header/DarkModeToggle';
 import axiosInstance from '@/utils/customAxios';
+import theme from '@/styles/theme';
 
 const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
   const [focus, setFocus] = useState(false);
@@ -96,7 +98,11 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
     <Card
       width='100vw'
       height='80px'
-      style={{ display: 'flex', justifyContent: 'center' }}>
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        backgroundColor: 'transparent',
+      }}>
       <StyledHeaderWrapper>
         <LogoWrapper onClick={() => navigate('/home')}>
           <LogoWithFontSize fontSize='24px' />
@@ -112,7 +118,7 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
                 tagType='span'
                 fontType='h4'
                 colorType='primary'
-                colorNumber='400'>
+                colorNumber={theme.isDark ? '200' : '500'}>
                 {name}
               </Text>
             </NavLinkWrapper>
@@ -135,6 +141,7 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
             </SearchIcon>
           </Button>
         </FormContainer>
+        <DarkModeToggle />
         {isAuth ? (
           <AuthUiWrapper>
             {myInfo?.role === 'SuperAdmin' && (
@@ -146,7 +153,6 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
             )}
 
             <NotificationCardBell />
-
             <Avatar
               size='small'
               src={userImage}

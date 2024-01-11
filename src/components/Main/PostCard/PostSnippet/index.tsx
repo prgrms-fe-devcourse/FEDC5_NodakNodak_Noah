@@ -7,6 +7,7 @@ import {
   PostSnippetBox,
   ContentBox,
 } from '@/components/Main/PostCard/PostSnippet/style';
+import theme from '@/styles/theme';
 
 const PostSnippet = ({
   avatar,
@@ -39,7 +40,7 @@ const PostSnippet = ({
           tagType='span'
           fontType='caption'
           colorType='primary'
-          colorNumber='400'>
+          colorNumber={theme.isDark ? '200' : '400'}>
           {count}
         </Text>
         <Text tagType='span' fontType='caption' colorType='black'>

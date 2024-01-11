@@ -34,6 +34,7 @@ export const StyledTextArea = styled.textarea`
   resize: none;
   outline: none;
   background-color: transparent;
+  font-family: Pretendeard;
 `;
 
 export const ButtonWrapper = styled.div`

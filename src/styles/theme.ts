@@ -1,3 +1,5 @@
+const isDark = localStorage.getItem('isDark') === 'true';
+
 const theme = {
   colors: {
     primary: {
@@ -58,6 +60,7 @@ const theme = {
     button3: { size: '12px', weight: 'normal' },
     caption: { size: '12px', weight: 'normal' },
   },
+  isDark: isDark,
 };
 
 export default theme;

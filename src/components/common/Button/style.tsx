@@ -38,8 +38,12 @@ export const ButtonSize = {
 export const ButtonTypeEvent = {
   primary: {
     enabled: css`
-      background: ${theme.colors.primary[200]};
-      color: ${theme.colors.grayscale[400]};
+      background: ${theme.isDark
+        ? theme.colors.primary[400]
+        : theme.colors.primary[200]};
+      color: ${theme.isDark
+        ? theme.colors.primary[100]
+        : theme.colors.grayscale[400]};
     `,
     hover: css`
       background: ${theme.colors.primary[300]};
@@ -61,9 +65,14 @@ export const ButtonTypeEvent = {
   },
   ghost: {
     enabled: css`
-      border: 1px solid ${theme.colors.primary[200]};
-      background: ${theme.colors.white};
-      color: ${theme.colors.primary[400]};
+      border: 1px solid
+        ${theme.isDark ? theme.colors.primary[100] : theme.colors.primary[200]};
+      background: ${theme.isDark
+        ? theme.colors.grayscale[500]
+        : theme.colors.white};
+      color: ${theme.isDark
+        ? theme.colors.primary[100]
+        : theme.colors.primary[400]};
     `,
     hover: css`
       border: 1px solid ${theme.colors.primary[300]};
@@ -89,7 +98,7 @@ export const ButtonTypeEvent = {
   },
   text: {
     enabled: css`
-      color: ${theme.colors.info[300]};
+      color: ${theme.isDark ? theme.colors.info[200] : theme.colors.info[300]};
     `,
     hover: css`
       background: ${theme.colors.info[100]};
@@ -182,6 +191,7 @@ const ButtonWrapperBackgroundSize = {
   mini: css`
     width: 36px;
     height: 36px;
+    padding: 0px;
   `,
   small: css`
     width: 80px;

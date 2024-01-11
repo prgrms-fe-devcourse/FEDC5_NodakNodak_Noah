@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from '@/styles/theme';
 
 export const Container = styled.div`
   display: flex;
@@ -6,13 +7,17 @@ export const Container = styled.div`
   height: 100vh;
   justify-content: center;
   align-items: center;
-  background-color: #faf6e8;
+  background-color: ${theme.isDark
+    ? theme.colors.grayscale[500]
+    : theme.colors.primary[100]};
 `;
 
 export const Card = styled.section`
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: ${theme.isDark
+    ? theme.colors.grayscale[400]
+    : theme.colors.primary[100]};
   width: 960px;
   height: 680px;
   border-radius: 8px;

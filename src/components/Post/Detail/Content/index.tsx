@@ -9,6 +9,7 @@ import { Text, Button, Avatar } from '@/components/common';
 import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
 import axiosInstance from '@/utils/customAxios';
+import theme from '@/styles/theme';
 
 const PostContent = () => {
   const postDetailContent = useSelectedPostDetail();
@@ -74,10 +75,10 @@ const PostContent = () => {
         <Avatar size='middle' alt='유저네임' src={image} />
         <Text
           colorType='grayscale'
-          colorNumber='500'
+          colorNumber={theme.isDark ? '100' : '500'}
           fontType='body1'
           tagType='span'
-          style={{ margin: '0 10px 0 10px' }}>
+          style={{ margin: '0 10px' }}>
           {fullName}
         </Text>
         <Text
@@ -96,10 +97,10 @@ const PostContent = () => {
         {content}
       </Text>
       {/* <Image
-        width='23.25rem'
-        height='9.4375rem'
-        style={{ marginTop: '1.25rem' }}
-      /> */}
+          width='23.25rem'
+          height='9.4375rem'
+          style={{ marginTop: '1.25rem' }}
+        /> */}
     </PostContentContainer>
   );
 };

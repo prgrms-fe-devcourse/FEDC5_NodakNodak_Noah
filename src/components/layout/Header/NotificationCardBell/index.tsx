@@ -10,7 +10,8 @@ import { useDispatch } from '@/store';
 import useClickAway from '@/hooks/useClickAway';
 import { useSelectedUserList } from '@/hooks/useSelectedUserList';
 import { useSelectedNotifications } from '@/hooks/useSelectedNotifications';
-import { Badge, Button, ScrollBar } from '@/components/common';
+import { Badge, Button, ScrollBar, Text } from '@/components/common';
+import theme from '@/styles/theme';
 import {
   NotificationContainer,
   NotificationHeader,
@@ -79,7 +80,13 @@ const NotificationCardBell = () => {
         <NotificationContainer ref={ref}>
           <ScrollBar>
             <NotificationHeader>
-              알림
+              <Text
+                tagType='span'
+                fontType='body2'
+                colorType='primary'
+                colorNumber={theme.isDark ? '100' : '500'}>
+                알림
+              </Text>
               <Button
                 type='button'
                 size='small'
@@ -90,7 +97,15 @@ const NotificationCardBell = () => {
             </NotificationHeader>
             <NotificationList>
               {notificationsArray.map(({ _id, text }) => (
-                <li key={_id}>{text}</li>
+                <li
+                  key={_id}
+                  style={{
+                    color: theme.isDark
+                      ? theme.colors.primary[100]
+                      : theme.colors.primary[500],
+                  }}>
+                  {text}
+                </li>
               ))}
             </NotificationList>
           </ScrollBar>

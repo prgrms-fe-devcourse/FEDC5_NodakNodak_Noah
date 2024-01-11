@@ -4,7 +4,9 @@ import theme from '@/styles/theme';
 export const IndexContainer = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: ${theme.colors.primary[100]};
+  background-color: ${theme.isDark
+    ? theme.colors.grayscale[500]
+    : theme.colors.primary[100]};
 `;
 
 export const IndexWrapper = styled.div`

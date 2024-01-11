@@ -5,6 +5,7 @@ export const AvatarWrapper = styled.div`
   display: inline-block;
   border: 1px solid #dadada;
   border-radius: 50%;
+  aspect-ratio: 1/1;
   background-color: #eee;
   overflow: hidden;
   cursor: pointer;

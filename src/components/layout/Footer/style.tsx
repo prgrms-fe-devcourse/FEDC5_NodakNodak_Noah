@@ -6,9 +6,10 @@ export const StyledFooter = styled.footer`
   flex-direction: column;
   width: 100vw;
   height: 160px;
-  background-color: ${theme.colors.grayscale[100]};
-  color: ${theme.colors.black};
+  background-color: ${theme.isDark
+    ? theme.colors.grayscale[400]
+    : theme.colors.grayscale[100]};
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 16px;
 `;

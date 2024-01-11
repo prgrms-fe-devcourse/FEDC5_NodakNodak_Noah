@@ -5,7 +5,9 @@ import { LightnessType } from '@/components/User/GrassTable/type';
 export const GrassWrapper = styled.div`
   width: 152px;
   height: 112px;
-  background-color: ${theme.colors.grayscale[100]};
+  background-color: ${theme.isDark
+    ? theme.colors.grayscale[300]
+    : theme.colors.grayscale[100]};
   display: flex;
   justify-content: flex-start;
   align-items: center;
