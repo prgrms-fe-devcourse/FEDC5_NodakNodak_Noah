@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import {
   VoteTitleWrapper,
@@ -12,6 +12,7 @@ import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
 const PostVoteChart = () => {
   const postDetailContent = useSelectedPostDetail();
   const postDetailVote = useSelectedVote();
+  const { postId, channelId } = useParams();
   const navigate = useNavigate();
 
   if (!postDetailContent.title) return null;
@@ -23,6 +24,10 @@ const PostVoteChart = () => {
 
   const handleToHome = () => {
     navigate('/home');
+  };
+
+  const handleToDetail = () => {
+    navigate(`/detail/${channelId}/${postId}`);
   };
 
   return (
@@ -42,6 +47,13 @@ const PostVoteChart = () => {
         </VoteTitleWrapper>
         <BarChart voteArray={voteArray} votedArray={votedArray} />
         <ButtonWrapper>
+          <Button
+            event='enabled'
+            styleType='ghost'
+            size='wide'
+            onClick={handleToDetail}>
+            투표 하기
+          </Button>
           <Button
             event='enabled'
             styleType='ghost'
