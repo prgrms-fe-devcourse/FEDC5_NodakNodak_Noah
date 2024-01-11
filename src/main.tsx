@@ -1,11 +1,12 @@
-import AdminPage from './pages/AdminPage';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
+
 import ProtectedRoute from '@/components/common/ProtectedRoute';
 
 import App from '@/App';
+import Admin from '@/pages/AdminPage';
 import store from '@/store';
 import Main from '@/pages/MainPage';
 import Login from '@/pages/SignPage';
@@ -55,7 +56,7 @@ const router = createBrowserRouter([
         path: '/admin',
         element: (
           <ProtectedRoute admin>
-            <AdminPage />
+            <Admin />
           </ProtectedRoute>
         ),
       },
