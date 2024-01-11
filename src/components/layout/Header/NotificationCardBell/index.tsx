@@ -2,12 +2,12 @@
 import { useState, useEffect } from 'react';
 
 import Bell from '@/assets/Bell';
-import { Badge, Button, ScrollBar, Text } from '@/components/common';
 import {
   NotificationContainer,
   NotificationHeader,
   NotificationList,
 } from '@/components/layout/Header/NotificationCardBell/style';
+import { Badge, Button, ScrollBar, Text } from '@/components/common';
 import { useDispatch } from '@/store';
 import {
   seeNotifications,

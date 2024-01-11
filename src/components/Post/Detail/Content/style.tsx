@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const PostContentWrapper = styled.div`
+export const PostContentTitleContainer = styled.div`
   margin: 3rem;
 `;
 

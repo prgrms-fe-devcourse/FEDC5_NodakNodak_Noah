@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react';
-import CardProps from '@/components/common/Card/CardProps';
+import CardProps from '@/components/common/Card/type';
 import theme from '@/styles/theme';
 
 const Card = ({

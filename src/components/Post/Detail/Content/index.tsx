@@ -1,7 +1,7 @@
 import { useNavigate, useParams } from 'react-router-dom';
 
 import {
-  PostContentWrapper,
+  PostContentTitleContainer,
   PostContentAuthorWrapper,
 } from '@/components/Post/Detail/Content/style';
 import { Text, Button, Avatar } from '@/components/common';
@@ -40,7 +40,7 @@ const PostContent = () => {
   };
 
   return (
-    <PostContentWrapper className='ContentTitle'>
+    <PostContentTitleContainer className='ContentTitle'>
       <div style={{ display: 'inline-flex', marginLeft: '20px' }}>
         <Text colorType='black' tagType='span' fontType='h1'>
           {title}
@@ -94,7 +94,7 @@ const PostContent = () => {
         height='9.4375rem'
         style={{ marginTop: '1.25rem' }}
       /> */}
-    </PostContentWrapper>
+    </PostContentTitleContainer>
   );
 };
 

@@ -4,8 +4,8 @@ import theme from '@/styles/theme';
 type LightnessType = 100 | 200 | 300 | 400 | 500;
 
 export const GrassWrapper = styled.div`
-  width: 224px;
-  height: 80px;
+  width: 152px;
+  height: 112px;
   background-color: ${theme.isDark
     ? theme.colors.grayscale[300]
     : theme.colors.grayscale[100]};
