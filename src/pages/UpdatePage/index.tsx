@@ -28,15 +28,15 @@ const PostUpdatePage = () => {
   const postDetailVote = useSelectedVote();
   const isVoteEmpty = postDetailVote.length === 0;
 
-  const convertToBlob = async (url: string) => {
+  const fetchImageBlob = async (url: string) => {
     const response = await fetch(url);
     const blob = await response.blob();
 
     return blob;
   };
 
-  const someFunction = async () => {
-    const imageBlob = await convertToBlob(image || '');
+  const generateImageFile = async () => {
+    const imageBlob = await fetchImageBlob(image || '');
     const imageFile = new File([imageBlob], 'image.jpg', {
       type: 'image/jpeg',
     });
@@ -44,7 +44,7 @@ const PostUpdatePage = () => {
     return imageFile;
   };
 
-  const imageFile = someFunction();
+  const imageFile = generateImageFile();
 
   const handleFormSubmit = async (forms: FormType) => {
     const {
