@@ -21,7 +21,14 @@ import PostVote from '@/components/Post/Detail/Vote';
 
 const router = createBrowserRouter([
   { path: '/', element: <Index />, errorElement: <NotFound />, index: true },
-  { path: '/user/:userId/setting', element: <Setting /> },
+  {
+    path: '/user/:userId/setting',
+    element: (
+      <ProtectedRoute>
+        <Setting />
+      </ProtectedRoute>
+    ),
+  },
   {
     path: '/',
     element: <App />,
