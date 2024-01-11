@@ -51,7 +51,7 @@ const Main = () => {
   const postList = keyword ? searchedPosts : posts;
   const postSnippetList = postListToPostSnippetList(postList);
   const { paginationedPostList, totalPage, currentPage, handlePageChange } =
-    usePagination(postSnippetList);
+    usePagination(postSnippetList, 9);
 
   const getChannelTitle = () => {
     if (channelStatus === 'loading') return '로딩중';
