@@ -1,7 +1,9 @@
+import AdminPage from './pages/AdminPage';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
+import ProtectedRoute from '@/components/common/ProtectedRoute';
 
 import App from '@/App';
 import store from '@/store';
@@ -24,10 +26,32 @@ const router = createBrowserRouter([
     path: '/',
     element: <App />,
     children: [
-      { path: '/update/:channelId/:postId', element: <PostUpdatePage /> },
-      { path: '/write/:channelId', element: <PostCreatePage /> },
+      {
+        path: '/update/:channelId/:postId',
+        element: (
+          <ProtectedRoute>
+            <PostUpdatePage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: '/write/:channelId',
+        element: (
+          <ProtectedRoute>
+            <PostCreatePage />
+          </ProtectedRoute>
+        ),
+      },
       { path: '/home/:channelId?', element: <Main /> },
       { path: '/user/:userId', element: <UserPage /> },
+      {
+        path: '/admin',
+        element: (
+          <ProtectedRoute admin>
+            <AdminPage />
+          </ProtectedRoute>
+        ),
+      },
       {
         path: '/detail/:channelId/:postId/',
         element: <DetailPage />,
