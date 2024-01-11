@@ -21,7 +21,15 @@ export const getPostDetail = createAsyncThunk(
 export const detailPostSlice = createSlice({
   name: 'detailPost',
   initialState,
-  reducers: {},
+  reducers: {
+    deleteComment: (state, action) => {
+      const commentId = action.payload;
+      const commentIndex = state.post.comments.findIndex(
+        (comment) => comment._id === commentId,
+      );
+      state.post.comments.splice(commentIndex, 1);
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getPostDetail.pending, (state) => {
       state.isLoading = true;
@@ -36,4 +44,5 @@ export const detailPostSlice = createSlice({
   },
 });
 
+export const { deleteComment } = detailPostSlice.actions;
 export default detailPostSlice.reducer;
