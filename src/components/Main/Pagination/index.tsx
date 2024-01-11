@@ -6,6 +6,7 @@ import {
   PageNumberWrapper,
 } from '@/components/Main/Pagination/style';
 import { PaginationProps } from '@/components/Main/Pagination/type';
+import theme from '@/styles/theme';
 
 const Pagination = ({ page, totalPage, onPageChange }: PaginationProps) => {
   const pageArray = Array.from(
@@ -38,7 +39,15 @@ const Pagination = ({ page, totalPage, onPageChange }: PaginationProps) => {
               tagType='span'
               fontType='h4'
               colorType='primary'
-              colorNumber={page === index + 1 ? '500' : '300'}>
+              colorNumber={
+                theme.isDark
+                  ? page === index + 1
+                    ? '200'
+                    : '500'
+                  : page === index + 1
+                    ? '500'
+                    : '300'
+              }>
               {(index + 1).toString()}
             </Text>
           </TextWrapper>

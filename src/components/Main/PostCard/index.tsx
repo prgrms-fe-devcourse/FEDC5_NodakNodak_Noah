@@ -64,11 +64,9 @@ const PostCard = ({ post }: PostCardProps) => {
 
 PostCard.Group = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
-
   width: 904px;
-
   gap: 16px;
 `;
 
