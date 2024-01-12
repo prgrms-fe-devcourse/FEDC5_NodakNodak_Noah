@@ -27,10 +27,9 @@ const UserInfo = () => {
     if (userId) {
       dispatch(getUser({ userId }));
     }
-        dispatch(getUserList());
+    dispatch(getUserList());
     dispatch(getUserList());
   }, [dispatch, userId, isFollower, isFollowing]);
-
 
   const [profileImage, setProfileImage] = useState('');
 
@@ -45,69 +44,68 @@ const UserInfo = () => {
       })
       .join(', ');
 
-
   if (!currentUser) return null;
 
   const { image, fullName, username, followers, following, posts } =
     currentUser;
 
   return (
-      <UserInfoContainer>
-        <AvatarWrapper>
-          <Avatar src={profileImage || image} alt={fullName} size='large' />
-          <ImageUploader
-            size='wide'
-            setImage={setProfileImage}
-            apiParam={'users/upload-photo'}>
-            이미지 선택
-          </ImageUploader>
-        </AvatarWrapper>
-        <UserInfoWrapper>
-          <Text tagType='span' fontType='h1' colorType='black'>
-            {fullName}
-          </Text>
-          <Text tagType='span' fontType='body1' colorType='black'>
-            {username || '한줄 소개가 없습니다'}
-          </Text>
-          <UserButtonContainer>
-            <Tooltip
-              direction='bottom'
-              message={getFullNames(followers.map((follower) => follower.user))}
-              hasArrow={true}
-              type='click'>
-              <a>
-                <Button
-                  size='regular'
-                  styleType='ghost'
-                  style={{ cursor: 'default' }}>
-                  {followers.length} 팔로워
-                </Button>
-              </a>
-            </Tooltip>
-            <Tooltip
-              direction='bottom'
-              message={getFullNames(following.map((followee) => followee.user))}
-              hasArrow={true}
-              type='click'>
-              <a>
-                <Button
-                  size='regular'
-                  styleType='ghost'
-                  style={{ cursor: 'default' }}>
-                  {following.length} 팔로잉
-                </Button>
-              </a>
-            </Tooltip>
-            <Button
-              size='regular'
-              styleType='ghost'
-              style={{ cursor: 'default' }}>
-              {posts.length} 포스트
-            </Button>
-          </UserButtonContainer>
-          <GrassTable />
-        </UserInfoWrapper>
-      </UserInfoContainer>
+    <UserInfoContainer>
+      <AvatarWrapper>
+        <Avatar src={profileImage || image} alt={fullName} size='large' />
+        <ImageUploader
+          size='wide'
+          setImage={setProfileImage}
+          apiParam={'users/upload-photo'}>
+          이미지 선택
+        </ImageUploader>
+      </AvatarWrapper>
+      <UserInfoWrapper>
+        <Text tagType='span' fontType='h1' colorType='black'>
+          {fullName}
+        </Text>
+        <Text tagType='span' fontType='body1' colorType='black'>
+          {username || '한줄 소개가 없습니다'}
+        </Text>
+        <UserButtonContainer>
+          <Tooltip
+            direction='bottom'
+            message={getFullNames(followers.map((follower) => follower.user))}
+            hasArrow={true}
+            type='click'>
+            <a>
+              <Button
+                size='regular'
+                styleType='ghost'
+                style={{ cursor: 'default' }}>
+                {followers.length} 팔로워
+              </Button>
+            </a>
+          </Tooltip>
+          <Tooltip
+            direction='bottom'
+            message={getFullNames(following.map((followee) => followee.user))}
+            hasArrow={true}
+            type='click'>
+            <a>
+              <Button
+                size='regular'
+                styleType='ghost'
+                style={{ cursor: 'default' }}>
+                {following.length} 팔로잉
+              </Button>
+            </a>
+          </Tooltip>
+          <Button
+            size='regular'
+            styleType='ghost'
+            style={{ cursor: 'default' }}>
+            {posts.length} 포스트
+          </Button>
+        </UserButtonContainer>
+        <GrassTable />
+      </UserInfoWrapper>
+    </UserInfoContainer>
   );
 };
 
