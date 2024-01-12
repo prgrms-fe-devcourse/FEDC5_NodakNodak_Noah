@@ -24,9 +24,3 @@ export const CardWrapper = styled.div`
   display: flex;
   gap: 2rem;
 `;
-
-export const AvatarWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-`;
