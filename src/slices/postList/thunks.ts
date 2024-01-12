@@ -9,7 +9,7 @@ import {
 export const getPostListByChannelId = createAsyncThunk(
   `${name}/getPostListByChannelId`,
   async ({ channelId, offset, limit }: GetPostsByChannelIdParams) => {
-    const queries = paginationClaculator(offset, limit);
+    const queries = paginationCalculator(offset, limit);
 
     const { data } = await axiosInstance.get(
       `posts/channel/${channelId}/${queries}`,
@@ -22,7 +22,7 @@ export const getPostListByChannelId = createAsyncThunk(
 export const getPostListByUserId = createAsyncThunk(
   `${name}/getPostListByUserId`,
   async ({ userId, offset, limit }: GetPostsByUserIdParams) => {
-    const queries = paginationClaculator(offset, limit);
+    const queries = paginationCalculator(offset, limit);
 
     const { data } = await axiosInstance.get(
       `posts/author/${userId}/${queries}`,
@@ -32,7 +32,7 @@ export const getPostListByUserId = createAsyncThunk(
   },
 );
 
-const paginationClaculator = (offset?: number, limit?: number) => {
+const paginationCalculator = (offset?: number, limit?: number) => {
   if (offset === undefined || limit === undefined) {
     return '';
   }
