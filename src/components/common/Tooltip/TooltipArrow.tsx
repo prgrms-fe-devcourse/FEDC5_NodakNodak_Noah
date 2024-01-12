@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components';
-
-type TooltipDirection = 'top' | 'bottom' | 'left' | 'right';
+import { TooltipDirection } from '@/components/Common/Tooltip/type';
 
 interface TooltipArrowProps {
   direction: TooltipDirection;

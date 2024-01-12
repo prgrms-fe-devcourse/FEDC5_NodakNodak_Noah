@@ -1,20 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, PropsWithChildren } from 'react';
 import useHover from '@/hooks/useHover';
 import TooltipContainer, {
   TooltipContent,
-  TooltipDirection,
 } from '@/components/common/Tooltip/style';
 import TooltipArrow from '@/components/common/Tooltip/TooltipArrow';
-
-type TooltipType = 'click' | 'focus' | 'hover';
-
-interface TooltipProps {
-  message: string;
-  type?: TooltipType;
-  direction: TooltipDirection;
-  hasArrow: boolean;
-  children: React.ReactNode;
-}
+import { TooltipProps } from '@/components/common/Tooltip/type';
 
 const Tooltip = ({
   type,
@@ -22,7 +12,7 @@ const Tooltip = ({
   message,
   direction,
   children,
-}: TooltipProps) => {
+}: PropsWithChildren<TooltipProps>) => {
   const [ref, isHovered] = useHover();
   const [show, setShow] = React.useState(false);
   const tooltipRef = useRef<HTMLSpanElement | null>(null);

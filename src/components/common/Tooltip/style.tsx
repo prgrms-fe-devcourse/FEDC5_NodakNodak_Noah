@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { TooltipDirection } from '@/components/Common/Tooltip/type';
 
 export const TooltipContainer = styled.div`
   position: relative;
@@ -49,7 +50,5 @@ export const getBoxShadow = (direction: TooltipDirection) => {
       return 'none';
   }
 };
-
-type TooltipDirection = 'top' | 'bottom' | 'left' | 'right';
 
 export default TooltipContainer;
