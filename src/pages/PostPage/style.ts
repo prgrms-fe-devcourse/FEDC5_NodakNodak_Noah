@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import them from '@/styles/theme';
 
 export const FormContainer = styled.form`
   display: flex;
@@ -8,33 +7,6 @@ export const FormContainer = styled.form`
   flex-direction: column;
   align-items: flex-end;
   margin: 80px auto;
-`;
-
-export const FormArea = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  width: 100%;
-  margin-bottom: 50px;
-`;
-
-export const TextAreaWrapper = styled.div`
-  height: 429px;
-  background-color: transparent;
-  padding: 10px;
-  border: 1px solid ${them.colors.grayscale[300]};
-  border-radius: 4px;
-`;
-
-export const StyledTextArea = styled.textarea`
-  font-size: 16px;
-  width: 100%;
-  height: 100%;
-  border: none;
-  resize: none;
-  outline: none;
-  background-color: transparent;
-  font-family: Pretendeard;
 `;
 
 export const ButtonWrapper = styled.div`

@@ -1,6 +1,5 @@
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
-  wrapperStyle?: React.CSSProperties;
   underline?: boolean;
   fontType?: 'h1' | 'h2' | 'h3' | 'h4' | 'body1' | 'body2' | 'body3';
   bordertype?:
@@ -12,4 +11,6 @@ export interface InputProps
     | 'error'
     | 'disabled';
   justifyContent?: 'center' | 'flex-start';
+
+  wrapperWidth?: string;
 }

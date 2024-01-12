@@ -12,12 +12,16 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       justifyContent = 'flex-start',
       height,
       width = '400px',
+      wrapperWidth = '100%',
       ...props
     }: InputProps,
     ref: Ref<HTMLInputElement>,
   ) => {
     return (
-      <Wrapper ref={ref} $justifyContent={justifyContent}>
+      <Wrapper
+        ref={ref}
+        $justifyContent={justifyContent}
+        style={{ width: wrapperWidth }}>
         <StyledInput
           $bordertype={bordertype}
           $fontType={fontType}
