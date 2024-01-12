@@ -6,6 +6,8 @@ export interface PostSnippet {
   title: string;
   count: string;
   userId: string;
+
+  channelId: string;
 }
 
 export interface PostCardProps {

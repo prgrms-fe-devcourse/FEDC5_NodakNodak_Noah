@@ -71,7 +71,9 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
       location.reload();
     } else if (item === '비밀번호변경') {
       setShowMenu(false);
-      navigate(`/user/${myInfo?._id}/setting/password`);
+      navigate(`/user/${myInfo?._id}/setting/password`, {
+        state: myInfo?.image,
+      });
     }
   };
 

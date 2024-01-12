@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import {
   CommentItemProps,
   CommentContent,
@@ -23,13 +24,18 @@ const Item = ({
 }: CommentItemProps) => {
   const myInfo = useSelectedMyInfo();
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const dateObject = new Date(createdAt);
   const year = dateObject.getFullYear();
   const month = dateObject.getMonth() + 1;
   const date = dateObject.getDate();
 
   const { content } = { ...JSON.parse(comment) } as CommentContent;
+
+  const handleCommentAuthorAvatarClick = (id: string) => {
+    navigate(`/user/${id}`);
+  };
+
   const handleCommentRemove = async () => {
     const isConfirm = window.confirm('댓글을 정말 삭제하시겠습니까?');
     if (!isConfirm) return;
@@ -45,7 +51,14 @@ const Item = ({
   return (
     <CommentItemContainer>
       <CommentAuthorContainer>
-        <Avatar size='middle' alt='유저네임' src={authorImage} />
+        <Avatar
+          size='middle'
+          alt='유저네임'
+          src={authorImage}
+          onClick={() => {
+            handleCommentAuthorAvatarClick(authorId);
+          }}
+        />
         <CommentAuthorWrapper>
           <Text
             colorType='grayscale'
