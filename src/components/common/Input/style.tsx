@@ -27,12 +27,13 @@ export interface StyledInputProps {
 
 export const Wrapper = styled.div<{
   $justifyContent?: 'center' | 'flex-start';
+  $width?: string;
 }>`
   display: flex;
   justify-content: ${({ $justifyContent }) => $justifyContent || 'center'};
   align-items: center;
   position: relative;
-  width: 100%;
+  width: ${({ $width }) => $width || '100%'};
 `;
 
 export const Eye = styled.span`
