@@ -11,6 +11,7 @@ const axiosInstance = axios.create({
 const authRequiredUrlList = [
   '/auth-user',
   '/users/upload-photo',
+  '/settings/update-password',
   '/settings/update-user',
   '/posts/create',
   '/posts/update',

@@ -22,34 +22,11 @@ export const CardWrapper = styled.div`
     ? theme.colors.grayscale[400]
     : theme.colors.white};
   display: flex;
-  flex-direction: column;
   gap: 2rem;
-`;
-
-export const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
-
-export const ContentContainer = styled.div`
-  display: flex;
-  gap: 1rem;
 `;
 
 export const AvatarWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
-`;
-
-export const InputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`;
-
-export const TextWrapper = styled.div`
-  display: flex;
-  align-items: flex-end;
-  gap: 1rem;
 `;

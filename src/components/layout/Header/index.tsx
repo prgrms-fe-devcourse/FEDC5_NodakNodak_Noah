@@ -34,7 +34,7 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
   const [inputValue, setInputValue] = useState('');
   const [showMenu, setShowMenu] = useState(false);
   const myInfo = useSelectedMyInfo();
-  const menu = ['마이페이지', '로그아웃'];
+  const menu = ['마이페이지', '비밀번호변경', '로그아웃'];
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -63,11 +63,14 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
     if (item === '마이페이지') {
       setShowMenu(false);
       navigate(`/user/${myInfo?._id}`);
-    } else {
+    } else if (item === '로그아웃') {
       localStorage.removeItem('auth-token');
       const { data } = await axiosInstance.post('/logout');
       alert(data);
       location.reload();
+    } else if (item === '비밀번호변경') {
+      setShowMenu(false);
+      navigate(`/user/${myInfo?._id}/setting/password`);
     }
   };
 
