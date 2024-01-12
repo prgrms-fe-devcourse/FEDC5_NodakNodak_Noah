@@ -11,7 +11,7 @@ const OnLineBadge = ({
   return (
     <BadgeContainer>
       {children}
-      <Super className='dot' isOnline={isOnline} isFollowing={isFollowing} />
+      <Super className='dot' $isOnline={isOnline} $isFollowing={isFollowing} />
     </BadgeContainer>
   );
 };

@@ -6,7 +6,7 @@ export const BadgeContainer = styled.div`
   display: inline-block;
 `;
 
-export const Super = styled.sup<{ isOnline: boolean; isFollowing: boolean }>`
+export const Super = styled.sup<{ $isOnline: boolean; $isFollowing: boolean }>`
   position: absolute;
   top: 0;
   right: 0;
@@ -17,8 +17,8 @@ export const Super = styled.sup<{ isOnline: boolean; isFollowing: boolean }>`
   font-size: 12px;
   color: white;
   border-radius: 20px;
-  background-color: ${({ isOnline }) =>
-    isOnline ? theme.colors.success[300] : theme.colors.error[300]};
+  background-color: ${({ $isOnline }) =>
+    $isOnline ? theme.colors.success[300] : theme.colors.error[300]};
 
   &.dot {
     padding: 0;
@@ -29,7 +29,7 @@ export const Super = styled.sup<{ isOnline: boolean; isFollowing: boolean }>`
     box-shadow: 0px 1px 2px ${theme.colors.grayscale[500]};
 
     border: 3px solid
-      ${({ isFollowing }) =>
-        isFollowing ? theme.colors.info[300] : theme.colors.white};
+      ${({ $isFollowing }) =>
+        $isFollowing ? theme.colors.info[300] : theme.colors.white};
   }
 `;

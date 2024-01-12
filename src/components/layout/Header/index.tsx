@@ -23,7 +23,7 @@ import {
   FormContainer,
   AuthUiWrapper,
   NavLinkWrapper,
-  AdminSettings,
+  IconWrapper,
 } from '@/components/layout/Header/style';
 import DarkModeToggle from '@/components/layout/Header/DarkModeToggle';
 import axiosInstance from '@/utils/customAxios';
@@ -144,14 +144,6 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
         <DarkModeToggle />
         {isAuth ? (
           <AuthUiWrapper>
-            {myInfo?.role === 'SuperAdmin' && (
-              <AdminSettings
-                onClick={() => navigate('/admin')}
-                className='material-symbols-outlined'>
-                settings
-              </AdminSettings>
-            )}
-
             <NotificationCardBell />
             <Avatar
               size='small'
@@ -159,6 +151,25 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
               onClick={handleAvatarClick}
               alt='유저네임'
             />
+
+            {myInfo?.role ? (
+              myInfo?.role === 'Regular' ? (
+                <IconWrapper
+                  className='material-symbols-outlined'
+                  onClick={() => navigate('/request')}>
+                  help
+                </IconWrapper>
+              ) : (
+                <IconWrapper
+                  onClick={() => navigate('/admin')}
+                  className='material-symbols-outlined'>
+                  settings
+                </IconWrapper>
+              )
+            ) : (
+              '...'
+            )}
+
             {showMenu && (
               <DropdownContent
                 ref={menuRef as RefObject<HTMLUListElement>}

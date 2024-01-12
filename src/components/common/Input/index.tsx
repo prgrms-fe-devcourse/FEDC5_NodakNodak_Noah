@@ -17,7 +17,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     ref: Ref<HTMLInputElement>,
   ) => {
     return (
-      <Wrapper ref={ref} justifyContent={justifyContent}>
+      <Wrapper ref={ref} $justifyContent={justifyContent}>
         <StyledInput
           $bordertype={bordertype}
           $fontType={fontType}

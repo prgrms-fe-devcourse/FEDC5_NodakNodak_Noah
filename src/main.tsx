@@ -1,8 +1,10 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import ProtectedRoute from '@/components/common/ProtectedRoute';
 
 import App from '@/App';
@@ -19,6 +21,7 @@ import PostCreatePage from '@/pages/PostPage';
 import PostUpdatePage from '@/pages/UpdatePage';
 import PostVoteChart from '@/components/Post/Detail/Result';
 import PostVote from '@/components/Post/Detail/Vote';
+import RequestToAdmin from '@/pages/RequestPage';
 import UserInfo from '@/components/Setting/UserInfo';
 import Password from '@/components/Setting/Password';
 import GlobalStyle from '@/styles/GlobalStyle';
@@ -56,6 +59,14 @@ const router = createBrowserRouter([
       { path: '/home/:channelId?', element: <Main /> },
       { path: '/user/:userId', element: <UserPage /> },
       {
+        path: '/request',
+        element: (
+          <ProtectedRoute>
+            <RequestToAdmin />
+          </ProtectedRoute>
+        ),
+      },
+      {
         path: '/admin',
         element: (
           <ProtectedRoute admin>
@@ -78,9 +89,23 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <RouterProvider router={router} />
-      <GlobalStyle />
-    </Provider>
+    <HelmetProvider>
+      <Provider store={store}>
+        <RouterProvider router={router} />
+        <Helmet>
+          <link
+            rel='stylesheet'
+            type='text/css'
+            href='https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css'
+          />
+          <link
+            rel='stylesheet'
+            type='text/css'
+            href='https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap'
+          />
+        </Helmet>
+        <GlobalStyle />
+      </Provider>
+    </HelmetProvider>
   </React.StrictMode>,
 );

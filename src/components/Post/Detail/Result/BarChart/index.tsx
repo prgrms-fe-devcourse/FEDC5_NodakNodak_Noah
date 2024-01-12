@@ -28,6 +28,7 @@ const BarChart = ({
     <InputWrapper>
       {[...voteCountMap].map(([vote, count], index) => (
         <BarChartContainer
+          key={`${vote}/${count}/${index}`}
           style={{
             display: 'inline-flex',
             alignItems: 'center',

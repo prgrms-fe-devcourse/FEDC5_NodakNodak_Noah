@@ -41,12 +41,12 @@ export const AuthUiWrapper = styled.div`
   gap: 16px;
 `;
 
-export const AdminSettings = styled.span`
+export const IconWrapper = styled.span`
   cursor: pointer;
   user-select: none;
   transition: all 0.2s linear;
-
+  transform: scale(1.4);
   &:hover {
-    transform: scale(1.4);
+    transform: scale(1.5);
   }
 `;
