@@ -11,18 +11,23 @@ import { Title } from '@/components/Main/UserListCard/UserSnippet/style';
 
 const UserSnippet = ({
   isOnline,
+  handleClick,
   image,
   fullName,
   isFollowing,
   userId,
+  ...props
 }: UserSnippetProps) => {
   const navigate = useNavigate();
+
   const handleUserClick = () => {
     navigate(`/user/${userId}`);
   };
 
   return (
-    <UserSnippetBox onClick={handleUserClick}>
+    <UserSnippetBox
+      onClick={handleClick || handleUserClick}
+      style={{ ...props.style }}>
       <OnLineBadge isOnline={isOnline} isFollowing={isFollowing}>
         <Avatar src={image} alt={fullName} size='small' />
       </OnLineBadge>
@@ -37,7 +42,7 @@ UserSnippet.Group = ({
 }: PropsWithChildren<UserSnippetGroupProps>) => {
   return (
     <>
-      <Title>{title}</Title>
+      {title && <Title>{title}</Title>}
       {children}
     </>
   );

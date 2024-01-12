@@ -2,7 +2,12 @@ import { useNavigate } from 'react-router-dom';
 
 import Logo from '@/assets/Logo';
 import Button from '@/components/common/Button';
-import { IndexContainer, IndexWrapper } from '@/pages/IndexPage/style';
+import {
+  IndexContainer,
+  IndexWrapper,
+  LogoContainer,
+} from '@/pages/IndexPage/style';
+import Swipe from '@/components/Index';
 
 const Index = () => {
   const navigate = useNavigate();
@@ -15,7 +20,10 @@ const Index = () => {
   return (
     <IndexContainer>
       <IndexWrapper>
-        <Logo />
+        <LogoContainer>
+          <Logo />
+        </LogoContainer>
+        <Swipe />
         <Button size='wide' onClick={handleStart}>
           시작하기
         </Button>

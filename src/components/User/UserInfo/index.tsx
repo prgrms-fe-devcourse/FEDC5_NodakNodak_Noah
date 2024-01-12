@@ -13,6 +13,9 @@ import { useDispatch } from '@/store';
 import { getUser } from '@/slices/user';
 import { useSelectedFollowData } from '@/hooks/useSelectedFollowData';
 import { useSelectedUser } from '@/hooks/useSelectedUser';
+import Tooltip from '@/components/Common/Tooltip';
+import { useSelectedUserList } from '@/hooks/useSelectedUserList';
+import { getUserList } from '@/slices/userList/thunk';
 
 const UserInfo = () => {
   const dispatch = useDispatch();
@@ -27,6 +30,23 @@ const UserInfo = () => {
   }, [dispatch, userId, isFollower, isFollowing]);
 
   const [profileImage, setProfileImage] = useState('');
+
+  useEffect(() => {
+    dispatch(getUserList());
+  }, [dispatch]);
+  const userList = useSelectedUserList();
+
+  const getFullNames = (userIds: string[]) => {
+    return userIds
+      .map((userId) => {
+        const user = userList.find((user) => {
+          return user._id === userId;
+        });
+
+        return user ? user.fullName : 'Unknown User';
+      })
+      .join(', ');
+  };
 
   if (!currentUser) return null;
 
@@ -53,18 +73,34 @@ const UserInfo = () => {
             {username || '한줄 소개가 없습니다'}
           </Text>
           <UserButtonContainer>
-            <Button
-              size='regular'
-              styleType='ghost'
-              style={{ cursor: 'default' }}>
-              {followers.length} 팔로워
-            </Button>
-            <Button
-              size='regular'
-              styleType='ghost'
-              style={{ cursor: 'default' }}>
-              {following.length} 팔로잉
-            </Button>
+            <Tooltip
+              direction='bottom'
+              message={getFullNames(followers.map((follower) => follower.user))}
+              hasArrow={true}
+              type='click'>
+              <a>
+                <Button
+                  size='regular'
+                  styleType='ghost'
+                  style={{ cursor: 'default' }}>
+                  {followers.length} 팔로워
+                </Button>
+              </a>
+            </Tooltip>
+            <Tooltip
+              direction='bottom'
+              message={getFullNames(following.map((followee) => followee.user))}
+              hasArrow={true}
+              type='click'>
+              <a>
+                <Button
+                  size='regular'
+                  styleType='ghost'
+                  style={{ cursor: 'default' }}>
+                  {following.length} 팔로잉
+                </Button>
+              </a>
+            </Tooltip>
             <Button
               size='regular'
               styleType='ghost'

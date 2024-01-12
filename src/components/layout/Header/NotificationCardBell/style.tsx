@@ -22,7 +22,7 @@ export const NotificationHeader = styled.div`
   gap: 80px;
   align-items: center;
   width: 100%;
-  height: 36px;
+  height: 20%;
   border-bottom: 1px solid
     ${theme.isDark ? theme.colors.primary[200] : theme.colors.primary[300]};
   margin-bottom: 8px;
@@ -33,4 +33,5 @@ export const NotificationList = styled.ul`
   flex-direction: column;
   gap: 8px;
   margin-left: 4px;
+  align-items: flex-start;
 `;

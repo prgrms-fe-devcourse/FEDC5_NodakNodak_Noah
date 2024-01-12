@@ -48,3 +48,15 @@ export const getFullPostList = createAsyncThunk(
     return data;
   },
 );
+
+export const getPostListByMyId = createAsyncThunk(
+  `${name}/getPostListByMyId`,
+  async () => {
+    const {
+      data: { _id: userId },
+    } = await axiosInstance.get('auth-user');
+    const { data } = await axiosInstance.get(`posts/author/${userId}/`);
+
+    return data;
+  },
+);
