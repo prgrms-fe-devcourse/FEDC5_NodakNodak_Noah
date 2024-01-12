@@ -16,7 +16,7 @@ const Image = ({
     ...props.style,
   };
 
-  return <img src={src} alt={alt} style={{ ...imageStyle }} />;
+  return <img {...props} src={src} alt={alt} style={{ ...imageStyle }} />;
 };
 
 export default Image;
