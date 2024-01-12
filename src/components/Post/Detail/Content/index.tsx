@@ -5,7 +5,7 @@ import {
   PostContentAuthorWrapper,
   PostContentTitleContainer,
 } from '@/components/Post/Detail/Content/style';
-import { Text, Button, Avatar } from '@/components/common';
+import { Text, Button, Avatar, Image } from '@/components/common';
 import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
 import axiosInstance from '@/utils/customAxios';
@@ -21,8 +21,7 @@ const PostContent = () => {
   if (!postDetailContent.title) return null;
 
   const { content, title } = JSON.parse(postDetailContent.title);
-  const { fullName, image } = author;
-
+  const { fullName, image, _id } = author;
   const dataObject = new Date(createdAt);
   const year = dataObject.getFullYear();
   const month = dataObject.getMonth() + 1;
@@ -33,6 +32,7 @@ const PostContent = () => {
     if (!isConfirm) return;
     navigate(`/update/${postId}`);
   };
+
   const handlePostDelete = async () => {
     const isConfirm = window.confirm('게시글을 삭제하시겠습니까?');
     if (!isConfirm) return;
@@ -43,6 +43,10 @@ const PostContent = () => {
     } catch (e) {
       alert(e);
     }
+  };
+
+  const handlePostAuthorAvatarClick = () => {
+    navigate(`/user/${_id}`);
   };
 
   return (
@@ -72,7 +76,12 @@ const PostContent = () => {
         ) : null}
       </PostContentTitleContainer>
       <PostContentAuthorWrapper className='Author'>
-        <Avatar size='middle' alt='유저네임' src={image} />
+        <Avatar
+          size='middle'
+          alt='유저네임'
+          src={image}
+          onClick={handlePostAuthorAvatarClick}
+        />
         <Text
           colorType='grayscale'
           colorNumber={theme.isDark ? '100' : '500'}
@@ -96,11 +105,14 @@ const PostContent = () => {
         style={{ lineHeight: '150%', letterSpacing: '0.02813rem' }}>
         {content}
       </Text>
-      {/* <Image
-          width='23.25rem'
-          height='9.4375rem'
+      {postDetailContent.image ? (
+        <Image
+          width='32rem'
+          height='18rem'
           style={{ marginTop: '1.25rem' }}
-        /> */}
+          src={postDetailContent.image}
+        />
+      ) : null}
     </PostContentContainer>
   );
 };
