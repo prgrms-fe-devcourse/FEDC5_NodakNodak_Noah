@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { AxiosError } from 'axios';
 
 import { RootState } from '@/store';
-import { ensuerEndingSlash } from '@/utils/customAxios/utils';
+import { ensureEndingSlash } from '@/utils/customAxios/utils';
 import { Methods, AllUrlList } from '@/utils/customAxios/type';
 
 type UseSelectedStatusType = (
@@ -16,7 +16,7 @@ export const useSelectedStatus: UseSelectedStatusType = (
   url,
   variable = '',
 ) => {
-  const slashedVariable = variable && ensuerEndingSlash(variable);
+  const slashedVariable = variable && ensureEndingSlash(variable);
   const status = useSelector(
     (state: RootState) => state.status[`${method}_${url}${slashedVariable}`],
   );
