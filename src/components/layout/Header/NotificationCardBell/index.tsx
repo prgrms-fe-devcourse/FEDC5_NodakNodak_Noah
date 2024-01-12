@@ -56,8 +56,8 @@ const NotificationCardBell = () => {
         const isVote = JSON.parse(comment.comment).type === 'vote';
 
         const text = isVote
-          ? `${snippetAuthor.fullName}님이 ${postTitle}글에 투표하였습니다.`
-          : `${snippetAuthor.fullName}님이 ${postTitle}글에 댓글을 달았습니다.`;
+          ? `${snippetAuthor.fullName} 님이 ${postTitle} 글에 투표하였습니다.`
+          : `${snippetAuthor.fullName} 님이 ${postTitle} 글에 댓글을 달았습니다.`;
 
         return {
           _id,
@@ -68,11 +68,11 @@ const NotificationCardBell = () => {
             : undefined,
         };
       } else if (follower) {
-        const text = `${follower}님이 팔로우했습니다.`;
+        const text = `${follower} 님이 팔로우했습니다.`;
 
         return { _id, text, snippetAuthor };
       } else if (post && !follow && snippetAuthor) {
-        const text = `${snippetAuthor.fullName}님이 ${postTitle}에 좋아요 를 남겼습니다.`;
+        const text = `${snippetAuthor.fullName}님이 ${postTitle} 글에 좋아요 를 남겼습니다.`;
 
         return {
           _id,
@@ -83,7 +83,7 @@ const NotificationCardBell = () => {
             : undefined,
         };
       } else if (message && snippetAuthor) {
-        const text = `${snippetAuthor.fullName}님이 메세지를 보냈습니다.`;
+        const text = `${snippetAuthor.fullName} 님이 요청을 보냈습니다.`;
 
         return {
           _id,
