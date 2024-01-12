@@ -118,6 +118,7 @@ const PostVote = () => {
                 value={vote}
                 bordertype='enabled'
                 readOnly={true}
+                justifyContent='center'
                 style={{
                   marginBottom: '1.5rem',
                   width: '466px',

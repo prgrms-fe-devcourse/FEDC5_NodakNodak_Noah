@@ -42,7 +42,7 @@ const UserPostList = () => {
         colorNumber={theme.isDark ? '200' : '400'}>
         님의 최근 게시글
       </Text>
-      <PostCard.Group style={{ width: '60vw', margin: '2rem 0' }}>
+      <PostCard.Group style={{ width: '80vw', margin: '2rem 0', maxWidth: '1440px' }}>
         {postSnippetList.length === 0 ? (
           <Text
             tagType='span'

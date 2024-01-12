@@ -15,17 +15,19 @@ const PostCreatePage = () => {
   const navigate = useNavigate();
 
   const handleFormSubmit = async (forms: FormType) => {
-    const { title, content, voteTitle, voteArray, channelId } = forms;
+    const { title, content, voteTitle, voteArray, channelId, image } = forms;
 
     if (!isValidatedForm(forms)) {
       return;
     }
 
-    const postData = {
-      title: JSON.stringify({ title, content, voteTitle, voteArray }),
-      channelId,
-      image: '',
-    };
+    const postData = new FormData();
+    postData.append(
+      'title',
+      JSON.stringify({ title, content, voteTitle, voteArray }),
+    );
+    postData.append('channelId', channelId);
+    postData.append('image', image || '');
 
     try {
       const token = localStorage.getItem('auth-token');
@@ -54,9 +56,15 @@ const PostCreatePage = () => {
       voteTitle: '',
       voteArray: ['', ''],
       channelId: channelId || '',
+      image: null,
     },
     onSubmit: handleFormSubmit,
   });
+
+  const handleDeleteImage = () => {
+    setFieldValue('imageSrc', undefined);
+    setFieldValue('image', null);
+  };
 
   const { values, handleChange, handleSubmit, setFieldValue } = formik;
 
@@ -66,6 +74,7 @@ const PostCreatePage = () => {
         values={values}
         handleChange={handleChange}
         setFieldValue={setFieldValue}
+        handleDeleteImage={handleDeleteImage}
       />
       <VoteBox
         values={{
@@ -73,6 +82,7 @@ const PostCreatePage = () => {
           voteArray: values.voteArray,
         }}
         setFieldValue={setFieldValue}
+        isEditable={true}
       />
       <SubmitButton onSubmit={handleSubmit} message='등록하기' />
     </FormContainer>

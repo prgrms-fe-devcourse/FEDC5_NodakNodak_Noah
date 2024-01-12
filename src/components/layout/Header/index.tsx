@@ -82,9 +82,7 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
     setFocus(!focus);
   });
 
-  const menuRef = useClickAway((e: MouseEvent | TouchEvent) => {
-    const { tagName } = e.target as HTMLElement;
-    if (tagName === 'IMG') return;
+  const menuRef = useClickAway(() => {
     setShowMenu(false);
   });
 
@@ -132,7 +130,6 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
             ref={inputRef as RefObject<HTMLInputElement>}
             height={'32px'}
             width={focus ? '160px' : '100px'}
-            bordertype={focus ? 'focus' : 'filled'}
             underline={true}
             placeholder='Find'
             onChange={(e) => setInputValue(e.target.value)}

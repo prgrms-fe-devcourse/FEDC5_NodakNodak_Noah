@@ -25,9 +25,9 @@ export interface StyledInputProps {
     | 'caption';
 }
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<{ justifyContent?: 'center' | 'flex-start' }>`
   display: flex;
-  justify-content: center;
+  justify-content: ${({ justifyContent }) => justifyContent || 'center'};
   align-items: center;
   position: relative;
   width: 100%;
@@ -54,8 +54,12 @@ export const StyledInput = styled.input<StyledInputProps>`
   border-left: ${({ $underline }) => ($underline ? 'none' : 'auto')};
   border-right: ${({ $underline }) => ($underline ? 'none' : 'auto')};
   padding: 4px 8px;
+  outline: none;
   box-sizing: border-box;
-  background-color: #f9f9f9;
+  background-color: transparent;
+  color: ${theme.isDark
+    ? theme.colors.grayscale[100]
+    : theme.colors.grayscale[400]};
   font-family: Prentendard;
 `;
 

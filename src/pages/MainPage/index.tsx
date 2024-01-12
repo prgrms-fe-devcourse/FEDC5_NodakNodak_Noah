@@ -17,21 +17,19 @@ import {
   getFullPostList,
   getPostListByChannelId,
 } from '@/slices/postList/thunks';
-import { postListToPostSnippetList } from '@/slices/postList/utils';
-import { searchAllData } from '@/slices/searchedData/thunk';
 import { getUserList } from '@/slices/userList/thunk';
-
-import { useSelectedPostList } from '@/hooks/useSelectedPostList';
-import {
-  useSelectedChannelStatus,
-  useSelectedChannel,
-} from '@/hooks/useSelectedChannel';
-import { useSelectedUserList } from '@/hooks/useSelectedUserList';
-import { usePagination } from '@/hooks/usePagination';
-import { useSelectedSearchedPostData } from '@/hooks/useSelectedSearchedData';
-import useInterval from '@/hooks/useInterval';
-import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
+import { searchAllData } from '@/slices/searchedData/thunk';
+import { postListToPostSnippetList } from '@/slices/postList/utils';
 import { userListToUserSnippetList } from '@/slices/userList/utils';
+
+import useInterval from '@/hooks/useInterval';
+import { usePagination } from '@/hooks/usePagination';
+import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
+import { useSelectedStatus } from '@/hooks/useSelectedStatus';
+import { useSelectedChannel } from '@/hooks/useSelectedChannel';
+import { useSelectedUserList } from '@/hooks/useSelectedUserList';
+import { useSelectedPostList } from '@/hooks/useSelectedPostList';
+import { useSelectedSearchedPostData } from '@/hooks/useSelectedSearchedData';
 
 const Main = () => {
   const navigate = useNavigate();
@@ -44,9 +42,11 @@ const Main = () => {
   const myInfo = useSelectedMyInfo();
   const userList = useSelectedUserList();
   const channel = useSelectedChannel();
-  const channelStatus = useSelectedChannelStatus();
   const posts = useSelectedPostList();
   const searchedPosts = useSelectedSearchedPostData();
+  const userListStatus = useSelectedStatus('get', '/users/get-users');
+  const channelStatus = useSelectedStatus('get', '/posts/channel/', channelId);
+  const fullChannelStatus = useSelectedStatus('get', '/posts');
 
   const postList = keyword ? searchedPosts : posts;
   const postSnippetList = postListToPostSnippetList(postList);
@@ -54,9 +54,9 @@ const Main = () => {
     usePagination(postSnippetList, 9);
 
   const getChannelTitle = () => {
-    if (channelStatus === 'loading') return '로딩중';
-    if (channelStatus === 'failed') return '채널을 찾을 수 없습니다.';
-    if (!channelId && channelStatus === 'idle') return '전체 글';
+    if (channelStatus.isLoading || fullChannelStatus.isLoading) return '로딩중';
+    if (channelStatus.error) return '채널을 찾을 수 없습니다.';
+    if (!channelId && !fullChannelStatus.isLoading) return '전체 글';
     if (!channel) return '채널을 찾을 수 없습니다.';
     return channel.name;
   };
@@ -121,7 +121,10 @@ const Main = () => {
           onPageChange={handlePageChange}
         />
       </PostContentWrapper>
-      <UserListCard users={userListToUserSnippetList(userList, myInfo)} />
+      {userListStatus.isLoading && <div>로딩중</div>}
+      {!userListStatus.isLoading && (
+        <UserListCard users={userListToUserSnippetList(userList, myInfo)} />
+      )}
     </MainWrapper>
   );
 };

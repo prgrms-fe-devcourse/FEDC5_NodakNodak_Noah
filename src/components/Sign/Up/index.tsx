@@ -119,6 +119,7 @@ const Up = ({ isLogin, setIsLogin }: SignProps) => {
         placeholder='이메일'
         autoComplete='on'
         type='email'
+        justifyContent='center'
         bordertype={warn[0] ? 'error' : 'filled'}
         onChange={(e) => setEmail(e.target.value)}
       />

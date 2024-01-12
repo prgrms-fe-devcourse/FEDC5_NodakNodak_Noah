@@ -11,4 +11,5 @@ export interface InputProps
     | 'filled'
     | 'error'
     | 'disabled';
+  justifyContent?: 'center' | 'flex-start';
 }
