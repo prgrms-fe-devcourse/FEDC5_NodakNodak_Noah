@@ -22,17 +22,19 @@ import PostUpdatePage from '@/pages/UpdatePage';
 import PostVoteChart from '@/components/Post/Detail/Result';
 import PostVote from '@/components/Post/Detail/Vote';
 import RequestToAdmin from '@/pages/RequestPage';
+import UserInfo from '@/components/Setting/UserInfo';
+import Password from '@/components/Setting/Password';
 import GlobalStyle from '@/styles/GlobalStyle';
 
 const router = createBrowserRouter([
   { path: '/', element: <Index />, errorElement: <NotFound />, index: true },
   {
-    path: '/user/:userId/setting',
-    element: (
-      <ProtectedRoute>
-        <Setting />
-      </ProtectedRoute>
-    ),
+    path: '/user/:userId/setting/',
+    element: <Setting />,
+    children: [
+      { path: '', element: <UserInfo /> },
+      { path: 'password', element: <Password /> },
+    ],
   },
   {
     path: '/',

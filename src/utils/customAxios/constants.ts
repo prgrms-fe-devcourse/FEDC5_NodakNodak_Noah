@@ -2,6 +2,7 @@ export const authRequiredUrlList = [
   '/auth-user',
   '/users/upload-photo',
   '/settings/update-user',
+  '/settings/update-password',
   '/posts/create',
   '/posts/update',
   '/posts/delete',
