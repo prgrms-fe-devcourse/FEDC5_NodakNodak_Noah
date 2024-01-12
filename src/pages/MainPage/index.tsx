@@ -30,6 +30,7 @@ import { useSelectedChannel } from '@/hooks/useSelectedChannel';
 import { useSelectedUserList } from '@/hooks/useSelectedUserList';
 import { useSelectedPostList } from '@/hooks/useSelectedPostList';
 import { useSelectedSearchedPostData } from '@/hooks/useSelectedSearchedData';
+import MainPageSpinner from '@/components/common/MainPageSpinner';
 
 const Main = () => {
   const navigate = useNavigate();
@@ -44,9 +45,9 @@ const Main = () => {
   const channel = useSelectedChannel();
   const posts = useSelectedPostList();
   const searchedPosts = useSelectedSearchedPostData();
-  const userListStatus = useSelectedStatus('get', '/users/get-users');
   const channelStatus = useSelectedStatus('get', '/posts/channel/', channelId);
   const fullChannelStatus = useSelectedStatus('get', '/posts');
+  const token = localStorage.getItem('auth-token');
 
   const postList = keyword ? searchedPosts : posts;
   const postSnippetList = postListToPostSnippetList(postList);
@@ -54,16 +55,15 @@ const Main = () => {
     usePagination(postSnippetList, 9);
 
   const getChannelTitle = () => {
-    if (channelStatus.isLoading || fullChannelStatus.isLoading) return '로딩중';
-    if (channelStatus.error) return '채널을 찾을 수 없습니다.';
-    if (!channelId && !fullChannelStatus.isLoading) return '전체 글';
-    if (!channel) return '채널을 찾을 수 없습니다.';
+    if (channelStatus.isLoading) return '로딩중';
+    else if (!channelId && !fullChannelStatus.isLoading) return '전체 글';
+    else if (!channel || channelStatus.error) return '채널을 찾을 수 없습니다.';
     return channel.name;
   };
 
   const handleWriteClick = (e: MouseEvent) => {
     e.preventDefault();
-    const token = localStorage.getItem('auth-token');
+
     if (!token) {
       alert('로그인이 필요한 서비스 입니다.');
       return;
@@ -72,10 +72,10 @@ const Main = () => {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem('auth-token');
     if (!token) return;
     dispatch(getMyInfo());
-  }, [dispatch]);
+    dispatch(getUserList());
+  }, [dispatch, token]);
 
   useEffect(() => {
     if (!keyword) return;
@@ -90,10 +90,6 @@ const Main = () => {
     }
     dispatch(getPostListByChannelId({ channelId }));
   }, [dispatch, channelId]);
-
-  useEffect(() => {
-    dispatch(getUserList());
-  }, [dispatch]);
 
   useInterval(() => {
     dispatch(getUserList());
@@ -110,21 +106,22 @@ const Main = () => {
             글 쓰기
           </Button>
         </MainFlexWrapper>
-        <PostCard.Group>
-          {paginatedPostList.map((post) => (
-            <PostCard key={post._id} post={post} />
-          ))}
-        </PostCard.Group>
+        {fullChannelStatus.isLoading ? (
+          <MainPageSpinner />
+        ) : (
+          <PostCard.Group>
+            {paginatedPostList.map((post) => (
+              <PostCard key={post._id} post={post} />
+            ))}
+          </PostCard.Group>
+        )}
         <Pagination
           page={currentPage}
           totalPage={totalPage}
           onPageChange={handlePageChange}
         />
       </PostContentWrapper>
-      {userListStatus.isLoading && <div>로딩중</div>}
-      {!userListStatus.isLoading && (
-        <UserListCard users={userListToUserSnippetList(userList, myInfo)} />
-      )}
+      <UserListCard users={userListToUserSnippetList(userList, myInfo)} />
     </MainWrapper>
   );
 };
