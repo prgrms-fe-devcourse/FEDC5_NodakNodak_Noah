@@ -24,72 +24,64 @@ const UserInfo = () => {
     if (userId) {
       dispatch(getUser({ userId }));
     }
+    dispatch(getUserList());
   }, [dispatch, userId, isFollower, isFollowing]);
 
-  useEffect(() => {
-    dispatch(getUserList());
-  }, [dispatch]);
   const userList = useSelectedUserList();
 
-  const getFullNames = (userIds: string[]) => {
-    return userIds
+  const getFullNames = (userIds: string[]) =>
+    userIds
       .map((userId) => {
-        const user = userList.find((user) => {
-          return user._id === userId;
-        });
+        const user = userList.find((user) => user._id === userId);
 
         return user ? user.fullName : 'Unknown User';
       })
       .join(', ');
-  };
-
   const currentUser = useSelectedUser();
   if (!currentUser) return null;
   const { image, fullName, username, followers, following, posts } =
     currentUser;
 
   return (
-    <>
-      <UserInfoContainer>
-        <Avatar src={image} alt={fullName} size='large' />
-        <UserInfoWrapper>
-          <Text tagType='span' fontType='h1' colorType='black'>
-            {fullName}
-          </Text>
-          <Text tagType='span' fontType='body1' colorType='black'>
-            {username || '한줄 소개가 없습니다'}
-          </Text>
-          <UserButtonContainer>
-            <Tooltip
-              direction='bottom'
-              message={getFullNames(followers.map((follower) => follower.user))}
-              hasArrow={true}
-              type='click'>
-              <a>
-                <Button size='regular' styleType='ghost'>
-                  {followers.length} 팔로워
-                </Button>
-              </a>
-            </Tooltip>
-            <Tooltip
-              direction='bottom'
-              message={getFullNames(following.map((followee) => followee.user))}
-              hasArrow={true}
-              type='click'>
-              <a>
-                <Button size='regular' styleType='ghost'>
-                  {following.length} 팔로잉
-                </Button>
-              </a>
-            </Tooltip>
-            <Button size='regular' styleType='ghost'>
-              {posts.length} 포스트
-            </Button>
-          </UserButtonContainer>
-          <GrassTable />
-        </UserInfoWrapper>
-      </UserInfoContainer>
-    </>
+    <UserInfoContainer>
+      <Avatar src={image} alt={fullName} size='large' />
+      <UserInfoWrapper>
+        <Text tagType='span' fontType='h1' colorType='black'>
+          {fullName}
+        </Text>
+        <Text tagType='span' fontType='body1' colorType='black'>
+          {username || '한줄 소개가 없습니다'}
+        </Text>
+        <UserButtonContainer>
+          <Tooltip
+            direction='bottom'
+            message={getFullNames(followers.map((follower) => follower.user))}
+            hasArrow={true}
+            type='click'>
+            <a>
+              <Button size='regular' styleType='ghost'>
+                {followers.length} 팔로워
+              </Button>
+            </a>
+          </Tooltip>
+          <Tooltip
+            direction='bottom'
+            message={getFullNames(following.map((followee) => followee.user))}
+            hasArrow={true}
+            type='click'>
+            <a>
+              <Button size='regular' styleType='ghost'>
+                {following.length} 팔로잉
+              </Button>
+            </a>
+          </Tooltip>
+          <Button size='regular' styleType='ghost'>
+            {posts.length} 포스트
+          </Button>
+        </UserButtonContainer>
+        <GrassTable />
+      </UserInfoWrapper>
+    </UserInfoContainer>
   );
 };
 

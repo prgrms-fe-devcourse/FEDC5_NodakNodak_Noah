@@ -25,14 +25,10 @@ const UserPostList = () => {
   useEffect(() => {
     if (!userId) return;
     dispatch(getUser({ userId }));
-  }, [dispatch, userId]);
-
-  useEffect(() => {
-    if (!userId) return;
     dispatch(getPostListByUserId({ userId }));
   }, [dispatch, userId]);
 
-  if (!currentUser) return null;
+  if (!currentUser) return <div>Loading...</div>;
   const { fullName } = currentUser;
 
   return (
