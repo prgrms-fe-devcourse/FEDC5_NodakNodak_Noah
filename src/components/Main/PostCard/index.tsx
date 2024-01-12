@@ -13,7 +13,7 @@ import {
 } from '@/hooks/useSelectedChannel';
 
 const PostCard = ({ post }: PostCardProps) => {
-  const { avatar, image, title, count, fullName, userId } = post;
+  const { avatar, image, title, count, fullName, userId, _id } = post;
   const channel = useSelectedChannel();
   const channelLoading = useSelectedChannelLoading();
   const currentUser = useSelector(
@@ -43,6 +43,8 @@ const PostCard = ({ post }: PostCardProps) => {
         count={count}
         fullName={isUserPage ? currentUser?.fullName : fullName}
         userId={isUserPage ? currentUser?._id : userId}
+        postId={_id}
+        channelId={channel?._id}
       />
       <FlexWrapper>
         <Button

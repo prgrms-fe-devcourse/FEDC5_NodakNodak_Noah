@@ -16,6 +16,8 @@ const PostSnippet = ({
   count,
   fullName,
   userId,
+  postId,
+  channelId,
 }: PostSnippetProps) => {
   const navigate = useNavigate();
   const handleUserClick = () => {
@@ -28,6 +30,8 @@ const PostSnippet = ({
         width='280px'
         height='146px'
         src={image ? image : '/DefaultImage.jpg'}
+        onClick={() => navigate(`/detail/${channelId}/${postId}`)}
+        style={{ cursor: 'pointer' }}
       />
       <ContentBox>
         <Text tagType='p' fontType='body2' colorType='black'>

@@ -5,4 +5,7 @@ export interface PostSnippetProps {
   count: string;
   fullName?: string;
   userId?: string;
+
+  postId?: string;
+  channelId?: string;
 }

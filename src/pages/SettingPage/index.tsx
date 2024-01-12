@@ -1,16 +1,11 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 
-import {
-  Container,
-  CardWrapper,
-  AvatarWrapper,
-} from '@/pages/SettingPage/style';
+import { Container, CardWrapper } from '@/pages/SettingPage/style';
 import { getUser } from '@/slices/user';
 import { useDispatch } from '@/store';
 import { Avatar } from '@/components/common';
 import { useSelectedUser } from '@/hooks/useSelectedUser';
-import ImageUploader from '@/components/common/Button/ImageUploadButton';
 
 const Setting = () => {
   const currentUser = useSelectedUser();
@@ -18,8 +13,6 @@ const Setting = () => {
   const dispatch = useDispatch();
   const { userId } = useParams();
   const { state } = useLocation();
-
-  const [profileImage, setProfileImage] = useState(state || '');
 
   useEffect(() => {
     if (userId) {
@@ -39,15 +32,7 @@ const Setting = () => {
   return (
     <Container>
       <CardWrapper>
-        <AvatarWrapper>
-          <Avatar src={profileImage} size='large' alt={fullName} />
-          <ImageUploader
-            size='wide'
-            setImage={setProfileImage}
-            apiParam={'users/upload-photo'}>
-            이미지 선택
-          </ImageUploader>
-        </AvatarWrapper>
+        <Avatar src={state} size='large' alt={fullName} />
         <Outlet />
       </CardWrapper>
     </Container>
