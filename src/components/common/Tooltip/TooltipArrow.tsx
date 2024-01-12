@@ -26,19 +26,19 @@ const TooltipArrow = styled.div<TooltipArrowProps>`
         left: 50%;
         bottom: 100%;
         transform: translateX(-50%) translateY(0%);
-        border-color: transparent transparent #faf7e8 transparent; /* 삼각형 색상 조절 */
+        border-color: transparent transparent #faf7e8 transparent;
       `,
       left: css`
         top: 50%;
         left: 100%;
         transform: translateY(-50%) translateX(0%);
-        border-color: transparent transparent transparent #faf7e8; /* 삼각형 색상 조절 */
+        border-color: transparent transparent transparent #faf7e8;
       `,
       right: css`
         top: 50%;
         right: 100%;
         transform: translateY(-50%) translateX(0%);
-        border-color: transparent #faf7e8 transparent transparent; /* 삼각형 색상 조절 */
+        border-color: transparent #faf7e8 transparent transparent;
       `,
     };
 
