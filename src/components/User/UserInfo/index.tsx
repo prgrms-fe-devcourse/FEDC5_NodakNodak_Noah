@@ -27,26 +27,24 @@ const UserInfo = () => {
     if (userId) {
       dispatch(getUser({ userId }));
     }
+        dispatch(getUserList());
+    dispatch(getUserList());
   }, [dispatch, userId, isFollower, isFollowing]);
+
 
   const [profileImage, setProfileImage] = useState('');
 
-  useEffect(() => {
-    dispatch(getUserList());
-  }, [dispatch]);
   const userList = useSelectedUserList();
 
-  const getFullNames = (userIds: string[]) => {
-    return userIds
+  const getFullNames = (userIds: string[]) =>
+    userIds
       .map((userId) => {
-        const user = userList.find((user) => {
-          return user._id === userId;
-        });
+        const user = userList.find((user) => user._id === userId);
 
         return user ? user.fullName : 'Unknown User';
       })
       .join(', ');
-  };
+
 
   if (!currentUser) return null;
 
@@ -54,7 +52,6 @@ const UserInfo = () => {
     currentUser;
 
   return (
-    <>
       <UserInfoContainer>
         <AvatarWrapper>
           <Avatar src={profileImage || image} alt={fullName} size='large' />
@@ -111,7 +108,6 @@ const UserInfo = () => {
           <GrassTable />
         </UserInfoWrapper>
       </UserInfoContainer>
-    </>
   );
 };
 

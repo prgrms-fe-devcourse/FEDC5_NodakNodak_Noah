@@ -35,7 +35,7 @@ const VoteBox = ({ values, setFieldValue, isEditable }: FormProps) => {
       shadowType='medium'
       style={{ margin: '0 auto', maxWidth: '666px' }}>
       <ScrollBar>
-        <ContentWrapper isEditable={isEditable}>
+        <ContentWrapper $isEditable={isEditable}>
           <Content>
             <Input
               placeholder={PLACEHOLDER.VOTE_SUBJECT}
