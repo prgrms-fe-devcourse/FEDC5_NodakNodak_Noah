@@ -45,6 +45,11 @@ const UserInfo = () => {
   }, [currentUser]);
 
   const handleUpdate = async () => {
+    const userNameRegex = /^[a-zA-Z0-9가-힣]{2,8}$/;
+    if (!userNameRegex.test(updatedData.username)) {
+      alert('별명은 2~8자의 영문, 한글, 숫자만 사용 가능합니다.');
+      return;
+    }
     try {
       await axiosInstance.put('settings/update-user', {
         fullName: updatedData.fullName,
@@ -55,6 +60,15 @@ const UserInfo = () => {
       alert(error);
     }
   };
+
+  useEffect(() => {
+    if (currentUser) {
+      setUpdatedData({
+        fullName: currentUser.fullName,
+        username: currentUser.username,
+      });
+    }
+  }, [currentUser]);
 
   const handleCancel = () => {
     navigate(-1);
