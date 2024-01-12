@@ -19,6 +19,7 @@ export const ChannelWrapper = styled.div`
   align-items: center;
   gap: 16px;
   text-decoration: none;
+  width: 400px;
 `;
 
 export const NavLinkWrapper = styled(NavLink)`

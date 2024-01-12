@@ -29,12 +29,13 @@ import DarkModeToggle from '@/components/layout/Header/DarkModeToggle';
 import axiosInstance from '@/utils/customAxios';
 import theme from '@/styles/theme';
 
+const menu = ['마이페이지', '비밀번호변경', '로그아웃'];
+
 const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
   const [focus, setFocus] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [showMenu, setShowMenu] = useState(false);
   const myInfo = useSelectedMyInfo();
-  const menu = ['마이페이지', '비밀번호변경', '로그아웃'];
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
