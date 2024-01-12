@@ -8,6 +8,7 @@ export const PaddingWrapper = styled.div`
   box-sizing: border-box;
   flex-direction: column;
   gap: 5px;
+  padding: 16px;
 `;
 
 export const ScrollBarWrapper = styled.div`
@@ -15,6 +16,7 @@ export const ScrollBarWrapper = styled.div`
   height: 100%;
   overflow-y: auto;
   overflow-x: hidden;
+  padding-right: 8px;
   &::-webkit-scrollbar {
     width: 8px;
     height: 120px;
