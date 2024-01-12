@@ -5,6 +5,9 @@ import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
 import LikeButtonIcon from '@/assets/LikeButtonIcon';
 import axiosInstance from '@/utils/customAxios';
 import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
+import { useDispatch } from '@/store';
+import { createNotification } from '@/slices/notification/thunk';
+import { CreateNotificationData } from '@/slices/notification/type';
 
 const LikeButton = () => {
   const [isLiked, setIsLiked] = useState(false);
@@ -16,6 +19,7 @@ const LikeButton = () => {
 
   const myInfo = useSelectedMyInfo();
   const { postId } = useParams();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (likesDetail) {
@@ -45,6 +49,15 @@ const LikeButton = () => {
       });
       setLikeId(data._id);
       setIsLiked((prevIsLiked) => !prevIsLiked);
+
+      if (isLiked) return;
+      const notificationData: CreateNotificationData = {
+        notificationType: 'LIKE',
+        notificationTypeId: data._id,
+        postId: postId ? postId : null,
+        userId: postDetail.author._id,
+      };
+      dispatch(createNotification({ notificationData }));
     } catch (e) {
       alert(e);
     }

@@ -2,6 +2,9 @@ import { Post } from '@/types/APIResponseTypes';
 
 export interface PostList {
   posts: Post[];
+  postListByChannelId: Post[];
+  postListByUserId: Post[];
+  postListByMyId: Post[];
   isLoading: boolean;
 }
 
