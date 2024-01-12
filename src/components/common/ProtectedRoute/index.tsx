@@ -8,8 +8,9 @@ const ProtectedRoute = ({
   admin,
 }: PropsWithChildren<ProtectedRouteProps>) => {
   const myInfo = useSelectedMyInfo();
+  const token = localStorage.getItem('auth-token');
 
-  if (!myInfo?.role || (admin && myInfo?.role !== 'SuperAdmin')) {
+  if (!token || (admin && !token && myInfo?.role !== 'SuperAdmin')) {
     return <Navigate to='/home' replace />;
   }
   return children;
