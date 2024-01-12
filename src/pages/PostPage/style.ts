@@ -20,11 +20,10 @@ export const FormArea = styled.div`
 
 export const TextAreaWrapper = styled.div`
   height: 429px;
-  background-color: ${them.colors.grayscale[100]};
+  background-color: transparent;
   padding: 10px;
   border: 1px solid ${them.colors.grayscale[300]};
   border-radius: 4px;
-  margin: 12px;
 `;
 
 export const StyledTextArea = styled.textarea`

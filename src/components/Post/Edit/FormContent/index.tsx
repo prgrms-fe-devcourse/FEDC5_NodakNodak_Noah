@@ -39,7 +39,6 @@ const FormContent = ({
         style={{
           width: FORM_SIZE.WIDTH,
           height: FORM_SIZE.HEIGHT,
-          textAlign: 'center',
         }}
       />
       <Dropdown

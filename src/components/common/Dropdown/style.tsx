@@ -18,8 +18,7 @@ export const DropdownButton = styled.button<{ $ismenuopen: boolean }>`
   align-items: center;
   justify-content: space-between;
   padding: 0 13px 0 20px;
-  background-color: ${({ $ismenuopen }) =>
-    $ismenuopen ? theme.colors.grayscale[200] : theme.colors.grayscale[100]};
+  background-color: transparent;
   color: ${theme.colors.grayscale[300]};
   font-family: Pretendard;
   cursor: pointer;
@@ -40,13 +39,13 @@ export const ListItemButton = styled.button`
   height: 48px;
   text-align: left;
   border: none;
-  border-bottom: 1px solid ${theme.colors.primary[200]};
+  border-bottom: 1px solid ${theme.colors.primary[100]};
   padding: 0 20px;
   background-color: ${theme.isDark
-    ? theme.colors.primary[400]
+    ? theme.colors.grayscale[400]
     : theme.colors.primary[100]};
   color: ${theme.isDark
-    ? theme.colors.primary[200]
+    ? theme.colors.primary[100]
     : theme.colors.primary[400]};
   font-family: Prentendard;
   cursor: pointer;
@@ -58,7 +57,7 @@ export const ListItemButton = styled.button`
 
   &:hover {
     background-color: ${theme.isDark
-      ? theme.colors.primary[500]
+      ? theme.colors.grayscale[500]
       : theme.colors.primary[200]};
   }
 `;

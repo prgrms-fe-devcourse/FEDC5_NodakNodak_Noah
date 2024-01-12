@@ -45,6 +45,7 @@ const In = ({ isLogin, setIsLogin }: SignProps) => {
         placeholder='Email'
         autoComplete='on'
         type='email'
+        justifyContent='center'
         bordertype={warn ? 'error' : 'filled'}
         onChange={(e) => setEmail(e.target.value)}
       />
