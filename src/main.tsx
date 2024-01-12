@@ -1,8 +1,8 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import ProtectedRoute from '@/components/common/ProtectedRoute';
 
 import App from '@/App';
@@ -19,6 +19,7 @@ import PostCreatePage from '@/pages/PostPage';
 import PostUpdatePage from '@/pages/UpdatePage';
 import PostVoteChart from '@/components/Post/Detail/Result';
 import PostVote from '@/components/Post/Detail/Vote';
+import RequestToAdmin from '@/pages/RequestPage';
 import GlobalStyle from '@/styles/GlobalStyle';
 
 const router = createBrowserRouter([
@@ -53,6 +54,14 @@ const router = createBrowserRouter([
       },
       { path: '/home/:channelId?', element: <Main /> },
       { path: '/user/:userId', element: <UserPage /> },
+      {
+        path: '/request',
+        element: (
+          <ProtectedRoute>
+            <RequestToAdmin />
+          </ProtectedRoute>
+        ),
+      },
       {
         path: '/admin',
         element: (
