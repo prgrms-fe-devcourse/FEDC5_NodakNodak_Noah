@@ -33,7 +33,6 @@ export const FormContainer = styled.form`
   flex-wrap: nowrap;
 `;
 
-export const SearchIcon = styled.span``;
 export const AuthUiWrapper = styled.div`
   display: flex;
   position: relative;

@@ -8,7 +8,6 @@ export const ButtonSize = {
     height: 36px;
     justify-content: center;
     align-items: center;
-    gap: 4px;
     flex-shrink: 0;
   `,
   small: css`
@@ -16,14 +15,12 @@ export const ButtonSize = {
     width: 80px;
     justify-content: center;
     align-items: center;
-    gap: 10px;
   `,
   regular: css`
     display: flex;
     width: 120px;
     justify-content: center;
     align-items: center;
-    gap: 10px;
   `,
   wide: css`
     display: flex;
@@ -31,7 +28,6 @@ export const ButtonSize = {
     min-width: 200px;
     justify-content: center;
     align-items: center;
-    gap: 10px;
   `,
 };
 
@@ -160,6 +156,7 @@ export const ButtonLayout = styled.button<ButtonLayoutProps>`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  padding: 13px 16px;
   cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
   &:hover {
     opacity: ${({ $disabled }) => ($disabled ? 1 : 0.8)};
@@ -168,8 +165,6 @@ export const ButtonLayout = styled.button<ButtonLayoutProps>`
   ${({ $size }) => $size && ButtonSize[$size]};
   ${({ $styleType, $event }) =>
     $event && $styleType && ButtonTypeEvent[$styleType][$event]};
-  padding: ${({ $isArrow }) =>
-    $isArrow ? '13px 12px 13px 16px' : '13px 16px'};
 `;
 
 const ButtonWrapperBorderColor = {

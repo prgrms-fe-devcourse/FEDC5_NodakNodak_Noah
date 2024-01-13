@@ -87,13 +87,12 @@ const UserInfo = () => {
   return (
     <ContentWrapper>
       <ButtonWrapper>
-        <Button styleType='danger' isArrow={true} onClick={handleCancel}>
+        <Button styleType='danger' onClick={handleCancel}>
           취소하기
         </Button>
         <Button
           event={isModified ? 'enabled' : 'disabled'}
           disabled={!isModified}
-          isArrow={true}
           onClick={handleUpdate}>
           변경하기
         </Button>

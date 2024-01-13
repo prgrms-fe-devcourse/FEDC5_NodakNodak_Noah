@@ -4,6 +4,7 @@ import { Container, Card, SignText, GoHome } from '@/pages/SignPage/style';
 import In from '@/components/Sign/In';
 import Up from '@/components/Sign/Up';
 import { Text } from '@/components/common';
+import LeftArrowIcon from '@/assets/LeftArrowIcon';
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -13,7 +14,7 @@ const Login = () => {
     <Container>
       <Card>
         <GoHome onClick={() => navigate('/home')}>
-          <span className='material-symbols-outlined'>arrow_back_ios</span>
+          <LeftArrowIcon />
           <Text
             tagType='span'
             colorType='grayscale'

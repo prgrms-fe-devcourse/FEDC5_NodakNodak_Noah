@@ -10,7 +10,6 @@ const ImageUploader = ({
   size = 'regular',
   event = 'enabled',
   type,
-  isArrow,
   children,
   setImage,
   setFile,
@@ -51,7 +50,6 @@ const ImageUploader = ({
           size={size}
           event={event}
           type={type}
-          isArrow={isArrow}
           onClick={() => selectedFile.current?.click()}>
           {children}
         </Button>

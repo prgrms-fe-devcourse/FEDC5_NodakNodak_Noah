@@ -4,7 +4,6 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   event?: 'enabled' | 'hover' | 'disabled';
   type?: 'button' | 'submit' | 'reset';
   disabled?: boolean;
-  isArrow?: boolean;
 }
 
 export interface ImageUnloadButtonProps extends ButtonProps {

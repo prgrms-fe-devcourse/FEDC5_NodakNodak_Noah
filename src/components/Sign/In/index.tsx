@@ -61,10 +61,7 @@ const In = ({ isLogin, setIsLogin }: SignProps) => {
       {warn ? <Warning>{warnText}</Warning> : ''}
       <Guide>
         노닥노닥이 처음이라면?
-        <Register onClick={() => setIsLogin(!isLogin)}>
-          회원가입
-          <span className='material-symbols-outlined'>arrow_forward_ios</span>
-        </Register>
+        <Register onClick={() => setIsLogin(!isLogin)}>회원가입</Register>
       </Guide>
       <Button
         size='wide'
