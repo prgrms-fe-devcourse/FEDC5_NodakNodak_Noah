@@ -9,7 +9,7 @@ import { Card, Input, Button, ScrollBar } from '@/components/common';
 import DeleteIcon from '@/assets/DeleteIcon';
 import { FormProps } from '@/components/Post/Edit/VoteBox/type';
 import Text from '@/components/common/Text';
-import PlusIcon from '@/assets/PlusIcon';
+import theme from '@/styles/theme';
 
 const VoteBox = ({ values, setFieldValue, isEditable }: FormProps) => {
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -81,7 +81,9 @@ const VoteBox = ({ values, setFieldValue, isEditable }: FormProps) => {
               </InputContainer>
             ))}
             {!isEditable && (
-              <Text tagType='span' style={{ color: 'red' }}>
+              <Text
+                tagType='span'
+                style={{ color: `${theme.colors.error[400]}` }}>
                 {'투표가 진행되어 수정할 수 없습니다.'}
               </Text>
             )}

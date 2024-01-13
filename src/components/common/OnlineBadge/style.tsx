@@ -15,7 +15,7 @@ export const Super = styled.sup<{ $isOnline: boolean; $isFollowing: boolean }>`
   height: 20px;
   padding: 0 8px;
   font-size: 12px;
-  color: white;
+  color: ${theme.colors.white};
   border-radius: 20px;
   background-color: ${({ $isOnline }) =>
     $isOnline ? theme.colors.success[300] : theme.colors.error[300]};
@@ -30,6 +30,6 @@ export const Super = styled.sup<{ $isOnline: boolean; $isFollowing: boolean }>`
 
     border: 3px solid
       ${({ $isFollowing }) =>
-        $isFollowing ? theme.colors.info[300] : theme.colors.white};
+        $isFollowing ? theme.colors.success[300] : theme.colors.white};
   }
 `;

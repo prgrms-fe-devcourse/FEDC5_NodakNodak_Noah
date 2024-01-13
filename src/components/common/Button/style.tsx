@@ -92,28 +92,6 @@ export const ButtonTypeEvent = {
       color: ${theme.colors.grayscale[300]};
     `,
   },
-  text: {
-    enabled: css`
-      color: ${theme.isDark ? theme.colors.info[200] : theme.colors.info[300]};
-    `,
-    hover: css`
-      background: ${theme.colors.info[100]};
-      color: ${theme.colors.info[300]};
-    `,
-    click: css`
-      background: ${theme.colors.info[100]};
-      color: ${theme.colors.info[300]};
-    `,
-    focus: css`
-      align-self: stretch;
-      background: ${theme.colors.white};
-      color: ${theme.colors.info[300]};
-    `,
-    disabled: css`
-      background: ${theme.colors.white};
-      color: ${theme.colors.grayscale[300]};
-    `,
-  },
   danger: {
     enabled: css`
       background: ${theme.colors.error[300]};
@@ -174,9 +152,6 @@ const ButtonWrapperBorderColor = {
   ghost: css`
     border: 3px solid ${theme.colors.primary[100]};
   `,
-  text: css`
-    border: 3px solid ${theme.colors.info[100]};
-  `,
   danger: css`
     border: 3px solid ${theme.colors.error[100]};
   `,
@@ -200,7 +175,7 @@ const ButtonWrapperBackgroundSize = {
 };
 
 interface ButtonWrapperProps {
-  $styleType?: 'primary' | 'ghost' | 'text' | 'danger';
+  $styleType?: 'primary' | 'ghost' | 'danger';
   $size?: 'mini' | 'small' | 'regular' | 'wide';
 }
 
