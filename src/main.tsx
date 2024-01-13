@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
-import { Helmet, HelmetProvider } from 'react-helmet-async';
 import ProtectedRoute from '@/components/common/ProtectedRoute';
 
 import App from '@/App';

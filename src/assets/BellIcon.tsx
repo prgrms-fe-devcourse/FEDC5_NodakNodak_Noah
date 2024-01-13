@@ -4,7 +4,7 @@ interface BellProps {
   onToggleCard: () => void;
 }
 
-const Bell = ({ onToggleCard: handleToggleCard }: BellProps) => {
+const BellIcon = ({ onToggleCard: handleToggleCard }: BellProps) => {
   return (
     <svg
       onClick={handleToggleCard}
@@ -34,4 +34,4 @@ const Bell = ({ onToggleCard: handleToggleCard }: BellProps) => {
   );
 };
 
-export default Bell;
+export default BellIcon;
