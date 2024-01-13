@@ -10,7 +10,6 @@ interface FormType {
 
 export const isValidatedForm = (forms: FormType) => {
   const { title, content, voteTitle, voteArray, channelId } = forms;
-
   const hasDuplicates = (array: string[]) => {
     return new Set(array).size !== array.length;
   };

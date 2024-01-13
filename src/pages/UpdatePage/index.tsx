@@ -1,6 +1,6 @@
 import { useFormik } from 'formik';
 import { useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import VoteBox from '@/components/Post/Edit/VoteBox';
 import { FormContainer } from '@/pages/PostPage/style';
 import { isValidatedForm } from '@/utils/Validations/formValidation';
@@ -8,11 +8,11 @@ import { MESSAGE } from '@/utils/constants';
 import { sendPostRequest } from '@/components/Post/Edit/Api';
 import { useDispatch } from '@/store';
 import { getPostDetail } from '@/slices/postDetail';
-import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
 import FormContent from '@/components/Post/Edit/FormContent';
 import SubmitButton from '@/components/Post/Edit/SubmitButton';
 import { FormType } from '@/pages/UpdatePage/type';
 import { useSelectedVote } from '@/hooks/useSelectedVote';
+import { getMyInfo } from '@/slices/user';
 
 const PostUpdatePage = () => {
   const { postId } = useParams();
@@ -21,12 +21,16 @@ const PostUpdatePage = () => {
 
   useEffect(() => {
     dispatch(getPostDetail({ postId }));
+    dispatch(getMyInfo());
   }, [dispatch, postId]);
 
-  const { image, imagePublicId, title, channel } = useSelectedPostDetail();
+  const postDetailVote = useSelectedVote();
+  const postDetail = useLocation();
+  const { title, channel, image, imagePublicId } = postDetail.state;
+
   const channelId = channel._id;
   const serverData = JSON.parse(title);
-  const postDetailVote = useSelectedVote();
+
   const isVoteEmpty = postDetailVote.length === 0;
 
   const fetchImageBlob = async (url: string) => {
@@ -46,7 +50,6 @@ const PostUpdatePage = () => {
   };
 
   const imageFile = generateImageFile();
-
   const handleFormSubmit = async (forms: FormType) => {
     const {
       title,
