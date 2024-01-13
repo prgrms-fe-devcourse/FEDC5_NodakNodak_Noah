@@ -30,7 +30,11 @@ const router = createBrowserRouter([
   { path: '/', element: <Index />, errorElement: <NotFound />, index: true },
   {
     path: '/user/:userId/setting/',
-    element: <Setting />,
+    element: (
+      <ProtectedRoute>
+        <Setting />
+      </ProtectedRoute>
+    ),
     children: [
       { path: '', element: <UserInfo /> },
       { path: 'password', element: <Password /> },
@@ -48,6 +52,7 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
+
       {
         path: '/write/:channelId',
         element: (
@@ -76,7 +81,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/detail/:channelId/:postId/',
-        element: <DetailPage />,
+        element: (
+          <ProtectedRoute>
+            <DetailPage />
+          </ProtectedRoute>
+        ),
         children: [
           { path: '', element: <PostVote /> },
           { path: 'result', element: <PostVoteChart /> },
