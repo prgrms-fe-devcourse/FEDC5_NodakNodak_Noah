@@ -129,6 +129,7 @@ const Up = ({ isLogin, setIsLogin }: SignProps) => {
         fontType='body3'
         placeholder='별명'
         autoComplete='on'
+        justifyContent='center'
         bordertype={warn[3] ? 'error' : 'filled'}
         onChange={(e) => setUserName(e.target.value)}
       />
