@@ -7,8 +7,6 @@ import {
   TextWrapper,
   ContentWrapper,
 } from '@/components/Setting/style';
-import { getUser } from '@/slices/user';
-import { useDispatch } from '@/store';
 import { Input, Text, Button } from '@/components/common';
 import { useSelectedUser } from '@/hooks/useSelectedUser';
 import MailIcon from '@/assets/MailIcon';
@@ -17,7 +15,6 @@ import axiosInstance from '@/utils/customAxios';
 const UserInfo = () => {
   const currentUser = useSelectedUser();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const { userId } = useParams();
 
   const [isModified, setIsModified] = useState(false);
@@ -25,15 +22,6 @@ const UserInfo = () => {
     fullName: currentUser?.fullName || '',
     username: currentUser?.username || '',
   });
-
-  useEffect(() => {
-    if (userId) {
-      dispatch(getUser({ userId }));
-    } else {
-      alert('올바르지 않은 접근입니다.');
-      navigate(-1);
-    }
-  }, [dispatch, navigate, userId]);
 
   useEffect(() => {
     if (currentUser) {
@@ -71,7 +59,7 @@ const UserInfo = () => {
   }, [currentUser]);
 
   const handleCancel = () => {
-    navigate(-1);
+    navigate(`/user/${userId}`);
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -87,13 +75,12 @@ const UserInfo = () => {
   return (
     <ContentWrapper>
       <ButtonWrapper>
-        <Button styleType='danger' isArrow={true} onClick={handleCancel}>
+        <Button styleType='danger' onClick={handleCancel}>
           취소하기
         </Button>
         <Button
           event={isModified ? 'enabled' : 'disabled'}
           disabled={!isModified}
-          isArrow={true}
           onClick={handleUpdate}>
           변경하기
         </Button>

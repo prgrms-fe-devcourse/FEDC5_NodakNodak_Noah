@@ -12,7 +12,7 @@ export const AdminCard = styled.section`
   width: 960px;
   height: 680px;
   border-radius: 8px;
-  box-shadow: 2px 2px 4px 1px #868e96;
+  box-shadow: 2px 2px 4px 1px ${theme.colors.grayscale[300]};
   @media screen and (max-width: 900px) {
     width: 680px;
   }
@@ -29,7 +29,9 @@ export const Legend = styled.span`
   gap: 8px;
   width: 80%;
   height: 40px;
-  background-color: #bac8ff;
+  background-color: ${theme.isDark
+    ? theme.colors.grayscale[300]
+    : theme.colors.grayscale[300]};
 `;
 
 export const LegendRead = styled.span`
@@ -53,13 +55,12 @@ export const RequestLi = styled.li`
   width: 100%;
   max-height: 100px;
   overflow-y: auto;
-  /* background-color: #f4fce3; */
   background-color: ${theme.isDark
     ? theme.colors.grayscale[400]
     : theme.colors.success[100]};
   border-bottom: 1px solid black;
   &:hover {
-    background-color: rgba(0, 0, 0, 0.1);
+    background-color: rgba(${theme.colors.black} 0.1);
     transition-duration: 0.3s;
   }
 `;

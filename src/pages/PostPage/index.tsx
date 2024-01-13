@@ -13,6 +13,8 @@ import { FormType } from '@/pages/PostPage/type';
 const PostCreatePage = () => {
   const { channelId } = useParams();
   const navigate = useNavigate();
+  const selectedChannelId =
+    channelId !== 'unselected ' || null ? '' : channelId;
 
   const handleFormSubmit = async (forms: FormType) => {
     const { title, content, voteTitle, voteArray, channelId, image } = forms;
@@ -55,7 +57,7 @@ const PostCreatePage = () => {
       content: '',
       voteTitle: '',
       voteArray: ['', ''],
-      channelId: channelId || '',
+      channelId: selectedChannelId,
       image: null,
     },
     onSubmit: handleFormSubmit,

@@ -8,7 +8,6 @@ export const ButtonSize = {
     height: 36px;
     justify-content: center;
     align-items: center;
-    gap: 4px;
     flex-shrink: 0;
   `,
   small: css`
@@ -16,14 +15,12 @@ export const ButtonSize = {
     width: 80px;
     justify-content: center;
     align-items: center;
-    gap: 10px;
   `,
   regular: css`
     display: flex;
     width: 120px;
     justify-content: center;
     align-items: center;
-    gap: 10px;
   `,
   wide: css`
     display: flex;
@@ -31,7 +28,6 @@ export const ButtonSize = {
     min-width: 200px;
     justify-content: center;
     align-items: center;
-    gap: 10px;
   `,
 };
 
@@ -96,28 +92,6 @@ export const ButtonTypeEvent = {
       color: ${theme.colors.grayscale[300]};
     `,
   },
-  text: {
-    enabled: css`
-      color: ${theme.isDark ? theme.colors.info[200] : theme.colors.info[300]};
-    `,
-    hover: css`
-      background: ${theme.colors.info[100]};
-      color: ${theme.colors.info[300]};
-    `,
-    click: css`
-      background: ${theme.colors.info[100]};
-      color: ${theme.colors.info[300]};
-    `,
-    focus: css`
-      align-self: stretch;
-      background: ${theme.colors.white};
-      color: ${theme.colors.info[300]};
-    `,
-    disabled: css`
-      background: ${theme.colors.white};
-      color: ${theme.colors.grayscale[300]};
-    `,
-  },
   danger: {
     enabled: css`
       background: ${theme.colors.error[300]};
@@ -160,6 +134,7 @@ export const ButtonLayout = styled.button<ButtonLayoutProps>`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  padding: 13px 16px;
   cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
   &:hover {
     opacity: ${({ $disabled }) => ($disabled ? 1 : 0.8)};
@@ -168,8 +143,6 @@ export const ButtonLayout = styled.button<ButtonLayoutProps>`
   ${({ $size }) => $size && ButtonSize[$size]};
   ${({ $styleType, $event }) =>
     $event && $styleType && ButtonTypeEvent[$styleType][$event]};
-  padding: ${({ $isArrow }) =>
-    $isArrow ? '13px 12px 13px 16px' : '13px 16px'};
 `;
 
 const ButtonWrapperBorderColor = {
@@ -178,9 +151,6 @@ const ButtonWrapperBorderColor = {
   `,
   ghost: css`
     border: 3px solid ${theme.colors.primary[100]};
-  `,
-  text: css`
-    border: 3px solid ${theme.colors.info[100]};
   `,
   danger: css`
     border: 3px solid ${theme.colors.error[100]};
@@ -205,7 +175,7 @@ const ButtonWrapperBackgroundSize = {
 };
 
 interface ButtonWrapperProps {
-  $styleType?: 'primary' | 'ghost' | 'text' | 'danger';
+  $styleType?: 'primary' | 'ghost' | 'danger';
   $size?: 'mini' | 'small' | 'regular' | 'wide';
 }
 

@@ -68,9 +68,9 @@ export const StyledInput = styled.input<StyledInputProps>`
 
 const borderMap = {
   enabled: theme.colors.grayscale[300],
-  hover: theme.colors.info[300],
-  focus: theme.colors.info[300],
-  active: theme.colors.info[300],
+  hover: theme.colors.grayscale[300],
+  focus: theme.colors.grayscale[300],
+  active: theme.colors.grayscale[300],
   filled: theme.colors.grayscale[300],
   error: theme.colors.error[500],
   disabled: theme.colors.grayscale[200],

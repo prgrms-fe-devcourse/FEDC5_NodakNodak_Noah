@@ -11,7 +11,7 @@ import { useDispatch } from '@/store';
 import { getUser } from '@/slices/user';
 import { useSelectedFollowData } from '@/hooks/useSelectedFollowData';
 import { useSelectedUser } from '@/hooks/useSelectedUser';
-import Tooltip from '@/components/Common/Tooltip';
+import Tooltip from '@/components/common/Tooltip';
 import { useSelectedUserList } from '@/hooks/useSelectedUserList';
 import { getUserList } from '@/slices/userList/thunk';
 

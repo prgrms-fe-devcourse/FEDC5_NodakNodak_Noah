@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import Bell from '@/assets/Bell';
+import BellIcon from '@/assets/BellIcon';
 import theme from '@/styles/theme';
 import { useDispatch } from '@/store';
 import {
@@ -121,7 +121,7 @@ const NotificationCardBell = () => {
 
   return (
     <Badge count={count}>
-      <Bell onToggleCard={handleToggleCard} />
+      <BellIcon onToggleCard={handleToggleCard} />
       {toggleNotification && (
         <NotificationContainer ref={ref}>
           <ScrollBar>

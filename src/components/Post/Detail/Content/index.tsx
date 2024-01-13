@@ -30,7 +30,7 @@ const PostContent = () => {
   const handlePostEdit = () => {
     const isConfirm = window.confirm('수정하시겠습니까?');
     if (!isConfirm) return;
-    navigate(`/update/${postId}`);
+    navigate(`/update/${postId}`, { state: postDetailContent });
   };
 
   const handlePostDelete = async () => {

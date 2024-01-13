@@ -22,6 +22,8 @@ import {
   StyledTextArea,
 } from '@/components/Post/Edit/FormContent/style';
 import { PLACEHOLDER, FORM_SIZE } from '@/utils/constants';
+import { useDispatch } from '@/store';
+import { getMyInfo } from '@/slices/user';
 
 const FormContent = ({
   values,
@@ -30,11 +32,21 @@ const FormContent = ({
   handleDeleteImage,
 }: FormContentProps) => {
   const { state } = useLocation();
-  const [image, setImage] = useState(state || '');
+  const [image, setImage] = useState(state || null);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getMyInfo());
+  }, [dispatch]);
+
   const myInfo = useSelectedMyInfo();
 
   useEffect(() => {
-    setImage(values.imageSrc);
+    if (values.imageSrc !== '' && values.imageSrc) {
+      setImage(values.imageSrc);
+      return;
+    }
+    setImage(null);
   }, [values.imageSrc]);
 
   return (
@@ -91,10 +103,12 @@ const FormContent = ({
         )}
       </ActionButtonsWrapper>
 
-      <Image
-        src={image}
-        style={{ objectFit: 'contain', maxHeight: '500px', margin: '10px' }}
-      />
+      {image && (
+        <Image
+          src={image}
+          style={{ objectFit: 'contain', maxHeight: '500px', margin: '10px' }}
+        />
+      )}
 
       <TextAreaWrapper>
         <StyledTextArea

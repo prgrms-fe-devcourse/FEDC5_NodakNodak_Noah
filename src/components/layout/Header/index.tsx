@@ -19,7 +19,6 @@ import {
   StyledHeaderWrapper,
   ChannelWrapper,
   LogoWrapper,
-  SearchIcon,
   FormContainer,
   AuthUiWrapper,
   NavLinkWrapper,
@@ -27,6 +26,7 @@ import {
 import DarkModeToggle from '@/components/layout/Header/DarkModeToggle';
 import axiosInstance from '@/utils/customAxios';
 import theme from '@/styles/theme';
+import SearchIcon from '@/assets/SearchIcon';
 
 const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
   const [focus, setFocus] = useState(false);
@@ -161,10 +161,12 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
             onChange={(e) => setInputValue(e.target.value)}
             onFocus={handleFocus}
           />
-          <Button type='submit' styleType='ghost' size='mini'>
-            <SearchIcon className='material-symbols-outlined'>
-              search
-            </SearchIcon>
+          <Button
+            type='submit'
+            styleType='ghost'
+            size='mini'
+            style={{ padding: 0 }}>
+            <SearchIcon />
           </Button>
         </FormContainer>
         <DarkModeToggle />

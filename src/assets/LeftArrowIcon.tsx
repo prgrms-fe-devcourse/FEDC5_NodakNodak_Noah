@@ -1,0 +1,22 @@
+import theme from '@/styles/theme';
+
+const LeftArrowIcon = () => {
+  return (
+    <svg
+      width='14'
+      height='14'
+      viewBox='0 0 14 14'
+      fill='none'
+      xmlns='http://www.w3.org/2000/svg'>
+      <path
+        d='M10.15 0.5L4 6.65C3.95217 6.69489 3.91405 6.74911 3.88799 6.80931C3.86193 6.8695 3.84848 6.9344 3.84848 7C3.84848 7.0656 3.86193 7.1305 3.88799 7.19069C3.91405 7.25089 3.95217 7.30511 4 7.35L10.15 13.5'
+        stroke={theme.isDark ? theme.colors.white : theme.colors.black}
+        strokeLinecap='round'
+        strokeLinejoin='round'
+        strokeWidth={2}
+      />
+    </svg>
+  );
+};
+
+export default LeftArrowIcon;

@@ -1,7 +1,7 @@
 import { GrassWrapper, GrassItem } from '@/components/User/GrassTable/style';
 import { useSelectedUser } from '@/hooks/useSelectedUser';
 import { LightnessType } from '@/components/User/GrassTable/type';
-import Tooltip from '@/components/Common/Tooltip';
+import Tooltip from '@/components/common/Tooltip';
 
 const GrassTable = () => {
   const currentUser = useSelectedUser();
