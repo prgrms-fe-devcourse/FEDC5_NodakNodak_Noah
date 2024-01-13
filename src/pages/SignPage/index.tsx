@@ -15,13 +15,6 @@ const Login = () => {
       <Card>
         <GoHome onClick={() => navigate('/home')}>
           <LeftArrowIcon />
-          <Text
-            tagType='span'
-            colorType='grayscale'
-            colorNumber='400'
-            fontType='h4'>
-            뒤로가기
-          </Text>
         </GoHome>
 
         <SignText>{isLogin ? '로그인' : '회원가입'}</SignText>
