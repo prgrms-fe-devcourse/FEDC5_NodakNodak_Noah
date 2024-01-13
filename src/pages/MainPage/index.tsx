@@ -63,11 +63,6 @@ const Main = () => {
 
   const handleWriteClick = (e: MouseEvent) => {
     e.preventDefault();
-
-    if (!token) {
-      alert('로그인이 필요한 서비스 입니다.');
-      return;
-    }
     navigate(`/write/${channelId ? channelId : 'unselected'}`);
   };
 

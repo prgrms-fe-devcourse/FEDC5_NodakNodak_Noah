@@ -25,13 +25,11 @@ const PostCard = ({ post }: PostCardProps) => {
   const navigate = useNavigate();
 
   const handleDetailClick = () => {
-    const token = localStorage.getItem('auth-token');
-    navigate(token ? `/detail/${channel?._id}/${post._id}` : '/sign');
+    navigate(`/detail/${channel?._id}/${post._id}`);
   };
 
   const handleDetailResultClick = () => {
-    const token = localStorage.getItem('auth-token');
-    navigate(token ? `/detail/${channel?._id}/${post._id}/result` : '/sign');
+    navigate(`/detail/${channel?._id}/${post._id}/result`);
   };
 
   return (

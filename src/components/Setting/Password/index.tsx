@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import {
@@ -7,8 +7,6 @@ import {
   TextWrapper,
   ContentWrapper,
 } from '@/components/Setting/style';
-import { getUser } from '@/slices/user';
-import { useDispatch } from '@/store';
 import { Input, Text, Button } from '@/components/common';
 import { useSelectedUser } from '@/hooks/useSelectedUser';
 import MailIcon from '@/assets/MailIcon';
@@ -17,24 +15,14 @@ import axiosInstance from '@/utils/customAxios';
 const Password = () => {
   const currentUser = useSelectedUser();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
   const { userId } = useParams();
 
   const [isModified, setIsModified] = useState(false);
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
-  useEffect(() => {
-    if (userId) {
-      dispatch(getUser({ userId }));
-    } else {
-      alert('올바르지 않은 접근입니다.');
-      navigate(-1);
-    }
-  }, [dispatch, navigate, userId]);
-
   const handleCancel = () => {
-    navigate(-1);
+    navigate('/user/:userId');
   };
 
   if (!currentUser) {
