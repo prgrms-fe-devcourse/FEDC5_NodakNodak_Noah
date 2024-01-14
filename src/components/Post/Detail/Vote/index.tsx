@@ -131,6 +131,14 @@ const PostVote = () => {
                         ? theme.colors.primary[200]
                         : ''
                   }`,
+                  color: `${
+                    !theme.isDark
+                      ? theme.colors.black
+                      : vote === myVote
+                        ? theme.colors.black
+                        : theme.colors.white
+                  }`,
+
                   outline: 'none',
                 }}
                 onClick={() => handleVoteContent(vote)}

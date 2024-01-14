@@ -5,6 +5,7 @@ import { Text } from '@/components/common';
 import In from '@/components/Sign/In';
 import Up from '@/components/Sign/Up';
 import LeftArrowIcon from '@/assets/LeftArrowIcon';
+import theme from '@/styles/theme';
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -18,7 +19,7 @@ const Login = () => {
           <Text
             tagType='span'
             colorType='grayscale'
-            colorNumber='400'
+            colorNumber={theme.isDark ? '100' : '400'}
             fontType='h4'>
             뒤로가기
           </Text>

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import them from '@/styles/theme';
+import theme from '@/styles/theme';
 
 export const HeaderWrapper = styled.div`
   display: flex;
@@ -35,6 +36,7 @@ export const StyledTextArea = styled.textarea`
   border: none;
   resize: none;
   outline: none;
+  color: ${theme.isDark ? theme.colors.white : theme.colors.black};
   background-color: transparent;
   font-family: Pretendeard;
 `;
