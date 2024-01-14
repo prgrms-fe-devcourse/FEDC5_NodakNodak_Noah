@@ -1,5 +1,4 @@
-import { MessageContent, RequestCard } from './style';
-import { Container } from '../SignPage/style';
+import { Container, MessageContent, RequestCard } from './style';
 import { useCallback, useEffect, useState } from 'react';
 import { Button, Text } from '@/components/common';
 import axiosInstance from '@/utils/customAxios';

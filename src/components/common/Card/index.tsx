@@ -11,10 +11,10 @@ const Card = ({
 }: PropsWithChildren<CardProps>) => {
   const ShadowSizes = {
     medium: theme.isDark
-      ? `0px 4px 6px 0px rgba(${theme.colors.grayscale[400]}, 0.10),0px 2px 4px 0px rgba(${theme.colors.grayscale[400]}, 0.10)`
+      ? `0px 4px 6px 0px rgba(${theme.colors.grayscale[200]}, 0.10),0px 2px 4px 0px rgba(${theme.colors.grayscale[200]}, 0.10)`
       : `0px 4px 6px 0px rgba(${theme.colors.black}, 0.10),0px 2px 4px 0px rgba(${theme.colors.black}, 0.10)`,
     large: theme.isDark
-      ? `0px 4px 6px 0px rgba(${theme.colors.grayscale[400]}, 0.10),0px 2px 4px 0px rgba(${theme.colors.grayscale[400]}, 0.10)`
+      ? `0px 4px 6px 0px rgba(${theme.colors.grayscale[200]}, 0.10),0px 2px 4px 0px rgba(${theme.colors.grayscale[200]}, 0.10)`
       : `0px 4px 6px 0px rgba(${theme.colors.black}, 0.10),0px 2px 4px 0px rgba(${theme.colors.black}, 0.10)`,
   };
   const getBackgroundColor = () => {

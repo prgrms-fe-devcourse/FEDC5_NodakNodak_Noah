@@ -1,7 +1,16 @@
 import styled from 'styled-components';
 import theme from '@/styles/theme';
 
+export const Container = styled.div`
+  width: 100vw;
+  height: 100vh;
+`;
+
 export const RequestCard = styled.section`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
   justify-content: center;
