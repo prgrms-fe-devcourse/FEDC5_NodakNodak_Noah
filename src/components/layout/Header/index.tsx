@@ -22,14 +22,11 @@ import {
   FormContainer,
   AuthUiWrapper,
   NavLinkWrapper,
-  IconWrapper,
 } from '@/components/layout/Header/style';
 import DarkModeToggle from '@/components/layout/Header/DarkModeToggle';
 import axiosInstance from '@/utils/customAxios';
 import theme from '@/styles/theme';
 import SearchIcon from '@/assets/SearchIcon';
-
-const menu = ['마이페이지', '비밀번호변경', '로그아웃'];
 
 const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
   const [focus, setFocus] = useState(false);
@@ -40,7 +37,12 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = localStorage.getItem('auth-token');
-
+  const menu = [
+    '마이페이지',
+    '비밀번호 변경',
+    myInfo?.role === 'Regular' ? '문의하기' : '문의함',
+    '로그아웃',
+  ];
   const handleSearch = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     navigate(`/home?search=${inputValue}`);
@@ -61,19 +63,38 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
   };
 
   const handleMenuItemClick = async (item: string) => {
-    if (item === '마이페이지') {
-      setShowMenu(false);
-      navigate(`/user/${myInfo?._id}`);
-    } else if (item === '로그아웃') {
-      localStorage.removeItem('auth-token');
-      const { data } = await axiosInstance.post('/logout');
-      alert(data);
-      location.reload();
-    } else if (item === '비밀번호변경') {
-      setShowMenu(false);
-      navigate(`/user/${myInfo?._id}/setting/password`, {
-        state: myInfo?.image,
-      });
+    switch (item) {
+      case '마이페이지': {
+        setShowMenu(false);
+        navigate(`/user/${myInfo?._id}`);
+        break;
+      }
+      case '로그아웃': {
+        localStorage.removeItem('auth-token');
+        const { data } = await axiosInstance.post('/logout');
+        alert(data);
+        location.reload();
+        break;
+      }
+      case '문의하기': {
+        setShowMenu(false);
+        navigate('/request');
+        break;
+      }
+      case '문의함': {
+        setShowMenu(false);
+        navigate('/admin');
+        break;
+      }
+      case '비밀번호 변경': {
+        setShowMenu(false);
+        navigate(`/user/${myInfo?._id}/setting/password`, {
+          state: myInfo?.image,
+        });
+        break;
+      }
+      default:
+        break;
     }
   };
 
@@ -85,7 +106,9 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
     setFocus(!focus);
   });
 
-  const menuRef = useClickAway(() => {
+  const menuRef = useClickAway((e: MouseEvent | TouchEvent) => {
+    const { tagName } = e.target as HTMLElement;
+    if (tagName === 'IMG') return;
     setShowMenu(false);
   });
 
@@ -156,24 +179,6 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
               onClick={handleAvatarClick}
               alt='유저네임'
             />
-
-            {myInfo?.role ? (
-              myInfo?.role === 'Regular' ? (
-                <IconWrapper
-                  className='material-symbols-outlined'
-                  onClick={() => navigate('/request')}>
-                  help
-                </IconWrapper>
-              ) : (
-                <IconWrapper
-                  onClick={() => navigate('/admin')}
-                  className='material-symbols-outlined'>
-                  settings
-                </IconWrapper>
-              )
-            ) : (
-              '...'
-            )}
 
             {showMenu && (
               <DropdownContent
