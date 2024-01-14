@@ -10,6 +10,7 @@ import {
 } from '@/components/common/Dropdown/style';
 import useClickAway from '@/hooks/useClickAway';
 import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
+import { useSelectedChannels } from '@/hooks/useSelectedChannel';
 
 import { useDispatch } from '@/store';
 import { getChannel, setChannel } from '@/slices/channel';
@@ -26,7 +27,6 @@ import DarkModeToggle from '@/components/layout/Header/DarkModeToggle';
 import axiosInstance from '@/utils/customAxios';
 import theme from '@/styles/theme';
 import SearchIcon from '@/assets/SearchIcon';
-import { useSelectedChannels } from '@/hooks/useSelectedChannel';
 
 const Header = () => {
   const [focus, setFocus] = useState(false);
