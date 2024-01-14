@@ -54,7 +54,7 @@ const UserInfo = () => {
         </Text>
         <UserButtonContainer>
           <Tooltip
-            direction='bottom'
+            direction='right'
             message={getFullNames(
               followers.map((follower) => follower.follower),
             )}
@@ -67,7 +67,7 @@ const UserInfo = () => {
             </a>
           </Tooltip>
           <Tooltip
-            direction='bottom'
+            direction='right'
             message={getFullNames(following.map((followee) => followee.user))}
             hasArrow={true}
             type='hover'>
