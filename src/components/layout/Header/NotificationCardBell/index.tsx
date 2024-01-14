@@ -160,9 +160,9 @@ const NotificationCardBell = () => {
                     return (
                       <UserSnippet
                         key={_id}
-                        userId={author._id || ''}
-                        image={author.image || ''}
-                        isOnline={author?.isOnline || false}
+                        userId={author._id}
+                        image={author.image}
+                        isOnline={author.isOnline}
                         isFollowing={isFollowing}
                         handleClick={handleClick}
                         text={text}
