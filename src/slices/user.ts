@@ -2,11 +2,13 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import axiosInstance from '@/utils/customAxios';
 import { UserInfo } from '@/slices/user/type';
+import { initialUser } from '@/slices/initialState';
 
 const initialState: UserInfo = {
-  currentUser: undefined,
-  authUser: undefined,
+  currentUser: initialUser,
+  authUser: initialUser,
   isLoading: false,
+  authUserStatus: 'loading',
 };
 
 export const getUser = createAsyncThunk(

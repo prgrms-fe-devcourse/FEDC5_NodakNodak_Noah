@@ -6,21 +6,17 @@ export interface User {
   posts: Post[];
   likes: Like[];
   comments: string[];
-  followers: [
-    {
-      follower: string;
-    },
-  ];
-  following: [
-    {
-      _id: string;
-      user: string;
-      follower: string;
-      createdAt: string;
-      updatedAt: string;
-      __v: number;
-    },
-  ];
+  followers: {
+    follower: string;
+  }[];
+  following: {
+    _id: string;
+    user: string;
+    follower: string;
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
+  }[];
   notifications: Notification[];
   messages: Message[];
   _id: string;

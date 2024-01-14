@@ -5,9 +5,9 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import ProtectedRoute from '@/components/common/ProtectedRoute';
 
+import store from '@/store';
 import App from '@/App';
 import Admin from '@/pages/AdminPage';
-import store from '@/store';
 import Main from '@/pages/MainPage';
 import Login from '@/pages/SignPage';
 import Index from '@/pages/IndexPage';

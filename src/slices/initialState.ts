@@ -1,0 +1,21 @@
+export const initialUser = {
+  coverImage: '',
+  image: '',
+  role: '',
+  isOnline: false,
+  posts: [],
+  likes: [],
+  comments: [],
+  followers: [{ follower: '' }],
+  following: [
+    { _id: '', user: '', follower: '', createdAt: '', updatedAt: '', __v: 0 },
+  ],
+  notifications: [],
+  messages: [],
+  _id: '',
+  fullName: '',
+  username: '',
+  email: '',
+  createdAt: '',
+  updatedAt: '',
+};
