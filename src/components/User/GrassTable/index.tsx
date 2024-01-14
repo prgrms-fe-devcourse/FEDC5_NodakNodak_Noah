@@ -9,10 +9,15 @@ const GrassTable = () => {
   const month = new Date().getMonth();
 
   const lastDayOfMonth = new Date(year, month + 1, 0).getDate();
-  const grass: { lightness: LightnessType; postNumber: number }[] = Array.from(
-    { length: lastDayOfMonth },
-    () => ({ lightness: 100, postNumber: 0 }),
-  );
+  const grass: {
+    lightness: LightnessType;
+    postNumber: number;
+    date: string;
+  }[] = Array.from({ length: lastDayOfMonth }, (_, index) => ({
+    lightness: 100,
+    postNumber: 0,
+    date: `${year}-${month + 1}-${index + 1}`,
+  }));
 
   currentUser?.posts.forEach((post) => {
     const postDate = new Date(post.createdAt);
@@ -38,7 +43,7 @@ const GrassTable = () => {
           <Tooltip
             key={i}
             direction='bottom'
-            message={`게시물: ${data.postNumber}`}
+            message={`${data.date}, 게시물: ${data.postNumber}`}
             hasArrow={true}
             type='hover'>
             <GrassItem lightness={data.lightness} />

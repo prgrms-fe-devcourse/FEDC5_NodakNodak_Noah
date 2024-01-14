@@ -15,6 +15,12 @@ import Tooltip from '@/components/common/Tooltip';
 import { useSelectedUserList } from '@/hooks/useSelectedUserList';
 import { getUserList } from '@/slices/userList/thunk';
 
+const MESSAGE = {
+  NO_USER_MESSAGE: '사용자가, 없습니다.',
+  UNKNOWN_USER_MESSAGE: 'Unknown User',
+  NO_INTRODUCTION_MESSAGE: '한줄 소개가 없습니다',
+};
+
 const UserInfo = () => {
   const dispatch = useDispatch();
   const { userId } = useParams();
@@ -29,14 +35,19 @@ const UserInfo = () => {
 
   const userList = useSelectedUserList();
 
-  const getFullNames = (userIds: string[]) =>
-    userIds
+  const getFullNames = (userIds: string[]) => {
+    if (userIds.length === 0) {
+      return MESSAGE.NO_USER_MESSAGE;
+    }
+    return userIds
       .map((userId) => {
         const user = userList.find((user) => user._id === userId);
 
-        return user ? user.fullName : 'Unknown User';
+        return user ? user.fullName : MESSAGE.UNKNOWN_USER_MESSAGE;
       })
       .join(', ');
+  };
+
   const currentUser = useSelectedUser();
   if (!currentUser) return null;
   const { image, fullName, username, followers, following, posts } =
@@ -50,14 +61,16 @@ const UserInfo = () => {
           {fullName}
         </Text>
         <Text tagType='span' fontType='body1' colorType='black'>
-          {username || '한줄 소개가 없습니다'}
+          {username || MESSAGE.NO_INTRODUCTION_MESSAGE}
         </Text>
         <UserButtonContainer>
           <Tooltip
             direction='bottom'
-            message={getFullNames(followers.map((follower) => follower.user))}
+            message={getFullNames(
+              followers.map((follower) => follower.follower),
+            )}
             hasArrow={true}
-            type='click'>
+            type='hover'>
             <a>
               <Button size='regular' styleType='ghost'>
                 {followers.length} 팔로워
@@ -68,7 +81,7 @@ const UserInfo = () => {
             direction='bottom'
             message={getFullNames(following.map((followee) => followee.user))}
             hasArrow={true}
-            type='click'>
+            type='hover'>
             <a>
               <Button size='regular' styleType='ghost'>
                 {following.length} 팔로잉
