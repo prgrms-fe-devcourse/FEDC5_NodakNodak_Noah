@@ -55,9 +55,11 @@ const UserInfo = () => {
         <UserButtonContainer>
           <Tooltip
             direction='bottom'
-            message={getFullNames(followers.map((follower) => follower.user))}
+            message={getFullNames(
+              followers.map((follower) => follower.follower),
+            )}
             hasArrow={true}
-            type='click'>
+            type='hover'>
             <a>
               <Button size='regular' styleType='ghost'>
                 {followers.length} 팔로워
@@ -68,7 +70,7 @@ const UserInfo = () => {
             direction='bottom'
             message={getFullNames(following.map((followee) => followee.user))}
             hasArrow={true}
-            type='click'>
+            type='hover'>
             <a>
               <Button size='regular' styleType='ghost'>
                 {following.length} 팔로잉

@@ -8,7 +8,7 @@ export interface User {
   comments: string[];
   followers: [
     {
-      user: string;
+      follower: string;
     },
   ];
   following: [
