@@ -1,23 +1,17 @@
 import styled from 'styled-components';
 import them from '@/styles/theme';
 
-export const UserInfoWrapper = styled.div`
+export const HeaderWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 32px;
+  margin-top: 24px;
 `;
 
-export const UserInfo = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 8px;
-`;
-
-export const ActionButtonsWrapper = styled.div`
+export const UploadeButtonsWrapper = styled.div`
   display: flex;
   gap: 8px;
-  margin: 24px 0 4px 0;
+  margin: 28px 0 12px 0;
 `;
 
 export const FormArea = styled.div`
