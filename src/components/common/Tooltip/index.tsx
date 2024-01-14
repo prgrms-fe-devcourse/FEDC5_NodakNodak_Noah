@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, PropsWithChildren } from 'react';
+import React, { useEffect, useRef, PropsWithChildren, useState } from 'react';
 import useHover from '@/hooks/useHover';
 import TooltipContainer, {
   TooltipContent,
@@ -14,7 +14,7 @@ const Tooltip = ({
   children,
 }: PropsWithChildren<TooltipProps>) => {
   const [ref, isHovered] = useHover();
-  const [show, setShow] = React.useState(false);
+  const [show, setShow] = useState(false);
   const tooltipRef = useRef<HTMLSpanElement | null>(null);
 
   useEffect(() => {
@@ -40,11 +40,11 @@ const Tooltip = ({
     }
   }, [type, isHovered, ref]);
 
+  const childElement = React.Children.only(children) as React.ReactElement;
+
   return (
     <TooltipContainer>
-      {React.cloneElement(React.Children.only(children) as React.ReactElement, {
-        ref,
-      })}
+      <span ref={ref}>{childElement}</span>
       {show && (
         <TooltipContent
           ref={tooltipRef}
