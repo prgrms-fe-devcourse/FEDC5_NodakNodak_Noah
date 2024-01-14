@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { TooltipDirection } from '@/components/Common/Tooltip/type';
+import theme from '@/styles/theme';
 
 export const TooltipContainer = styled.div`
   position: relative;
@@ -11,10 +12,10 @@ export const TooltipContent = styled.span<{ direction: TooltipDirection }>`
   position: absolute;
   z-index: 10;
   border-radius: 0.375rem;
-  background-color: #faf7e8;
+  background-color: ${theme.colors.primary[100]};
   padding: 10px;
   text-align: center;
-  color: #000;
+  color: ${theme.colors.black};
   width: 100px;
   max-width: 300px;
   font-size: 14px;
@@ -36,7 +37,7 @@ export const TooltipContent = styled.span<{ direction: TooltipDirection }>`
 `;
 
 export const getBoxShadow = (direction: TooltipDirection) => {
-  const shadowCommon = '12px rgba(0, 0, 0, 0.2)';
+  const shadowCommon = `12px rgba(${theme.colors.black} 0.2)`;
   switch (direction) {
     case 'top':
       return `0 5px ${shadowCommon}`;

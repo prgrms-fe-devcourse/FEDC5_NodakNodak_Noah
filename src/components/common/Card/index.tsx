@@ -11,11 +11,11 @@ const Card = ({
 }: PropsWithChildren<CardProps>) => {
   const ShadowSizes = {
     medium: theme.isDark
-      ? '0px 4px 6px 0px rgba(100, 100, 100, 0.10),0px 2px 4px 0px rgba(100, 100, 100, 0.10)'
-      : '0px 4px 6px 0px rgba(0, 0, 0, 0.10),0px 2px 4px 0px rgba(0, 0, 0, 0.10)',
+      ? `0px 4px 6px 0px rgba(${theme.colors.grayscale[400]}, 0.10),0px 2px 4px 0px rgba(${theme.colors.grayscale[400]}, 0.10)`
+      : `0px 4px 6px 0px rgba(${theme.colors.black}, 0.10),0px 2px 4px 0px rgba(${theme.colors.black}, 0.10)`,
     large: theme.isDark
-      ? '0px 4px 6px 0px rgba(100, 100, 100, 0.10),0px 2px 4px 0px rgba(100, 100, 100, 0.10)'
-      : '0px 4px 6px 0px rgba(0, 0, 0, 0.10),0px 2px 4px 0px rgba(0, 0, 0, 0.10)',
+      ? `0px 4px 6px 0px rgba(${theme.colors.grayscale[400]}, 0.10),0px 2px 4px 0px rgba(${theme.colors.grayscale[400]}, 0.10)`
+      : `0px 4px 6px 0px rgba(${theme.colors.black}, 0.10),0px 2px 4px 0px rgba(${theme.colors.black}, 0.10)`,
   };
   const getBackgroundColor = () => {
     return theme.isDark ? theme.colors.grayscale[400] : theme.colors.white;

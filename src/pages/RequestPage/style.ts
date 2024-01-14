@@ -13,7 +13,7 @@ export const RequestCard = styled.section`
   width: 960px;
   height: 680px;
   border-radius: 8px;
-  box-shadow: 2px 2px 4px 1px #868e96;
+  box-shadow: 2px 2px 4px 1px ${theme.colors.grayscale[300]};
   @media screen and (max-width: 900px) {
     width: 680px;
   }

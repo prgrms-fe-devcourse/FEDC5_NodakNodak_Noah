@@ -129,6 +129,7 @@ const Up = ({ isLogin, setIsLogin }: SignProps) => {
         fontType='body3'
         placeholder='별명'
         autoComplete='on'
+        justifyContent='center'
         bordertype={warn[3] ? 'error' : 'filled'}
         onChange={(e) => setUserName(e.target.value)}
       />
@@ -154,10 +155,7 @@ const Up = ({ isLogin, setIsLogin }: SignProps) => {
       {warnText !== '' ? <Warning>{warnText}</Warning> : ''}
       <Guide>
         이미 노닥노닥과 함께라면
-        <Register onClick={() => setIsLogin(!isLogin)}>
-          로그인
-          <span className='material-symbols-outlined'>arrow_forward_ios</span>
-        </Register>
+        <Register onClick={() => setIsLogin(!isLogin)}>로그인</Register>
       </Guide>
       <Button
         size='wide'

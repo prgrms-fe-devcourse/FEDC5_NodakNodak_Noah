@@ -26,6 +26,6 @@ export const Guide = styled.span`
 export const Register = styled.span`
   display: flex;
   align-items: center;
-  color: #5c7cfa;
+  color: ${theme.colors.primary[300]};
   cursor: pointer;
 `;

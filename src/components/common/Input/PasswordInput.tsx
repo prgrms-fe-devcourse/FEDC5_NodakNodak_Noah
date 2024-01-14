@@ -2,6 +2,8 @@ import { useState } from 'react';
 
 import { Wrapper, StyledInput, Eye } from '@/components/common/Input/style';
 import { InputProps } from '@/components/common/Input/type';
+import ViewEyesIcon from '@/assets/ViewEyesIcon';
+import HideEyesIcon from '@/assets/HideEyesIcon';
 
 const PasswordInput = ({
   bordertype = 'filled',
@@ -26,8 +28,8 @@ const PasswordInput = ({
         type={canSee ? 'text' : 'password'}
         {...props}
       />
-      <Eye onClick={handleEye} className='material-symbols-outlined'>
-        {canSee ? 'visibility_off' : 'visibility'}
+      <Eye onClick={handleEye}>
+        {canSee ? <HideEyesIcon /> : <ViewEyesIcon />}
       </Eye>
     </Wrapper>
   );

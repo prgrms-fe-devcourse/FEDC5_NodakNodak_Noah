@@ -11,7 +11,12 @@ const ProtectedRoute = ({
   const token = localStorage.getItem('auth-token');
 
   if (!token || (admin && !token && myInfo?.role !== 'SuperAdmin')) {
-    return <Navigate to='/home' replace />;
+    const check = window.confirm('로그인이 필요합니다. 로그인 하시겠습니까?');
+    if (check) {
+      return <Navigate to='/sign' replace />;
+    } else {
+      return <Navigate to='/home' replace />;
+    }
   }
   return children;
 };

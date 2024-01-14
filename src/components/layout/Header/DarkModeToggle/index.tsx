@@ -10,7 +10,7 @@ const DarkModeToggle = () => {
   };
 
   return (
-    <div onClick={toggleDarkMode}>
+    <div onClick={toggleDarkMode} style={{ cursor: 'pointer' }}>
       {theme.isDark ? <LightIcon /> : <DarkIcon />}
     </div>
   );
