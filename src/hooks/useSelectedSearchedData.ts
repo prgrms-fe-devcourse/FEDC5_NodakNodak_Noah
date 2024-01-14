@@ -6,3 +6,6 @@ export const useSelectedSearchedPostData = () =>
 
 export const useSelectedSearchedUserData = () =>
   useSelector((state: RootState) => state.searchedData.userData);
+
+export const useSelectedSearchedDataLoading = () =>
+  useSelector((state: RootState) => state.searchedData.isLoading);

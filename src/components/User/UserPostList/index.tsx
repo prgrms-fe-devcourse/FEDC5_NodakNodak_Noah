@@ -3,14 +3,14 @@ import { useParams } from 'react-router-dom';
 import Text from '@/components/common/Text';
 import { useDispatch } from '@/store';
 import { getUser } from '@/slices/user';
-import PostCard from '@/components/Main/PostCard';
-import Pagination from '@/components/Main/Pagination';
-import { postListToPostSnippetList } from '@/slices/postList/utils';
+import PostCard from '@/components/Main/PostList/PostCard';
+import Pagination from '@/components/common/Pagination';
 import { useSelectedPostList } from '@/hooks/useSelectedPostList';
 import { getPostListByUserId } from '@/slices/postList/thunks';
 import { useSelectedUser } from '@/hooks/useSelectedUser';
 import { usePagination } from '@/hooks/usePagination';
 import theme from '@/styles/theme';
+import { PostCardWrapper } from '@/components/Main/PostList/PostCard/style';
 
 const UserPostList = () => {
   const dispatch = useDispatch();
@@ -18,9 +18,8 @@ const UserPostList = () => {
   const currentUser = useSelectedUser();
   const postList = useSelectedPostList();
 
-  const postSnippetList = postListToPostSnippetList(postList);
   const { paginatedPostList, totalPage, currentPage, handlePageChange } =
-    usePagination(postSnippetList, 4);
+    usePagination(postList, 4);
 
   useEffect(() => {
     if (!userId) return;
@@ -43,7 +42,7 @@ const UserPostList = () => {
         colorNumber={theme.isDark ? '200' : '400'}>
         님의 최근 게시글
       </Text>
-      <PostCard.Group
+      <PostCardWrapper
         style={{ width: '80vw', margin: '2rem 0', maxWidth: '1440px' }}>
         {paginatedPostList.length === 0 ? (
           <Text
@@ -54,11 +53,20 @@ const UserPostList = () => {
             게시글이 존재하지 않습니다.
           </Text>
         ) : (
-          paginatedPostList.map((post) => {
-            return <PostCard key={post._id} post={post} />;
+          paginatedPostList.map(({ _id, image, title, author, comments }) => {
+            return (
+              <PostCard
+                key={_id}
+                postId={_id}
+                image={image}
+                title={title}
+                author={author}
+                comments={comments}
+              />
+            );
           })
         )}
-      </PostCard.Group>
+      </PostCardWrapper>
       <Pagination
         page={currentPage}
         totalPage={totalPage}
