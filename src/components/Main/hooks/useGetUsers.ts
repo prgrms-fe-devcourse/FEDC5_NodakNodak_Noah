@@ -25,9 +25,9 @@ const useGetUserList = () => {
   const isLoading = isLoadingUserList || isLoadingMyInfo;
 
   useEffect(() => {
+    dispatch(getUserList());
     if (!token) return;
     dispatch(getMyInfo());
-    dispatch(getUserList());
   }, [dispatch, token]);
 
   useInterval(() => {
