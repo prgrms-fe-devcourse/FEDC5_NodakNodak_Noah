@@ -1,9 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
   UserButtonContainer,
   UserInfoWrapper,
   UserInfoContainer,
+  AvatarWrapper,
 } from '@/components/User/UserInfo/style';
 import GrassTable from '@/components/User/GrassTable';
 import { Avatar, Button, Text } from '@/components/common';
@@ -14,6 +15,7 @@ import { useSelectedUser } from '@/hooks/useSelectedUser';
 import Tooltip from '@/components/common/Tooltip';
 import { useSelectedUserList } from '@/hooks/useSelectedUserList';
 import { getUserList } from '@/slices/userList/thunk';
+import ImageUploader from '@/components/common/Button/ImageUploadButton';
 
 const MESSAGE = {
   NO_USER_MESSAGE: '사용자가, 없습니다.',
@@ -25,6 +27,7 @@ const UserInfo = () => {
   const dispatch = useDispatch();
   const { userId } = useParams();
   const { isFollower, isFollowing } = useSelectedFollowData();
+  const [userImage, setUserImage] = useState('');
 
   useEffect(() => {
     if (userId) {
@@ -55,7 +58,16 @@ const UserInfo = () => {
 
   return (
     <UserInfoContainer>
-      <Avatar src={image} alt={fullName} size='large' />
+      <AvatarWrapper>
+        <Avatar
+          src={userImage === '' ? image : userImage}
+          alt={fullName}
+          size='large'
+        />
+        <ImageUploader setImage={setUserImage} apiParam='users/upload-photo'>
+          이미지 변경
+        </ImageUploader>
+      </AvatarWrapper>
       <UserInfoWrapper>
         <Text tagType='span' fontType='h1' colorType='black'>
           {fullName}
