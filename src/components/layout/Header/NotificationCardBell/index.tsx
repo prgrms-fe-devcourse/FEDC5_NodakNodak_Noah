@@ -9,6 +9,7 @@ import {
   getNotificationArray,
 } from '@/slices/notification/thunk';
 import { getPostListByMyId } from '@/slices/postList/thunks';
+import { notificationType } from '@/slices/notification';
 import { userToUserSnippet } from '@/slices/userList/utils';
 import useInterval from '@/hooks/useInterval';
 import useClickAway from '@/hooks/useClickAway';
@@ -35,7 +36,7 @@ const NotificationCardBell = () => {
   const count = notifications.length;
 
   const notificationsArray = notifications.map(
-    ({ _id, comment, follow, author, post, message }) => {
+    ({ _id, follow, author, post, type }) => {
       const snippetAuthor = userToUserSnippet(author, myInfo);
       if (!snippetAuthor) return { _id, text: '알수 없는 알림' };
 
@@ -52,47 +53,55 @@ const NotificationCardBell = () => {
         (postByUser) => postByUser._id === post,
       )?.channel._id;
 
-      if (comment && 'comment' in comment && snippetAuthor) {
-        const isVote = JSON.parse(comment.comment).type === 'vote';
-
-        const text = isVote
-          ? `${snippetAuthor.fullName} 님이 ${postTitle} 글에 투표하였습니다.`
-          : `${snippetAuthor.fullName} 님이 ${postTitle} 글에 댓글을 달았습니다.`;
-
-        return {
-          _id,
-          text,
-          snippetAuthor,
-          handleClick: channelId
-            ? () => navigate(`/detail/${channelId}/${post}`)
-            : undefined,
-        };
-      } else if (follower) {
-        const text = `${follower} 님이 팔로우했습니다.`;
-
-        return { _id, text, snippetAuthor };
-      } else if (post && !follow && snippetAuthor) {
-        const text = `${snippetAuthor.fullName}님이 ${postTitle} 글에 좋아요 를 남겼습니다.`;
-
-        return {
-          _id,
-          text,
-          snippetAuthor,
-          handleClick: channelId
-            ? () => navigate(`/detail/${channelId}/${post}`)
-            : undefined,
-        };
-      } else if (message && snippetAuthor) {
-        const text = `${snippetAuthor.fullName} 님이 요청을 보냈습니다.`;
-
-        return {
-          _id,
-          text,
-          snippetAuthor,
-          handleClick: undefined,
-        };
-      } else {
-        return { _id, text: '알수 없는 알림', snippetAuthor };
+      switch (type) {
+        case notificationType.comment:
+          return {
+            _id,
+            text: `${snippetAuthor.fullName} 님이 ${postTitle} 글에 댓글을 달았습니다.`,
+            snippetAuthor,
+            handleClick: channelId
+              ? () => navigate(`/detail/${channelId}/${post}`)
+              : undefined,
+          };
+        case notificationType.vote:
+          return {
+            _id,
+            text: `${snippetAuthor.fullName} 님이 ${postTitle} 글에 투표하였습니다.`,
+            snippetAuthor,
+            handleClick: channelId
+              ? () => navigate(`/detail/${channelId}/${post}`)
+              : undefined,
+          };
+        case notificationType.follow:
+          return {
+            _id,
+            text: `${follower} 님이 팔로우했습니다.`,
+            snippetAuthor,
+          };
+        case notificationType.like:
+          return {
+            _id,
+            text: `${snippetAuthor.fullName}님이 ${postTitle} 글에 좋아요 를 남겼습니다.`,
+            snippetAuthor,
+            handleClick: channelId
+              ? () => navigate(`/detail/${channelId}/${post}`)
+              : undefined,
+          };
+        case notificationType.message:
+          return {
+            _id,
+            text: `${snippetAuthor.fullName} 님이 요청을 보냈습니다.`,
+            snippetAuthor,
+            handleClick: undefined,
+          };
+        case notificationType.notdefined:
+          return {
+            _id,
+            text: `${snippetAuthor.fullName} 님이 언팔로우 했습니다.`,
+            snippetAuthor,
+          };
+        default:
+          return { _id, text: '알수 없는 알림', snippetAuthor };
       }
     },
   );
