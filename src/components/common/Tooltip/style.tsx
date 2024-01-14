@@ -24,12 +24,12 @@ export const TooltipContent = styled.span<{ direction: TooltipDirection }>`
 
   ${({ direction }) => {
     const directionStyles = {
-      top: 'bottom: 100%; left: 50%; transform: translateX(-50%) translateY(-0.5rem); margin-bottom:12px;',
+      top: 'bottom: 100%; left: 50%; transform: translateX(-50%) translateY(-0.5rem); margin-bottom:8px;',
       bottom:
-        'top: 100%; left: 50%; transform: translateX(-50%) translateY(0.5rem); margin-top:12px;',
-      left: 'top: 50%; right: 100%; transform: translateY(-50%) translateX(-0.5rem);margin-right:12px;',
+        'top: 100%; left: 50%; transform: translateX(-50%) translateY(0.5rem); margin-top:8px;',
+      left: 'top: 50%; right: 100%; transform: translateY(-50%) translateX(-0.5rem);margin-right:8px;',
       right:
-        'top: 50%; left: 100%; transform: translateY(-50%) translateX(0.5rem); margin-left:12px;',
+        'top: 50%; left: 100%; transform: translateY(-50%) translateX(0.5rem); margin-left:8px;',
     };
 
     return directionStyles[direction];
