@@ -23,6 +23,12 @@ export const InputWrapper = styled.div`
   gap: 2rem;
 `;
 
+export const Warning = styled.div`
+  display: flex;
+  color: ${theme.colors.error[500]};
+  font-size: 13px;
+`;
+
 export const TextWrapper = styled.div`
   position: absolute;
   bottom: 30px;

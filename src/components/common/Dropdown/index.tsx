@@ -53,7 +53,7 @@ const DropdownMenu = ({ channelId, setChannelId }: DropdownProps) => {
       <DropdownButton
         type='button'
         onClick={toggleMenu}
-        $ismenuopen={isMenuOpen}
+        $isMenuOpen={isMenuOpen}
         className='DropdownButton'>
         {channelTitle}
         <BorderLine />

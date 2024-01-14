@@ -6,7 +6,7 @@ import ImageUploader from '@/components/common/Button/ImageUploadButton';
 import { FormContentProps } from '@/components/Post/Edit/FormContent/type';
 import {
   HeaderWrapper,
-  UploadeButtonsWrapper,
+  UploadButtonsWrapper,
   FormArea,
   TextAreaWrapper,
   StyledTextArea,
@@ -60,7 +60,7 @@ const FormContent = ({
         />
       </HeaderWrapper>
 
-      <UploadeButtonsWrapper>
+      <UploadButtonsWrapper>
         <ImageUploader
           size='regular'
           setFile={(value) => setFieldValue('image', value)}
@@ -77,7 +77,7 @@ const FormContent = ({
             이미지 삭제
           </Button>
         )}
-      </UploadeButtonsWrapper>
+      </UploadButtonsWrapper>
 
       {image && (
         <Image

@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import them from '@/styles/theme';
 import theme from '@/styles/theme';
 
 export const HeaderWrapper = styled.div`
@@ -9,7 +8,7 @@ export const HeaderWrapper = styled.div`
   margin-top: 24px;
 `;
 
-export const UploadeButtonsWrapper = styled.div`
+export const UploadButtonsWrapper = styled.div`
   display: flex;
   gap: 8px;
   margin: 28px 0 12px 0;
@@ -26,7 +25,7 @@ export const TextAreaWrapper = styled.div`
   height: 429px;
   background-color: transparent;
   padding: 10px;
-  border: 1px solid ${them.colors.grayscale[300]};
+  border: 1px solid ${theme.colors.grayscale[300]};
   border-radius: 4px;
 `;
 export const StyledTextArea = styled.textarea`
@@ -39,4 +38,5 @@ export const StyledTextArea = styled.textarea`
   color: ${theme.isDark ? theme.colors.white : theme.colors.black};
   background-color: transparent;
   font-family: Pretendeard;
+  color: ${theme.isDark ? 'white' : 'black'};
 `;

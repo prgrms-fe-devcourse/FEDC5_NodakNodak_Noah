@@ -1,5 +1,5 @@
-import theme from '@/styles/theme';
 import styled from 'styled-components';
+import theme from '@/styles/theme';
 
 export const AvatarWrapper = styled.div`
   position: relative;
@@ -8,7 +8,6 @@ export const AvatarWrapper = styled.div`
   border-radius: 50%;
   aspect-ratio: 1/1;
   overflow: hidden;
-  cursor: pointer;
   > img {
     transition: opacity 0.2s ease-out;
   }
