@@ -1,7 +1,7 @@
 import { Notification } from '@/types/APIResponseTypes';
 
 export interface InitialState {
-  notifications: Notification[];
+  notifications: Array<Notification & { type: string }>;
   isLoading: boolean;
 }
 

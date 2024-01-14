@@ -8,6 +8,15 @@ import { InitialState } from '@/slices/notification/type';
 import { name } from '@/slices/notification/constants';
 import { Notification } from '@/types/APIResponseTypes';
 
+export const notificationType = {
+  follow: 'FOLLOW',
+  comment: 'COMMENT',
+  message: 'MESSAGE',
+  like: 'LIKE',
+  vote: 'VOTE',
+  notdefined: 'NOTDEFINED',
+};
+
 const initialState: InitialState = {
   notifications: [],
   isLoading: false,
@@ -21,12 +30,27 @@ const notificationSlice = createSlice({
       state.notifications = action.payload.filter(
         (notification: Notification) => !notification.seen,
       );
-    });
-    builder.addCase(seeNotifications.fulfilled, (state) => {
+
       state.notifications = state.notifications.map((notification) => {
-        notification.seen = true;
+        if (notification.post) {
+          if (notification.comment) {
+            if (JSON.parse(notification.comment.comment).type === 'vote')
+              notification.type = notificationType.vote;
+            else notification.type = notificationType.comment;
+          } else if (notification.message) {
+            notification.type = notificationType.message;
+          } else {
+            notification.type = notificationType.like;
+          }
+        } else if (notification.follow) {
+          notification.type = notificationType.follow;
+        } else if (notification.author) {
+          notification.type = notificationType.notdefined;
+        }
         return notification;
       });
+    });
+    builder.addCase(seeNotifications.fulfilled, (state) => {
       state.notifications = [];
     });
 

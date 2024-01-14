@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
+import useTimeoutFn from '@/hooks/useTimeoutFn';
+import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
 import LikeButtonIcon from '@/assets/LikeButtonIcon';
 import axiosInstance from '@/utils/customAxios';
-import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 import { useDispatch } from '@/store';
 import { createNotification } from '@/slices/notification/thunk';
 import { CreateNotificationData } from '@/slices/notification/type';
@@ -20,6 +21,11 @@ const LikeButton = () => {
   const myInfo = useSelectedMyInfo();
   const { postId } = useParams();
   const dispatch = useDispatch();
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [debouncedHandleLikeToggle, clearUnfollow] = useTimeoutFn(() => {
+    handleLikeToggle();
+  }, 1000);
 
   useEffect(() => {
     if (likesDetail) {
@@ -65,7 +71,7 @@ const LikeButton = () => {
 
   return (
     <LikeButtonIcon
-      onClick={handleLikeToggle}
+      onClick={debouncedHandleLikeToggle}
       isLiked={isLiked}
       likesNumber={likeNumber}
     />
