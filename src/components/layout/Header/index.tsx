@@ -2,7 +2,6 @@ import { ChangeEvent, RefObject, useState, useEffect, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Text, Card, Input, Avatar, Button } from '@/components/common';
-import HeaderProps from '@/components/layout/Header/type';
 import LogoWithFontSize from '@/components/layout/LogoWithFontSize';
 import NotificationCardBell from '@/components/layout/Header/NotificationCardBell';
 import {
@@ -13,7 +12,7 @@ import useClickAway from '@/hooks/useClickAway';
 import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 
 import { useDispatch } from '@/store';
-import { setChannel } from '@/slices/channel';
+import { getChannel, setChannel } from '@/slices/channel';
 import { getNotificationArray } from '@/slices/notification/thunk';
 import {
   StyledHeaderWrapper,
@@ -27,12 +26,16 @@ import DarkModeToggle from '@/components/layout/Header/DarkModeToggle';
 import axiosInstance from '@/utils/customAxios';
 import theme from '@/styles/theme';
 import SearchIcon from '@/assets/SearchIcon';
+import { useSelectedChannels } from '@/hooks/useSelectedChannel';
 
-const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
+const Header = () => {
   const [focus, setFocus] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [showMenu, setShowMenu] = useState(false);
-  const myInfo = useSelectedMyInfo();
+
+  const channels = useSelectedChannels();
+  const { role: myRole, image: myImage, _id: myId } = useSelectedMyInfo();
+  const isAuth = !!localStorage.getItem('auth-token');
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -40,7 +43,7 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
   const menu = [
     '마이페이지',
     '비밀번호 변경',
-    myInfo?.role === 'Regular' ? '문의하기' : '문의함',
+    myRole === 'Regular' ? '문의하기' : '문의함',
     '로그아웃',
   ];
   const handleSearch = (e: FormEvent<HTMLFormElement>) => {
@@ -66,7 +69,7 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
     switch (item) {
       case '마이페이지': {
         setShowMenu(false);
-        navigate(`/user/${myInfo?._id}`);
+        navigate(`/user/${myId}`);
         break;
       }
       case '로그아웃': {
@@ -88,8 +91,8 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
       }
       case '비밀번호 변경': {
         setShowMenu(false);
-        navigate(`/user/${myInfo?._id}/setting/password`, {
-          state: myInfo?.image,
+        navigate(`/user/${myId}/setting/password`, {
+          state: myImage,
         });
         break;
       }
@@ -120,6 +123,10 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
     if (!token) return;
     dispatch(getNotificationArray());
   }, [dispatch, token]);
+
+  useEffect(() => {
+    dispatch(getChannel());
+  }, [dispatch]);
 
   return (
     <Card
@@ -175,7 +182,7 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
             <NotificationCardBell />
             <Avatar
               size='small'
-              src={userImage}
+              src={myImage}
               onClick={handleAvatarClick}
               alt='유저네임'
             />
