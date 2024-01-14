@@ -12,5 +12,6 @@ export interface InputProps
     | 'disabled';
   justifyContent?: 'center' | 'flex-start';
 
+  eyePosition?: string;
   wrapperWidth?: string;
 }

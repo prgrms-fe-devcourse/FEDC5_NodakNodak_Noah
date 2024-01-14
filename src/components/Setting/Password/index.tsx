@@ -8,7 +8,8 @@ import {
   ContentWrapper,
   Warning,
 } from '@/components/Setting/style';
-import { Input, Text, Button } from '@/components/common';
+import PasswordInput from '@/components/common/Input/PasswordInput';
+import { Text, Button } from '@/components/common';
 import { useSelectedUser } from '@/hooks/useSelectedUser';
 import MailIcon from '@/assets/MailIcon';
 import axiosInstance from '@/utils/customAxios';
@@ -92,26 +93,30 @@ const Password = () => {
         </Button>
       </ButtonWrapper>
       <InputWrapper>
-        <Input
-          type='password'
+        <PasswordInput
           underline={true}
           placeholder='변경 할 비밀번호'
-          width='320px'
-          fontType='body1'
+          width='360px'
+          height='48px'
+          fontType='body3'
+          autoComplete='off'
           value={password}
           bordertype={warn[0] ? 'error' : 'filled'}
           onChange={(e) => handlePasswordChange(e.target.value)}
+          eyePosition='15px'
         />
         {warn[0] && !warn[1] && <Warning>{warnText}</Warning>}
-        <Input
-          type='password'
+        <PasswordInput
           underline={true}
           placeholder='비밀번호 확인'
-          width='320px'
-          fontType='body1'
+          width='360px'
+          height='48px'
+          fontType='body3'
+          autoComplete='off'
           value={confirmPassword}
           bordertype={warn[1] ? 'error' : 'filled'}
           onChange={(e) => handleConfirmPasswordChange(e.target.value)}
+          eyePosition='15px'
         />
         {warn[1] && <Warning>{warnText}</Warning>}
       </InputWrapper>
