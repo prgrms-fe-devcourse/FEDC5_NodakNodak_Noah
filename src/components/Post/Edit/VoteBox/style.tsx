@@ -37,7 +37,7 @@ export const InputContainer = styled.div`
   width: 100%;
 `;
 
-export const DeleteButton = styled.button<{ $isshow: boolean }>`
+export const DeleteButton = styled.button<{ $isShow: boolean }>`
   margin-left: 10px;
   align-items: center;
   position: absolute;
@@ -45,5 +45,5 @@ export const DeleteButton = styled.button<{ $isshow: boolean }>`
   cursor: pointer;
   border: none;
   background: none;
-  visibility: ${({ $isshow }) => ($isshow ? 'visible' : 'hidden')};
+  visibility: ${({ $isShow }) => ($isShow ? 'visible' : 'hidden')};
 `;
