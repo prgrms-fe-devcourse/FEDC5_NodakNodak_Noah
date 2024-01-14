@@ -10,4 +10,6 @@ export const useSelectedMyInfoStatus = () =>
   useSelector((state: RootState) => state.userInfo.authUserStatus);
 
 export const useSelectedMyInfoLoading = () =>
-  useSelector((state: RootState) => state.userInfo.isLoading);
+  useSelector(
+    (state: RootState) => state.userInfo.authUserStatus === 'loading',
+  );
