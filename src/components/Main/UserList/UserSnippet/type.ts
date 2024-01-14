@@ -1,5 +1,5 @@
 export interface UserSnippetProps extends React.HTMLAttributes<HTMLDivElement> {
-  fullName: string;
+  text: string;
   isOnline: boolean;
   handleClick?: () => void;
   isFollowing: boolean;
