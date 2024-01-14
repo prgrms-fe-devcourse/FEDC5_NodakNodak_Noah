@@ -8,7 +8,7 @@ export const MenuForm = styled.div`
   position: relative;
 `;
 
-export const DropdownButton = styled.button<{ $ismenuopen: boolean }>`
+export const DropdownButton = styled.button<{ $isMenuOpen: boolean }>`
   width: 100%;
   height: 100%;
   border: 1px solid ${theme.colors.grayscale[300]};
@@ -62,7 +62,7 @@ export const ListItemButton = styled.button`
 
 export const DropdownContent = styled.ul`
   width: 100%;
-  min-width: 120px;
+  min-width: 132px;
   position: absolute;
   top: 100%;
   margin: 0px;
