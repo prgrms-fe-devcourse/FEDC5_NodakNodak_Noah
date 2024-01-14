@@ -10,3 +10,6 @@ export const useSelectedChannelLoading = () =>
 
 export const useSelectedChannelStatus = () =>
   useSelector((state: RootState) => state.channel.status);
+
+export const useSelectedChannels = () =>
+  useSelector((state: RootState) => state.channel.channels);
