@@ -13,11 +13,11 @@ import theme from '@/styles/theme';
 
 const VoteBox = ({ values, setFieldValue, isEditable }: FormProps) => {
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFieldValue('voteTitle', e.target.value);
+    setFieldValue('voteTitle', e.target.value.trimStart());
   };
 
   const handleCandidateChange = (index: number, value: string) => {
-    setFieldValue(`voteArray[${index}]`, value);
+    setFieldValue(`voteArray[${index}]`, value.trimStart());
   };
 
   const handleAddCandidate = () => {
