@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import ProtectedRoute from '@/components/common/ProtectedRoute';
