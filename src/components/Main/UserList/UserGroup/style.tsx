@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from '@/styles/theme';
 
 export const Title = styled.h2`
   position: -webkit-sticky;
@@ -7,4 +8,7 @@ export const Title = styled.h2`
   z-index: 2;
   width: 100%;
   padding: 16px 0;
+  background-color: ${theme.isDark
+    ? theme.colors.grayscale[400]
+    : theme.colors.white};
 `;
