@@ -9,3 +9,10 @@ export interface FormType {
   imageSrc: string;
   imageToDeletePublicId: string;
 }
+
+export interface TitleType {
+  title: string;
+  content: string;
+  voteTitle: string;
+  voteArray: string[];
+}

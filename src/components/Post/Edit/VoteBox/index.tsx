@@ -72,7 +72,7 @@ const VoteBox = ({ values, setFieldValue, isEditable }: FormProps) => {
                 />
                 {isEditable && (
                   <DeleteButton
-                    $isshow={index >= 2}
+                    $isShow={index >= 2}
                     type='button'
                     onClick={() => handleRemoveCandidate(index)}>
                     <DeleteIcon />

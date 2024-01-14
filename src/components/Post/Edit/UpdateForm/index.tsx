@@ -1,14 +1,15 @@
-import { useFormik } from 'formik';
 import { useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import VoteBox from '@/components/Post/Edit/VoteBox';
+import { useFormik } from 'formik';
+
+import { Button } from '@/components/common';
+import { useSelectedVote } from '@/hooks/useSelectedVote';
 import { isValidatedForm } from '@/utils/Validations/formValidation';
 import { MESSAGE } from '@/utils/constants';
 import { sendPostRequest } from '@/components/Post/Edit/Api';
+import VoteBox from '@/components/Post/Edit/VoteBox';
 import FormContent from '@/components/Post/Edit/FormContent';
-import { FormType } from '@/components/Post/Edit/UpdateForm/type';
-import { useSelectedVote } from '@/hooks/useSelectedVote';
-import { Button } from '@/components/common';
+import { FormType, TitleType } from '@/components/Post/Edit/UpdateForm/type';
 import { ButtonWrapper } from '@/components/Post/Edit/PostForm/style';
 
 const UpdateForm = ({ postId }: { postId: string | undefined }) => {
@@ -18,26 +19,8 @@ const UpdateForm = ({ postId }: { postId: string | undefined }) => {
 
   const { title, channel, image, imagePublicId } = postDetail.state;
   const channelId = channel._id;
-  const serverData = JSON.parse(title);
+  const serverData = JSON.parse(title) as TitleType;
   const isVoteEmpty = postDetailVote.length === 0;
-
-  const fetchImageBlob = async (url: string) => {
-    const response = await fetch(url);
-    const blob = await response.blob();
-
-    return blob;
-  };
-
-  const generateImageFile = async () => {
-    const imageBlob = await fetchImageBlob(image || '');
-    const imageFile = new File([imageBlob], 'image.jpg', {
-      type: 'image/jpeg',
-    });
-
-    return imageFile;
-  };
-
-  const imageFile = generateImageFile();
 
   const handleFormSubmit = async (forms: FormType) => {
     const {
@@ -79,8 +62,6 @@ const UpdateForm = ({ postId }: { postId: string | undefined }) => {
       if (response) {
         alert(MESSAGE.CREATE_POST);
         navigate(`/detail/${channelId}/${postId}`);
-      } else {
-        alert(MESSAGE.CREATE_POST_FAIL);
       }
     } catch (error) {
       alert(MESSAGE.CREATE_POST_FAIL);
@@ -114,11 +95,12 @@ const UpdateForm = ({ postId }: { postId: string | undefined }) => {
       formik.setValues({
         ...serverData,
         imageSrc: image,
-        image: imageFile,
+        image: null,
         channelId: channelId,
+        imageToDeletePublicId: '',
       });
     }
-  }, [serverData, formik, values, channelId, imageFile, image]);
+  }, [serverData, formik, values, channelId, image]);
 
   return (
     <form onSubmit={handleSubmit} noValidate>

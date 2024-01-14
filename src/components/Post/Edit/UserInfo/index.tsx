@@ -1,4 +1,4 @@
-import { UserInfoWrapper } from '@/components/Post/Edit/UserInfo/style'; // UserInfoWrapper는 FormContent에서 import한 것을 그대로 사용
+import { UserInfoWrapper } from '@/components/Post/Edit/UserInfo/style';
 import { Avatar, Text } from '@/components/common';
 import theme from '@/styles/theme';
 
