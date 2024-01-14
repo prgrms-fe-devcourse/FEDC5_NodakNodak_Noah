@@ -1,13 +1,8 @@
-import { PropsWithChildren } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Avatar, OnLineBadge } from '@/components/common';
 import { UserSnippetBox } from '@/components/Main/style';
-import {
-  UserSnippetProps,
-  UserSnippetGroupProps,
-} from '@/components/Main/UserListCard/UserSnippet/type';
-import { Title } from '@/components/Main/UserListCard/UserSnippet/style';
+import { Avatar, OnLineBadge } from '@/components/common';
+import { UserSnippetProps } from '@/components/Main/UserList/UserSnippet/type';
 
 const UserSnippet = ({
   isOnline,
@@ -33,18 +28,6 @@ const UserSnippet = ({
       </OnLineBadge>
       {fullName}
     </UserSnippetBox>
-  );
-};
-
-UserSnippet.Group = ({
-  title,
-  children,
-}: PropsWithChildren<UserSnippetGroupProps>) => {
-  return (
-    <>
-      {title && <Title>{title}</Title>}
-      {children}
-    </>
   );
 };
 

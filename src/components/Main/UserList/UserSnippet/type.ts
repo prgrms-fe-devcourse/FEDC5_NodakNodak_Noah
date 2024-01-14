@@ -7,7 +7,3 @@ export interface UserSnippetProps extends React.HTMLAttributes<HTMLDivElement> {
   userId: string;
   style?: React.CSSProperties;
 }
-
-export interface UserSnippetGroupProps {
-  title?: string;
-}

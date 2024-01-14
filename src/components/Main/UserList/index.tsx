@@ -1,16 +1,18 @@
 import { Card, ScrollBar } from '@/components/common';
-import UserSnippet from '@/components/Main/UserListCard/UserSnippet';
-import {
-  UserListCardProps,
-  RenderUserSnippets,
-} from '@/components/Main/UserListCard/type';
+import useGetUserList from '@/components/Main/hooks/useGetUsers';
+import UserSnippet from '@/components/Main/UserList/UserSnippet';
+import { RenderUserSnippets } from '@/components/Main/UserList/type';
+import UserGroup from '@/components/Main/UserList/UserGroup';
 
-const UserListCard = ({ users }: UserListCardProps) => {
-  const onlineUsers = users.filter((user) => user.isOnline);
-  const offlineUsers = users.filter((user) => !user.isOnline);
+const UserList = () => {
+  const { isLoading, userSnippetList } = useGetUserList();
+  if (isLoading) return <div>loading...</div>;
+
+  const onlineUsers = userSnippetList.filter((user) => user.isOnline);
+  const offlineUsers = userSnippetList.filter((user) => !user.isOnline);
 
   const renderUserSnippets: RenderUserSnippets = (users, title) => (
-    <UserSnippet.Group title={title}>
+    <UserGroup title={title}>
       {users.map(({ fullName, image, isFollowing, isOnline, _id }) => (
         <UserSnippet
           fullName={fullName}
@@ -21,7 +23,7 @@ const UserListCard = ({ users }: UserListCardProps) => {
           key={_id}
         />
       ))}
-    </UserSnippet.Group>
+    </UserGroup>
   );
 
   return (
@@ -34,4 +36,4 @@ const UserListCard = ({ users }: UserListCardProps) => {
   );
 };
 
-export default UserListCard;
+export default UserList;
