@@ -4,7 +4,7 @@ import {
   InputContainer,
   DeleteButton,
 } from '@/components/Post/Edit/VoteBox/style';
-import { PLACEHOLDER } from '@/utils/constants';
+import { PLACEHOLDER, MESSAGE } from '@/utils/constants';
 import { Card, Input, Button, ScrollBar } from '@/components/common';
 import DeleteIcon from '@/assets/DeleteIcon';
 import { FormProps } from '@/components/Post/Edit/VoteBox/type';
@@ -84,7 +84,7 @@ const VoteBox = ({ values, setFieldValue, isEditable }: FormProps) => {
               <Text
                 tagType='span'
                 style={{ color: `${theme.colors.error[400]}` }}>
-                {'투표가 진행되어 수정할 수 없습니다.'}
+                {MESSAGE.VOTE_IN_PROGRESS}
               </Text>
             )}
           </Content>
