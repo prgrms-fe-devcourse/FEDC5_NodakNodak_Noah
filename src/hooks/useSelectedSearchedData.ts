@@ -8,4 +8,4 @@ export const useSelectedSearchedUserData = () =>
   useSelector((state: RootState) => state.searchedData.userData);
 
 export const useSelectedSearchedDataLoading = () =>
-  useSelector((state: RootState) => state.searchedData.isLoading);
+  useSelector((state: RootState) => state.searchedData.status === 'loading');

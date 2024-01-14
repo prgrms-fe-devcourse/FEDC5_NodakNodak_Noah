@@ -1,12 +1,13 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { Post } from '@/types/APIResponseTypes';
 import axiosInstance from '@/utils/customAxios';
-import { DetailPost, PostId } from '@/slices/postDetail/type';
+import { InitialState, PostId } from '@/slices/postDetail/type';
+import { initialPost } from './initialState';
+import { Post } from '@/types/APIResponseTypes';
 
-const initialState: DetailPost = {
-  post: {} as Post,
-  isLoading: false,
+const initialState: InitialState = {
+  post: initialPost,
+  status: 'idle',
 };
 
 export const getPostDetail = createAsyncThunk(
@@ -18,11 +19,11 @@ export const getPostDetail = createAsyncThunk(
   },
 );
 
-export const detailPostSlice = createSlice({
+const detailPostSlice = createSlice({
   name: 'detailPost',
   initialState,
   reducers: {
-    deleteComment: (state, action) => {
+    deleteComment: (state, action: PayloadAction<string>) => {
       const commentId = action.payload;
       state.post.comments = state.post.comments.filter(
         (comment) => comment._id !== commentId,
@@ -31,14 +32,17 @@ export const detailPostSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getPostDetail.pending, (state) => {
-      state.isLoading = true;
+      state.status = 'loading';
     });
-    builder.addCase(getPostDetail.fulfilled, (state, action) => {
-      state.post = action.payload;
-      state.isLoading = false;
-    });
+    builder.addCase(
+      getPostDetail.fulfilled,
+      (state, action: PayloadAction<Post>) => {
+        state.post = action.payload;
+        state.status = 'idle';
+      },
+    );
     builder.addCase(getPostDetail.rejected, (state) => {
-      state.isLoading = false;
+      state.status = 'failed';
     });
   },
 });

@@ -4,6 +4,6 @@ import { StatusType } from '@/slices/type';
 export interface UserInfo {
   currentUser: User;
   authUser: User;
-  isLoading: boolean;
   authUserStatus: StatusType;
+  currentUserStatus: StatusType;
 }

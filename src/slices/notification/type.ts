@@ -1,8 +1,11 @@
 import { Notification } from '@/types/APIResponseTypes';
+import { StatusType } from '@/slices/type';
+
+export type NotificationWithType = Notification & { type: string };
 
 export interface InitialState {
-  notifications: Array<Notification & { type: string }>;
-  isLoading: boolean;
+  notifications: Array<NotificationWithType>;
+  status: StatusType;
 }
 
 export interface CreateNotificationData {

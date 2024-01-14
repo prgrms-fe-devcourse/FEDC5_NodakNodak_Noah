@@ -6,4 +6,4 @@ export const useSelectedPostDetail = () =>
   useSelector((state: RootState) => state.postDetail.post);
 
 export const useSelectedPostDetailLoading = () =>
-  useSelector((state: RootState) => state.postDetail.isLoading);
+  useSelector((state: RootState) => state.postDetail.status === 'loading');

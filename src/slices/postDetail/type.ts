@@ -1,10 +1,11 @@
 import { Post } from '@/types/APIResponseTypes';
+import { StatusType } from '@/slices/type';
 
 export interface PostId {
   postId: string | undefined;
 }
 
-export interface DetailPost {
+export interface InitialState {
   post: Post;
-  isLoading: boolean;
+  status: StatusType;
 }

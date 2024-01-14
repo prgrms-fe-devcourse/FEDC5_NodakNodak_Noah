@@ -1,9 +1,10 @@
 import { User, Comment } from '@/types/APIResponseTypes';
+import { StatusType } from '@/slices/type';
 
-export interface SearchedData {
+export interface InitialState {
   postData: SearchedPost[];
   userData: User[];
-  isLoading: boolean;
+  status: StatusType;
 }
 
 export interface SearchedPost {
