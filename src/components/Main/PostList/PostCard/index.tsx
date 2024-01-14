@@ -69,7 +69,16 @@ const PostCard = ({
           style={{ cursor: 'pointer' }}
         />
         <ContentBox>
-          <Text tagType='p' fontType='body2' colorType='black'>
+          <Text
+            tagType='p'
+            fontType='body2'
+            colorType='black'
+            style={{
+              overflow: 'hidden',
+              textOverflow: ' ellipsis',
+              whiteSpace: 'nowrap',
+              width: '260px',
+            }}>
             {parsedTitle}
           </Text>
           <Text tagType='span' fontType='caption' colorType='black'>

@@ -13,6 +13,7 @@ import {
   CommentAuthorContainer,
   CommentAuthorWrapper,
 } from '@/components/Post/Detail/Comment/Item/style';
+import theme from '@/styles/theme';
 
 const Item = ({
   authorName,
@@ -62,7 +63,7 @@ const Item = ({
         <CommentAuthorWrapper>
           <Text
             colorType='grayscale'
-            colorNumber='500'
+            colorNumber={theme.isDark ? '100' : '500'}
             fontType='body1'
             tagType='span'>
             {authorName}
@@ -75,7 +76,6 @@ const Item = ({
             style={{ marginTop: '10px' }}>
             {`${year}년 ${month}월 ${date}일`}
           </Text>
-          <hr />
         </CommentAuthorWrapper>
       </CommentAuthorContainer>
       <Text

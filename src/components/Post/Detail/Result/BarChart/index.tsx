@@ -44,6 +44,7 @@ const BarChart = ({
               width: '466px',
               height: '48px',
               position: 'relative',
+              color: `${theme.colors.black}`,
               backgroundImage: `linear-gradient(to right, ${
                 theme.colors.primary[200]
               } ${
@@ -57,7 +58,12 @@ const BarChart = ({
             fontType='body1'
             colorNumber='400'
             colorType='primary'
-            style={{ position: 'absolute', right: '5px', zIndex: '3' }}>
+            style={{
+              position: 'absolute',
+              right: '5px',
+              zIndex: '3',
+              color: `${theme.colors.black}`,
+            }}>
             {votedArray.length ? `${count}/${votedArray.length}` : '0'}
           </Text>
         </BarChartContainer>

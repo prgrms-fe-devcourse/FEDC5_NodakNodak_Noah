@@ -35,6 +35,7 @@ export const StyledTextArea = styled.textarea`
   border: none;
   resize: none;
   outline: none;
+  color: ${theme.isDark ? theme.colors.white : theme.colors.black};
   background-color: transparent;
   font-family: Pretendeard;
   color: ${theme.isDark ? 'white' : 'black'};

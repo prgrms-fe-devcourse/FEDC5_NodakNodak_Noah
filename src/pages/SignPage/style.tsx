@@ -17,7 +17,7 @@ export const Card = styled.section`
   flex-direction: column;
   background-color: ${theme.isDark
     ? theme.colors.grayscale[400]
-    : theme.colors.primary[100]};
+    : theme.colors.white};
   width: 960px;
   height: 680px;
   border-radius: 8px;
@@ -32,7 +32,7 @@ export const Card = styled.section`
 
 export const GoHome = styled.span`
   display: flex;
-  align-items: center;
+  align-items: baseline;
   padding: 8px;
   cursor: pointer;
   user-select: none;
