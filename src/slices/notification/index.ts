@@ -51,10 +51,7 @@ const notificationSlice = createSlice({
       });
     });
     builder.addCase(seeNotifications.fulfilled, (state) => {
-      state.notifications = state.notifications.map((notification) => {
-        notification.seen = true;
-        return notification;
-      });
+      state.notifications = [];
     });
 
     builder.addMatcher(
