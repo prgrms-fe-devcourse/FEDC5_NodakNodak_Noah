@@ -1,8 +1,8 @@
 import { Channel } from '@/types/APIResponseTypes';
+import { StatusType } from '@/slices/type';
 
-export interface ChannelState {
+export interface InitialState {
   channels: Channel[];
-  currentChannel: Channel | undefined;
-  isLoading: boolean;
-  status: 'idle' | 'loading' | 'failed';
+  currentChannel?: Channel;
+  status: StatusType;
 }

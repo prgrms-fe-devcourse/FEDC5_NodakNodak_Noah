@@ -1,5 +1,5 @@
-import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { PostList } from '@/slices/postList/type';
+import { PayloadAction, createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { InitialState } from '@/slices/postList/type';
 import { name } from '@/slices/postList/constants';
 import {
   getPostListByChannelId,
@@ -7,34 +7,48 @@ import {
   getFullPostList,
   getPostListByMyId,
 } from '@/slices/postList/thunks';
+import { initialPost } from '@/slices/initialState';
+import { Post } from '@/types/APIResponseTypes';
 
-const initialState: PostList = {
-  posts: [],
-  postListByChannelId: [],
-  postListByUserId: [],
-  postListByMyId: [],
-  isLoading: false,
+const initialState: InitialState = {
+  posts: [initialPost],
+  postListByChannelId: [initialPost],
+  postListByUserId: [initialPost],
+  postListByMyId: [initialPost],
+  status: 'idle',
 };
 
-export const postSlice = createSlice({
+const postSlice = createSlice({
   name,
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getPostListByChannelId.fulfilled, (state, action) => {
-      state.posts = action.payload;
-      state.postListByChannelId = action.payload;
-    });
-    builder.addCase(getPostListByUserId.fulfilled, (state, action) => {
-      state.posts = action.payload;
-      state.postListByUserId = action.payload;
-    });
-    builder.addCase(getFullPostList.fulfilled, (state, action) => {
-      state.posts = action.payload;
-    });
-    builder.addCase(getPostListByMyId.fulfilled, (state, action) => {
-      state.postListByMyId = action.payload;
-    });
+    builder.addCase(
+      getPostListByChannelId.fulfilled,
+      (state, action: PayloadAction<Post[]>) => {
+        state.posts = action.payload;
+        state.postListByChannelId = action.payload;
+      },
+    );
+    builder.addCase(
+      getPostListByUserId.fulfilled,
+      (state, action: PayloadAction<Post[]>) => {
+        state.posts = action.payload;
+        state.postListByUserId = action.payload;
+      },
+    );
+    builder.addCase(
+      getFullPostList.fulfilled,
+      (state, action: PayloadAction<Post[]>) => {
+        state.posts = action.payload;
+      },
+    );
+    builder.addCase(
+      getPostListByMyId.fulfilled,
+      (state, action: PayloadAction<Post[]>) => {
+        state.postListByMyId = action.payload;
+      },
+    );
 
     builder.addMatcher(
       isAnyOf(
@@ -43,7 +57,7 @@ export const postSlice = createSlice({
         getFullPostList.pending,
       ),
       (state) => {
-        state.isLoading = true;
+        state.status = 'loading';
       },
     );
     builder.addMatcher(
@@ -56,7 +70,7 @@ export const postSlice = createSlice({
         getFullPostList.rejected,
       ),
       (state) => {
-        state.isLoading = false;
+        state.status = 'idle';
       },
     );
   },

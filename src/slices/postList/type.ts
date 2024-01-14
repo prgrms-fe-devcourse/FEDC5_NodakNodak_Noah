@@ -1,11 +1,12 @@
 import { Post } from '@/types/APIResponseTypes';
+import { StatusType } from '@/slices/type';
 
-export interface PostList {
+export interface InitialState {
   posts: Post[];
   postListByChannelId: Post[];
   postListByUserId: Post[];
   postListByMyId: Post[];
-  isLoading: boolean;
+  status: StatusType;
 }
 
 export interface GetPostsByChannelIdParams {

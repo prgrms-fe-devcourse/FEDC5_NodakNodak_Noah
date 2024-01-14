@@ -1,12 +1,13 @@
-import { createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice, isAnyOf } from '@reduxjs/toolkit';
 import {
   getNotificationArray,
   seeNotifications,
   createNotification,
 } from '@/slices/notification/thunk';
-import { InitialState } from '@/slices/notification/type';
+import { InitialState, NotificationWithType } from '@/slices/notification/type';
 import { name } from '@/slices/notification/constants';
 import { Notification } from '@/types/APIResponseTypes';
+import { initialNotification } from '@/slices/initialState';
 
 export const notificationType = {
   follow: 'FOLLOW',
@@ -18,38 +19,41 @@ export const notificationType = {
 };
 
 const initialState: InitialState = {
-  notifications: [],
-  isLoading: false,
+  notifications: [initialNotification],
+  status: 'idle',
 };
 const notificationSlice = createSlice({
   name,
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getNotificationArray.fulfilled, (state, action) => {
-      state.notifications = action.payload.filter(
-        (notification: Notification) => !notification.seen,
-      );
+    builder.addCase(
+      getNotificationArray.fulfilled,
+      (state, action: PayloadAction<NotificationWithType[]>) => {
+        state.notifications = action.payload.filter(
+          (notification: Notification) => !notification.seen,
+        );
 
-      state.notifications = state.notifications.map((notification) => {
-        if (notification.post) {
-          if (notification.comment) {
-            if (JSON.parse(notification.comment.comment).type === 'vote')
-              notification.type = notificationType.vote;
-            else notification.type = notificationType.comment;
-          } else if (notification.message) {
-            notification.type = notificationType.message;
-          } else {
-            notification.type = notificationType.like;
+        state.notifications = state.notifications.map((notification) => {
+          if (notification.post) {
+            if (notification.comment) {
+              if (JSON.parse(notification.comment.comment).type === 'vote')
+                notification.type = notificationType.vote;
+              else notification.type = notificationType.comment;
+            } else if (notification.message) {
+              notification.type = notificationType.message;
+            } else {
+              notification.type = notificationType.like;
+            }
+          } else if (notification.follow) {
+            notification.type = notificationType.follow;
+          } else if (notification.author) {
+            notification.type = notificationType.notdefined;
           }
-        } else if (notification.follow) {
-          notification.type = notificationType.follow;
-        } else if (notification.author) {
-          notification.type = notificationType.notdefined;
-        }
-        return notification;
-      });
-    });
+          return notification;
+        });
+      },
+    );
     builder.addCase(seeNotifications.fulfilled, (state) => {
       state.notifications = [];
     });
@@ -61,7 +65,7 @@ const notificationSlice = createSlice({
         createNotification.pending,
       ),
       (state) => {
-        state.isLoading = true;
+        state.status = 'loading';
       },
     );
     builder.addMatcher(
@@ -74,7 +78,7 @@ const notificationSlice = createSlice({
         createNotification.rejected,
       ),
       (state) => {
-        state.isLoading = false;
+        state.status = 'idle';
       },
     );
   },

@@ -1,4 +1,5 @@
 import { User } from '@/types/APIResponseTypes';
+import { StatusType } from '@/slices/type';
 
 export interface FollowData {
   followId?: string;
@@ -7,7 +8,7 @@ export interface FollowData {
 }
 
 export interface InitialState {
-  targetUser?: User;
+  targetUser: User;
   followData: FollowData;
-  isLoading: boolean;
+  status: StatusType;
 }

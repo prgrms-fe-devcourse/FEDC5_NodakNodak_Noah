@@ -1,6 +1,7 @@
 import { User } from '@/types/APIResponseTypes';
+import { StatusType } from '@/slices/type';
 
 export interface UserList {
   users: User[];
-  isLoading: boolean;
+  status: StatusType;
 }
