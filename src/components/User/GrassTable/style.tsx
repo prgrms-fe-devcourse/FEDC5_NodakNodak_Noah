@@ -16,10 +16,10 @@ export const GrassWrapper = styled.div`
   border-radius: 4px;
 `;
 
-export const GrassItem = styled.div<{ lightness: LightnessType }>`
+export const GrassItem = styled.div<{ $lightness: LightnessType }>`
   width: 20px;
   height: 20px;
-  background-color: ${({ lightness }) => theme.colors.success[lightness]};
+  background-color: ${({ $lightness }) => theme.colors.success[$lightness]};
   border-radius: 4px;
 
   box-shadow: 0 0 0 0.5px ${theme.colors.grayscale[200]};

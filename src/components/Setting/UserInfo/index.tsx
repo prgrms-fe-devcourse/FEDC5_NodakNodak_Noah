@@ -6,6 +6,7 @@ import {
   InputWrapper,
   TextWrapper,
   ContentWrapper,
+  Warning,
 } from '@/components/Setting/style';
 import { Input, Text, Button } from '@/components/common';
 import { useSelectedUser } from '@/hooks/useSelectedUser';
@@ -17,6 +18,8 @@ const UserInfo = () => {
   const navigate = useNavigate();
   const { userId } = useParams();
 
+  const [warn, setWarn] = useState([false, false]);
+  const [warnText, setWarnText] = useState('');
   const [isModified, setIsModified] = useState(false);
   const [updatedData, setUpdatedData] = useState({
     fullName: currentUser?.fullName || '',
@@ -33,15 +36,33 @@ const UserInfo = () => {
   }, [currentUser]);
 
   const handleUpdate = async () => {
-    const userNameRegex = /^[a-zA-Z0-9가-힣]{2,8}$/;
-    if (!userNameRegex.test(updatedData.username)) {
-      alert('별명은 2~8자의 영문, 한글, 숫자만 사용 가능합니다.');
+    const fullNameRegex = /^[a-zA-Z0-9가-힣]{2,8}$/;
+
+    const { fullName, username } = updatedData;
+    if (!fullNameRegex.test(fullName)) {
+      setWarnText('별명은 2~8자의 영문, 한글, 숫자만 사용 가능합니다.');
+      setWarn([true, false]);
+      setTimeout(() => {
+        setWarn([false, false]);
+        setWarnText('');
+      }, 3000);
       return;
     }
+
+    if (username.trim().length > 36) {
+      setWarnText('36자 미만으로 작성해주세요');
+      setWarn([false, true]);
+      setTimeout(() => {
+        setWarn([false, false]);
+        setWarnText('');
+      }, 3000);
+      return;
+    }
+
     try {
       await axiosInstance.put('settings/update-user', {
-        fullName: updatedData.fullName,
-        username: updatedData.username,
+        fullName,
+        username,
       });
       navigate(`/user/${userId}`);
     } catch (error) {
@@ -91,18 +112,22 @@ const UserInfo = () => {
           placeholder='닉네임'
           width='320px'
           fontType='h1'
-          required={true}
+          required
           value={updatedData.fullName || ''}
+          bordertype={warn[0] ? 'error' : 'filled'}
           onChange={(e) => handleInputChange('fullName', e.target.value)}
         />
+        {warn[0] && <Warning>{warnText}</Warning>}
         <Input
           underline={true}
           placeholder='한줄 소개'
           width='320px'
           fontType='body1'
           value={updatedData.username || ''}
+          bordertype={warn[1] ? 'error' : 'filled'}
           onChange={(e) => handleInputChange('username', e.target.value)}
         />
+        {warn[1] && <Warning>{warnText}</Warning>}
       </InputWrapper>
       <TextWrapper>
         <MailIcon />
