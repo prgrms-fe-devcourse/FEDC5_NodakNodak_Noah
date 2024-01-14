@@ -46,7 +46,7 @@ const GrassTable = () => {
             message={`${data.date}, 게시물: ${data.postNumber}`}
             hasArrow={true}
             type='hover'>
-            <GrassItem lightness={data.lightness} />
+            <GrassItem $lightness={data.lightness} />
           </Tooltip>
         ))}
     </GrassWrapper>
