@@ -120,7 +120,7 @@ const PostComment = () => {
             <Input
               ref={inputRef as React.RefObject<HTMLInputElement>}
               bordertype={warn ? 'error' : 'filled'}
-              value={comment}
+              value={comment.trimStart()}
               placeholder='댓글을 입력해주세요.'
               fontType='body2'
               width='538px'
