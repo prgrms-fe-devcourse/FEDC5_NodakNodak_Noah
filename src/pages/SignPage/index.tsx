@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Card, SignText, GoHome } from '@/pages/SignPage/style';
+import { Text } from '@/components/common';
 import In from '@/components/Sign/In';
 import Up from '@/components/Sign/Up';
 import LeftArrowIcon from '@/assets/LeftArrowIcon';

@@ -27,7 +27,11 @@ const UserList = () => {
   );
 
   return (
-    <Card width='223px' height='626px' shadowType='medium'>
+    <Card
+      width='223px'
+      height='626px'
+      shadowType='medium'
+      style={{ marginTop: '96px' }}>
       <ScrollBar>
         {renderUserSnippets(onlineUsers, `online - ${onlineUsers.length}`)}
         {renderUserSnippets(offlineUsers, `offline - ${offlineUsers.length}`)}
