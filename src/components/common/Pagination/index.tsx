@@ -4,8 +4,8 @@ import {
   PaginationWrapper,
   TextWrapper,
   PageNumberWrapper,
-} from '@/components/Main/Pagination/style';
-import { PaginationProps } from '@/components/Main/Pagination/type';
+} from '@/components/common/Pagination/style';
+import { PaginationProps } from '@/components/common/Pagination/type';
 import theme from '@/styles/theme';
 
 const Pagination = ({ page, totalPage, onPageChange }: PaginationProps) => {

@@ -1,22 +1,12 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import {
-  Input,
-  Dropdown,
-  Image,
-  Button,
-  Avatar,
-  Text,
-} from '@/components/common';
+import { Input, Dropdown, Image, Button } from '@/components/common';
 import ImageUploader from '@/components/common/Button/ImageUploadButton';
 import { FormContentProps } from '@/components/Post/Edit/FormContent/type';
-import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
-import theme from '@/styles/theme';
 import {
-  UserInfoWrapper,
-  UserInfo,
-  ActionButtonsWrapper,
+  HeaderWrapper,
+  UploadeButtonsWrapper,
   FormArea,
   TextAreaWrapper,
   StyledTextArea,
@@ -39,8 +29,6 @@ const FormContent = ({
     dispatch(getMyInfo());
   }, [dispatch]);
 
-  const myInfo = useSelectedMyInfo();
-
   useEffect(() => {
     if (values.imageSrc !== '' && values.imageSrc) {
       setImage(values.imageSrc);
@@ -51,40 +39,28 @@ const FormContent = ({
 
   return (
     <FormArea>
-      <UserInfoWrapper>
-        <UserInfo>
-          <Avatar size='middle' alt='유저네임' src={myInfo?.image} />
-          <Text
-            colorType='grayscale'
-            colorNumber={theme.isDark ? '100' : '500'}
-            fontType='body1'
-            tagType='span'
-            style={{ margin: '0 10px' }}>
-            {myInfo?.fullName || 'user'}
-          </Text>
-        </UserInfo>
+      <HeaderWrapper>
+        <Input
+          required={true}
+          placeholder={PLACEHOLDER.TITLE}
+          name='title'
+          value={values.title}
+          onChange={handleChange}
+          fontType='h1'
+          underline={true}
+          wrapperWidth='fit-content'
+          style={{
+            width: FORM_SIZE.WIDTH,
+            height: FORM_SIZE.HEIGHT,
+          }}
+        />
         <Dropdown
           channelId={values.channelId}
           setChannelId={(value) => setFieldValue('channelId', value)}
         />
-      </UserInfoWrapper>
+      </HeaderWrapper>
 
-      <Input
-        required={true}
-        placeholder={PLACEHOLDER.TITLE}
-        name='title'
-        value={values.title}
-        onChange={handleChange}
-        fontType='h1'
-        underline={true}
-        wrapperWidth='fit-content'
-        style={{
-          width: FORM_SIZE.WIDTH,
-          height: FORM_SIZE.HEIGHT,
-        }}
-      />
-
-      <ActionButtonsWrapper>
+      <UploadeButtonsWrapper>
         <ImageUploader
           size='regular'
           setFile={(value) => setFieldValue('image', value)}
@@ -101,7 +77,7 @@ const FormContent = ({
             이미지 삭제
           </Button>
         )}
-      </ActionButtonsWrapper>
+      </UploadeButtonsWrapper>
 
       {image && (
         <Image

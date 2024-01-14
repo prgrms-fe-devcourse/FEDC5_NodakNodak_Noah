@@ -10,7 +10,7 @@ import {
 } from '@/slices/notification/thunk';
 import { getPostListByMyId } from '@/slices/postList/thunks';
 import { notificationType } from '@/slices/notification';
-import { userToUserSnippet } from '@/slices/userList/utils';
+import { userToUserSnippet } from '@/utils/makeSnippet';
 import useInterval from '@/hooks/useInterval';
 import useClickAway from '@/hooks/useClickAway';
 import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
@@ -21,8 +21,9 @@ import {
   NotificationList,
   NotificationHeader,
 } from '@/components/layout/Header/NotificationCardBell/style';
-import UserSnippet from '@/components/Main/UserListCard/UserSnippet';
+import UserSnippet from '@/components/Main/UserList/UserSnippet';
 import { Badge, ScrollBar, Text, Button } from '@/components/common';
+import UserGroup from '@/components/Main/UserList/UserGroup';
 
 const NotificationCardBell = () => {
   const token = localStorage.getItem('auth-token');
@@ -148,7 +149,7 @@ const NotificationCardBell = () => {
               </Button>
             </NotificationHeader>
             <NotificationList>
-              <UserSnippet.Group>
+              <UserGroup>
                 {notificationsArray.length === 0 && (
                   <Text tagType='span' fontType='h3'>
                     {'알림이 없습니다.'}
@@ -174,7 +175,7 @@ const NotificationCardBell = () => {
                     );
                   },
                 )}
-              </UserSnippet.Group>
+              </UserGroup>
             </NotificationList>
           </ScrollBar>
         </NotificationContainer>
