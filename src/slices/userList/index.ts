@@ -17,6 +17,7 @@ const userListSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getUserList.pending, (state) => {
       state.status = 'loading';
+      state.users = [initialUser];
     });
     builder.addCase(
       getUserList.fulfilled,

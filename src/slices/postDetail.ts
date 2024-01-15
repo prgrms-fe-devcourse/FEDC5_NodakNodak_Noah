@@ -2,7 +2,7 @@ import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
 import axiosInstance from '@/utils/customAxios';
 import { InitialState, PostId } from '@/slices/postDetail/type';
-import { initialPost } from './initialState';
+import { initialPost } from '@/slices/initialState';
 import { Post } from '@/types/APIResponseTypes';
 
 const initialState: InitialState = {
@@ -33,6 +33,7 @@ const detailPostSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(getPostDetail.pending, (state) => {
       state.status = 'loading';
+      state.post = initialPost;
     });
     builder.addCase(
       getPostDetail.fulfilled,

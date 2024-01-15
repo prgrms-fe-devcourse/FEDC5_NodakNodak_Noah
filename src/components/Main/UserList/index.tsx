@@ -5,8 +5,7 @@ import { RenderUserSnippets } from '@/components/Main/UserList/type';
 import UserGroup from '@/components/Main/UserList/UserGroup';
 
 const UserList = () => {
-  const { isLoading, userSnippetList } = useGetUserList();
-  if (isLoading) return <div>loading...</div>;
+  const { userSnippetList } = useGetUserList();
 
   const onlineUsers = userSnippetList.filter((user) => user.isOnline);
   const offlineUsers = userSnippetList.filter((user) => !user.isOnline);

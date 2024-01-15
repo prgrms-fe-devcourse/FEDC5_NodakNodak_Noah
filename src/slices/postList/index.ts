@@ -58,6 +58,9 @@ const postSlice = createSlice({
       ),
       (state) => {
         state.status = 'loading';
+        state.postListByChannelId = [initialPost];
+        state.postListByUserId = [initialPost];
+        state.posts = [initialPost];
       },
     );
     builder.addMatcher(

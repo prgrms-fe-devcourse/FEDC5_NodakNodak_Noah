@@ -4,6 +4,10 @@ import axiosInstance from '@/utils/customAxios';
 import { UserInfo } from '@/slices/user/type';
 import { initialUser } from '@/slices/initialState';
 import { User } from '@/types/APIResponseTypes';
+import {
+  getPostListByMyId,
+  getPostListByUserId,
+} from '@/slices/postList/thunks';
 
 const initialState: UserInfo = {
   currentUser: initialUser,
@@ -32,6 +36,12 @@ const userInfo = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
+    builder.addCase(getPostListByUserId.pending, (state) => {
+      state.currentUser = initialUser;
+    });
+    builder.addCase(getPostListByMyId.pending, (state) => {
+      state.authUser = initialUser;
+    });
     builder.addCase(getUser.pending, (state) => {
       state.currentUserStatus = 'loading';
     });

@@ -66,6 +66,7 @@ const Header = () => {
   };
 
   const handleMenuItemClick = async (item: string) => {
+    if (!myId) return;
     switch (item) {
       case '마이페이지': {
         setShowMenu(false);
