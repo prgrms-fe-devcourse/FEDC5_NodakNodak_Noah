@@ -35,7 +35,7 @@ const Avatar = ({
         <img
           width={avatarSize}
           height={avatarSize}
-          src={src ? src : '/DefaultProfile.jpg'}
+          src={src ? src : '/DefaultProfile.webp'}
           alt={alt}
           style={{ ...props.style, opacity: loaded ? 1 : 0 }}
         />
