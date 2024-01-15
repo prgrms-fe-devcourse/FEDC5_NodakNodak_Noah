@@ -2,11 +2,15 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Button from '@/components/common/Button';
 import useTimeoutFn from '@/hooks/useTimeoutFn';
-import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
+import {
+  useSelectedMyInfo,
+  useSelectedMyInfoLoading,
+} from '@/hooks/useSelectedMyInfo';
 import { useSelectedFollowData } from '@/hooks/useSelectedFollowData';
 import { unfollow, follow } from '@/slices/follow/thunk';
 import { useDispatch } from '@/store';
 import { getMyInfo } from '@/slices/user';
+import { useSelectedUserLoading } from '@/hooks/useSelectedUser';
 
 const FollowButton = () => {
   const userId = useParams().userId!;
@@ -18,8 +22,12 @@ const FollowButton = () => {
   const { isFollowing, followId } = useSelectedFollowData();
   const [isFollowingUi, setIsFollowingUi] = useState(false);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [debouncedFollow, clear] = useTimeoutFn(() => {
+  const isMyLoading = useSelectedMyInfoLoading();
+  const isUserLoading = useSelectedUserLoading();
+
+  const isLoading = isMyLoading || isUserLoading;
+
+  const debouncedFollow = useTimeoutFn(() => {
     handleFollow();
   }, 1000);
 
@@ -38,6 +46,7 @@ const FollowButton = () => {
       : textMap.none;
 
   const handleFollow = () => {
+    if (isFollowingUi === isFollowing) return;
     if (!myInfo || !token) {
       alert('로그인이 필요합니다.');
       return;
@@ -84,9 +93,17 @@ const FollowButton = () => {
   const styleType = isFollowingUi ? 'danger' : 'primary';
 
   return (
-    <Button styleType={styleType} onClick={handleClick}>
-      {buttonText}
-    </Button>
+    <>
+      {isLoading ? (
+        <Button styleType={styleType} disabled>
+          로딩 중
+        </Button>
+      ) : (
+        <Button styleType={styleType} onClick={handleClick}>
+          {buttonText}
+        </Button>
+      )}
+    </>
   );
 };
 
