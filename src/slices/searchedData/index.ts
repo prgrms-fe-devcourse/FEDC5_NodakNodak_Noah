@@ -33,6 +33,8 @@ const searchedDataSlice = createSlice({
       isAnyOf(searchAllData.pending, searchUserData.pending),
       (state) => {
         state.status = 'loading';
+        state.postData = [initialSearchedPost];
+        state.userData = [initialUser];
       },
     );
     builder.addMatcher(
