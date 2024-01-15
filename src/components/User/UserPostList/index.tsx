@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Text from '@/components/common/Text';
 import { useDispatch } from '@/store';
-import { getUser } from '@/slices/user';
+import { getUser } from '@/slices/user/thunk';
 import PostCard from '@/components/Main/PostList/PostCard';
 import Pagination from '@/components/common/Pagination';
 import { getPostListByUserId } from '@/slices/postList/thunks';

@@ -10,7 +10,7 @@ import {
   useSelectedUserListLoading,
 } from '@/hooks/useSelectedUserList';
 import useInterval from '@/hooks/useInterval';
-import { getMyInfo } from '@/slices/user';
+import { getMyInfo } from '@/slices/user/thunk';
 import { getUserList } from '@/slices/userList/thunk';
 
 const useGetUserList = () => {

@@ -15,7 +15,7 @@ import axiosInstance from '@/utils/customAxios';
 import { Button, Input, Text } from '@/components/common';
 import { Message } from '@/types/APIResponseTypes';
 import { useDispatch } from '@/store';
-import { getMyInfo } from '@/slices/user';
+import { getMyInfo } from '@/slices/user/thunk';
 
 const Admin = () => {
   const [messages, setMessages] = useState([]);

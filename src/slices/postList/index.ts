@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { InitialState } from '@/slices/postList/type';
-import { name } from '@/slices/postList/constants';
+import { SLICE_NAME } from '@/slices/constants';
 import {
   getPostListByChannelId,
   getPostListByUserId,
@@ -19,7 +19,7 @@ const initialState: InitialState = {
 };
 
 const postSlice = createSlice({
-  name,
+  name: SLICE_NAME.POST_LIST,
   initialState,
   reducers: {},
   extraReducers: (builder) => {

@@ -1,26 +1,18 @@
-import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import axiosInstance from '@/utils/customAxios';
-import { InitialState, PostId } from '@/slices/postDetail/type';
+import { InitialState } from '@/slices/postDetail/type';
 import { initialPost } from '@/slices/initialState';
 import { Post } from '@/types/APIResponseTypes';
+import { getPostDetail } from '@/slices/postDetail/thunk';
+import { SLICE_NAME } from '@/slices/constants';
 
 const initialState: InitialState = {
   post: initialPost,
   status: 'idle',
 };
 
-export const getPostDetail = createAsyncThunk(
-  'detailPost/getPostDetail',
-  async ({ postId }: PostId) => {
-    const { data } = await axiosInstance.get(`/posts/${postId}`);
-
-    return data;
-  },
-);
-
 const detailPostSlice = createSlice({
-  name: 'detailPost',
+  name: SLICE_NAME.DETAIL_POST,
   initialState,
   reducers: {
     deleteComment: (state, action: PayloadAction<string>) => {

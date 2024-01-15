@@ -1,7 +1,7 @@
 import { useEffect, useState, RefObject } from 'react';
 import { useSelector } from 'react-redux';
 
-import { getChannel } from '@/slices/channel';
+import { getChannel } from '@/slices/channel/thunk';
 import { useDispatch, RootState } from '@/store';
 import DownArrowIcon from '@/assets/DownArrowIcon';
 import {

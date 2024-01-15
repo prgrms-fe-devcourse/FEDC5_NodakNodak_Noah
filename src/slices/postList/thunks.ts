@@ -1,5 +1,6 @@
-import { name } from './constants';
 import { createAsyncThunk } from '@reduxjs/toolkit';
+
+import { SLICE_NAME } from '@/slices/constants';
 import axiosInstance from '@/utils/customAxios';
 import {
   GetPostsByChannelIdParams,
@@ -7,7 +8,7 @@ import {
 } from '@/slices/postList/type';
 
 export const getPostListByChannelId = createAsyncThunk(
-  `${name}/getPostListByChannelId`,
+  `${SLICE_NAME.POST_LIST}/getPostListByChannelId`,
   async ({ channelId, offset, limit }: GetPostsByChannelIdParams) => {
     const queries = paginationCalculator(offset, limit);
 
@@ -20,7 +21,7 @@ export const getPostListByChannelId = createAsyncThunk(
 );
 
 export const getPostListByUserId = createAsyncThunk(
-  `${name}/getPostListByUserId`,
+  `${SLICE_NAME.POST_LIST}/getPostListByUserId`,
   async ({ userId, offset, limit }: GetPostsByUserIdParams) => {
     const queries = paginationCalculator(offset, limit);
 
@@ -41,7 +42,7 @@ const paginationCalculator = (offset?: number, limit?: number) => {
 };
 
 export const getFullPostList = createAsyncThunk(
-  `${name}/getFullPostList`,
+  `${SLICE_NAME.POST_LIST}/getFullPostList`,
   async () => {
     const { data } = await axiosInstance.get('/posts');
 
@@ -50,7 +51,7 @@ export const getFullPostList = createAsyncThunk(
 );
 
 export const getPostListByMyId = createAsyncThunk(
-  `${name}/getPostListByMyId`,
+  `${SLICE_NAME.POST_LIST}/getPostListByMyId`,
   async () => {
     const {
       data: { _id: userId },

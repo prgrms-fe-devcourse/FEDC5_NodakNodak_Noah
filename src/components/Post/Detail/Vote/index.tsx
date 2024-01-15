@@ -9,7 +9,7 @@ import {
 } from '@/components/Post/Detail/Vote/style';
 import theme from '@/styles/theme';
 import { useDispatch } from '@/store';
-import { getPostDetail } from '@/slices/postDetail';
+import { getPostDetail } from '@/slices/postDetail/thunk';
 import { createNotification } from '@/slices/notification/thunk';
 import { CreateNotificationData } from '@/slices/notification/type';
 import { useSelectedVote } from '@/hooks/useSelectedVote';
