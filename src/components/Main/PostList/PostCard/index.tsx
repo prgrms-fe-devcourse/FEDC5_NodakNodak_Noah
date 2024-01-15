@@ -45,13 +45,11 @@ const PostCard = ({
   const navigate = useNavigate();
 
   const handleDetailClick = () => {
-    const token = localStorage.getItem('auth-token');
-    navigate(token ? `/detail/${channel?._id}/${postId}` : '/sign');
+    navigate(`/detail/${channel?._id}/${postId}`);
   };
 
   const handleDetailResultClick = () => {
-    const token = localStorage.getItem('auth-token');
-    navigate(token ? `/detail/${channel?._id}/${postId}/result` : '/sign');
+    navigate(`/detail/${channel?._id}/${postId}/result`);
   };
 
   const handleUserClick = () => {

@@ -16,6 +16,7 @@ import Tooltip from '@/components/common/Tooltip';
 import { useSelectedUserList } from '@/hooks/useSelectedUserList';
 import { getUserList } from '@/slices/userList/thunk';
 import ImageUploader from '@/components/common/Button/ImageUploadButton';
+import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 
 const MESSAGE = {
   NO_USER_MESSAGE: '사용자가, 없습니다.',
@@ -24,6 +25,7 @@ const MESSAGE = {
 };
 
 const UserInfo = () => {
+  const myInfo = useSelectedMyInfo();
   const dispatch = useDispatch();
   const { userId } = useParams();
   const { isFollower, isFollowing } = useSelectedFollowData();
@@ -64,9 +66,11 @@ const UserInfo = () => {
           alt={fullName}
           size='large'
         />
-        <ImageUploader setImage={setUserImage} apiParam='users/upload-photo'>
-          이미지 변경
-        </ImageUploader>
+        {myInfo?._id === currentUser._id && (
+          <ImageUploader setImage={setUserImage} apiParam='users/upload-photo'>
+            이미지 변경
+          </ImageUploader>
+        )}
       </AvatarWrapper>
       <UserInfoWrapper>
         <Text tagType='span' fontType='h1' colorType='black'>
