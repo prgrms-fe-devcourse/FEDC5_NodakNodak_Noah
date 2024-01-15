@@ -112,9 +112,7 @@ const PostContent = () => {
       </Text>
       {postDetailContent.image ? (
         <img
-          width='32rem'
-          height='18rem'
-          style={{ marginTop: '1.25rem' }}
+          style={{ marginTop: '1.25rem', width: '32rem', height: '18rem' }}
           src={postDetailContent.image}
         />
       ) : null}
