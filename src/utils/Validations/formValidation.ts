@@ -11,16 +11,18 @@ interface FormType {
 export const isValidatedForm = (forms: FormType) => {
   const { title, content, voteTitle, voteArray, channelId } = forms;
   const hasDuplicates = (array: string[]) => {
-    return new Set(array).size !== array.length;
+    const trimmedArray = array.map((item) => item.trim());
+
+    return new Set(trimmedArray).size !== trimmedArray.length;
   };
 
   const validations = [
-    { value: title, prompt: PROMPT.TITLE },
+    { value: title.trim(), prompt: PROMPT.TITLE },
     { value: channelId, prompt: PROMPT.CHANNEL },
-    { value: content, prompt: PROMPT.CONTENT },
-    { value: voteTitle, prompt: PROMPT.VOTE_SUBJECT },
+    { value: content.trim(), prompt: PROMPT.CONTENT },
+    { value: voteTitle.trim(), prompt: PROMPT.VOTE_SUBJECT },
     {
-      value: voteArray.every((candidate) => candidate),
+      value: voteArray.every((candidate) => candidate.trim()),
       prompt: PROMPT.CANDIDATES_INPUT,
     },
   ];
