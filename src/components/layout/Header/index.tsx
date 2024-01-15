@@ -73,9 +73,10 @@ const Header = () => {
         break;
       }
       case '로그아웃': {
+        const isLogout = window.confirm('로그아웃 하시겠습니까?');
+        if (!isLogout) return;
         localStorage.removeItem('auth-token');
-        const { data } = await axiosInstance.post('/logout');
-        alert(data);
+        await axiosInstance.post('/logout');
         location.reload();
         break;
       }
