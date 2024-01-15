@@ -82,7 +82,11 @@ const Item = ({
         tagType='p'
         fontType='body3'
         colorType='black'
-        style={{ paddingLeft: '3rem' }}>
+        style={{
+          paddingLeft: '3rem',
+          maxWidth: '340px',
+          wordWrap: 'break-word',
+        }}>
         {content}
       </Text>
       {authorId === myInfo?._id ? (

@@ -102,14 +102,17 @@ const PostContent = () => {
         colorType='black'
         tagType='p'
         fontType='body1'
-        style={{ lineHeight: '150%', letterSpacing: '0.02813rem' }}>
+        style={{
+          lineHeight: '150%',
+          letterSpacing: '0.02813rem',
+          maxWidth: '700px',
+          wordWrap: 'break-word',
+        }}>
         {content}
       </Text>
       {postDetailContent.image ? (
         <img
-          width='32rem'
-          height='18rem'
-          style={{ marginTop: '1.25rem' }}
+          style={{ marginTop: '1.25rem', width: '32rem', height: '18rem' }}
           src={postDetailContent.image}
         />
       ) : null}

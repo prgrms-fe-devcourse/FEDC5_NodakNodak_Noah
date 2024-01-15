@@ -60,7 +60,7 @@ export const RequestLi = styled.li`
     : theme.colors.success[100]};
   border-bottom: 1px solid black;
   &:hover {
-    background-color: rgba(${theme.colors.black} 0.1);
+    background-color: rgba(0, 0, 0, 0.1);
     transition-duration: 0.3s;
   }
 `;
