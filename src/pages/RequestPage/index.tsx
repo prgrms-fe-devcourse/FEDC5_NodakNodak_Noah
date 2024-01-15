@@ -1,5 +1,9 @@
-import { Container, MessageContent, RequestCard } from './style';
 import { useCallback, useEffect, useState } from 'react';
+import {
+  Container,
+  MessageContent,
+  RequestCard,
+} from '@/pages/RequestPage/style';
 import { Button, Text } from '@/components/common';
 import axiosInstance from '@/utils/customAxios';
 import { getMyInfo } from '@/slices/user';
