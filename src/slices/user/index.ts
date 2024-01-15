@@ -1,6 +1,5 @@
-import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import axiosInstance from '@/utils/customAxios';
 import { UserInfo } from '@/slices/user/type';
 import { initialUser } from '@/slices/initialState';
 import { User } from '@/types/APIResponseTypes';
@@ -8,6 +7,8 @@ import {
   getPostListByMyId,
   getPostListByUserId,
 } from '@/slices/postList/thunks';
+import { name } from '@/slices/constants';
+import { getUser, getMyInfo } from '@/slices/user/thunk';
 
 const initialState: UserInfo = {
   currentUser: initialUser,
@@ -16,23 +17,8 @@ const initialState: UserInfo = {
   currentUserStatus: 'idle',
 };
 
-export const getUser = createAsyncThunk(
-  'user/getUser',
-  async ({ userId }: { userId: string }) => {
-    const { data } = await axiosInstance.get(`/users/${userId}`);
-
-    return data;
-  },
-);
-
-export const getMyInfo = createAsyncThunk('user/getMyInfo', async () => {
-  const { data } = await axiosInstance.get('auth-user');
-
-  return data;
-});
-
 const userInfo = createSlice({
-  name: 'user',
+  name: name.user,
   initialState,
   reducers: {},
   extraReducers: (builder) => {

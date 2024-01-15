@@ -10,7 +10,7 @@ import {
 import { useDispatch } from '@/store';
 import { createNotification } from '@/slices/notification/thunk';
 import { CreateNotificationData } from '@/slices/notification/type';
-import { getPostDetail } from '@/slices/postDetail';
+import { getPostDetail } from '@/slices/postDetail/thunk';
 import Item from '@/components/Post/Detail/Comment/Item';
 import { Input, Button } from '@/components/common';
 import { Warning } from '@/components/Sign/style';

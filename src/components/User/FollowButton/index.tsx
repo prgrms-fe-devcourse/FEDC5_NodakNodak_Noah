@@ -6,7 +6,7 @@ import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 import { useSelectedFollowData } from '@/hooks/useSelectedFollowData';
 import { unfollow, follow } from '@/slices/follow/thunk';
 import { useDispatch } from '@/store';
-import { getMyInfo } from '@/slices/user';
+import { getMyInfo } from '@/slices/user/thunk';
 
 const FollowButton = () => {
   const userId = useParams().userId!;

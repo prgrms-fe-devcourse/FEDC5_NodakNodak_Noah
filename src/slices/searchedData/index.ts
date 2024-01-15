@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { InitialState, SearchedPost } from '@/slices/searchedData/type';
 import { searchAllData, searchUserData } from '@/slices/searchedData/thunk';
-import { name } from '@/slices/searchedData/constants';
+import { name } from '@/slices/constants';
 import { initialSearchedPost, initialUser } from '@/slices/initialState';
 import { User } from '@/types/APIResponseTypes';
 
@@ -12,7 +12,7 @@ const initialState: InitialState = {
 };
 
 const searchedDataSlice = createSlice({
-  name,
+  name: name.searchedData,
   initialState,
   reducers: {},
   extraReducers: (builder) => {

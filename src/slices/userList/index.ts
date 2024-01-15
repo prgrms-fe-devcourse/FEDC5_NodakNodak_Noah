@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { name } from '@/slices/userList/contants';
+import { name } from '@/slices/constants';
 import { getUserList } from '@/slices/userList/thunk';
 import { UserList } from '@/slices/userList/type';
 import { initialUser } from '@/slices/initialState';
@@ -11,7 +11,7 @@ const initialState: UserList = {
 };
 
 const userListSlice = createSlice({
-  name,
+  name: name.userList,
   initialState,
   reducers: {},
   extraReducers: (builder) => {

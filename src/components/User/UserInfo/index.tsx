@@ -9,7 +9,7 @@ import {
 import GrassTable from '@/components/User/GrassTable';
 import { Avatar, Button, Text } from '@/components/common';
 import { useDispatch } from '@/store';
-import { getUser } from '@/slices/user';
+import { getUser } from '@/slices/user/thunk';
 import { useSelectedFollowData } from '@/hooks/useSelectedFollowData';
 import { useSelectedUser } from '@/hooks/useSelectedUser';
 import Tooltip from '@/components/common/Tooltip';
