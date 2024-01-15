@@ -16,6 +16,15 @@ export const isValidatedForm = (forms: FormType) => {
     return new Set(trimmedArray).size !== trimmedArray.length;
   };
 
+  const validateLength = (value: string, maxLength: number, prompt: string) => {
+    const trimmedValue = value.trim();
+    if (trimmedValue.length > maxLength) {
+      alert(`${prompt}은 ${maxLength}자 이하여야 합니다.`);
+      return false;
+    }
+    return true;
+  };
+
   const validations = [
     { value: title.trim(), prompt: PROMPT.TITLE },
     { value: channelId, prompt: PROMPT.CHANNEL },
@@ -32,6 +41,15 @@ export const isValidatedForm = (forms: FormType) => {
       alert(validation.prompt);
       return false;
     }
+  }
+
+  if (
+    !validateLength(title, 15, '제목') ||
+    !validateLength(content, 300, '내용') ||
+    !validateLength(voteTitle, 10, '투표 제목') ||
+    !voteArray.every((candidate) => validateLength(candidate, 35, '투표 후보'))
+  ) {
+    return false;
   }
 
   if (hasDuplicates(voteArray)) {

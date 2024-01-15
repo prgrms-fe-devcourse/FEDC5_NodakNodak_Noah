@@ -42,7 +42,7 @@ const PostComment = () => {
   const handleCommentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const token = localStorage.getItem('auth-token');
-    if (!comment.trim() || !postId || !token) {
+    if (comment.trim().length > 120 || !comment.trim() || !postId || !token) {
       setWarn(true);
       return;
     }
@@ -116,7 +116,15 @@ const PostComment = () => {
               underline
               onChange={handleInputChange}
             />
-            {warn ? <Warning>댓글을 입력해주세요.</Warning> : ''}
+            {warn ? (
+              comment.trim().length > 120 ? (
+                <Warning>댓글은 120자 이하여야 합니다.</Warning>
+              ) : (
+                <Warning>댓글을 입력해주세요.</Warning>
+              )
+            ) : (
+              ''
+            )}
           </FlexColumn>
           <Button
             event='enabled'
