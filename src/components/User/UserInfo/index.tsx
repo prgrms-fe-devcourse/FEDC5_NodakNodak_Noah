@@ -85,22 +85,18 @@ const UserInfo = () => {
             )}
             hasArrow
             type='hover'>
-            <a>
-              <Button size='regular' styleType='ghost'>
-                {followers.length} 팔로워
-              </Button>
-            </a>
+            <Button size='regular' styleType='ghost'>
+              {followers.length} 팔로워
+            </Button>
           </Tooltip>
           <Tooltip
             direction='bottom'
             message={getFullNames(following.map((followee) => followee.user))}
             hasArrow
             type='hover'>
-            <a>
-              <Button size='regular' styleType='ghost'>
-                {following.length} 팔로잉
-              </Button>
-            </a>
+            <Button size='regular' styleType='ghost'>
+              {following.length} 팔로잉
+            </Button>
           </Tooltip>
           <Button size='regular' styleType='ghost'>
             {posts.length} 포스트
