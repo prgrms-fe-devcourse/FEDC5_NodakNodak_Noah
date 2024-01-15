@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { TooltipDirection } from '@/components/Common/Tooltip/type';
+import { TooltipDirection } from '@/components/common/Tooltip/type';
 import theme from '@/styles/theme';
 
 export const TooltipContainer = styled.div`
