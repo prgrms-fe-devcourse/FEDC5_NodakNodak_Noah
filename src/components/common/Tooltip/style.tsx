@@ -37,7 +37,7 @@ export const TooltipContent = styled.span<{ direction: TooltipDirection }>`
 `;
 
 export const getBoxShadow = (direction: TooltipDirection) => {
-  const shadowCommon = `12px rgba(${theme.colors.black} 0.2)`;
+  const shadowCommon = `12px rgba(0,0,0,0.2)`;
   switch (direction) {
     case 'top':
       return `0 5px ${shadowCommon}`;
