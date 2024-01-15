@@ -14,6 +14,8 @@ const LikeButton = () => {
   const [isLiked, setIsLiked] = useState(false);
   const [likeId, setLikeId] = useState('');
   const [likeNumber, setLikeNumber] = useState(0);
+  const [isLikedUi, setIsLikedUi] = useState(false);
+  const [likeNumberUi, setLikeNumberUi] = useState(0);
 
   const postDetail = useSelectedPostDetail();
   const likesDetail = postDetail.likes;
@@ -69,11 +71,25 @@ const LikeButton = () => {
     }
   };
 
+  const handleLikeToggleUi = () => {
+    if (!myInfo) {
+      alert('로그인이 필요합니다.');
+      return;
+    }
+    setIsLikedUi((prevIsLiked) => !prevIsLiked);
+    debouncedHandleLikeToggle();
+  };
+
+  useEffect(() => {
+    setIsLikedUi(isLiked);
+    setLikeNumberUi(likeNumber);
+  }, [isLiked, likeNumber]);
+
   return (
     <LikeButtonIcon
-      onClick={debouncedHandleLikeToggle}
-      isLiked={isLiked}
-      likesNumber={likeNumber}
+      onClick={handleLikeToggleUi}
+      isLiked={isLikedUi}
+      likesNumber={likeNumberUi}
     />
   );
 };

@@ -23,6 +23,9 @@ const userInfo = createSlice({
     setFollowData: (state, action: PayloadAction<FollowData>) => {
       state.followData = action.payload;
     },
+    setIsFollowing: (state, action: PayloadAction<boolean>) => {
+      state.followData.isFollowing = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(
@@ -79,6 +82,6 @@ const userInfo = createSlice({
   },
 });
 
-export const { setFollowData } = userInfo.actions;
+export const { setFollowData, setIsFollowing } = userInfo.actions;
 
 export default userInfo.reducer;
