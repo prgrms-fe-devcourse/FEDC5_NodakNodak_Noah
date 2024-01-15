@@ -22,7 +22,7 @@ const useTimeoutFn = (fn: () => void, ms: number) => {
 
   useEffect(() => clear, [clear]);
 
-  return [run, clear];
+  return run;
 };
 
 export default useTimeoutFn;
