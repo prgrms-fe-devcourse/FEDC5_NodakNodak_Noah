@@ -14,7 +14,7 @@ const Swipe = () => {
       {[0, 1, 2, 3, 4].map((index) => (
         <StyledSwiperSlide key={index}>
           <img
-            src={`/${theme.isDark ? 'SlideD' : 'SlideL'}${index}.jpg`}
+            src={`/${theme.isDark ? 'SlideD' : 'SlideL'}${index}.webp`}
             alt={`Slide ${index}`}
           />
         </StyledSwiperSlide>

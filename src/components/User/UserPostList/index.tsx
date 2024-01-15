@@ -5,18 +5,18 @@ import { useDispatch } from '@/store';
 import { getUser } from '@/slices/user/thunk';
 import PostCard from '@/components/Main/PostList/PostCard';
 import Pagination from '@/components/common/Pagination';
-import { useSelectedPostList } from '@/hooks/useSelectedPostList';
 import { getPostListByUserId } from '@/slices/postList/thunks';
 import { useSelectedUser } from '@/hooks/useSelectedUser';
 import { usePagination } from '@/hooks/usePagination';
 import theme from '@/styles/theme';
 import { PostCardWrapper } from '@/components/Main/PostList/PostCard/style';
+import { useSelectedPostListByUser } from '@/hooks/useSelectedPostListByUser';
 
 const UserPostList = () => {
   const dispatch = useDispatch();
   const { userId } = useParams();
   const currentUser = useSelectedUser();
-  const postList = useSelectedPostList();
+  const postList = useSelectedPostListByUser();
 
   const { paginatedPostList, totalPage, currentPage, handlePageChange } =
     usePagination(postList, 4);

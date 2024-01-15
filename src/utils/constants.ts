@@ -23,3 +23,10 @@ export const FORM_SIZE = {
   WIDTH: '584px',
   HEIGHT: '72px',
 };
+
+export const MAX_LENGTH = {
+  TITLE: 15,
+  CONTENT: 300,
+  VOTE_TITLE: 10,
+  CANDIDATE: 35,
+};

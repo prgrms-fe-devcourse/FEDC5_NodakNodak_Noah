@@ -13,7 +13,6 @@ import { CreateNotificationData } from '@/slices/notification/type';
 const LikeButton = () => {
   const [isLiked, setIsLiked] = useState(false);
   const [likeId, setLikeId] = useState('');
-  const [likeNumber, setLikeNumber] = useState(0);
   const [isLikedUi, setIsLikedUi] = useState(false);
   const [likeNumberUi, setLikeNumberUi] = useState(0);
 
@@ -38,15 +37,14 @@ const LikeButton = () => {
         return false;
       });
       setIsLiked(likedByUser);
-      setLikeNumber(likesDetail.length);
+      setIsLikedUi(likedByUser);
+      setLikeNumberUi(likesDetail.length);
     }
   }, [likesDetail, myInfo]);
 
   const handleLikeToggle = async () => {
+    if (isLiked === isLikedUi) return;
     const likeUrl = isLiked ? 'delete' : 'create';
-    setLikeNumber((prevLikeNumber) =>
-      isLiked ? prevLikeNumber - 1 : prevLikeNumber + 1,
-    );
 
     try {
       const { data } = await axiosInstance({
@@ -76,13 +74,11 @@ const LikeButton = () => {
       return;
     }
     setIsLikedUi((prevIsLiked) => !prevIsLiked);
+    setLikeNumberUi((prevLikeNumber) =>
+      isLikedUi ? prevLikeNumber - 1 : prevLikeNumber + 1,
+    );
     debouncedHandleLikeToggle();
   };
-
-  useEffect(() => {
-    setIsLikedUi(isLiked);
-    setLikeNumberUi(likeNumber);
-  }, [isLiked, likeNumber]);
 
   return (
     <LikeButtonIcon

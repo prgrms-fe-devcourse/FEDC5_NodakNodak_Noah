@@ -3,10 +3,6 @@ import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { UserInfo } from '@/slices/user/type';
 import { initialUser } from '@/slices/initialState';
 import { User } from '@/types/APIResponseTypes';
-import {
-  getPostListByMyId,
-  getPostListByUserId,
-} from '@/slices/postList/thunks';
 import { SLICE_NAME } from '@/slices/constants';
 import { getUser, getMyInfo } from '@/slices/user/thunk';
 
@@ -22,14 +18,9 @@ const userInfo = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getPostListByUserId.pending, (state) => {
-      state.currentUser = initialUser;
-    });
-    builder.addCase(getPostListByMyId.pending, (state) => {
-      state.authUser = initialUser;
-    });
     builder.addCase(getUser.pending, (state) => {
       state.currentUserStatus = 'loading';
+      state.currentUser = initialUser;
     });
     builder.addCase(getUser.fulfilled, (state, action: PayloadAction<User>) => {
       state.currentUser = action.payload;
@@ -40,6 +31,7 @@ const userInfo = createSlice({
     });
     builder.addCase(getMyInfo.pending, (state) => {
       state.authUserStatus = 'loading';
+      state.authUser = initialUser;
     });
     builder.addCase(
       getMyInfo.fulfilled,
