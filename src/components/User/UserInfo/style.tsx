@@ -18,3 +18,10 @@ export const UserInfoWrapper = styled.div`
 export const UserButtonContainer = styled.div`
   display: flex;
 `;
+
+export const AvatarWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+`;

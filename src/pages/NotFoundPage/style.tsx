@@ -5,7 +5,9 @@ import theme from '@/styles/theme';
 export const NotFoundContainer = styled.div`
   width: 100vw;
   height: 100vh;
-  background-color: ${theme.colors.primary[100]};
+  background-color: ${theme.isDark
+    ? theme.colors.grayscale[500]
+    : theme.colors.primary[100]};
 `;
 
 export const NotFoundWrapper = styled.div`
@@ -24,5 +26,7 @@ export const NotFoundWrapper = styled.div`
 export const TitleText = styled.span`
   font-family: 'LOTTERIACHAB', sans-serif;
   font-size: 5vw;
-  color: ${theme.colors.primary[500]};
+  color: ${theme.isDark
+    ? theme.colors.primary[200]
+    : theme.colors.primary[500]};
 `;

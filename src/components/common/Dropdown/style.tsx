@@ -6,11 +6,9 @@ export const MenuForm = styled.div`
   height: 48px;
   max-width: 100%;
   position: relative;
-  margin-top: 48px;
-  margin-bottom: 16px;
 `;
 
-export const DropdownButton = styled.button<{ $ismenuopen: boolean }>`
+export const DropdownButton = styled.button<{ $isMenuOpen: boolean }>`
   width: 100%;
   height: 100%;
   border: 1px solid ${theme.colors.grayscale[300]};
@@ -18,9 +16,9 @@ export const DropdownButton = styled.button<{ $ismenuopen: boolean }>`
   align-items: center;
   justify-content: space-between;
   padding: 0 13px 0 20px;
-  background-color: ${({ $ismenuopen }) =>
-    $ismenuopen ? theme.colors.grayscale[200] : theme.colors.grayscale[100]};
+  background-color: transparent;
   color: ${theme.colors.grayscale[300]};
+  font-family: Pretendard;
   cursor: pointer;
   border-radius: 4px;
 `;
@@ -38,11 +36,16 @@ export const ListItemButton = styled.button`
   width: 100%;
   height: 48px;
   text-align: left;
-  background-color: ${theme.colors.primary[100]};
   border: none;
-  border-bottom: 1px solid ${theme.colors.primary[200]};
+  border-bottom: 1px solid ${theme.colors.primary[100]};
   padding: 0 20px;
-  color: ${theme.colors.primary[400]};
+  background-color: ${theme.isDark
+    ? theme.colors.grayscale[400]
+    : theme.colors.primary[100]};
+  color: ${theme.isDark
+    ? theme.colors.primary[100]
+    : theme.colors.primary[400]};
+  font-family: Prentendard;
   cursor: pointer;
   &:last-child {
     border-bottom-left-radius: 8px;
@@ -51,13 +54,15 @@ export const ListItemButton = styled.button`
   }
 
   &:hover {
-    background-color: ${theme.colors.primary[200]};
+    background-color: ${theme.isDark
+      ? theme.colors.grayscale[500]
+      : theme.colors.primary[200]};
   }
 `;
 
 export const DropdownContent = styled.ul`
   width: 100%;
-  min-width: 100px;
+  min-width: 132px;
   position: absolute;
   top: 100%;
   margin: 0px;

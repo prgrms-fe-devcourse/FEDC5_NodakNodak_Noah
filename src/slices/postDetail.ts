@@ -1,21 +1,15 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-import { Post } from '@/types/APIResponseTypes';
 import axiosInstance from '@/utils/customAxios';
+import { InitialState, PostId } from '@/slices/postDetail/type';
+import { initialPost } from '@/slices/initialState';
+import { Post } from '@/types/APIResponseTypes';
 
-interface DetailPost {
-  post: Post;
-  isLoading: boolean;
-}
-
-const initialState: DetailPost = {
-  post: {} as Post,
-  isLoading: false,
+const initialState: InitialState = {
+  post: initialPost,
+  status: 'idle',
 };
 
-interface PostId {
-  postId: string | undefined;
-}
 export const getPostDetail = createAsyncThunk(
   'detailPost/getPostDetail',
   async ({ postId }: PostId) => {
@@ -25,22 +19,34 @@ export const getPostDetail = createAsyncThunk(
   },
 );
 
-export const detailPostSlice = createSlice({
+const detailPostSlice = createSlice({
   name: 'detailPost',
   initialState,
-  reducers: {},
+  reducers: {
+    deleteComment: (state, action: PayloadAction<string>) => {
+      const commentId = action.payload;
+      state.post.comments = state.post.comments.filter(
+        (comment) => comment._id !== commentId,
+      );
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(getPostDetail.pending, (state) => {
-      state.isLoading = true;
+      state.status = 'loading';
+      state.post = initialPost;
     });
-    builder.addCase(getPostDetail.fulfilled, (state, action) => {
-      state.post = action.payload;
-      state.isLoading = false;
-    });
+    builder.addCase(
+      getPostDetail.fulfilled,
+      (state, action: PayloadAction<Post>) => {
+        state.post = action.payload;
+        state.status = 'idle';
+      },
+    );
     builder.addCase(getPostDetail.rejected, (state) => {
-      state.isLoading = false;
+      state.status = 'failed';
     });
   },
 });
 
+export const { deleteComment } = detailPostSlice.actions;
 export default detailPostSlice.reducer;

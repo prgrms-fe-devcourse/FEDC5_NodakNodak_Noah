@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import theme from '@/styles/theme';
 
 export const Container = styled.div`
   display: flex;
@@ -6,22 +7,38 @@ export const Container = styled.div`
   height: 100vh;
   justify-content: center;
   align-items: center;
-  background-color: #faf6e8;
+  background-color: ${theme.isDark
+    ? theme.colors.grayscale[500]
+    : theme.colors.primary[100]};
 `;
 
 export const Card = styled.section`
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: ${theme.isDark
+    ? theme.colors.grayscale[400]
+    : theme.colors.white};
   width: 960px;
   height: 680px;
   border-radius: 8px;
-  box-shadow: 2px 2px 4px 1px #868e96;
+  box-shadow: 2px 2px 4px 1px ${theme.colors.grayscale[300]};
   @media screen and (max-width: 900px) {
     width: 680px;
   }
   @media screen and (max-width: 600px) {
     width: 400px;
+  }
+`;
+
+export const GoHome = styled.span`
+  display: flex;
+  align-items: baseline;
+  padding: 8px;
+  cursor: pointer;
+  user-select: none;
+  &:hover {
+    opacity: 0.8;
+    transition-duration: 0.5s;
   }
 `;
 

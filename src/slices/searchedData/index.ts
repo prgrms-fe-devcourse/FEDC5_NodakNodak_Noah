@@ -1,31 +1,40 @@
-import { name } from './constants';
-import { searchAllData, searchUserData } from './thunk';
-import { SearchedPost, SearchedData } from './searchedDataType';
-import { createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { InitialState, SearchedPost } from '@/slices/searchedData/type';
+import { searchAllData, searchUserData } from '@/slices/searchedData/thunk';
+import { name } from '@/slices/searchedData/constants';
+import { initialSearchedPost, initialUser } from '@/slices/initialState';
 import { User } from '@/types/APIResponseTypes';
 
-const initialState: SearchedData = {
-  postData: [] as SearchedPost[],
-  userData: [] as User[],
-  isLoading: false,
+const initialState: InitialState = {
+  postData: [initialSearchedPost],
+  userData: [initialUser],
+  status: 'idle',
 };
 
-export const searchedDataSlice = createSlice({
+const searchedDataSlice = createSlice({
   name,
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(searchAllData.fulfilled, (state, action) => {
-      state.postData = action.payload;
-    });
-    builder.addCase(searchUserData.fulfilled, (state, action) => {
-      state.userData = action.payload;
-    });
+    builder.addCase(
+      searchAllData.fulfilled,
+      (state, action: PayloadAction<SearchedPost[]>) => {
+        state.postData = action.payload;
+      },
+    );
+    builder.addCase(
+      searchUserData.fulfilled,
+      (state, action: PayloadAction<User[]>) => {
+        state.userData = action.payload;
+      },
+    );
 
     builder.addMatcher(
       isAnyOf(searchAllData.pending, searchUserData.pending),
       (state) => {
-        state.isLoading = true;
+        state.status = 'loading';
+        state.postData = [initialSearchedPost];
+        state.userData = [initialUser];
       },
     );
     builder.addMatcher(
@@ -36,7 +45,7 @@ export const searchedDataSlice = createSlice({
         searchUserData.rejected,
       ),
       (state) => {
-        state.isLoading = false;
+        state.status = 'idle';
       },
     );
   },

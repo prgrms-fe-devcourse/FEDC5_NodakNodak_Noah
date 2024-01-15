@@ -10,10 +10,8 @@ import {
 import theme from '@/styles/theme';
 import { useDispatch } from '@/store';
 import { getPostDetail } from '@/slices/postDetail';
-import {
-  CreateNotificationData,
-  createNotification,
-} from '@/slices/notification/thunk';
+import { createNotification } from '@/slices/notification/thunk';
+import { CreateNotificationData } from '@/slices/notification/type';
 import { useSelectedVote } from '@/hooks/useSelectedVote';
 import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
@@ -30,12 +28,18 @@ const PostVote = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [voteContent, setVoteContent] = useState('');
-  const [reVote, setRevote] = useState(false);
+  const [reVote, setReVote] = useState(false);
+  const [myVote, setMyVote] = useState('');
 
   useEffect(() => {
     postDetailVote.some((vote) => vote.author._id === myInfo?._id)
-      ? setRevote(true)
-      : setRevote(false);
+      ? setReVote(true)
+      : setReVote(false);
+    const myVote = postDetailVote.filter(
+      (vote) => vote.author._id === myInfo?._id,
+    )[0]?.comment;
+    if (!myVote) return;
+    setMyVote(JSON.parse(myVote).content);
   }, [myInfo, postDetailVote]);
 
   if (!postDetailContent.title) return null;
@@ -43,6 +47,11 @@ const PostVote = () => {
 
   const handleViewResult = () => {
     navigate(`./result`);
+  };
+
+  const handleVoteContent = (voteItem: string) => {
+    if (reVote) return;
+    setVoteContent(voteItem);
   };
 
   const handleVote = async (e: React.FormEvent) => {
@@ -90,6 +99,13 @@ const PostVote = () => {
           <Text tagType='span' fontType='body2' colorType='black'>
             {`${postDetailVote?.length}명 투표`}
           </Text>
+          {reVote ? (
+            <Warning style={{ margin: '20px 0 0 0' }}>
+              이미 투표하셨습니다.
+            </Warning>
+          ) : (
+            ''
+          )}
         </VoteTitleWrapper>
         <form>
           <InputWrapper>
@@ -98,17 +114,31 @@ const PostVote = () => {
                 key={index}
                 value={vote}
                 bordertype='enabled'
-                readOnly={true}
+                readOnly
+                justifyContent='center'
                 style={{
                   marginBottom: '1.5rem',
                   width: '466px',
                   height: '48px',
+                  cursor: reVote ? 'not-allowed' : 'pointer',
                   backgroundColor: `${
-                    voteContent === vote ? theme.colors.primary[200] : ''
+                    vote === myVote
+                      ? theme.colors.primary[200]
+                      : voteContent === vote
+                        ? theme.colors.primary[200]
+                        : ''
                   }`,
+                  color: `${
+                    !theme.isDark
+                      ? theme.colors.black
+                      : vote === myVote || vote === voteContent
+                        ? theme.colors.black
+                        : theme.colors.white
+                  }`,
+
                   outline: 'none',
                 }}
-                onClick={() => setVoteContent(vote)}
+                onClick={() => handleVoteContent(vote)}
               />
             ))}
           </InputWrapper>
@@ -117,7 +147,7 @@ const PostVote = () => {
               event={voteContent === '' || reVote ? 'disabled' : 'enabled'}
               styleType='primary'
               size='wide'
-              disabled={voteContent === '' || reVote ? true : false}
+              disabled={voteContent === '' || reVote}
               onClick={handleVote}>
               투표 하기
             </Button>
@@ -130,7 +160,6 @@ const PostVote = () => {
             </Button>
           </ButtonWrapper>
         </form>
-        {reVote ? <Warning>이미 투표하셨습니다.</Warning> : ''}
       </ScrollBar>
     </Card>
   );

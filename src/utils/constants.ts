@@ -16,6 +16,7 @@ export const PROMPT = {
 export const MESSAGE = {
   CREATE_POST: '게시물이 등록되었습니다.',
   CREATE_POST_FAIL: '게시물 등록에 실패했습니다.',
+  VOTE_IN_PROGRESS: '투표가 진행되어 수정할 수 없습니다.',
 };
 
 export const FORM_SIZE = {

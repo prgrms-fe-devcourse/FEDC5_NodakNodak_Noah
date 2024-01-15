@@ -1,3 +1,5 @@
+const isDark = localStorage.getItem('isDark') === 'true';
+
 const theme = {
   colors: {
     primary: {
@@ -20,20 +22,6 @@ const theme = {
       300: '#FF6B6B',
       400: '#F03E3E',
       500: '#C92A2A',
-    },
-    info: {
-      100: '#EDF2FF',
-      200: '#BAC8FF',
-      300: '#5C7CFA',
-      400: '#4263EB',
-      500: '#364FC7',
-    },
-    warning: {
-      100: '#FFF9DB',
-      200: '#FFE066',
-      300: '#FCC419',
-      400: '#F59F00',
-      500: '#E67700',
     },
     grayscale: {
       100: '#F9F9F9',
@@ -58,6 +46,7 @@ const theme = {
     button3: { size: '12px', weight: 'normal' },
     caption: { size: '12px', weight: 'normal' },
   },
+  isDark: isDark,
 };
 
 export default theme;

@@ -1,5 +1,5 @@
 import theme from '@/styles/theme';
-import { TextProps } from '@/components/common/Text/TextProps';
+import { TextProps } from '@/components/common/Text/type';
 
 const Text = ({
   tagType = 'span',
@@ -16,7 +16,7 @@ const Text = ({
   let color = '';
 
   if (colorType === 'black') {
-    color = theme.colors[colorType];
+    color = theme.isDark ? theme.colors.white : theme.colors[colorType];
   } else {
     colorNumber && (color = theme.colors[colorType][colorNumber]);
   }

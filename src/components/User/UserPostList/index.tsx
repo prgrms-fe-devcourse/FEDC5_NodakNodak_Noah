@@ -3,11 +3,14 @@ import { useParams } from 'react-router-dom';
 import Text from '@/components/common/Text';
 import { useDispatch } from '@/store';
 import { getUser } from '@/slices/user';
-import PostCard from '@/components/Main/PostCard';
-import { postListToPostSnippetList } from '@/slices/postList/utils';
+import PostCard from '@/components/Main/PostList/PostCard';
+import Pagination from '@/components/common/Pagination';
 import { useSelectedPostList } from '@/hooks/useSelectedPostList';
 import { getPostListByUserId } from '@/slices/postList/thunks';
 import { useSelectedUser } from '@/hooks/useSelectedUser';
+import { usePagination } from '@/hooks/usePagination';
+import theme from '@/styles/theme';
+import { PostCardWrapper } from '@/components/Main/PostList/PostCard/style';
 
 const UserPostList = () => {
   const dispatch = useDispatch();
@@ -15,21 +18,17 @@ const UserPostList = () => {
   const currentUser = useSelectedUser();
   const postList = useSelectedPostList();
 
+  const { paginatedPostList, totalPage, currentPage, handlePageChange } =
+    usePagination(postList, 4);
+
   useEffect(() => {
     if (!userId) return;
     dispatch(getUser({ userId }));
-  }, [dispatch, userId]);
-
-  useEffect(() => {
-    if (!userId) return;
     dispatch(getPostListByUserId({ userId }));
   }, [dispatch, userId]);
 
-  if (!currentUser) {
-    return <></>;
-  }
+  if (!currentUser) return <div>Loading...</div>;
   const { fullName } = currentUser;
-  const postSnippetList = postListToPostSnippetList(postList);
 
   return (
     <>
@@ -40,11 +39,12 @@ const UserPostList = () => {
         tagType='span'
         fontType='body1'
         colorType='grayscale'
-        colorNumber='400'>
+        colorNumber={theme.isDark ? '200' : '400'}>
         님의 최근 게시글
       </Text>
-      <PostCard.Group style={{ width: '60vw', margin: '2rem 0' }}>
-        {postSnippetList.length === 0 ? (
+      <PostCardWrapper
+        style={{ width: '80vw', margin: '2rem 0', maxWidth: '1440px' }}>
+        {paginatedPostList.length === 0 ? (
           <Text
             tagType='span'
             fontType='h4'
@@ -53,11 +53,25 @@ const UserPostList = () => {
             게시글이 존재하지 않습니다.
           </Text>
         ) : (
-          postSnippetList.map((post) => {
-            return <PostCard key={post._id} post={post} />;
+          paginatedPostList.map(({ _id, image, title, author, comments }) => {
+            return (
+              <PostCard
+                key={_id}
+                postId={_id}
+                image={image}
+                title={title}
+                author={author}
+                comments={comments}
+              />
+            );
           })
         )}
-      </PostCard.Group>
+      </PostCardWrapper>
+      <Pagination
+        page={currentPage}
+        totalPage={totalPage}
+        onPageChange={handlePageChange}
+      />
     </>
   );
 };

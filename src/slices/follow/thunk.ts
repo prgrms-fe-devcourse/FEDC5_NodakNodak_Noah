@@ -1,10 +1,8 @@
-import { name } from './constants';
-import {
-  CreateNotificationData,
-  createNotification,
-} from '../notification/thunk';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
+import { name } from '@/slices/follow/constants';
+import { getPostListByMyId } from '@/slices/postList/thunks';
+import { createNotification } from '@/slices/notification/thunk';
+import { CreateNotificationData } from '@/slices/notification/type';
 import { RootState } from '@/store';
 import axiosInstance from '@/utils/customAxios';
 
@@ -33,6 +31,7 @@ export const follow = createAsyncThunk(
       postId: null,
     };
 
+    dispatch(getPostListByMyId());
     dispatch(
       createNotification({
         notificationData,
@@ -53,7 +52,7 @@ export const unfollow = createAsyncThunk(
       myId: string;
       followId: string;
     },
-    { getState },
+    { getState, dispatch },
   ) => {
     const state = getState() as RootState;
     const myInfo = state.userInfo.authUser;
@@ -65,6 +64,7 @@ export const unfollow = createAsyncThunk(
         id: followId,
       },
     });
+    dispatch(getPostListByMyId());
 
     return data;
   },

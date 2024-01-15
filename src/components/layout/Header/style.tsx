@@ -19,6 +19,7 @@ export const ChannelWrapper = styled.div`
   align-items: center;
   gap: 16px;
   text-decoration: none;
+  width: 400px;
 `;
 
 export const NavLinkWrapper = styled(NavLink)`
@@ -26,19 +27,26 @@ export const NavLinkWrapper = styled(NavLink)`
 `;
 
 export const FormContainer = styled.form`
+  display: flex;
   position: relative;
   width: 160px;
+  flex-wrap: nowrap;
 `;
 
-export const SearchIcon = styled.span`
-  position: absolute;
-  left: 32px;
-  top: 4px;
-`;
 export const AuthUiWrapper = styled.div`
   display: flex;
   position: relative;
   justify-content: center;
   align-items: center;
   gap: 16px;
+`;
+
+export const IconWrapper = styled.span`
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s linear;
+  transform: scale(1.4);
+  &:hover {
+    transform: scale(1.5);
+  }
 `;

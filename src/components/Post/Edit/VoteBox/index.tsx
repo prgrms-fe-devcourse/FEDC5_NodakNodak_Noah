@@ -4,19 +4,14 @@ import {
   InputContainer,
   DeleteButton,
 } from '@/components/Post/Edit/VoteBox/style';
-import { PLACEHOLDER } from '@/utils/constants';
+import { PLACEHOLDER, MESSAGE } from '@/utils/constants';
 import { Card, Input, Button, ScrollBar } from '@/components/common';
 import DeleteIcon from '@/assets/DeleteIcon';
+import { FormProps } from '@/components/Post/Edit/VoteBox/type';
+import Text from '@/components/common/Text';
+import theme from '@/styles/theme';
 
-interface FormProps {
-  values: {
-    voteTitle: string;
-    voteArray: string[];
-  };
-  setFieldValue: (field: string, values: string | string[]) => void;
-}
-
-const VoteBox = ({ values, setFieldValue }: FormProps) => {
+const VoteBox = ({ values, setFieldValue, isEditable }: FormProps) => {
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFieldValue('voteTitle', e.target.value);
   };
@@ -41,19 +36,18 @@ const VoteBox = ({ values, setFieldValue }: FormProps) => {
       shadowType='medium'
       style={{ margin: '0 auto', maxWidth: '666px' }}>
       <ScrollBar>
-        <ContentWrapper>
+        <ContentWrapper $isEditable={isEditable}>
           <Content>
             <Input
               placeholder={PLACEHOLDER.VOTE_SUBJECT}
-              required={true}
-              underline={true}
+              required
+              underline
               fontType='h3'
               value={values.voteTitle}
               onChange={handleTitleChange}
               style={{
                 width: '100%',
                 height: '48px',
-                textAlign: 'center',
               }}
             />
             <Button
@@ -62,12 +56,12 @@ const VoteBox = ({ values, setFieldValue }: FormProps) => {
               event='hover'
               onClick={handleAddCandidate}
               type='button'>
-              <>선택지 추가 +</>
+              선택지 추가
             </Button>
             {values.voteArray.map((candidate, index) => (
               <InputContainer key={index}>
                 <Input
-                  required={true}
+                  required
                   placeholder={`투표 후보${index + 1}`}
                   value={candidate}
                   onChange={(e) => handleCandidateChange(index, e.target.value)}
@@ -76,14 +70,23 @@ const VoteBox = ({ values, setFieldValue }: FormProps) => {
                     height: '48px',
                   }}
                 />
-                <DeleteButton
-                  $isshow={index >= 2}
-                  type='button'
-                  onClick={() => handleRemoveCandidate(index)}>
-                  <DeleteIcon />
-                </DeleteButton>
+                {isEditable && (
+                  <DeleteButton
+                    $isShow={index >= 2}
+                    type='button'
+                    onClick={() => handleRemoveCandidate(index)}>
+                    <DeleteIcon />
+                  </DeleteButton>
+                )}
               </InputContainer>
             ))}
+            {!isEditable && (
+              <Text
+                tagType='span'
+                style={{ color: `${theme.colors.error[400]}` }}>
+                {MESSAGE.VOTE_IN_PROGRESS}
+              </Text>
+            )}
           </Content>
         </ContentWrapper>
       </ScrollBar>

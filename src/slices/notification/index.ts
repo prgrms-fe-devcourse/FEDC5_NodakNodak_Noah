@@ -1,45 +1,59 @@
-import { name } from './constants';
+import { PayloadAction, createSlice, isAnyOf } from '@reduxjs/toolkit';
 import {
   getNotificationArray,
   seeNotifications,
   createNotification,
-} from './thunk';
-import { InitialState } from './notificationType';
-import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { Comment, Notification, User, Follow } from '@/types/APIResponseTypes';
+} from '@/slices/notification/thunk';
+import { InitialState, NotificationWithType } from '@/slices/notification/type';
+import { name } from '@/slices/notification/constants';
+import { Notification } from '@/types/APIResponseTypes';
+
+export const notificationType = {
+  follow: 'FOLLOW',
+  comment: 'COMMENT',
+  message: 'MESSAGE',
+  like: 'LIKE',
+  vote: 'VOTE',
+  notdefined: 'NOTDEFINED',
+};
 
 const initialState: InitialState = {
-  notifications: [
-    {
-      seen: false,
-      _id: '',
-      author: {} as User,
-      user: '',
-      post: '',
-      follow: {} as Follow,
-      comment: {} as Comment,
-      message: '',
-      createdAt: '',
-      updatedAt: '',
-    },
-  ],
-  isLoading: false,
+  notifications: [],
+  status: 'idle',
 };
 const notificationSlice = createSlice({
   name,
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getNotificationArray.fulfilled, (state, action) => {
-      state.notifications = action.payload.filter(
-        (notification: Notification) => !notification.seen,
-      );
-    });
+    builder.addCase(
+      getNotificationArray.fulfilled,
+      (state, action: PayloadAction<NotificationWithType[]>) => {
+        state.notifications = action.payload.filter(
+          (notification: Notification) => !notification.seen,
+        );
+
+        state.notifications = state.notifications.map((notification) => {
+          if (notification.post) {
+            if (notification.comment) {
+              if (JSON.parse(notification.comment.comment).type === 'vote')
+                notification.type = notificationType.vote;
+              else notification.type = notificationType.comment;
+            } else if (notification.message) {
+              notification.type = notificationType.message;
+            } else {
+              notification.type = notificationType.like;
+            }
+          } else if (notification.follow) {
+            notification.type = notificationType.follow;
+          } else if (notification.author) {
+            notification.type = notificationType.notdefined;
+          }
+          return notification;
+        });
+      },
+    );
     builder.addCase(seeNotifications.fulfilled, (state) => {
-      state.notifications = state.notifications.map((notification) => {
-        notification.seen = true;
-        return notification;
-      });
       state.notifications = [];
     });
 
@@ -50,7 +64,7 @@ const notificationSlice = createSlice({
         createNotification.pending,
       ),
       (state) => {
-        state.isLoading = true;
+        state.status = 'loading';
       },
     );
     builder.addMatcher(
@@ -63,7 +77,7 @@ const notificationSlice = createSlice({
         createNotification.rejected,
       ),
       (state) => {
-        state.isLoading = false;
+        state.status = 'idle';
       },
     );
   },

@@ -1,6 +1,6 @@
 ﻿import { forwardRef, Ref } from 'react';
 
-import { InputProps } from '@/components/common/Input/InputProps';
+import { InputProps } from '@/components/common/Input/type';
 import { Wrapper, StyledInput } from '@/components/common/Input/style';
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
@@ -9,14 +9,19 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       bordertype = 'filled',
       fontType = 'body3',
       underline = false,
+      justifyContent = 'flex-start',
       height,
       width = '400px',
+      wrapperWidth = '100%',
       ...props
     }: InputProps,
     ref: Ref<HTMLInputElement>,
   ) => {
     return (
-      <Wrapper ref={ref}>
+      <Wrapper
+        ref={ref}
+        $justifyContent={justifyContent}
+        style={{ width: wrapperWidth }}>
         <StyledInput
           $bordertype={bordertype}
           $fontType={fontType}

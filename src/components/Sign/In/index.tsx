@@ -3,14 +3,9 @@ import { useNavigate } from 'react-router-dom';
 
 import PasswordInput from '@/components/common/Input/PasswordInput';
 import { Button, Input } from '@/components/common';
-import {
-  Form,
-  Guide,
-  Register,
-  SignProps,
-  Warning,
-} from '@/components/Sign/style';
+import { Form, Guide, Register, Warning } from '@/components/Sign/style';
 import axiosInstance from '@/utils/customAxios';
+import { SignProps } from '@/components/Sign/type';
 
 const In = ({ isLogin, setIsLogin }: SignProps) => {
   const [email, setEmail] = useState('');
@@ -50,6 +45,7 @@ const In = ({ isLogin, setIsLogin }: SignProps) => {
         placeholder='Email'
         autoComplete='on'
         type='email'
+        justifyContent='center'
         bordertype={warn ? 'error' : 'filled'}
         onChange={(e) => setEmail(e.target.value)}
       />
@@ -65,10 +61,7 @@ const In = ({ isLogin, setIsLogin }: SignProps) => {
       {warn ? <Warning>{warnText}</Warning> : ''}
       <Guide>
         노닥노닥이 처음이라면?
-        <Register onClick={() => setIsLogin(!isLogin)}>
-          회원가입
-          <span className='material-symbols-outlined'>arrow_forward_ios</span>
-        </Register>
+        <Register onClick={() => setIsLogin(!isLogin)}>회원가입</Register>
       </Guide>
       <Button
         size='wide'

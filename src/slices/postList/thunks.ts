@@ -1,23 +1,15 @@
 import { name } from './constants';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axiosInstance from '@/utils/customAxios';
-
-export interface GetPostsByChannelIdParams {
-  channelId: string;
-  offset?: number;
-  limit?: number;
-}
-
-export interface GetPostsByUserIdParams {
-  userId: string;
-  offset?: number;
-  limit?: number;
-}
+import {
+  GetPostsByChannelIdParams,
+  GetPostsByUserIdParams,
+} from '@/slices/postList/type';
 
 export const getPostListByChannelId = createAsyncThunk(
   `${name}/getPostListByChannelId`,
   async ({ channelId, offset, limit }: GetPostsByChannelIdParams) => {
-    const queries = paginationClaculator(offset, limit);
+    const queries = paginationCalculator(offset, limit);
 
     const { data } = await axiosInstance.get(
       `posts/channel/${channelId}/${queries}`,
@@ -30,7 +22,7 @@ export const getPostListByChannelId = createAsyncThunk(
 export const getPostListByUserId = createAsyncThunk(
   `${name}/getPostListByUserId`,
   async ({ userId, offset, limit }: GetPostsByUserIdParams) => {
-    const queries = paginationClaculator(offset, limit);
+    const queries = paginationCalculator(offset, limit);
 
     const { data } = await axiosInstance.get(
       `posts/author/${userId}/${queries}`,
@@ -40,7 +32,7 @@ export const getPostListByUserId = createAsyncThunk(
   },
 );
 
-const paginationClaculator = (offset?: number, limit?: number) => {
+const paginationCalculator = (offset?: number, limit?: number) => {
   if (offset === undefined || limit === undefined) {
     return '';
   }
@@ -52,6 +44,18 @@ export const getFullPostList = createAsyncThunk(
   `${name}/getFullPostList`,
   async () => {
     const { data } = await axiosInstance.get('/posts');
+
+    return data;
+  },
+);
+
+export const getPostListByMyId = createAsyncThunk(
+  `${name}/getPostListByMyId`,
+  async () => {
+    const {
+      data: { _id: userId },
+    } = await axiosInstance.get('auth-user');
+    const { data } = await axiosInstance.get(`posts/author/${userId}/`);
 
     return data;
   },

@@ -1,10 +1,15 @@
 import styled from 'styled-components';
 
-export const ContentWrapper = styled.div`
+interface ContentWrapperProps {
+  $isEditable: boolean;
+}
+export const ContentWrapper = styled.div<ContentWrapperProps>`
   display: flex;
   padding: 40px 20px;
   justify-content: center;
   max-height: 400px;
+  cursor: ${(props) => (props.$isEditable ? 'auto' : 'not-allowed')};
+  pointer-events: ${(props) => (props.$isEditable ? 'auto' : 'none')};
 `;
 
 export const Content = styled.div`
@@ -32,7 +37,7 @@ export const InputContainer = styled.div`
   width: 100%;
 `;
 
-export const DeleteButton = styled.button<{ $isshow: boolean }>`
+export const DeleteButton = styled.button<{ $isShow: boolean }>`
   margin-left: 10px;
   align-items: center;
   position: absolute;
@@ -40,5 +45,5 @@ export const DeleteButton = styled.button<{ $isshow: boolean }>`
   cursor: pointer;
   border: none;
   background: none;
-  visibility: ${({ $isshow }) => ($isshow ? 'visible' : 'hidden')};
+  visibility: ${({ $isShow }) => ($isShow ? 'visible' : 'hidden')};
 `;

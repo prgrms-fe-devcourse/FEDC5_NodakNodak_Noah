@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 
 import { BadgeContainer, Super } from '@/components/common/OnlineBadge/style';
-import { OnlineBadgePropsTypes } from '@/components/common/OnlineBadge/OnlineBadgeProps';
+import { OnlineBadgePropsTypes } from '@/components/common/OnlineBadge/type';
 
 const OnLineBadge = ({
   children,
@@ -11,7 +11,7 @@ const OnLineBadge = ({
   return (
     <BadgeContainer>
       {children}
-      <Super className='dot' isOnline={isOnline} isFollowing={isFollowing} />
+      <Super className='dot' $isOnline={isOnline} $isFollowing={isFollowing} />
     </BadgeContainer>
   );
 };

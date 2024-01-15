@@ -1,4 +1,7 @@
-import { InputWrapper } from '@/components/Post/Detail/Result/style';
+import {
+  InputWrapper,
+  BarChartContainer,
+} from '@/components/Post/Detail/Result/BarChart/style';
 import theme from '@/styles/theme';
 import { Text, Input } from '@/components/common';
 
@@ -24,7 +27,8 @@ const BarChart = ({
   return (
     <InputWrapper>
       {[...voteCountMap].map(([vote, count], index) => (
-        <div
+        <BarChartContainer
+          key={`${vote}/${count}/${index}`}
           style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -35,32 +39,34 @@ const BarChart = ({
             key={index}
             value={vote}
             bordertype='enabled'
-            readOnly={true}
+            readOnly
             style={{
               width: '466px',
               height: '48px',
               position: 'relative',
+              color: `${theme.colors.black}`,
               backgroundImage: `linear-gradient(to right, ${
                 theme.colors.primary[200]
               } ${
                 votedArray.length ? (count / votedArray.length) * 100 : 0
               }%, ${theme.colors.primary[100]} 0%)`,
             }}
-            disabled={true}
+            disabled
           />
           <Text
             tagType='span'
             fontType='body1'
             colorNumber='400'
             colorType='primary'
-            style={{ position: 'absolute', right: '5px', zIndex: '3' }}>
-            {votedArray.length
-              ? `${Math.round(
-                  (((count / votedArray.length) * 10) / 10) * 100,
-                ).toString()}%`
-              : '0'}
+            style={{
+              position: 'absolute',
+              right: '5px',
+              zIndex: '3',
+              color: `${theme.colors.black}`,
+            }}>
+            {votedArray.length ? `${count}/${votedArray.length}` : '0'}
           </Text>
-        </div>
+        </BarChartContainer>
       ))}
     </InputWrapper>
   );

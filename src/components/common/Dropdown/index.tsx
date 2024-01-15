@@ -12,7 +12,7 @@ import {
   MenuForm,
 } from '@/components/common/Dropdown/style';
 import useClickAway from '@/hooks/useClickAway';
-import { DropdownProps } from '@/components/common/Dropdown/DropdownProps';
+import { DropdownProps } from '@/components/common/Dropdown/type';
 
 export interface Channel {
   _id: string;
@@ -53,7 +53,7 @@ const DropdownMenu = ({ channelId, setChannelId }: DropdownProps) => {
       <DropdownButton
         type='button'
         onClick={toggleMenu}
-        $ismenuopen={isMenuOpen}
+        $isMenuOpen={isMenuOpen}
         className='DropdownButton'>
         {channelTitle}
         <BorderLine />

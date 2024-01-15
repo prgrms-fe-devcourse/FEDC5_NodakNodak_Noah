@@ -1,56 +1,69 @@
-import { follow, unfollow } from './thunk';
-import { name } from './constants';
-import { InitialState } from './followType';
-import { getUser, getMyInfo } from '../user';
-import { createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { User } from '@/types/APIResponseTypes';
+import { PayloadAction, createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { getUser, getMyInfo } from '@/slices/user';
+import { FollowData, InitialState } from '@/slices/follow/type';
+import { name } from '@/slices/follow/constants';
+import { follow, unfollow } from '@/slices/follow/thunk';
+import { Follow, User } from '@/types/APIResponseTypes';
+import { initialUser } from '@/slices/initialState';
 
 const initialState: InitialState = {
-  targetUser: undefined,
+  targetUser: initialUser,
   followData: {
     followId: undefined,
     isFollowing: false,
     isFollower: false,
   },
-  isLoading: false,
+  status: 'idle',
 };
 
-export const userInfo = createSlice({
+const userInfo = createSlice({
   name,
   initialState,
   reducers: {
-    setFollowData: (state, action) => {
+    setFollowData: (state, action: PayloadAction<FollowData>) => {
       state.followData = action.payload;
+    },
+    setIsFollowing: (state, action: PayloadAction<boolean>) => {
+      state.followData.isFollowing = action.payload;
     },
   },
   extraReducers: (builder) => {
-    builder.addCase(follow.fulfilled, (state, action) => {
-      state.followData.followId = action.payload._id;
-      state.followData.isFollowing = true;
-    });
-    builder.addCase(unfollow.fulfilled, (state, action) => {
-      state.followData.followId = action.payload._id;
-      state.followData.isFollowing = false;
-    });
-    builder.addCase(getUser.fulfilled, (state, action) => {
+    builder.addCase(
+      follow.fulfilled,
+      (state, action: PayloadAction<Follow>) => {
+        state.followData.followId = action.payload._id;
+        state.followData.isFollowing = true;
+      },
+    );
+    builder.addCase(
+      unfollow.fulfilled,
+      (state, action: PayloadAction<Follow>) => {
+        state.followData.followId = action.payload._id;
+        state.followData.isFollowing = false;
+      },
+    );
+    builder.addCase(getUser.fulfilled, (state, action: PayloadAction<User>) => {
       state.targetUser = action.payload;
     });
-    builder.addCase(getMyInfo.fulfilled, (state, action) => {
-      state.followData.isFollower = (action.payload as User).followers.some(
-        ({ user }) => user === state.targetUser?._id,
-      );
-      state.followData.isFollowing = (action.payload as User)?.following?.some(
-        ({ user }) => user === state.targetUser?._id,
-      );
-      state.followData.followId = (action.payload as User)?.following?.find(
-        ({ user }) => user === state.targetUser?._id,
-      )?._id;
-    });
+    builder.addCase(
+      getMyInfo.fulfilled,
+      (state, action: PayloadAction<User>) => {
+        state.followData.isFollower = action.payload.followers.some(
+          ({ follower }) => follower === state.targetUser?._id,
+        );
+        state.followData.isFollowing = action.payload?.following?.some(
+          ({ user }) => user === state.targetUser?._id,
+        );
+        state.followData.followId = action.payload.following.find(
+          ({ user }) => user === state.targetUser._id,
+        )?._id;
+      },
+    );
 
     builder.addMatcher(
       isAnyOf(follow.pending, unfollow.pending, getUser.pending),
       (state) => {
-        state.isLoading = true;
+        state.status = 'loading';
       },
     );
     builder.addMatcher(
@@ -63,12 +76,12 @@ export const userInfo = createSlice({
         getUser.rejected,
       ),
       (state) => {
-        state.isLoading = false;
+        state.status = 'idle';
       },
     );
   },
 });
 
-export const { setFollowData } = userInfo.actions;
+export const { setFollowData, setIsFollowing } = userInfo.actions;
 
 export default userInfo.reducer;

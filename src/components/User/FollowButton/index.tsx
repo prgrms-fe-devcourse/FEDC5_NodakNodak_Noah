@@ -1,6 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Button from '@/components/common/Button';
+import useTimeoutFn from '@/hooks/useTimeoutFn';
 import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 import { useSelectedFollowData } from '@/hooks/useSelectedFollowData';
 import { unfollow, follow } from '@/slices/follow/thunk';
@@ -14,55 +15,76 @@ const FollowButton = () => {
 
   const myInfo = useSelectedMyInfo();
   const token = localStorage.getItem('auth-token');
-  const { isFollower, isFollowing, followId } = useSelectedFollowData();
+  const { isFollowing, followId } = useSelectedFollowData();
+  const [isFollowingUi, setIsFollowingUi] = useState(false);
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [debouncedFollow, clear] = useTimeoutFn(() => {
+    handleFollow();
+  }, 1000);
 
   const isMyPage = userId === myInfo?._id;
 
   const textMap = {
     myPage: '프로필 수정',
-    follower: '팔로우',
     following: '언팔로우',
     none: '팔로우',
   };
 
   const buttonText = isMyPage
     ? textMap.myPage
-    : isFollower
-      ? textMap.follower
-      : isFollowing
-        ? textMap.following
-        : textMap.none;
+    : isFollowingUi
+      ? textMap.following
+      : textMap.none;
 
-  const handleSettingOrFollow = () => {
-    if (isMyPage) {
-      navigate('setting', { state: myInfo.image });
-    } else if (isFollower || isFollowing) {
-      if (!myInfo || !token) {
-        alert('로그인이 필요합니다.');
-        return;
-      }
-      if (isFollower) {
-        dispatch(follow({ myId: myInfo._id, userId }));
-      }
-      if (isFollowing && followId) {
-        dispatch(unfollow({ myId: myInfo._id, followId }));
-      }
+  const handleFollow = () => {
+    if (!myInfo || !token) {
+      alert('로그인이 필요합니다.');
+      return;
+    }
+    if (isFollowing && followId) {
+      dispatch(unfollow({ myId: myInfo._id, followId }));
     } else {
-      if (!myInfo || !token) {
-        alert('로그인이 필요합니다.');
-        return;
-      }
       dispatch(follow({ myId: myInfo._id, userId }));
     }
   };
+
+  const handleFollowUi = () => {
+    if (!myInfo || !token) {
+      alert('로그인이 필요합니다.');
+      return;
+    }
+    if (isFollowingUi && followId) {
+      setIsFollowingUi(false);
+    } else {
+      setIsFollowingUi(true);
+    }
+    debouncedFollow();
+  };
+
+  const handleMyPage = () => {
+    if (!myInfo || !token) {
+      alert('로그인이 필요합니다.');
+      return;
+    }
+    navigate('setting', { state: myInfo.image });
+  };
+
+  const handleClick = isMyPage ? handleMyPage : handleFollowUi;
 
   useEffect(() => {
     if (!token) return;
     dispatch(getMyInfo());
   }, [dispatch, token]);
 
+  useEffect(() => {
+    setIsFollowingUi(isFollowing);
+  }, [isFollowing]);
+
+  const styleType = isFollowingUi ? 'danger' : 'primary';
+
   return (
-    <Button styleType='ghost' onClick={handleSettingOrFollow}>
+    <Button styleType={styleType} onClick={handleClick}>
       {buttonText}
     </Button>
   );

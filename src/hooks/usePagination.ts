@@ -1,14 +1,18 @@
 import { useEffect, useState } from 'react';
-import { PostSnippet } from '@/components/Main/PostCard/type';
+import { SearchedPost } from '@/slices/searchedData/type';
+import { Post } from '@/types/APIResponseTypes';
 
-export const usePagination = (postList: PostSnippet[], limit: number = 12) => {
+export const usePagination = (
+  postList: Array<SearchedPost | Post>,
+  limit: number = 12,
+) => {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
     setPage(1);
   }, [postList.length]);
 
-  const paginationedPostList: PostSnippet[] = postList.slice(
+  const paginatedPostList: Array<SearchedPost | Post> = postList.slice(
     (page - 1) * limit,
     page * limit,
   );
@@ -21,7 +25,7 @@ export const usePagination = (postList: PostSnippet[], limit: number = 12) => {
   };
 
   return {
-    paginationedPostList,
+    paginatedPostList,
     totalPage,
     currentPage: page,
     handlePageChange,

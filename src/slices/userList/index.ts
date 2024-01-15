@@ -1,27 +1,33 @@
-import { UserList } from './userListType';
-import { getUserList } from './thunk';
-import { name } from './contants';
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { name } from '@/slices/userList/contants';
+import { getUserList } from '@/slices/userList/thunk';
+import { UserList } from '@/slices/userList/type';
+import { initialUser } from '@/slices/initialState';
+import { User } from '@/types/APIResponseTypes';
 
 const initialState: UserList = {
-  users: [],
-  isLoading: false,
+  users: [initialUser],
+  status: 'idle',
 };
 
-export const userListSlice = createSlice({
+const userListSlice = createSlice({
   name,
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(getUserList.pending, (state) => {
-      state.isLoading = true;
+      state.status = 'loading';
+      state.users = [initialUser];
     });
-    builder.addCase(getUserList.fulfilled, (state, action) => {
-      state.users = action.payload;
-      state.isLoading = false;
-    });
+    builder.addCase(
+      getUserList.fulfilled,
+      (state, action: PayloadAction<User[]>) => {
+        state.users = action.payload;
+        state.status = 'idle';
+      },
+    );
     builder.addCase(getUserList.rejected, (state) => {
-      state.isLoading = false;
+      state.status = 'failed';
     });
   },
 });

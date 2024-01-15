@@ -1,4 +1,4 @@
-import { LogoWithFontSizeProps } from '@/components/layout/LogoWithFontSize/LogoWithFontSizeProps';
+import { LogoWithFontSizeProps } from '@/components/layout/LogoWithFontSize/type';
 import theme from '@/styles/theme';
 
 const LogoWithFontSize = ({ fontSize = '16px' }: LogoWithFontSizeProps) => {

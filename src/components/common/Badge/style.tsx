@@ -17,7 +17,7 @@ export const Super = styled.sup`
   align-items: center;
   padding: 4px 8px;
   font-size: 8px;
-  color: white;
+  color: ${theme.colors.white};
   border-radius: 20px;
   transform: translate(50%, -50%);
 `;

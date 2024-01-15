@@ -1,13 +1,13 @@
 import styled from 'styled-components';
+import theme from '@/styles/theme';
 
 export const AvatarWrapper = styled.div`
   position: relative;
   display: inline-block;
-  border: 1px solid #dadada;
+  border: 1px solid ${theme.colors.grayscale[200]};
   border-radius: 50%;
-  background-color: #eee;
+  aspect-ratio: 1/1;
   overflow: hidden;
-  cursor: pointer;
   > img {
     transition: opacity 0.2s ease-out;
   }

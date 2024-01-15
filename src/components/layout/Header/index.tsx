@@ -2,7 +2,6 @@ import { ChangeEvent, RefObject, useState, useEffect, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Text, Card, Input, Avatar, Button } from '@/components/common';
-import HeaderProps from '@/components/layout/Header/HeaderProps';
 import LogoWithFontSize from '@/components/layout/LogoWithFontSize';
 import NotificationCardBell from '@/components/layout/Header/NotificationCardBell';
 import {
@@ -11,32 +10,42 @@ import {
 } from '@/components/common/Dropdown/style';
 import useClickAway from '@/hooks/useClickAway';
 import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
+import { useSelectedChannels } from '@/hooks/useSelectedChannel';
 
 import { useDispatch } from '@/store';
-import { setChannel } from '@/slices/channel';
+import { getChannel, setChannel } from '@/slices/channel';
 import { getNotificationArray } from '@/slices/notification/thunk';
 import {
   StyledHeaderWrapper,
   ChannelWrapper,
   LogoWrapper,
-  SearchIcon,
   FormContainer,
   AuthUiWrapper,
   NavLinkWrapper,
 } from '@/components/layout/Header/style';
+import DarkModeToggle from '@/components/layout/Header/DarkModeToggle';
 import axiosInstance from '@/utils/customAxios';
+import theme from '@/styles/theme';
+import SearchIcon from '@/assets/SearchIcon';
 
-const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
+const Header = () => {
   const [focus, setFocus] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [showMenu, setShowMenu] = useState(false);
-  const myInfo = useSelectedMyInfo();
-  const menu = ['마이페이지', '로그아웃'];
+
+  const channels = useSelectedChannels();
+  const { role: myRole, image: myImage, _id: myId } = useSelectedMyInfo();
+  const isAuth = !!localStorage.getItem('auth-token');
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const token = localStorage.getItem('auth-token');
-
+  const menu = [
+    '마이페이지',
+    '비밀번호 변경',
+    myRole === 'Regular' ? '문의하기' : '문의함',
+    '로그아웃',
+  ];
   const handleSearch = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     navigate(`/home?search=${inputValue}`);
@@ -57,14 +66,40 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
   };
 
   const handleMenuItemClick = async (item: string) => {
-    if (item === '마이페이지') {
-      setShowMenu(false);
-      navigate(`/user/${myInfo?._id}`);
-    } else {
-      localStorage.removeItem('auth-token');
-      const { data } = await axiosInstance.post('/logout');
-      alert(data);
-      location.reload();
+    if (!myId) return;
+    switch (item) {
+      case '마이페이지': {
+        setShowMenu(false);
+        navigate(`/user/${myId}`);
+        break;
+      }
+      case '로그아웃': {
+        const isLogout = window.confirm('로그아웃 하시겠습니까?');
+        if (!isLogout) return;
+        localStorage.removeItem('auth-token');
+        await axiosInstance.post('/logout');
+        location.reload();
+        break;
+      }
+      case '문의하기': {
+        setShowMenu(false);
+        navigate('/request');
+        break;
+      }
+      case '문의함': {
+        setShowMenu(false);
+        navigate('/admin');
+        break;
+      }
+      case '비밀번호 변경': {
+        setShowMenu(false);
+        navigate(`/user/${myId}/setting/password`, {
+          state: myImage,
+        });
+        break;
+      }
+      default:
+        break;
     }
   };
 
@@ -91,11 +126,19 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
     dispatch(getNotificationArray());
   }, [dispatch, token]);
 
+  useEffect(() => {
+    dispatch(getChannel());
+  }, [dispatch]);
+
   return (
     <Card
       width='100vw'
       height='80px'
-      style={{ display: 'flex', justifyContent: 'center' }}>
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        backgroundColor: 'transparent',
+      }}>
       <StyledHeaderWrapper>
         <LogoWrapper onClick={() => navigate('/home')}>
           <LogoWithFontSize fontSize='24px' />
@@ -111,7 +154,7 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
                 tagType='span'
                 fontType='h4'
                 colorType='primary'
-                colorNumber='400'>
+                colorNumber={theme.isDark ? '200' : '500'}>
                 {name}
               </Text>
             </NavLinkWrapper>
@@ -122,28 +165,30 @@ const Header = ({ channels, isAuth, userImage }: HeaderProps) => {
             ref={inputRef as RefObject<HTMLInputElement>}
             height={'32px'}
             width={focus ? '160px' : '100px'}
-            bordertype={focus ? 'focus' : 'filled'}
-            underline={true}
-            placeholder={focus ? '' : '     Find'}
+            underline
+            placeholder='Find'
             onChange={(e) => setInputValue(e.target.value)}
             onFocus={handleFocus}
           />
-          {!focus && (
-            <SearchIcon className='material-symbols-outlined'>
-              search
-            </SearchIcon>
-          )}
+          <Button
+            type='submit'
+            styleType='ghost'
+            size='mini'
+            style={{ padding: 0 }}>
+            <SearchIcon />
+          </Button>
         </FormContainer>
+        <DarkModeToggle />
         {isAuth ? (
           <AuthUiWrapper>
             <NotificationCardBell />
-
             <Avatar
               size='small'
-              src={userImage}
+              src={myImage}
               onClick={handleAvatarClick}
               alt='유저네임'
             />
+
             {showMenu && (
               <DropdownContent
                 ref={menuRef as RefObject<HTMLUListElement>}

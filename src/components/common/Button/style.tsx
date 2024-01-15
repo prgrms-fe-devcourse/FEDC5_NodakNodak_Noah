@@ -8,7 +8,6 @@ export const ButtonSize = {
     height: 36px;
     justify-content: center;
     align-items: center;
-    gap: 4px;
     flex-shrink: 0;
   `,
   small: css`
@@ -16,14 +15,12 @@ export const ButtonSize = {
     width: 80px;
     justify-content: center;
     align-items: center;
-    gap: 10px;
   `,
   regular: css`
     display: flex;
     width: 120px;
     justify-content: center;
     align-items: center;
-    gap: 10px;
   `,
   wide: css`
     display: flex;
@@ -31,15 +28,18 @@ export const ButtonSize = {
     min-width: 200px;
     justify-content: center;
     align-items: center;
-    gap: 10px;
   `,
 };
 
 export const ButtonTypeEvent = {
   primary: {
     enabled: css`
-      background: ${theme.colors.primary[200]};
-      color: ${theme.colors.grayscale[400]};
+      background: ${theme.isDark
+        ? theme.colors.primary[400]
+        : theme.colors.primary[200]};
+      color: ${theme.isDark
+        ? theme.colors.primary[100]
+        : theme.colors.grayscale[400]};
     `,
     hover: css`
       background: ${theme.colors.primary[300]};
@@ -61,9 +61,14 @@ export const ButtonTypeEvent = {
   },
   ghost: {
     enabled: css`
-      border: 1px solid ${theme.colors.primary[200]};
-      background: ${theme.colors.white};
-      color: ${theme.colors.primary[400]};
+      border: 1px solid
+        ${theme.isDark ? theme.colors.primary[100] : theme.colors.primary[200]};
+      background: ${theme.isDark
+        ? theme.colors.grayscale[500]
+        : theme.colors.white};
+      color: ${theme.isDark
+        ? theme.colors.primary[100]
+        : theme.colors.primary[400]};
     `,
     hover: css`
       border: 1px solid ${theme.colors.primary[300]};
@@ -83,28 +88,6 @@ export const ButtonTypeEvent = {
     `,
     disabled: css`
       border: 1px solid ${theme.colors.grayscale[300]};
-      background: ${theme.colors.white};
-      color: ${theme.colors.grayscale[300]};
-    `,
-  },
-  text: {
-    enabled: css`
-      color: ${theme.colors.info[300]};
-    `,
-    hover: css`
-      background: ${theme.colors.info[100]};
-      color: ${theme.colors.info[300]};
-    `,
-    click: css`
-      background: ${theme.colors.info[100]};
-      color: ${theme.colors.info[300]};
-    `,
-    focus: css`
-      align-self: stretch;
-      background: ${theme.colors.white};
-      color: ${theme.colors.info[300]};
-    `,
-    disabled: css`
       background: ${theme.colors.white};
       color: ${theme.colors.grayscale[300]};
     `,
@@ -151,6 +134,7 @@ export const ButtonLayout = styled.button<ButtonLayoutProps>`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  padding: 13px 16px;
   cursor: ${({ $disabled }) => ($disabled ? 'not-allowed' : 'pointer')};
   &:hover {
     opacity: ${({ $disabled }) => ($disabled ? 1 : 0.8)};
@@ -159,8 +143,6 @@ export const ButtonLayout = styled.button<ButtonLayoutProps>`
   ${({ $size }) => $size && ButtonSize[$size]};
   ${({ $styleType, $event }) =>
     $event && $styleType && ButtonTypeEvent[$styleType][$event]};
-  padding: ${({ $isArrow }) =>
-    $isArrow ? '13px 12px 13px 16px' : '13px 16px'};
 `;
 
 const ButtonWrapperBorderColor = {
@@ -169,9 +151,6 @@ const ButtonWrapperBorderColor = {
   `,
   ghost: css`
     border: 3px solid ${theme.colors.primary[100]};
-  `,
-  text: css`
-    border: 3px solid ${theme.colors.info[100]};
   `,
   danger: css`
     border: 3px solid ${theme.colors.error[100]};
@@ -182,6 +161,7 @@ const ButtonWrapperBackgroundSize = {
   mini: css`
     width: 36px;
     height: 36px;
+    padding: 0px;
   `,
   small: css`
     width: 80px;
@@ -195,7 +175,7 @@ const ButtonWrapperBackgroundSize = {
 };
 
 interface ButtonWrapperProps {
-  $styleType?: 'primary' | 'ghost' | 'text' | 'danger';
+  $styleType?: 'primary' | 'ghost' | 'danger';
   $size?: 'mini' | 'small' | 'regular' | 'wide';
 }
 

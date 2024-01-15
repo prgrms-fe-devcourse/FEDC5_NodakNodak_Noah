@@ -1,68 +1,113 @@
-// import useInterval from '@/hooks/useInterval';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import Bell from '@/assets/Bell';
-import { Badge, Button, ScrollBar } from '@/components/common';
-import {
-  NotificationContainer,
-  NotificationHeader,
-  NotificationList,
-} from '@/components/layout/Header/NotificationCardBell/style';
+import BellIcon from '@/assets/BellIcon';
+import theme from '@/styles/theme';
 import { useDispatch } from '@/store';
 import {
   seeNotifications,
   getNotificationArray,
 } from '@/slices/notification/thunk';
+import { getPostListByMyId } from '@/slices/postList/thunks';
+import { notificationType } from '@/slices/notification';
+import useInterval from '@/hooks/useInterval';
 import useClickAway from '@/hooks/useClickAway';
-import { useSelectedUserList } from '@/hooks/useSelectedUserList';
+import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 import { useSelectedNotifications } from '@/hooks/useSelectedNotifications';
-import { Comment } from '@/types/APIResponseTypes';
-
-interface NotificationData {
-  comment: Comment;
-  follower: string;
-}
+import { useSelectedPostListByMyId } from '@/hooks/useSelectedPostListById';
+import {
+  NotificationContainer,
+  NotificationList,
+  NotificationHeader,
+} from '@/components/layout/Header/NotificationCardBell/style';
+import UserSnippet from '@/components/Main/UserList/UserSnippet';
+import { Badge, ScrollBar, Text, Button } from '@/components/common';
+import UserGroup from '@/components/Main/UserList/UserGroup';
+import { NotificationData } from '@/components/layout/Header/NotificationCardBell/type';
 
 const NotificationCardBell = () => {
   const token = localStorage.getItem('auth-token');
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [toggleNotification, setToggleNotification] = useState(false);
   const notifications = useSelectedNotifications();
-  const userList = useSelectedUserList();
+  const postListByMyId = useSelectedPostListByMyId();
+  const myInfo = useSelectedMyInfo();
   const count = notifications.length;
 
   const notificationsArray = notifications.map(
-    ({ _id, comment, follow, author }) => {
-      const notificationData = {
-        comment,
-        follower:
-          userList.find((user) => user._id === follow?.follower)?.fullName ||
-          '',
-      } as NotificationData;
+    ({ _id, follow, author, post, type }) => {
+      const isFollowing =
+        myInfo.following.some(({ user }) => user === author._id) &&
+        myInfo.followers.some(({ follower }) => follower === author._id);
 
-      if (comment && 'comment' in notificationData.comment) {
-        const isVote =
-          JSON.parse(notificationData.comment.comment).type === 'vote';
-        const text = isVote
-          ? `${author.fullName}님이 투표에 참여했습니다.`
-          : `${author.fullName}님이 댓글을 달았습니다.`;
+      const notificationData: NotificationData = {
+        _id,
+        text: '',
+        author,
+        isFollowing,
+        handleClick: undefined,
+      };
 
-        return { _id, text };
-      } else if (notificationData.follower) {
-        const text = `${notificationData.follower}님이 팔로우했습니다.`;
+      const follower = follow ? author.fullName : '';
+      const postTitleJsonString = postListByMyId.find(
+        (postByUser) => postByUser._id === post,
+      )?.title;
 
-        return { _id, text };
-      } else {
-        const text = `좋아요가 눌렸습니다.`;
+      const postTitle = postTitleJsonString
+        ? (JSON.parse(postTitleJsonString).title as string)
+        : '';
 
-        return { _id, text };
+      const channelId = postListByMyId.find(
+        (postByUser) => postByUser._id === post,
+      )?.channel._id;
+
+      const ellipsisedTitle = (() => {
+        const maxLength = 15;
+        if (postTitle.length > maxLength) {
+          return `${postTitle.slice(0, maxLength)} ...`;
+        } else {
+          return postTitle;
+        }
+      })();
+
+      switch (type) {
+        case notificationType.comment:
+          notificationData.text = `${author.fullName} 님이 ${ellipsisedTitle} 글에 댓글을 달았습니다.`;
+          notificationData.handleClick = channelId
+            ? () => navigate(`/detail/${channelId}/${post}`)
+            : undefined;
+          return notificationData;
+        case notificationType.vote:
+          notificationData.text = `${author.fullName} 님이 ${ellipsisedTitle} 글에 투표하였습니다.`;
+          notificationData.handleClick = channelId
+            ? () => navigate(`/detail/${channelId}/${post}`)
+            : undefined;
+          return notificationData;
+        case notificationType.follow:
+          notificationData.text = `${follower} 님이 팔로우했습니다.`;
+          return notificationData;
+        case notificationType.like:
+          notificationData.text = `${author.fullName} 님이 ${ellipsisedTitle} 글에 좋아요 를 남겼습니다.`;
+          notificationData.handleClick = channelId
+            ? () => navigate(`/detail/${channelId}/${post}`)
+            : undefined;
+          return notificationData;
+        case notificationType.message:
+          notificationData.text = `${author.fullName} 님이 요청을 보냈습니다.`;
+          return notificationData;
+        case notificationType.notdefined:
+          notificationData.text = `${author.fullName} 님이 언팔로우 했습니다.`;
+          return notificationData;
+        default:
+          notificationData.text = '알수없는 알림입니다.';
+          return notificationData;
       }
     },
   );
 
-  const ref = useClickAway((e: MouseEvent | TouchEvent) => {
-    const { tagName } = e.target as HTMLElement;
-    if (tagName === 'path' || tagName === 'svg') return;
+  const ref = useClickAway(() => {
     setToggleNotification(false);
   });
 
@@ -75,35 +120,62 @@ const NotificationCardBell = () => {
 
   useEffect(() => {
     if (!token) return;
+    dispatch(getPostListByMyId());
     dispatch(getNotificationArray());
   }, [dispatch, token]);
 
-  // polling 방식 , 너무 많은 요청이 갈까봐 주석처리
-  // useInterval(() => {
-  //   if (!token) return;
-  //   dispatch(getNotificationArray());
-  // }, 10000);
+  useInterval(() => {
+    if (!token) return;
+    dispatch(getNotificationArray());
+  }, 10000);
 
   return (
     <Badge count={count}>
-      <Bell onToggleCard={handleToggleCard} />
+      <BellIcon onToggleCard={handleToggleCard} />
       {toggleNotification && (
         <NotificationContainer ref={ref}>
           <ScrollBar>
             <NotificationHeader>
-              알림
+              <Text tagType='span' fontType='body3'>
+                {`알림 - ${notificationsArray.length}`}
+              </Text>
               <Button
                 type='button'
                 size='small'
                 style={{ padding: '8px 4px' }}
+                styleType='danger'
                 onClick={handleSeeNotifications}>
-                모두 읽음
+                알림 삭제
               </Button>
             </NotificationHeader>
             <NotificationList>
-              {notificationsArray.map(({ _id, text }) => (
-                <li key={_id}>{text}</li>
-              ))}
+              <UserGroup>
+                {notificationsArray.length === 0 && (
+                  <Text tagType='span' fontType='h3'>
+                    {'알림이 없습니다.'}
+                  </Text>
+                )}
+                {notificationsArray.map(
+                  ({ _id, text, author, isFollowing, handleClick }) => {
+                    return (
+                      <UserSnippet
+                        key={_id}
+                        userId={author._id}
+                        image={author.image}
+                        isOnline={author.isOnline}
+                        isFollowing={isFollowing}
+                        handleClick={handleClick}
+                        text={text}
+                        style={{
+                          color: theme.isDark
+                            ? theme.colors.primary[100]
+                            : theme.colors.primary[500],
+                        }}
+                      />
+                    );
+                  },
+                )}
+              </UserGroup>
             </NotificationList>
           </ScrollBar>
         </NotificationContainer>
