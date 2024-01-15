@@ -24,8 +24,7 @@ const LikeButton = () => {
   const { postId } = useParams();
   const dispatch = useDispatch();
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [debouncedHandleLikeToggle, clearUnfollow] = useTimeoutFn(() => {
+  const debouncedHandleLikeToggle = useTimeoutFn(() => {
     handleLikeToggle();
   }, 1000);
 
