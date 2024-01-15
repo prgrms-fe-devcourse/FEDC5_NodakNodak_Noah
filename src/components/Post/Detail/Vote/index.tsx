@@ -131,7 +131,7 @@ const PostVote = () => {
                   color: `${
                     !theme.isDark
                       ? theme.colors.black
-                      : vote === myVote
+                      : vote === myVote || vote === voteContent
                         ? theme.colors.black
                         : theme.colors.white
                   }`,
