@@ -31,6 +31,7 @@ const ImageUploader = ({
         } = await axiosInstance.post(`/${apiParam}`, formData);
         setImage(image);
         setLoading(false);
+        location.reload();
       } else {
         setImage(URL.createObjectURL(imageFile));
         setLoading(false);
