@@ -18,8 +18,7 @@ const FollowButton = () => {
   const { isFollowing, followId } = useSelectedFollowData();
   const [isFollowingUi, setIsFollowingUi] = useState(false);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [debouncedFollow, clear] = useTimeoutFn(() => {
+  const debouncedFollow = useTimeoutFn(() => {
     handleFollow();
   }, 1000);
 
