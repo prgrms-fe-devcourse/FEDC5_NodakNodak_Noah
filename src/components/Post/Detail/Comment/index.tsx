@@ -21,6 +21,8 @@ import { useSelectedComment } from '@/hooks/useSelectedComment';
 import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
 import axiosInstance from '@/utils/customAxios';
 
+const MAX_COMMENT_LENGTH = 120;
+
 const PostComment = () => {
   const postDetailComment = useSelectedComment();
   const { postId } = useParams();
@@ -42,7 +44,12 @@ const PostComment = () => {
   const handleCommentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const token = localStorage.getItem('auth-token');
-    if (comment.trim().length > 120 || !comment.trim() || !postId || !token) {
+    if (
+      comment.trim().length > MAX_COMMENT_LENGTH ||
+      !comment.trim() ||
+      !postId ||
+      !token
+    ) {
       setWarn(true);
       return;
     }
@@ -117,8 +124,10 @@ const PostComment = () => {
               onChange={handleInputChange}
             />
             {warn ? (
-              comment.trim().length > 120 ? (
-                <Warning>댓글은 120자 이하여야 합니다.</Warning>
+              comment.trim().length > MAX_COMMENT_LENGTH ? (
+                <Warning>
+                  댓글은 {MAX_COMMENT_LENGTH}자 이하여야 합니다.
+                </Warning>
               ) : (
                 <Warning>댓글을 입력해주세요.</Warning>
               )
