@@ -29,7 +29,7 @@ const Pagination = ({ page, totalPage, onPageChange }: PaginationProps) => {
         styleType='ghost'
         onClick={handlePageChange(page - 1)}
         style={{ padding: '0' }}>
-        <RightArrowIcon flip={true} />
+        <RightArrowIcon flip />
       </Button>
       <PageNumberWrapper>
         {pageArray.map((index) => (

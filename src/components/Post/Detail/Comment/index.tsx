@@ -5,6 +5,7 @@ import {
   FlexColumn,
   CommentBoundaryLine,
   CommentContainer,
+  FormContainer,
 } from '@/components/Post/Detail/Comment/style';
 import { useDispatch } from '@/store';
 import { createNotification } from '@/slices/notification/thunk';
@@ -81,12 +82,7 @@ const PostComment = () => {
             : theme.colors.grayscale[200]
         }`,
       }}>
-      <CommentContainer
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-        }}>
+      <CommentContainer>
         {postDetailComment.map((comment) => {
           const {
             author: { _id: authorId, fullName, image },
@@ -107,15 +103,7 @@ const PostComment = () => {
             />
           );
         })}
-        <form
-          className='userInput'
-          style={{
-            display: 'flex',
-            marginTop: '16px',
-            width: '712px',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-          }}>
+        <FormContainer>
           <FlexColumn>
             <Input
               ref={inputRef as React.RefObject<HTMLInputElement>}
@@ -125,7 +113,7 @@ const PostComment = () => {
               fontType='body2'
               width='538px'
               height='48px'
-              underline={true}
+              underline
               onChange={handleInputChange}
             />
             {warn ? <Warning>댓글을 입력해주세요.</Warning> : ''}
@@ -140,7 +128,7 @@ const PostComment = () => {
             }}>
             제출
           </Button>
-        </form>
+        </FormContainer>
       </CommentContainer>
     </CommentBoundaryLine>
   );

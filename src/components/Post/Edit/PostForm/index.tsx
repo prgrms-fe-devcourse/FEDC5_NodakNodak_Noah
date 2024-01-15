@@ -78,7 +78,7 @@ const PostForm = ({ channelId }: { channelId: string | undefined }) => {
           voteArray: values.voteArray,
         }}
         setFieldValue={setFieldValue}
-        isEditable={true}
+        isEditable
       />
       <ButtonWrapper>
         <Button styleType='primary' size='small' type='submit' event='enabled'>

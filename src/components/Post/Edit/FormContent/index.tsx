@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { Input, Dropdown, Image, Button } from '@/components/common';
+import { Input, Dropdown, Button } from '@/components/common';
 import ImageUploader from '@/components/common/Button/ImageUploadButton';
 import { FormContentProps } from '@/components/Post/Edit/FormContent/type';
 import {
@@ -41,13 +41,13 @@ const FormContent = ({
     <FormArea>
       <HeaderWrapper>
         <Input
-          required={true}
+          required
           placeholder={PLACEHOLDER.TITLE}
           name='title'
           value={values.title.trimStart()}
           onChange={handleChange}
           fontType='h1'
-          underline={true}
+          underline
           wrapperWidth='fit-content'
           style={{
             width: FORM_SIZE.WIDTH,
@@ -80,7 +80,7 @@ const FormContent = ({
       </UploadButtonsWrapper>
 
       {image && (
-        <Image
+        <img
           src={image}
           style={{ objectFit: 'contain', maxHeight: '500px', margin: '10px' }}
         />

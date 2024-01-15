@@ -6,7 +6,7 @@ import {
   ContentBox,
 } from '@/components/Main/PostList/PostCard/style';
 import { UserSnippetBox } from '@/components/Main/style';
-import { Button, Card, Text, Image, Avatar } from '@/components/common';
+import { Button, Card, Text, Avatar } from '@/components/common';
 import { PostCardProps } from '@/components/Main/PostList/PostCard/type';
 import {
   useSelectedChannel,
@@ -61,7 +61,7 @@ const PostCard = ({
   return (
     <Card width='280px' height='280px' shadowType='medium'>
       <PostSnippetBox>
-        <Image
+        <img
           width='280px'
           height='146px'
           src={image ? image : '/DefaultImage.jpg'}

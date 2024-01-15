@@ -1,4 +1,12 @@
-import React, { useEffect, useRef, PropsWithChildren, useState } from 'react';
+import {
+  useEffect,
+  useRef,
+  PropsWithChildren,
+  useState,
+  ReactElement,
+  Children,
+  Fragment,
+} from 'react';
 import useHover from '@/hooks/useHover';
 import TooltipContainer, {
   TooltipContent,
@@ -40,7 +48,7 @@ const Tooltip = ({
     }
   }, [type, isHovered, ref]);
 
-  const childElement = React.Children.only(children) as React.ReactElement;
+  const childElement = Children.only(children) as ReactElement;
 
   return (
     <TooltipContainer>
@@ -56,10 +64,10 @@ const Tooltip = ({
             }
           }}>
           {message.split(',').map((item, index) => (
-            <React.Fragment key={index}>
+            <Fragment key={index}>
               {item}
               <br />
-            </React.Fragment>
+            </Fragment>
           ))}
           {hasArrow && <TooltipArrow direction={direction} />}
         </TooltipContent>

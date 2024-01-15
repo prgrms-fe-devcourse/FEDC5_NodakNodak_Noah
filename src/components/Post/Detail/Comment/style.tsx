@@ -25,3 +25,11 @@ export const CommentContainer = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+
+export const FormContainer = styled.form`
+  display: flex;
+  margin-top: 16px;
+  width: 712px;
+  align-items: center;
+  justify-content: space-between;
+`;

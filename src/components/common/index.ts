@@ -3,7 +3,6 @@ import Badge from '@/components/common/Badge';
 import Button from '@/components/common/Button';
 import Card from '@/components/common/Card';
 import Dropdown from '@/components/common/Dropdown';
-import Image from '@/components/common/Image';
 import Input from '@/components/common/Input';
 import OnLineBadge from '@/components/common/OnlineBadge';
 import ScrollBar from '@/components/common/ScrollBar';
@@ -15,7 +14,6 @@ export {
   Button,
   Card,
   Dropdown,
-  Image,
   Input,
   OnLineBadge,
   ScrollBar,
