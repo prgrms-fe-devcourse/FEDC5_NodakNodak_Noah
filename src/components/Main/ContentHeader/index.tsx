@@ -11,12 +11,6 @@ const ContentHeader = () => {
 
   const handleWriteClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
-    const token = localStorage.getItem('auth-token');
-
-    if (!token) {
-      alert('로그인이 필요한 서비스 입니다.');
-      return;
-    }
     navigate(`/write/${channelId ? channelId : 'unselected'}`);
   };
 
