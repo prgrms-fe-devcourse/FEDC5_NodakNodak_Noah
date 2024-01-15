@@ -7,7 +7,6 @@ import {
 import { InitialState, NotificationWithType } from '@/slices/notification/type';
 import { name } from '@/slices/notification/constants';
 import { Notification } from '@/types/APIResponseTypes';
-import { initialNotification } from '@/slices/initialState';
 
 export const notificationType = {
   follow: 'FOLLOW',
@@ -19,7 +18,7 @@ export const notificationType = {
 };
 
 const initialState: InitialState = {
-  notifications: [initialNotification],
+  notifications: [],
   status: 'idle',
 };
 const notificationSlice = createSlice({
