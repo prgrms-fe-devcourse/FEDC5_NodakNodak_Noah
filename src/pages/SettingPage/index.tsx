@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Outlet, useNavigate, useParams } from 'react-router-dom';
 
 import { Container, CardWrapper } from '@/pages/SettingPage/style';
 import { getUser } from '@/slices/user';
@@ -12,7 +12,6 @@ const Setting = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { userId } = useParams();
-  const { state } = useLocation();
 
   useEffect(() => {
     if (userId) {
@@ -32,7 +31,7 @@ const Setting = () => {
   return (
     <Container>
       <CardWrapper>
-        <Avatar src={state} size='large' alt={fullName} />
+        <Avatar src={currentUser.image} size='large' alt={fullName} />
         <Outlet />
       </CardWrapper>
     </Container>

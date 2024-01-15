@@ -11,6 +11,7 @@ const PasswordInput = ({
   underline = false,
   height,
   width,
+  eyePosition,
   ...props
 }: InputProps) => {
   const [canSee, setCanSee] = useState(false);
@@ -28,7 +29,7 @@ const PasswordInput = ({
         type={canSee ? 'text' : 'password'}
         {...props}
       />
-      <Eye onClick={handleEye}>
+      <Eye onClick={handleEye} style={{ right: eyePosition }}>
         {canSee ? <HideEyesIcon /> : <ViewEyesIcon />}
       </Eye>
     </Wrapper>
