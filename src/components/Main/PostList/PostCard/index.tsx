@@ -62,9 +62,10 @@ const PostCard = ({
         <img
           width='280px'
           height='146px'
-          src={image ? image : '/DefaultImage.jpg'}
+          src={image ? image : '/DefaultImage.webp'}
           onClick={handleDetailClick}
           style={{ cursor: 'pointer' }}
+          alt={postId}
         />
         <ContentBox>
           <Text
