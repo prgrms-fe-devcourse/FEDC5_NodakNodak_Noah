@@ -40,8 +40,8 @@ const VoteBox = ({ values, setFieldValue, isEditable }: FormProps) => {
           <Content>
             <Input
               placeholder={PLACEHOLDER.VOTE_SUBJECT}
-              required={true}
-              underline={true}
+              required
+              underline
               fontType='h3'
               value={values.voteTitle}
               onChange={handleTitleChange}
@@ -61,7 +61,7 @@ const VoteBox = ({ values, setFieldValue, isEditable }: FormProps) => {
             {values.voteArray.map((candidate, index) => (
               <InputContainer key={index}>
                 <Input
-                  required={true}
+                  required
                   placeholder={`투표 후보${index + 1}`}
                   value={candidate}
                   onChange={(e) => handleCandidateChange(index, e.target.value)}

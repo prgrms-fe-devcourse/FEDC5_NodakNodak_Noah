@@ -38,17 +38,16 @@ const GrassTable = () => {
 
   return (
     <GrassWrapper>
-      {grass &&
-        grass.map((data, i) => (
-          <Tooltip
-            key={i}
-            direction='bottom'
-            message={`${data.date}, 게시물: ${data.postNumber}`}
-            hasArrow={true}
-            type='hover'>
-            <GrassItem $lightness={data.lightness} />
-          </Tooltip>
-        ))}
+      {grass.map(({ date, postNumber, lightness }) => (
+        <Tooltip
+          key={date}
+          direction='bottom'
+          message={`${date}, 게시물: ${postNumber}`}
+          hasArrow
+          type='hover'>
+          <GrassItem $lightness={lightness} />
+        </Tooltip>
+      ))}
     </GrassWrapper>
   );
 };

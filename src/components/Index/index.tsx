@@ -7,9 +7,9 @@ const Swipe = () => {
     <StyledSwiper
       slidesPerView={1}
       spaceBetween={30}
-      loop={true}
+      loop
       pagination={{ clickable: true }}
-      navigation={true}
+      navigation
       modules={[Pagination, Navigation]}>
       {[0, 1, 2, 3, 4].map((index) => (
         <StyledSwiperSlide key={index}>

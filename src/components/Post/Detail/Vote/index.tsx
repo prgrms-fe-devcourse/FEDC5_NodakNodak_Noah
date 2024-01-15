@@ -28,21 +28,18 @@ const PostVote = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [voteContent, setVoteContent] = useState('');
-  const [reVote, setRevote] = useState(false);
-  const [myVote, setMyvote] = useState('');
+  const [reVote, setReVote] = useState(false);
+  const [myVote, setMyVote] = useState('');
 
   useEffect(() => {
     postDetailVote.some((vote) => vote.author._id === myInfo?._id)
-      ? setRevote(true)
-      : setRevote(false);
-  }, [myInfo, postDetailVote]);
-
-  useEffect(() => {
+      ? setReVote(true)
+      : setReVote(false);
     const myVote = postDetailVote.filter(
       (vote) => vote.author._id === myInfo?._id,
     )[0]?.comment;
     if (!myVote) return;
-    setMyvote(JSON.parse(myVote).content);
+    setMyVote(JSON.parse(myVote).content);
   }, [myInfo, postDetailVote]);
 
   if (!postDetailContent.title) return null;
@@ -117,7 +114,7 @@ const PostVote = () => {
                 key={index}
                 value={vote}
                 bordertype='enabled'
-                readOnly={true}
+                readOnly
                 justifyContent='center'
                 style={{
                   marginBottom: '1.5rem',
@@ -150,7 +147,7 @@ const PostVote = () => {
               event={voteContent === '' || reVote ? 'disabled' : 'enabled'}
               styleType='primary'
               size='wide'
-              disabled={voteContent === '' || reVote ? true : false}
+              disabled={voteContent === '' || reVote}
               onClick={handleVote}>
               투표 하기
             </Button>

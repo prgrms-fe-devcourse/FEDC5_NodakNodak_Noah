@@ -108,7 +108,7 @@ const UserInfo = () => {
       </ButtonWrapper>
       <InputWrapper>
         <Input
-          underline={true}
+          underline
           placeholder='닉네임'
           width='320px'
           fontType='h1'
@@ -119,7 +119,7 @@ const UserInfo = () => {
         />
         {warn[0] && <Warning>{warnText}</Warning>}
         <Input
-          underline={true}
+          underline
           placeholder='한줄 소개'
           width='320px'
           fontType='body1'

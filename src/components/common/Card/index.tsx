@@ -17,9 +17,8 @@ const Card = ({
       ? `0px 4px 6px 0px rgba(${theme.colors.grayscale[200]}, 0.10),0px 2px 4px 0px rgba(${theme.colors.grayscale[200]}, 0.10)`
       : `0px 4px 6px 0px rgba(${theme.colors.black}, 0.10),0px 2px 4px 0px rgba(${theme.colors.black}, 0.10)`,
   };
-  const getBackgroundColor = () => {
-    return theme.isDark ? theme.colors.grayscale[400] : theme.colors.white;
-  };
+  const getBackgroundColor = () =>
+    theme.isDark ? theme.colors.grayscale[400] : theme.colors.white;
 
   const CardStyle = {
     width,

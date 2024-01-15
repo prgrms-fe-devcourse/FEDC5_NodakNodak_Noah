@@ -5,7 +5,7 @@ import {
   PostContentAuthorWrapper,
   PostContentTitleContainer,
 } from '@/components/Post/Detail/Content/style';
-import { Text, Button, Avatar, Image } from '@/components/common';
+import { Text, Button, Avatar } from '@/components/common';
 import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
 import axiosInstance from '@/utils/customAxios';
@@ -106,7 +106,7 @@ const PostContent = () => {
         {content}
       </Text>
       {postDetailContent.image ? (
-        <Image
+        <img
           width='32rem'
           height='18rem'
           style={{ marginTop: '1.25rem' }}

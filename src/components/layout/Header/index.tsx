@@ -165,7 +165,7 @@ const Header = () => {
             ref={inputRef as RefObject<HTMLInputElement>}
             height={'32px'}
             width={focus ? '160px' : '100px'}
-            underline={true}
+            underline
             placeholder='Find'
             onChange={(e) => setInputValue(e.target.value)}
             onFocus={handleFocus}

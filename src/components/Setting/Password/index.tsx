@@ -94,7 +94,7 @@ const Password = () => {
       </ButtonWrapper>
       <InputWrapper>
         <PasswordInput
-          underline={true}
+          underline
           placeholder='변경 할 비밀번호'
           width='360px'
           height='48px'
@@ -107,7 +107,7 @@ const Password = () => {
         />
         {warn[0] && !warn[1] && <Warning>{warnText}</Warning>}
         <PasswordInput
-          underline={true}
+          underline
           placeholder='비밀번호 확인'
           width='360px'
           height='48px'

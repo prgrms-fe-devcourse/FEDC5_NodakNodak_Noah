@@ -81,7 +81,7 @@ const UserInfo = () => {
             message={getFullNames(
               followers.map((follower) => follower.follower),
             )}
-            hasArrow={true}
+            hasArrow
             type='hover'>
             <a>
               <Button size='regular' styleType='ghost'>
@@ -92,7 +92,7 @@ const UserInfo = () => {
           <Tooltip
             direction='bottom'
             message={getFullNames(following.map((followee) => followee.user))}
-            hasArrow={true}
+            hasArrow
             type='hover'>
             <a>
               <Button size='regular' styleType='ghost'>

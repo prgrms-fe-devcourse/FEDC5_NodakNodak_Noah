@@ -39,7 +39,7 @@ const BarChart = ({
             key={index}
             value={vote}
             bordertype='enabled'
-            readOnly={true}
+            readOnly
             style={{
               width: '466px',
               height: '48px',
@@ -51,7 +51,7 @@ const BarChart = ({
                 votedArray.length ? (count / votedArray.length) * 100 : 0
               }%, ${theme.colors.primary[100]} 0%)`,
             }}
-            disabled={true}
+            disabled
           />
           <Text
             tagType='span'
