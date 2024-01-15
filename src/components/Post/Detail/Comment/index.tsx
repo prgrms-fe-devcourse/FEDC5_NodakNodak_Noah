@@ -41,7 +41,7 @@ const PostComment = () => {
   const handleCommentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const token = localStorage.getItem('auth-token');
-    if (!comment || !postId || !token) {
+    if (!comment.trim() || !postId || !token) {
       setWarn(true);
       return;
     }
