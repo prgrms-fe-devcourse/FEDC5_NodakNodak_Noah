@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Button from '@/components/common/Button';
 import useTimeoutFn from '@/hooks/useTimeoutFn';
@@ -16,6 +16,7 @@ const FollowButton = () => {
   const myInfo = useSelectedMyInfo();
   const token = localStorage.getItem('auth-token');
   const { isFollowing, followId } = useSelectedFollowData();
+  const [isFollowingUi, setIsFollowingUi] = useState(false);
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [debouncedFollow, clear] = useTimeoutFn(() => {
@@ -32,7 +33,7 @@ const FollowButton = () => {
 
   const buttonText = isMyPage
     ? textMap.myPage
-    : isFollowing
+    : isFollowingUi
       ? textMap.following
       : textMap.none;
 
@@ -48,6 +49,19 @@ const FollowButton = () => {
     }
   };
 
+  const handleFollowUi = () => {
+    if (!myInfo || !token) {
+      alert('로그인이 필요합니다.');
+      return;
+    }
+    if (isFollowingUi && followId) {
+      setIsFollowingUi(false);
+    } else {
+      setIsFollowingUi(true);
+    }
+    debouncedFollow();
+  };
+
   const handleMyPage = () => {
     if (!myInfo || !token) {
       alert('로그인이 필요합니다.');
@@ -56,14 +70,18 @@ const FollowButton = () => {
     navigate('setting', { state: myInfo.image });
   };
 
-  const handleClick = isMyPage ? handleMyPage : debouncedFollow;
+  const handleClick = isMyPage ? handleMyPage : handleFollowUi;
 
   useEffect(() => {
     if (!token) return;
     dispatch(getMyInfo());
   }, [dispatch, token]);
 
-  const styleType = isFollowing ? 'danger' : 'primary';
+  useEffect(() => {
+    setIsFollowingUi(isFollowing);
+  }, [isFollowing]);
+
+  const styleType = isFollowingUi ? 'danger' : 'primary';
 
   return (
     <Button styleType={styleType} onClick={handleClick}>
