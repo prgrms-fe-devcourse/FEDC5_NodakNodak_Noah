@@ -4,7 +4,7 @@ import { InitialState } from '@/slices/postDetail/type';
 import { initialPost } from '@/slices/initialState';
 import { Post } from '@/types/APIResponseTypes';
 import { getPostDetail } from '@/slices/postDetail/thunk';
-import { name } from '@/slices/constants';
+import { SLICE_NAME } from '@/slices/constants';
 
 const initialState: InitialState = {
   post: initialPost,
@@ -12,7 +12,7 @@ const initialState: InitialState = {
 };
 
 const detailPostSlice = createSlice({
-  name: name.detailPost,
+  name: SLICE_NAME.DETAIL_POST,
   initialState,
   reducers: {
     deleteComment: (state, action: PayloadAction<string>) => {

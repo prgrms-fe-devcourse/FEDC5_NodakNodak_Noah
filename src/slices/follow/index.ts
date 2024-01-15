@@ -1,7 +1,7 @@
 import { PayloadAction, createSlice, isAnyOf } from '@reduxjs/toolkit';
 import { getUser, getMyInfo } from '@/slices/user/thunk';
 import { FollowData, InitialState } from '@/slices/follow/type';
-import { name } from '@/slices/constants';
+import { SLICE_NAME } from '@/slices/constants';
 import { follow, unfollow } from '@/slices/follow/thunk';
 import { Follow, User } from '@/types/APIResponseTypes';
 import { initialUser } from '@/slices/initialState';
@@ -17,7 +17,7 @@ const initialState: InitialState = {
 };
 
 const userInfo = createSlice({
-  name: name.follow,
+  name: SLICE_NAME.FOLLOW,
   initialState,
   reducers: {
     setFollowData: (state, action: PayloadAction<FollowData>) => {

@@ -1,10 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 import axiosInstance from '@/utils/customAxios';
-import { name } from '@/slices/constants';
+import { SLICE_NAME } from '@/slices/constants';
 
 export const getUser = createAsyncThunk(
-  `${name.user}/getUser`,
+  `${SLICE_NAME.USER}/getUser`,
   async ({ userId }: { userId: string }) => {
     const { data } = await axiosInstance.get(`/users/${userId}`);
 
@@ -13,7 +13,7 @@ export const getUser = createAsyncThunk(
 );
 
 export const getMyInfo = createAsyncThunk(
-  `${name.user}/getMyInfo`,
+  `${SLICE_NAME.USER}/getMyInfo`,
   async () => {
     const { data } = await axiosInstance.get('auth-user');
 

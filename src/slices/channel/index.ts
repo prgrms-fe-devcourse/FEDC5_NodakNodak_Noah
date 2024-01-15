@@ -4,7 +4,7 @@ import { Channel, Post } from '@/types/APIResponseTypes';
 import { getPostListByChannelId } from '@/slices/postList/thunks';
 import { InitialState } from '@/slices/channel/type';
 import { getChannel } from '@/slices/channel/thunk';
-import { name } from '@/slices/constants';
+import { SLICE_NAME } from '@/slices/constants';
 
 const initialState: InitialState = {
   channels: [],
@@ -13,7 +13,7 @@ const initialState: InitialState = {
 };
 
 const channelSlice = createSlice({
-  name: name.channel,
+  name: SLICE_NAME.CHANNEL,
   initialState,
   reducers: {
     setChannel: (state, action: PayloadAction<string>) => {

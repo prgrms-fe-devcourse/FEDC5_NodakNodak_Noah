@@ -5,7 +5,7 @@ import {
   createNotification,
 } from '@/slices/notification/thunk';
 import { InitialState, NotificationWithType } from '@/slices/notification/type';
-import { name } from '@/slices/constants';
+import { SLICE_NAME } from '@/slices/constants';
 import { Notification } from '@/types/APIResponseTypes';
 
 export const notificationType = {
@@ -22,7 +22,7 @@ const initialState: InitialState = {
   status: 'idle',
 };
 const notificationSlice = createSlice({
-  name: name.notification,
+  name: SLICE_NAME.NOTIFICATION,
   initialState,
   reducers: {},
   extraReducers: (builder) => {

@@ -1,11 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { name } from '@/slices/constants';
+import { SLICE_NAME } from '@/slices/constants';
 import axiosInstance from '@/utils/customAxios';
 import { CreateNotificationData } from '@/slices/notification/type';
 
 export const getNotificationArray = createAsyncThunk(
-  `${name.notification}/getNotificationArray`,
+  `${SLICE_NAME.NOTIFICATION}/getNotificationArray`,
   async () => {
     const { data } = await axiosInstance.get('/notifications');
 
@@ -14,7 +14,7 @@ export const getNotificationArray = createAsyncThunk(
 );
 
 export const seeNotifications = createAsyncThunk(
-  `${name.notification}/seenNotifications`,
+  `${SLICE_NAME.NOTIFICATION}/seenNotifications`,
   async () => {
     const { data } = await axiosInstance.put('/notifications/seen');
 
@@ -23,7 +23,7 @@ export const seeNotifications = createAsyncThunk(
 );
 
 export const createNotification = createAsyncThunk(
-  `${name.notification}/createNotification`,
+  `${SLICE_NAME.NOTIFICATION}/createNotification`,
   async ({
     notificationData,
   }: {

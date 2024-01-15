@@ -7,7 +7,7 @@ import {
   getPostListByMyId,
   getPostListByUserId,
 } from '@/slices/postList/thunks';
-import { name } from '@/slices/constants';
+import { SLICE_NAME } from '@/slices/constants';
 import { getUser, getMyInfo } from '@/slices/user/thunk';
 
 const initialState: UserInfo = {
@@ -18,7 +18,7 @@ const initialState: UserInfo = {
 };
 
 const userInfo = createSlice({
-  name: name.user,
+  name: SLICE_NAME.USER,
   initialState,
   reducers: {},
   extraReducers: (builder) => {
