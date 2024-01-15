@@ -15,7 +15,7 @@ const UserList = () => {
     <UserGroup title={title}>
       {users.map(({ fullName, image, isFollowing, isOnline, _id }) => (
         <UserSnippet
-          fullName={fullName}
+          text={fullName}
           image={image}
           isFollowing={isFollowing}
           isOnline={isOnline}

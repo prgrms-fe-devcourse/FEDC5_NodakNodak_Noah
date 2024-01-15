@@ -8,7 +8,7 @@ const UserSnippet = ({
   isOnline,
   handleClick,
   image,
-  fullName,
+  text,
   isFollowing,
   userId,
   ...props
@@ -24,9 +24,9 @@ const UserSnippet = ({
       onClick={handleClick || handleUserClick}
       style={{ ...props.style }}>
       <OnLineBadge isOnline={isOnline} isFollowing={isFollowing}>
-        <Avatar src={image} alt={fullName} size='small' />
+        <Avatar src={image} alt={text} size='small' />
       </OnLineBadge>
-      {fullName}
+      {text}
     </UserSnippetBox>
   );
 };
