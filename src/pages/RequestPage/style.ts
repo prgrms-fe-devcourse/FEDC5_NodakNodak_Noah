@@ -34,4 +34,5 @@ export const RequestCard = styled.section`
 export const MessageContent = styled.textarea`
   height: 200px;
   width: 360px;
+  resize: none;
 `;
