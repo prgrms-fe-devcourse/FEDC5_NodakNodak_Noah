@@ -39,16 +39,18 @@ const UserInfo = () => {
   const userList = useSelectedUserList();
 
   const getFullNames = (userIds: string[]) => {
-    if (userIds.length === 0) {
-      return MESSAGE.NO_USER_MESSAGE;
-    }
-    return userIds
-      .map((userId) => {
-        const user = userList.find((user) => user._id === userId);
+    const MAX_DISPLAY = 20;
 
-        return user ? user.fullName : MESSAGE.UNKNOWN_USER_MESSAGE;
-      })
-      .join(', ');
+    return userIds.length === 0
+      ? MESSAGE.NO_USER_MESSAGE
+      : userIds
+          .slice(0, MAX_DISPLAY)
+          .map(
+            (userId) =>
+              userList.find((user) => user._id === userId)?.fullName ||
+              MESSAGE.UNKNOWN_USER_MESSAGE,
+          )
+          .join(', ') + (userIds.length > MAX_DISPLAY ? ', ...' : '');
   };
 
   const currentUser = useSelectedUser();
