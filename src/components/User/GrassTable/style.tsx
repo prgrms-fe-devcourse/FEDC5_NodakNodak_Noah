@@ -14,6 +14,7 @@ export const GrassWrapper = styled.div`
   flex-wrap: wrap;
   gap: 2px;
   border-radius: 4px;
+  margin-top: 15px;
 `;
 
 export const GrassItem = styled.div<{ $lightness: LightnessType }>`

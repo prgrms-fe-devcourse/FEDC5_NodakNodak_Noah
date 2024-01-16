@@ -93,6 +93,11 @@ const FormContent = ({
           value={values.content}
           onChange={handleChange}
         />
+        <label
+          htmlFor='content'
+          style={{ position: 'absolute', bottom: '5px', right: '5px' }}>
+          {`${values.content.length}/300`}
+        </label>
       </TextAreaWrapper>
     </FormArea>
   );
