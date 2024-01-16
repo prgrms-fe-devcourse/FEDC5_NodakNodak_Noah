@@ -116,10 +116,10 @@ const PostVote = () => {
                 bordertype='enabled'
                 readOnly
                 justifyContent='center'
+                width='466px'
+                height='48px'
                 style={{
                   marginBottom: '1.5rem',
-                  width: '466px',
-                  height: '48px',
                   cursor: reVote ? 'not-allowed' : 'pointer',
                   backgroundColor: `${
                     vote === myVote
