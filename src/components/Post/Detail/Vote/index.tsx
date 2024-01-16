@@ -9,7 +9,7 @@ import {
 } from '@/components/Post/Detail/Vote/style';
 import theme from '@/styles/theme';
 import { useDispatch } from '@/store';
-import { getPostDetail } from '@/slices/postDetail';
+import { getPostDetail } from '@/slices/postDetail/thunk';
 import { createNotification } from '@/slices/notification/thunk';
 import { CreateNotificationData } from '@/slices/notification/type';
 import { useSelectedVote } from '@/hooks/useSelectedVote';
@@ -117,9 +117,9 @@ const PostVote = () => {
                 readOnly
                 justifyContent='center'
                 style={{
-                  marginBottom: '1.5rem',
                   width: '466px',
                   height: '48px',
+                  marginBottom: '1.5rem',
                   cursor: reVote ? 'not-allowed' : 'pointer',
                   backgroundColor: `${
                     vote === myVote

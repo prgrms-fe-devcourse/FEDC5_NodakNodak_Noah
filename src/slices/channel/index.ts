@@ -1,13 +1,10 @@
-import { getPostListByChannelId } from './postList/thunks';
-import {
-  PayloadAction,
-  createAsyncThunk,
-  createSlice,
-  isAnyOf,
-} from '@reduxjs/toolkit';
-import axiosInstance from '@/utils/customAxios';
+import { PayloadAction, createSlice, isAnyOf } from '@reduxjs/toolkit';
+
 import { Channel, Post } from '@/types/APIResponseTypes';
+import { getPostListByChannelId } from '@/slices/postList/thunks';
 import { InitialState } from '@/slices/channel/type';
+import { getChannel } from '@/slices/channel/thunk';
+import { SLICE_NAME } from '@/slices/constants';
 
 const initialState: InitialState = {
   channels: [],
@@ -15,14 +12,8 @@ const initialState: InitialState = {
   status: 'idle',
 };
 
-export const getChannel = createAsyncThunk('channel/getChannel', async () => {
-  const { data } = await axiosInstance.get('/channels');
-
-  return data;
-});
-
 const channelSlice = createSlice({
-  name: 'channel',
+  name: SLICE_NAME.CHANNEL,
   initialState,
   reducers: {
     setChannel: (state, action: PayloadAction<string>) => {

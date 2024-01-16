@@ -6,6 +6,7 @@ export const MenuForm = styled.div`
   height: 48px;
   max-width: 100%;
   position: relative;
+  z-index: 2;
 `;
 
 export const DropdownButton = styled.button<{ $isMenuOpen: boolean }>`

@@ -37,18 +37,21 @@ const GrassTable = () => {
   });
 
   return (
-    <GrassWrapper>
-      {grass.map(({ date, postNumber, lightness }) => (
-        <Tooltip
-          key={date}
-          direction='bottom'
-          message={`${date}, 게시물: ${postNumber}`}
-          hasArrow
-          type='hover'>
-          <GrassItem $lightness={lightness} />
-        </Tooltip>
-      ))}
-    </GrassWrapper>
+    <div>
+      <label>{`총 ${currentUser.posts.length}개의 포스트를 작성하였습니다.`}</label>
+      <GrassWrapper>
+        {grass.map(({ date, postNumber, lightness }) => (
+          <Tooltip
+            key={date}
+            direction='bottom'
+            message={`${date}, 게시물: ${postNumber}`}
+            hasArrow
+            type='hover'>
+            <GrassItem $lightness={lightness} />
+          </Tooltip>
+        ))}
+      </GrassWrapper>
+    </div>
   );
 };
 

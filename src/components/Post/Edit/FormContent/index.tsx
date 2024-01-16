@@ -13,7 +13,7 @@ import {
 } from '@/components/Post/Edit/FormContent/style';
 import { PLACEHOLDER, FORM_SIZE } from '@/utils/constants';
 import { useDispatch } from '@/store';
-import { getMyInfo } from '@/slices/user';
+import { getMyInfo } from '@/slices/user/thunk';
 
 const FormContent = ({
   values,
@@ -93,6 +93,11 @@ const FormContent = ({
           value={values.content}
           onChange={handleChange}
         />
+        <label
+          htmlFor='content'
+          style={{ position: 'absolute', bottom: '5px', right: '5px' }}>
+          {`${values.content.length}/300`}
+        </label>
       </TextAreaWrapper>
     </FormArea>
   );

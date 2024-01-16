@@ -6,7 +6,7 @@ import {
 } from '@/pages/RequestPage/style';
 import { Button, Text } from '@/components/common';
 import axiosInstance from '@/utils/customAxios';
-import { getMyInfo } from '@/slices/user';
+import { getMyInfo } from '@/slices/user/thunk';
 import { useDispatch } from '@/store';
 
 const RequestToAdmin = () => {

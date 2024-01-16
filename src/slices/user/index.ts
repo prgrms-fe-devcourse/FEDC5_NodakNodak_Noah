@@ -1,13 +1,10 @@
-import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import axiosInstance from '@/utils/customAxios';
 import { UserInfo } from '@/slices/user/type';
 import { initialUser } from '@/slices/initialState';
 import { User } from '@/types/APIResponseTypes';
-import {
-  getPostListByMyId,
-  getPostListByUserId,
-} from '@/slices/postList/thunks';
+import { SLICE_NAME } from '@/slices/constants';
+import { getUser, getMyInfo } from '@/slices/user/thunk';
 
 const initialState: UserInfo = {
   currentUser: initialUser,
@@ -16,34 +13,14 @@ const initialState: UserInfo = {
   currentUserStatus: 'idle',
 };
 
-export const getUser = createAsyncThunk(
-  'user/getUser',
-  async ({ userId }: { userId: string }) => {
-    const { data } = await axiosInstance.get(`/users/${userId}`);
-
-    return data;
-  },
-);
-
-export const getMyInfo = createAsyncThunk('user/getMyInfo', async () => {
-  const { data } = await axiosInstance.get('auth-user');
-
-  return data;
-});
-
 const userInfo = createSlice({
-  name: 'user',
+  name: SLICE_NAME.USER,
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getPostListByUserId.pending, (state) => {
-      state.currentUser = initialUser;
-    });
-    builder.addCase(getPostListByMyId.pending, (state) => {
-      state.authUser = initialUser;
-    });
     builder.addCase(getUser.pending, (state) => {
       state.currentUserStatus = 'loading';
+      state.currentUser = initialUser;
     });
     builder.addCase(getUser.fulfilled, (state, action: PayloadAction<User>) => {
       state.currentUser = action.payload;
@@ -54,6 +31,7 @@ const userInfo = createSlice({
     });
     builder.addCase(getMyInfo.pending, (state) => {
       state.authUserStatus = 'loading';
+      state.authUser = initialUser;
     });
     builder.addCase(
       getMyInfo.fulfilled,

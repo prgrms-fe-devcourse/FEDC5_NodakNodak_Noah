@@ -9,7 +9,7 @@ import {
 import GrassTable from '@/components/User/GrassTable';
 import { Avatar, Button, Text } from '@/components/common';
 import { useDispatch } from '@/store';
-import { getUser } from '@/slices/user';
+import { getUser } from '@/slices/user/thunk';
 import { useSelectedFollowData } from '@/hooks/useSelectedFollowData';
 import { useSelectedUser } from '@/hooks/useSelectedUser';
 import Tooltip from '@/components/common/Tooltip';
@@ -41,16 +41,18 @@ const UserInfo = () => {
   const userList = useSelectedUserList();
 
   const getFullNames = (userIds: string[]) => {
-    if (userIds.length === 0) {
-      return MESSAGE.NO_USER_MESSAGE;
-    }
-    return userIds
-      .map((userId) => {
-        const user = userList.find((user) => user._id === userId);
+    const MAX_DISPLAY = 20;
 
-        return user ? user.fullName : MESSAGE.UNKNOWN_USER_MESSAGE;
-      })
-      .join(', ');
+    return userIds.length === 0
+      ? MESSAGE.NO_USER_MESSAGE
+      : userIds
+          .slice(0, MAX_DISPLAY)
+          .map(
+            (userId) =>
+              userList.find((user) => user._id === userId)?.fullName ||
+              MESSAGE.UNKNOWN_USER_MESSAGE,
+          )
+          .join(', ') + (userIds.length > MAX_DISPLAY ? ', ...' : '');
   };
 
   const currentUser = useSelectedUser();
@@ -87,22 +89,18 @@ const UserInfo = () => {
             )}
             hasArrow
             type='hover'>
-            <a>
-              <Button size='regular' styleType='ghost'>
-                {followers.length} 팔로워
-              </Button>
-            </a>
+            <Button size='regular' styleType='ghost'>
+              {followers.length} 팔로워
+            </Button>
           </Tooltip>
           <Tooltip
             direction='bottom'
             message={getFullNames(following.map((followee) => followee.user))}
             hasArrow
             type='hover'>
-            <a>
-              <Button size='regular' styleType='ghost'>
-                {following.length} 팔로잉
-              </Button>
-            </a>
+            <Button size='regular' styleType='ghost'>
+              {following.length} 팔로잉
+            </Button>
           </Tooltip>
           <Button size='regular' styleType='ghost'>
             {posts.length} 포스트

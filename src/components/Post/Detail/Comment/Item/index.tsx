@@ -38,7 +38,7 @@ const Item = ({
   };
 
   const handleCommentRemove = async () => {
-    const isConfirm = window.confirm('댓글을 정말 삭제하시겠습니까?');
+    const isConfirm = confirm('댓글을 정말 삭제하시겠습니까?');
     if (!isConfirm) return;
 
     try {
@@ -89,18 +89,17 @@ const Item = ({
         }}>
         {content}
       </Text>
-      {authorId === myInfo?._id ? (
+      {(authorId === myInfo?._id || myInfo.role === 'SuperAdmin') && (
         <Button
           style={{
             position: 'absolute',
             right: '2px',
             bottom: '40px',
-            border: 'none',
           }}
           onClick={handleCommentRemove}>
           삭제
         </Button>
-      ) : null}
+      )}
     </CommentItemContainer>
   );
 };

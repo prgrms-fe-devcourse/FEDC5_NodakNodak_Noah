@@ -10,7 +10,7 @@ import {
 import { useDispatch } from '@/store';
 import { createNotification } from '@/slices/notification/thunk';
 import { CreateNotificationData } from '@/slices/notification/type';
-import { getPostDetail } from '@/slices/postDetail';
+import { getPostDetail } from '@/slices/postDetail/thunk';
 import Item from '@/components/Post/Detail/Comment/Item';
 import { Input, Button } from '@/components/common';
 import { Warning } from '@/components/Sign/style';
@@ -20,6 +20,8 @@ import useClickAway from '@/hooks/useClickAway';
 import { useSelectedComment } from '@/hooks/useSelectedComment';
 import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
 import axiosInstance from '@/utils/customAxios';
+
+const MAX_COMMENT_LENGTH = 120;
 
 const PostComment = () => {
   const postDetailComment = useSelectedComment();
@@ -42,7 +44,12 @@ const PostComment = () => {
   const handleCommentSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const token = localStorage.getItem('auth-token');
-    if (!comment.trim() || !postId || !token) {
+    if (
+      comment.trim().length > MAX_COMMENT_LENGTH ||
+      !comment.trim() ||
+      !postId ||
+      !token
+    ) {
       setWarn(true);
       return;
     }
@@ -116,7 +123,17 @@ const PostComment = () => {
               underline
               onChange={handleInputChange}
             />
-            {warn ? <Warning>댓글을 입력해주세요.</Warning> : ''}
+            {warn ? (
+              comment.trim().length > MAX_COMMENT_LENGTH ? (
+                <Warning>
+                  댓글은 {MAX_COMMENT_LENGTH}자 이하여야 합니다.
+                </Warning>
+              ) : (
+                <Warning>댓글을 입력해주세요.</Warning>
+              )
+            ) : (
+              ''
+            )}
           </FlexColumn>
           <Button
             event='enabled'

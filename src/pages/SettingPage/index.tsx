@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
 
 import { Container, CardWrapper } from '@/pages/SettingPage/style';
-import { getUser } from '@/slices/user';
+import { getUser } from '@/slices/user/thunk';
 import { useDispatch } from '@/store';
 import { Avatar } from '@/components/common';
 import { useSelectedUser } from '@/hooks/useSelectedUser';

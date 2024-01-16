@@ -6,7 +6,7 @@ const DarkModeToggle = () => {
   const toggleDarkMode = () => {
     const isDarkMode = localStorage.getItem('isDark') === 'true';
     localStorage.setItem('isDark', (!isDarkMode).toString());
-    window.location.reload();
+    location.reload();
   };
 
   return (

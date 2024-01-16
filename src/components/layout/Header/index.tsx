@@ -13,7 +13,8 @@ import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 import { useSelectedChannels } from '@/hooks/useSelectedChannel';
 
 import { useDispatch } from '@/store';
-import { getChannel, setChannel } from '@/slices/channel';
+import { setChannel } from '@/slices/channel';
+import { getChannel } from '@/slices/channel/thunk';
 import { getNotificationArray } from '@/slices/notification/thunk';
 import {
   StyledHeaderWrapper,
