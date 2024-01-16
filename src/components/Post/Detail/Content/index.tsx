@@ -56,20 +56,12 @@ const PostContent = () => {
         <Text colorType='black' tagType='span' fontType='h1'>
           {title}
         </Text>
-        {author?._id === myInfo?._id ? (
+        {author?._id === myInfo?._id || myInfo.role === 'SuperAdmin' ? (
           <>
-            <Button
-              styleType='primary'
-              size='small'
-              style={{ border: 'none', cursor: 'pointer' }}
-              onClick={handlePostEdit}>
+            <Button styleType='primary' size='small' onClick={handlePostEdit}>
               수정하기
             </Button>
-            <Button
-              styleType='primary'
-              size='small'
-              style={{ border: 'none', cursor: 'pointer' }}
-              onClick={handlePostDelete}>
+            <Button styleType='primary' size='small' onClick={handlePostDelete}>
               삭제하기
             </Button>
           </>
