@@ -89,18 +89,17 @@ const Item = ({
         }}>
         {content}
       </Text>
-      {authorId === myInfo?._id ||
-        (myInfo.role === 'SuperAdmin' && (
-          <Button
-            style={{
-              // position: 'absolute',
-              right: '2px',
-              bottom: '40px',
-            }}
-            onClick={handleCommentRemove}>
-            삭제
-          </Button>
-        ))}
+      {(authorId === myInfo?._id || myInfo.role === 'SuperAdmin') && (
+        <Button
+          style={{
+            position: 'absolute',
+            right: '2px',
+            bottom: '40px',
+          }}
+          onClick={handleCommentRemove}>
+          삭제
+        </Button>
+      )}
     </CommentItemContainer>
   );
 };

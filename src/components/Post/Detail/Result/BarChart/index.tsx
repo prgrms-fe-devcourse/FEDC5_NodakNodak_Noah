@@ -34,9 +34,9 @@ const BarChart = ({
             bordertype='enabled'
             readOnly
             disabled
-            width='466px'
-            height='48px'
             style={{
+              width: '466px',
+              height: '48px',
               position: 'relative',
               color: `${theme.colors.black}`,
               backgroundImage: `linear-gradient(to right, ${
