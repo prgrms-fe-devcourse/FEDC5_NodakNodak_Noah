@@ -27,22 +27,16 @@ const BarChart = ({
   return (
     <InputWrapper>
       {[...voteCountMap].map(([vote, count], index) => (
-        <BarChartContainer
-          key={`${vote}/${count}/${index}`}
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            marginBottom: '1.5rem',
-            position: 'relative',
-          }}>
+        <BarChartContainer key={`${vote}/${count}/${index}`}>
           <Input
             key={index}
             value={vote}
             bordertype='enabled'
             readOnly
+            disabled
+            width='466px'
+            height='48px'
             style={{
-              width: '466px',
-              height: '48px',
               position: 'relative',
               color: `${theme.colors.black}`,
               backgroundImage: `linear-gradient(to right, ${
@@ -51,7 +45,6 @@ const BarChart = ({
                 votedArray.length ? (count / votedArray.length) * 100 : 0
               }%, ${theme.colors.primary[100]} 0%)`,
             }}
-            disabled
           />
           <Text
             tagType='span'
