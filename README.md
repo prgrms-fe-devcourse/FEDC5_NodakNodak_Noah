@@ -3,12 +3,21 @@
 <img src="https://github.com/prgrms-fe-devcourse/FEDC5_NodakNodak_Noah/blob/dev/public/DefaultImage.webp?raw=true">
 </div>
 
- <p align='center'> <a href='https://nodak.vercel.app/'>노닥노닥 홈페이지</a> | <a href='https://www.notion.so/prgrms/dc31cbc0e863426e96f6b3fa30a1feec'>팀 노션</a> | <a href='#'>WIKI</a>
+ <p align='center'> <a href='https://nodak.vercel.app/'>노닥노닥 홈페이지</a> | <a href='https://www.notion.so/prgrms/dc31cbc0e863426e96f6b3fa30a1feec'>팀 노션</a> | <a href='https://github.com/prgrms-fe-devcourse/FEDC5_NodakNodak_Noah/wiki'>WIKI</a>
 
  </p>
 
 ## 개요
-**노닥노닥**은 선택지를 공유하고 의견을 나누며, 고민을 해결하고 비슷한 관심사를 가진 이용자들과 소통하는 투표형 커뮤니티 서비스입니다.
+**노닥노닥**은 선택지를 공유하고 의견을 나누며, 고민을 해결하고 비슷한 관심사를 가진 이용자들과 소통하는 **투표형 커뮤니티** 서비스입니다.
+
+## 노닥노닥 소개
+<div align='center'>
+ <img src='https://github.com/prgrms-fe-devcourse/FEDC5_NodakNodak_Noah/assets/104545906/466c6102-6820-4b27-86f5-dc44d0e8b50c' alt='노닥노닥 소개 이미지' width='800px'>
+ <img src='https://github.com/prgrms-fe-devcourse/FEDC5_NodakNodak_Noah/assets/104545906/a4f94147-4b05-48fd-8279-e81f75ed351e' alt='노닥노닥 소개 이미지' width='800px'>
+ <img src='https://github.com/prgrms-fe-devcourse/FEDC5_NodakNodak_Noah/assets/104545906/6ff677f0-3102-441b-a9d5-f062d829c737' alt='노닥노닥 소개 이미지' width='800px'>
+ <img src='https://github.com/prgrms-fe-devcourse/FEDC5_NodakNodak_Noah/assets/104545906/be9bfcad-1337-4621-be33-9d707d782708' alt='노닥노닥 소개 이미지' width='800px'>
+
+</div>
 
 ## 실행 방법
 ```
@@ -22,6 +31,9 @@ npm run dev
 npm run build && npm run preview
 ```
 ## 팀원
+> **팀 목표** <br>
+> 기본에 충실한 프로젝트 진행으로 완성도 있는 결과물을 지향 <br>
+>기한 엄수와 책임감을 기본으로 협업 능력을 향상 시킬 수 있는 과정을 지향
 
 | 팀장 | | | | |
 | :-: | :-: | :-: | :-: | :-: |
