@@ -5,8 +5,6 @@ export const UserSnippetBox = styled.div`
   align-items: center;
   gap: 10px;
   position: relative;
-
   margin: 4px 0;
-
   cursor: pointer;
 `;

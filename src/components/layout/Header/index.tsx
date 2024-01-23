@@ -1,4 +1,11 @@
-import { ChangeEvent, RefObject, useState, useEffect, FormEvent } from 'react';
+import {
+  ChangeEvent,
+  RefObject,
+  useState,
+  useEffect,
+  FormEvent,
+  useCallback,
+} from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Text, Card, Input, Avatar, Button } from '@/components/common';
@@ -36,7 +43,6 @@ const Header = () => {
 
   const channels = useSelectedChannels();
   const { role: myRole, image: myImage, _id: myId } = useSelectedMyInfo();
-  const isAuth = !!localStorage.getItem('auth-token');
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -47,6 +53,7 @@ const Header = () => {
     myRole === 'Regular' ? '문의하기' : '문의함',
     '로그아웃',
   ];
+
   const handleSearch = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     navigate(`/home?search=${inputValue}`);
@@ -66,43 +73,46 @@ const Header = () => {
     setShowMenu(!showMenu);
   };
 
-  const handleMenuItemClick = async (item: string) => {
-    if (!myId) return;
-    switch (item) {
-      case '마이페이지': {
-        setShowMenu(false);
-        navigate(`/user/${myId}`);
-        break;
+  const handleMenuItemClick = useCallback(
+    async (item: string) => {
+      if (!myId) return;
+      switch (item) {
+        case '마이페이지': {
+          setShowMenu(false);
+          navigate(`/user/${myId}`);
+          break;
+        }
+        case '로그아웃': {
+          const isLogout = window.confirm('로그아웃 하시겠습니까?');
+          if (!isLogout) return;
+          localStorage.removeItem('auth-token');
+          await axiosInstance.post('/logout');
+          location.reload();
+          break;
+        }
+        case '문의하기': {
+          setShowMenu(false);
+          navigate('/request');
+          break;
+        }
+        case '문의함': {
+          setShowMenu(false);
+          navigate('/admin', { state: myRole });
+          break;
+        }
+        case '비밀번호 변경': {
+          setShowMenu(false);
+          navigate(`/user/${myId}/setting/password`, {
+            state: myImage,
+          });
+          break;
+        }
+        default:
+          break;
       }
-      case '로그아웃': {
-        const isLogout = window.confirm('로그아웃 하시겠습니까?');
-        if (!isLogout) return;
-        localStorage.removeItem('auth-token');
-        await axiosInstance.post('/logout');
-        location.reload();
-        break;
-      }
-      case '문의하기': {
-        setShowMenu(false);
-        navigate('/request');
-        break;
-      }
-      case '문의함': {
-        setShowMenu(false);
-        navigate('/admin');
-        break;
-      }
-      case '비밀번호 변경': {
-        setShowMenu(false);
-        navigate(`/user/${myId}/setting/password`, {
-          state: myImage,
-        });
-        break;
-      }
-      default:
-        break;
-    }
-  };
+    },
+    [myId, myImage, myRole, navigate],
+  );
 
   const inputRef = useClickAway((e: MouseEvent | TouchEvent) => {
     const { tagName } = e.target as HTMLElement;
@@ -180,7 +190,7 @@ const Header = () => {
           </Button>
         </FormContainer>
         <DarkModeToggle />
-        {isAuth ? (
+        {token ? (
           <AuthUiWrapper>
             <NotificationCardBell />
             <Avatar
