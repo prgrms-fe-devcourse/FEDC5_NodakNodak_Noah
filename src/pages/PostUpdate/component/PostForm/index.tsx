@@ -6,9 +6,17 @@ import { isValidatedForm } from '@/utils/Validations/formValidation';
 import { MESSAGE } from '@/utils/constants';
 import { sendPostRequest } from '@/pages/PostUpdate/component/Api';
 import FormContent from '@/pages/PostUpdate/component/FormContent';
-import { FormType } from '@/pages/PostUpdate/component/PostForm/type';
 import { Button } from '@/components';
 import { ButtonWrapper } from '@/pages/PostUpdate/component/PostForm/style';
+
+export interface FormType {
+  title: string;
+  content: string;
+  voteTitle: string;
+  voteArray: string[];
+  channelId: string;
+  image: File | null;
+}
 
 const PostForm = ({ channelId }: { channelId: string | undefined }) => {
   const navigate = useNavigate();

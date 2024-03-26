@@ -10,6 +10,11 @@ import { useDispatch } from '@/store';
 import { createNotification } from '@/slices/notification/thunk';
 import { CreateNotificationData } from '@/slices/notification/type';
 
+export interface LikeButtonProps {
+  postId: string | undefined;
+  userId: string | undefined;
+}
+
 const LikeButton = () => {
   const [isLiked, setIsLiked] = useState(false);
   const [likeId, setLikeId] = useState('');

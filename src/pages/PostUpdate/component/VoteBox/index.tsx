@@ -7,9 +7,17 @@ import {
 import { PLACEHOLDER, MESSAGE } from '@/utils/constants';
 import { Card, Input, Button, ScrollBar } from '@/components';
 import DeleteIcon from '@/assets/DeleteIcon';
-import { FormProps } from '@/pages/PostUpdate/component/VoteBox/type';
 import Text from '@/components/Text';
 import theme from '@/styles/theme';
+
+export interface FormProps {
+  values: {
+    voteTitle: string;
+    voteArray: string[];
+  };
+  setFieldValue: (field: string, values: string | string[]) => void;
+  isEditable: boolean;
+}
 
 const VoteBox = ({ values, setFieldValue, isEditable }: FormProps) => {
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

@@ -7,6 +7,11 @@ import Up from '@/pages/Sign/components/Up';
 import LeftArrowIcon from '@/assets/LeftArrowIcon';
 import theme from '@/styles/theme';
 
+export interface SignProps {
+  isLogin: boolean;
+  setIsLogin: (isLogin: boolean) => void;
+}
+
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
   const navigate = useNavigate();

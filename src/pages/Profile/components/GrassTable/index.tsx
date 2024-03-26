@@ -3,8 +3,9 @@ import {
   GrassItem,
 } from '@/pages/Profile/components/GrassTable/style';
 import { useSelectedUser } from '@/hooks/useSelectedUser';
-import { LightnessType } from '@/pages/Profile/components/GrassTable/type';
 import Tooltip from '@/components/Tooltip';
+
+export type LightnessType = 100 | 200 | 300 | 400 | 500;
 
 const GrassTable = () => {
   const currentUser = useSelectedUser();

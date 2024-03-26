@@ -1,8 +1,18 @@
 import { Card, ScrollBar } from '@/components';
 import useGetUserList from '@/pages/Main/components/hooks/useGetUsers';
 import UserSnippet from '@/pages/Main/components/UserList/UserSnippet';
-import { RenderUserSnippets } from '@/pages/Main/components/UserList/type';
 import UserGroup from '@/pages/Main/components/UserList/UserGroup';
+
+export type RenderUserSnippets = (
+  users: {
+    image: string;
+    isOnline: boolean;
+    isFollowing: boolean;
+    fullName: string;
+    _id: string;
+  }[],
+  title: string,
+) => JSX.Element;
 
 const UserList = () => {
   const { userSnippetList } = useGetUserList();

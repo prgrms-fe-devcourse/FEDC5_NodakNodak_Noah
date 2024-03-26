@@ -5,8 +5,13 @@ import {
   TextWrapper,
   PageNumberWrapper,
 } from '@/components/Pagination/style';
-import { PaginationProps } from '@/components/Pagination/type';
 import theme from '@/styles/theme';
+
+export interface PaginationProps {
+  page: number;
+  totalPage: number;
+  onPageChange: (page: number) => void;
+}
 
 const Pagination = ({ page, totalPage, onPageChange }: PaginationProps) => {
   const pageArray = Array.from(

@@ -1,8 +1,16 @@
 import { useNavigate } from 'react-router-dom';
-
 import { UserSnippetBox } from '@/pages/Main/components/style';
 import { Avatar, OnLineBadge } from '@/components';
-import { UserSnippetProps } from '@/pages/Main/components/UserList/UserSnippet/type';
+
+export interface UserSnippetProps extends React.HTMLAttributes<HTMLDivElement> {
+  text: string;
+  isOnline: boolean;
+  handleClick?: () => void;
+  isFollowing: boolean;
+  image: string;
+  userId: string;
+  style?: React.CSSProperties;
+}
 
 const UserSnippet = ({
   isOnline,

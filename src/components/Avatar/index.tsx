@@ -1,7 +1,13 @@
+import { AvatarWrapper } from './style';
 import { useState, useEffect } from 'react';
 
-import { AvatarProps } from '@/components/Avatar/type';
-import { AvatarWrapper } from '@/components/Avatar/style';
+export interface AvatarProps {
+  src?: string;
+  size?: 'mini' | 'small' | 'middle' | 'large';
+  alt?: string;
+  style?: React.CSSProperties;
+  onClick?: () => void;
+}
 
 const avatarSizes = {
   mini: '24px',

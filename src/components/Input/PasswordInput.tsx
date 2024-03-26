@@ -1,7 +1,7 @@
+import { InputProps } from '.';
 import { useState } from 'react';
 
 import { Wrapper, StyledInput, Eye } from '@/components/Input/style';
-import { InputProps } from '@/components/Input/type';
 import ViewEyesIcon from '@/assets/ViewEyesIcon';
 import HideEyesIcon from '@/assets/HideEyesIcon';
 

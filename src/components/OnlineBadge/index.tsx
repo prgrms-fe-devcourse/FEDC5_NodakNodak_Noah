@@ -1,7 +1,11 @@
 import { PropsWithChildren } from 'react';
 
 import { BadgeContainer, Super } from '@/components/OnlineBadge/style';
-import { OnlineBadgePropsTypes } from '@/components/OnlineBadge/type';
+
+export interface OnlineBadgePropsTypes {
+  isOnline: boolean;
+  isFollowing: boolean;
+}
 
 const OnLineBadge = ({
   children,

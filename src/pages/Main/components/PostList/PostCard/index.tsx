@@ -7,13 +7,22 @@ import {
 } from '@/pages/Main/components/PostList/PostCard/style';
 import { UserSnippetBox } from '@/pages/Main/components/style';
 import { Button, Card, Text, Avatar } from '@/components';
-import { PostCardProps } from '@/pages/Main/components/PostList/PostCard/type';
 import {
   useSelectedChannel,
   useSelectedChannelLoading,
 } from '@/hooks/useSelectedChannel';
 import { useSelectedUser } from '@/hooks/useSelectedUser';
 import theme from '@/styles/theme';
+
+import { Comment, User } from '@/types/APIResponseTypes';
+
+export interface PostCardProps {
+  image?: string;
+  title: string;
+  author: User;
+  postId: string;
+  comments: Comment[];
+}
 
 const PostCard = ({
   image,

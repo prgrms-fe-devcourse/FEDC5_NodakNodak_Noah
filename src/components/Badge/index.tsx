@@ -1,7 +1,10 @@
 import { PropsWithChildren } from 'react';
-
-import { BadgeProps } from '@/components/Badge/type';
 import { BadgeContainer, Super } from '@/components/Badge/style';
+
+export interface BadgeProps {
+  count?: number;
+  style?: React.CSSProperties;
+}
 
 const Badge = ({
   children,

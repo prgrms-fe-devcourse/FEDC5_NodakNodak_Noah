@@ -10,7 +10,16 @@ import {
 import useHover from '@/hooks/useHover';
 import TooltipContainer, { TooltipContent } from '@/components/Tooltip/style';
 import TooltipArrow from '@/components/Tooltip/TooltipArrow';
-import { TooltipProps } from '@/components/Tooltip/type';
+
+export type TooltipDirection = 'top' | 'bottom' | 'left' | 'right';
+export type TooltipType = 'click' | 'focus' | 'hover';
+
+export interface TooltipProps {
+  message: string;
+  type?: TooltipType;
+  direction: TooltipDirection;
+  hasArrow: boolean;
+}
 
 const Tooltip = ({
   type,

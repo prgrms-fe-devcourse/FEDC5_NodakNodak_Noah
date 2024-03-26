@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 
 import { Input, Dropdown, Button } from '@/components';
 import ImageUploader from '@/components/Button/ImageUploadButton';
-import { FormContentProps } from '@/pages/PostUpdate/component/FormContent/type';
 import {
   HeaderWrapper,
   UploadButtonsWrapper,
@@ -14,6 +13,23 @@ import {
 import { PLACEHOLDER, FORM_SIZE } from '@/utils/constants';
 import { useDispatch } from '@/store';
 import { getMyInfo } from '@/slices/user/thunk';
+
+export interface FormContentProps {
+  values: {
+    title: string;
+    content: string;
+    channelId: string;
+
+    image: File | null;
+    imageSrc?: string;
+  };
+  handleChange: (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => void;
+
+  setFieldValue: (field: string, value: string | File | null) => void;
+  handleDeleteImage: () => void;
+}
 
 const FormContent = ({
   values,

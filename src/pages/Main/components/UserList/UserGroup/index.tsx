@@ -1,7 +1,10 @@
 import { PropsWithChildren } from 'react';
 
 import { Title } from '@/pages/Main/components/UserList/UserGroup/style';
-import { UserSnippetGroupProps } from '@/pages/Main/components/UserList/UserGroup/type';
+
+export interface UserSnippetGroupProps {
+  title?: string;
+}
 
 const UserGroup = ({
   title,

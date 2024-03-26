@@ -1,7 +1,13 @@
 import { PropsWithChildren } from 'react';
-
-import { ButtonProps } from '@/components/Button/types';
 import { ButtonLayout, ButtonWrapper } from '@/components/Button/style';
+
+export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+  styleType?: 'primary' | 'ghost' | 'danger';
+  size?: 'mini' | 'small' | 'regular' | 'wide';
+  event?: 'enabled' | 'hover' | 'disabled';
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
+}
 
 const Button = ({
   children,

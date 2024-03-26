@@ -1,3 +1,4 @@
+import { SignProps } from '../..';
 import { FormEvent, useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -5,7 +6,6 @@ import PasswordInput from '@/components/Input/PasswordInput';
 import { Button, Input } from '@/components';
 import { Form, Guide, Register, Warning } from '@/pages/Sign/components/style';
 import axiosInstance from '@/utils/customAxios';
-import { SignProps } from '@/pages/Sign/components/type';
 
 const In = ({ isLogin, setIsLogin }: SignProps) => {
   const [email, setEmail] = useState('');

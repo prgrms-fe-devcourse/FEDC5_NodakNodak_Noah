@@ -9,11 +9,26 @@ import { MESSAGE } from '@/utils/constants';
 import { sendPostRequest } from '@/pages/PostUpdate/component/Api';
 import VoteBox from '@/pages/PostUpdate/component/VoteBox';
 import FormContent from '@/pages/PostUpdate/component/FormContent';
-import {
-  FormType,
-  TitleType,
-} from '@/pages/PostUpdate/component/UpdateForm/type';
 import { ButtonWrapper } from '@/pages/PostUpdate/component/PostForm/style';
+
+export interface FormType {
+  title: string;
+  content: string;
+  voteTitle: string;
+  voteArray: string[];
+  channelId: string;
+
+  image: File | null;
+  imageSrc: string;
+  imageToDeletePublicId: string;
+}
+
+export interface TitleType {
+  title: string;
+  content: string;
+  voteTitle: string;
+  voteArray: string[];
+}
 
 const UpdateForm = ({ postId }: { postId: string | undefined }) => {
   const navigate = useNavigate();

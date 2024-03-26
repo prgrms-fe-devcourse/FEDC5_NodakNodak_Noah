@@ -1,6 +1,9 @@
-import { ProtectedRouteProps } from './type';
 import { Navigate, useLocation } from 'react-router-dom';
 import { PropsWithChildren } from 'react';
+
+export interface ProtectedRouteProps {
+  admin?: boolean;
+}
 
 const ProtectedRoute = ({
   children,

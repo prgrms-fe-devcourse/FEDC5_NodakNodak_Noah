@@ -1,9 +1,14 @@
 import { ChangeEvent, useRef, useState } from 'react';
 
-import Button from '@/components/Button';
+import Button, { type ButtonProps } from '@/components/Button';
 import { InvisibleInput } from '@/components/Button/style';
-import { ImageUploadButtonProps } from '@/components/Button/types';
 import axiosInstance from '@/utils/customAxios';
+
+export interface ImageUploadButtonProps extends ButtonProps {
+  setFile?: (file: File | null) => void;
+  setImage: (image: string) => void;
+  apiParam?: string;
+}
 
 const ImageUploader = ({
   styleType = 'primary',

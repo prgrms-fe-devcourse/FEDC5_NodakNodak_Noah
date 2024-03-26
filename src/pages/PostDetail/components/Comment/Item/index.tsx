@@ -1,8 +1,4 @@
 import { useNavigate } from 'react-router-dom';
-import {
-  CommentItemProps,
-  CommentContent,
-} from '@/pages/PostDetail/components/Comment/Item/type';
 import { useDispatch } from '@/store';
 import { deleteComment } from '@/slices/postDetail';
 import { Text, Avatar, Button } from '@/components';
@@ -14,6 +10,20 @@ import {
   CommentAuthorWrapper,
 } from '@/pages/PostDetail/components/Comment/Item/style';
 import theme from '@/styles/theme';
+
+export interface CommentItemProps {
+  authorName: string;
+  authorImage: string;
+  createdAt: string;
+  comment: string;
+  authorId: string;
+  commentId: string;
+}
+
+export interface CommentContent {
+  type: string;
+  content: string;
+}
 
 const Item = ({
   authorName,

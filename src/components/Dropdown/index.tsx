@@ -12,11 +12,15 @@ import {
   MenuForm,
 } from '@/components/Dropdown/style';
 import useClickAway from '@/hooks/useClickAway';
-import { DropdownProps } from '@/components/Dropdown/type';
 
 export interface Channel {
   _id: string;
   name: string;
+}
+
+export interface DropdownProps {
+  channelId: string;
+  setChannelId: (value: string) => void;
 }
 
 const DropdownMenu = ({ channelId, setChannelId }: DropdownProps) => {

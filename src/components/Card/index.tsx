@@ -1,6 +1,12 @@
 import { PropsWithChildren } from 'react';
-import CardProps from '@/components/Card/type';
 import theme from '@/styles/theme';
+
+interface CardProps {
+  width: string;
+  height: string;
+  shadowType?: 'medium' | 'large';
+  style?: React.CSSProperties;
+}
 
 const Card = ({
   width = '100px',
