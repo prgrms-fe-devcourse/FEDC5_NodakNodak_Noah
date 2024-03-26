@@ -1,17 +1,16 @@
 ---
-name: Refactor
-about: 코드수정
-title: "[Refector]"
-labels: refactor
+name: 이슈 템플릿
+about: Issue Template
+title: "[Refactor] 작업내용"
+labels: ''
 assignees: ''
 
 ---
 
-## Description
+## 🤷‍♂️ 내용 요약
 
-### ✅Todo
-- [ ] Todo
-- [ ] Todo
-- [ ] Todo
+- [ ] 체크리스트
+- [ ] 체크리스트
+- [ ] 체크리스트
 
-> Reference
+## 📒 특이사항
