@@ -1,4 +1,4 @@
-import { MainWrapper, PostContentWrapper } from '@/pages/MainPage/style';
+import { MainWrapper, PostContentWrapper } from '@/pages/Main/style';
 import PostList from '@/components/Main/PostList';
 import UserList from '@/components/Main/UserList';
 import ContentHeader from '@/components/Main/ContentHeader';

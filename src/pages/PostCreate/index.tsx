@@ -1,7 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import PostForm from '@/components/Post/Edit/PostForm';
-import { FormPageContainer } from '@/pages/PostPage/style';
+import { FormPageContainer } from '@/pages/PostCreate/style';
 import UserInfo from '@/components/Post/Edit/UserInfo';
 import { getMyInfo } from '@/slices/user/thunk';
 import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';

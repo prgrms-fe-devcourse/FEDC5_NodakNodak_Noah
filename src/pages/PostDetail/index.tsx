@@ -7,7 +7,7 @@ import { useDispatch } from '@/store';
 import { getMyInfo } from '@/slices/user/thunk';
 import { getPostDetail } from '@/slices/postDetail/thunk';
 import LikeButton from '@/components/Post/Detail/LikeButton';
-import { DetailPageContainer } from '@/pages/DetailPage/style';
+import { DetailPageContainer } from '@/pages/PostDetail/style';
 
 const DetailPage = () => {
   const dispatch = useDispatch();

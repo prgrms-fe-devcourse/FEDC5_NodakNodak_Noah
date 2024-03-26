@@ -5,7 +5,7 @@ import {
   NotFoundContainer,
   NotFoundWrapper,
   TitleText,
-} from '@/pages/NotFoundPage/style';
+} from '@/pages/NotFound/style';
 
 const NotFound = () => {
   const navigate = useNavigate();

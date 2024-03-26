@@ -9,7 +9,7 @@ import {
   RequestMessage,
   RequestUl,
 } from './style';
-import { Container } from '../SignPage/style';
+import { Container } from '../Sign/style';
 import { useEffect, useState } from 'react';
 import axiosInstance from '@/utils/customAxios';
 import { Button, Input, Text } from '@/components/common';

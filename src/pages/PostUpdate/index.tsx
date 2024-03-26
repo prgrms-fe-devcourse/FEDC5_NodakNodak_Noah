@@ -6,7 +6,7 @@ import { getPostDetail } from '@/slices/postDetail/thunk';
 import { getMyInfo } from '@/slices/user/thunk';
 import UserInfo from '@/components/Post/Edit/UserInfo';
 import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
-import { FormPageContainer } from '@/pages/PostPage/style';
+import { FormPageContainer } from '@/pages/PostCreate/style';
 
 const PostUpdatePage = () => {
   const { postId } = useParams();

@@ -3,7 +3,7 @@ import {
   Container,
   MessageContent,
   RequestCard,
-} from '@/pages/RequestPage/style';
+} from '@/pages/RequestToAdmin/style';
 import { Button, Text } from '@/components/common';
 import axiosInstance from '@/utils/customAxios';
 import { getMyInfo } from '@/slices/user/thunk';
