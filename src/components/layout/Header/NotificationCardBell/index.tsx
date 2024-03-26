@@ -20,9 +20,9 @@ import {
   NotificationList,
   NotificationHeader,
 } from '@/components/layout/Header/NotificationCardBell/style';
-import UserSnippet from '@/components/Main/UserList/UserSnippet';
-import { Badge, ScrollBar, Text, Button } from '@/components/common';
-import UserGroup from '@/components/Main/UserList/UserGroup';
+import UserSnippet from '@/pages/Main/components/UserList/UserSnippet';
+import { Badge, ScrollBar, Text, Button } from '@/components';
+import UserGroup from '@/pages/Main/components/UserList/UserGroup';
 import { NotificationData } from '@/components/layout/Header/NotificationCardBell/type';
 
 const NotificationCardBell = () => {

@@ -12,7 +12,7 @@ import {
 import { Container } from '../Sign/style';
 import { useEffect, useState } from 'react';
 import axiosInstance from '@/utils/customAxios';
-import { Button, Input, Text } from '@/components/common';
+import { Button, Input, Text } from '@/components';
 import { Message } from '@/types/APIResponseTypes';
 import { useDispatch } from '@/store';
 import { getMyInfo } from '@/slices/user/thunk';

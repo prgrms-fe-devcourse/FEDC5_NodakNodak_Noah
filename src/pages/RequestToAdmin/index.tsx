@@ -4,7 +4,7 @@ import {
   MessageContent,
   RequestCard,
 } from '@/pages/RequestToAdmin/style';
-import { Button, Text } from '@/components/common';
+import { Button, Text } from '@/components';
 import axiosInstance from '@/utils/customAxios';
 import { getMyInfo } from '@/slices/user/thunk';
 import { useDispatch } from '@/store';

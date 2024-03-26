@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import ProtectedRoute from '@/components/common/ProtectedRoute';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 import store from '@/store';
 import App from '@/App';
@@ -16,11 +16,11 @@ import NotFoundPage from '@/pages/NotFound';
 import DetailPage from '@/pages/PostDetail';
 import PostCreatePage from '@/pages/PostCreate';
 import PostUpdatePage from '@/pages/PostUpdate';
-import PostVoteChart from '@/components/Post/Detail/Result';
-import PostVote from '@/components/Post/Detail/Vote';
+import PostVoteChart from '@/pages/PostDetail/components/Result';
+import PostVote from '@/pages/PostDetail/components/Vote';
 import RequestToAdminPage from '@/pages/RequestToAdmin';
-import UserInfo from '@/components/Setting/UserInfo';
-import Password from '@/components/Setting/Password';
+import UserInfo from '@/pages/ProfileEdit/component/UserInfo';
+import Password from '@/pages/ProfileEdit/component/Password';
 import GlobalStyle from '@/styles/GlobalStyle';
 
 const router = createBrowserRouter([

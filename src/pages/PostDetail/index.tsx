@@ -1,12 +1,12 @@
 import { useEffect } from 'react';
 import { useParams, Outlet } from 'react-router-dom';
 
-import PostComment from '@/components/Post/Detail/Comment';
-import PostContent from '@/components/Post/Detail/Content';
+import PostComment from '@/pages/PostDetail/components/Comment';
+import PostContent from '@/pages/PostDetail/components/Content';
 import { useDispatch } from '@/store';
 import { getMyInfo } from '@/slices/user/thunk';
 import { getPostDetail } from '@/slices/postDetail/thunk';
-import LikeButton from '@/components/Post/Detail/LikeButton';
+import LikeButton from '@/pages/PostDetail/components/LikeButton';
 import { DetailPageContainer } from '@/pages/PostDetail/style';
 
 const DetailPage = () => {

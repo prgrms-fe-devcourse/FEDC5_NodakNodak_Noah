@@ -4,7 +4,7 @@ import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import { Container, CardWrapper } from '@/pages/ProfileEdit/style';
 import { getUser } from '@/slices/user/thunk';
 import { useDispatch } from '@/store';
-import { Avatar } from '@/components/common';
+import { Avatar } from '@/components';
 import { useSelectedUser } from '@/hooks/useSelectedUser';
 
 const Setting = () => {
