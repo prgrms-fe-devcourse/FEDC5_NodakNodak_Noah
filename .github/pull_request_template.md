@@ -1,19 +1,27 @@
-- [ ] 커밋, PR 제목 및 라벨 등을 확인했습니다.
+## 💬 Issue Number
 
-# 1. Works
-## 1-1.ISSUE_KEY: { short summary }
-- documentName: { link to document }
+> closes #1
 
-### Explain
-{ explanations }
+## 🤷‍♂️ Description
 
-### Refer
-{ images/videos }
+> 작업 내용에 대한 설명
 
-</br>
+## 📷 Screenshots
 
-# 2. PackageDiff (optional)
-- added { packageName, packageName } // group by task
-- removed/updated { packageName }
+> 작업 결과물
 
-</br>
+## 👻 Good Function
+
+> 팀원에게 공유하고 싶은 함수나 코드 일부
+
+## 📋 Check List
+
+> PR 전 체크해주세요.
+
+- [ ] Merge 하는 브랜치가 올바른가?
+- [ ] 코딩컨벤션을 준수하는가?
+- [ ] PR과 관련없는 변경사항이 없는가?
+
+## 📒 Remarks
+
+> 팀원이 코드리뷰 시 주의할 점 또는 말하고 싶은 점 특이사항
