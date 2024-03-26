@@ -7,7 +7,7 @@ import {
   TextWrapper,
   ContentWrapper,
   Warning,
-} from '@/pages/ProfileEdit/component/style';
+} from '@/pages/ProfileEdit/components/style';
 import { Input, Text, Button } from '@/components';
 import { useSelectedUser } from '@/hooks/useSelectedUser';
 import MailIcon from '@/assets/MailIcon';

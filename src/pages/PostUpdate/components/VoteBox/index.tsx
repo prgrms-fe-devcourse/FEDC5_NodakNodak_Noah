@@ -3,7 +3,7 @@ import {
   Content,
   InputContainer,
   DeleteButton,
-} from '@/pages/PostUpdate/component/VoteBox/style';
+} from '@/pages/PostUpdate/components/VoteBox/style';
 import { PLACEHOLDER, MESSAGE } from '@/utils/constants';
 import { Card, Input, Button, ScrollBar } from '@/components';
 import DeleteIcon from '@/assets/DeleteIcon';

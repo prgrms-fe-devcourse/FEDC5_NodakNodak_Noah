@@ -7,7 +7,7 @@ import {
   TextWrapper,
   ContentWrapper,
   Warning,
-} from '@/pages/ProfileEdit/component/style';
+} from '@/pages/ProfileEdit/components/style';
 import PasswordInput from '@/components/Input/PasswordInput';
 import { Text, Button } from '@/components';
 import { useSelectedUser } from '@/hooks/useSelectedUser';

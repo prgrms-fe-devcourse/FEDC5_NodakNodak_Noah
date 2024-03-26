@@ -4,7 +4,7 @@ import {
   FlexWrapper,
   PostSnippetBox,
   ContentBox,
-} from '@/pages/Main/components/PostList/PostCard/style';
+} from '@/pages/Main/components/PostList/style';
 import { UserSnippetBox } from '@/pages/Main/components/style';
 import { Button, Card, Text, Avatar } from '@/components';
 import {

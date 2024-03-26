@@ -19,8 +19,8 @@ import PostUpdatePage from '@/pages/PostUpdate';
 import PostVoteChart from '@/pages/PostDetail/components/Result';
 import PostVote from '@/pages/PostDetail/components/Vote';
 import RequestToAdminPage from '@/pages/RequestToAdmin';
-import UserInfo from '@/pages/ProfileEdit/component/UserInfo';
-import Password from '@/pages/ProfileEdit/component/Password';
+import UserInfo from '@/pages/ProfileEdit/components/UserInfo';
+import Password from '@/pages/ProfileEdit/components/Password';
 import GlobalStyle from '@/styles/GlobalStyle';
 
 const router = createBrowserRouter([

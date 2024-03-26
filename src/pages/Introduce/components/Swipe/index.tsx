@@ -3,7 +3,7 @@ import theme from '@/styles/theme';
 import {
   StyledSwiper,
   StyledSwiperSlide,
-} from '@/pages/Introduce/components/style';
+} from '@/pages/Introduce/components/Swipe/style';
 
 const Swipe = () => {
   return (

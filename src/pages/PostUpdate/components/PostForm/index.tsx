@@ -1,13 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 
-import VoteBox from '@/pages/PostUpdate/component/VoteBox';
+import VoteBox from '@/pages/PostUpdate/components/VoteBox';
 import { isValidatedForm } from '@/utils/Validations/formValidation';
 import { MESSAGE } from '@/utils/constants';
-import { sendPostRequest } from '@/pages/PostUpdate/component/Api';
-import FormContent from '@/pages/PostUpdate/component/FormContent';
+import { sendPostRequest } from '@/pages/PostUpdate/components/Api';
+import FormContent from '@/pages/PostUpdate/components/FormContent';
 import { Button } from '@/components';
-import { ButtonWrapper } from '@/pages/PostUpdate/component/PostForm/style';
+import { ButtonWrapper } from '@/pages/PostUpdate/components/PostForm/style';
 
 export interface FormType {
   title: string;

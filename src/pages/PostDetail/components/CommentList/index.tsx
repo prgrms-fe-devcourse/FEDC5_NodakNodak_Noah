@@ -6,12 +6,12 @@ import {
   CommentBoundaryLine,
   CommentContainer,
   FormContainer,
-} from '@/pages/PostDetail/components/Comment/style';
+} from '@/pages/PostDetail/components/CommentList/style';
 import { useDispatch } from '@/store';
 import { createNotification } from '@/slices/notification/thunk';
 import { CreateNotificationData } from '@/slices/notification/type';
 import { getPostDetail } from '@/slices/postDetail/thunk';
-import Item from '@/pages/PostDetail/components/Comment/Item';
+import Item from '@/pages/PostDetail/components/CommentList/CommentItem';
 import { Input, Button } from '@/components';
 import { Warning } from '@/pages/Sign/components/style';
 import theme from '@/styles/theme';
@@ -23,7 +23,7 @@ import axiosInstance from '@/utils/customAxios';
 
 const MAX_COMMENT_LENGTH = 120;
 
-const PostComment = () => {
+const CommentList = () => {
   const postDetailComment = useSelectedComment();
   const { postId } = useParams();
   const [comment, setComment] = useState('');
@@ -151,4 +151,4 @@ const PostComment = () => {
   );
 };
 
-export default PostComment;
+export default CommentList;

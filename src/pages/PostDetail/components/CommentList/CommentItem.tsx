@@ -1,14 +1,15 @@
+import {
+  CommentAuthorContainer,
+  CommentAuthorWrapper,
+  CommentItemContainer,
+} from './style';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from '@/store';
 import { deleteComment } from '@/slices/postDetail';
 import { Text, Avatar, Button } from '@/components';
 import axiosInstance from '@/utils/customAxios';
 import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
-import {
-  CommentItemContainer,
-  CommentAuthorContainer,
-  CommentAuthorWrapper,
-} from '@/pages/PostDetail/components/Comment/Item/style';
+
 import theme from '@/styles/theme';
 
 export interface CommentItemProps {
@@ -25,7 +26,7 @@ export interface CommentContent {
   content: string;
 }
 
-const Item = ({
+const CommentItem = ({
   authorName,
   authorImage,
   authorId,
@@ -114,4 +115,4 @@ const Item = ({
   );
 };
 
-export default Item;
+export default CommentItem;

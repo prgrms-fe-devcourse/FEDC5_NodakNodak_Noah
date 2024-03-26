@@ -1,7 +1,7 @@
 import {
   InputWrapper,
   BarChartContainer,
-} from '@/pages/PostDetail/components/Result/BarChart/style';
+} from '@/pages/PostDetail/components/Result/style';
 import theme from '@/styles/theme';
 import { Text, Input } from '@/components';
 

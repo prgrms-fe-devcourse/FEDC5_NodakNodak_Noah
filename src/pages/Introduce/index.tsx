@@ -1,13 +1,10 @@
+import { IndexContainer, IndexWrapper, LogoContainer } from './style';
 import { useNavigate } from 'react-router-dom';
 
 import Logo from '@/assets/Logo';
 import Button from '@/components/Button';
-import {
-  IndexContainer,
-  IndexWrapper,
-  LogoContainer,
-} from '@/pages/IndexPage/style';
-import Swipe from '@/pages/Introduce/components';
+
+import Swipe from '@/pages/Introduce/components/Swipe';
 
 const Index = () => {
   const navigate = useNavigate();

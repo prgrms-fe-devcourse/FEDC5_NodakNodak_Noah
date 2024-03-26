@@ -9,7 +9,7 @@ import {
   FormArea,
   TextAreaWrapper,
   StyledTextArea,
-} from '@/pages/PostUpdate/component/FormContent/style';
+} from '@/pages/PostUpdate/components/FormContent/style';
 import { PLACEHOLDER, FORM_SIZE } from '@/utils/constants';
 import { useDispatch } from '@/store';
 import { getMyInfo } from '@/slices/user/thunk';

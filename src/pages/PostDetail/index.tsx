@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useParams, Outlet } from 'react-router-dom';
 
-import PostComment from '@/pages/PostDetail/components/Comment';
+import PostComment from '@/pages/PostDetail/components/CommentList';
 import PostContent from '@/pages/PostDetail/components/Content';
 import { useDispatch } from '@/store';
 import { getMyInfo } from '@/slices/user/thunk';

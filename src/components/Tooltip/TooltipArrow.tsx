@@ -1,5 +1,5 @@
+import { type TooltipDirection } from '.';
 import styled, { css } from 'styled-components';
-import { TooltipDirection } from '@/components/Tooltip/type';
 import theme from '@/styles/theme';
 
 interface TooltipArrowProps {

@@ -9,7 +9,7 @@ import { getPostListByUserId } from '@/slices/postList/thunks';
 import { useSelectedUser } from '@/hooks/useSelectedUser';
 import { usePagination } from '@/hooks/usePagination';
 import theme from '@/styles/theme';
-import { PostCardWrapper } from '@/pages/Main/components/PostList/PostCard/style';
+import { PostCardWrapper } from '@/pages/Main/components/PostList/style';
 import { useSelectedPostListByUser } from '@/hooks/useSelectedPostListByUser';
 
 const UserPostList = () => {

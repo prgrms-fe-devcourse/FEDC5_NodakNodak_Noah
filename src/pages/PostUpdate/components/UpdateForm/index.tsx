@@ -6,10 +6,10 @@ import { Button } from '@/components';
 import { useSelectedVote } from '@/hooks/useSelectedVote';
 import { isValidatedForm } from '@/utils/Validations/formValidation';
 import { MESSAGE } from '@/utils/constants';
-import { sendPostRequest } from '@/pages/PostUpdate/component/Api';
-import VoteBox from '@/pages/PostUpdate/component/VoteBox';
-import FormContent from '@/pages/PostUpdate/component/FormContent';
-import { ButtonWrapper } from '@/pages/PostUpdate/component/PostForm/style';
+import { sendPostRequest } from '@/pages/PostUpdate/components/Api';
+import VoteBox from '@/pages/PostUpdate/components/VoteBox';
+import FormContent from '@/pages/PostUpdate/components/FormContent';
+import { ButtonWrapper } from '@/pages/PostUpdate/components/PostForm/style';
 
 export interface FormType {
   title: string;

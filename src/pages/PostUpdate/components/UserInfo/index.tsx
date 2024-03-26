@@ -1,4 +1,4 @@
-import { UserInfoWrapper } from '@/pages/PostUpdate/component/UserInfo/style';
+import { UserInfoWrapper } from '@/pages/PostUpdate/components/UserInfo/style';
 import { Avatar, Text } from '@/components';
 import theme from '@/styles/theme';
 

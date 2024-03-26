@@ -4,7 +4,7 @@ import Pagination from '@/components/Pagination';
 import PostCard from '@/pages/Main/components/PostList/PostCard';
 import MainPageSpinner from '@/components/MainPageSpinner';
 import { useSearchPosts } from '@/pages/Main/components/hooks/useSearchPosts';
-import { PostCardWrapper } from '@/pages/Main/components/PostList/PostCard/style';
+import { PostCardWrapper } from '@/pages/Main/components/PostList/style';
 import { useFetchChannelPosts } from '@/pages/Main/components/hooks/useChannelPosts';
 import { usePagination } from '@/hooks/usePagination';
 
