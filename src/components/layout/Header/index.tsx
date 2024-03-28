@@ -8,13 +8,10 @@ import {
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { Text, Card, Input, Avatar, Button } from '@/components/common';
+import { Text, Card, Input, Avatar, Button } from '@/components';
 import LogoWithFontSize from '@/components/layout/LogoWithFontSize';
 import NotificationCardBell from '@/components/layout/Header/NotificationCardBell';
-import {
-  DropdownContent,
-  ListItemButton,
-} from '@/components/common/Dropdown/style';
+import { DropdownContent, ListItemButton } from '@/components/Dropdown/style';
 import useClickAway from '@/hooks/useClickAway';
 import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 import { useSelectedChannels } from '@/hooks/useSelectedChannel';

@@ -2,34 +2,39 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import ProtectedRoute from '@/components/common/ProtectedRoute';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
 import store from '@/store';
 import App from '@/App';
-import Admin from '@/pages/AdminPage';
-import Main from '@/pages/MainPage';
-import Login from '@/pages/SignPage';
-import Index from '@/pages/IndexPage';
-import UserPage from '@/pages/UserPage';
-import Setting from '@/pages/SettingPage';
-import NotFound from '@/pages/NotFoundPage';
-import DetailPage from '@/pages/DetailPage';
-import PostCreatePage from '@/pages/PostPage';
-import PostUpdatePage from '@/pages/UpdatePage';
-import PostVoteChart from '@/components/Post/Detail/Result';
-import PostVote from '@/components/Post/Detail/Vote';
-import RequestToAdmin from '@/pages/RequestPage';
-import UserInfo from '@/components/Setting/UserInfo';
-import Password from '@/components/Setting/Password';
+import AdminPage from '@/pages/Admin';
+import MainPage from '@/pages/Main';
+import LoginPage from '@/pages/Sign';
+import IntroducePage from '@/pages/Introduce';
+import UserPage from '@/pages/Profile';
+import ProfileEditPage from '@/pages/ProfileEdit';
+import NotFoundPage from '@/pages/NotFound';
+import DetailPage from '@/pages/PostDetail';
+import PostCreatePage from '@/pages/PostCreate';
+import PostUpdatePage from '@/pages/PostUpdate';
+import PostVoteChart from '@/pages/PostDetail/components/Result';
+import PostVote from '@/pages/PostDetail/components/Vote';
+import RequestToAdminPage from '@/pages/RequestToAdmin';
+import UserInfo from '@/pages/ProfileEdit/components/UserInfo';
+import Password from '@/pages/ProfileEdit/components/Password';
 import GlobalStyle from '@/styles/GlobalStyle';
 
 const router = createBrowserRouter([
-  { path: '/', element: <Index />, errorElement: <NotFound />, index: true },
+  {
+    path: '/',
+    element: <IntroducePage />,
+    errorElement: <NotFoundPage />,
+    index: true,
+  },
   {
     path: '/user/:userId/setting/',
     element: (
       <ProtectedRoute>
-        <Setting />
+        <ProfileEditPage />
       </ProtectedRoute>
     ),
     children: [
@@ -58,13 +63,13 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
-      { path: '/home/:channelId?', element: <Main /> },
+      { path: '/home/:channelId?', element: <MainPage /> },
       { path: '/user/:userId', element: <UserPage /> },
       {
         path: '/request',
         element: (
           <ProtectedRoute>
-            <RequestToAdmin />
+            <RequestToAdminPage />
           </ProtectedRoute>
         ),
       },
@@ -72,7 +77,7 @@ const router = createBrowserRouter([
         path: '/admin',
         element: (
           <ProtectedRoute admin>
-            <Admin />
+            <AdminPage />
           </ProtectedRoute>
         ),
       },
@@ -90,7 +95,7 @@ const router = createBrowserRouter([
       },
     ],
   },
-  { path: '/sign', element: <Login /> },
+  { path: '/sign', element: <LoginPage /> },
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

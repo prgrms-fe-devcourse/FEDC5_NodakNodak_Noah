@@ -20,10 +20,18 @@ import {
   NotificationList,
   NotificationHeader,
 } from '@/components/layout/Header/NotificationCardBell/style';
-import UserSnippet from '@/components/Main/UserList/UserSnippet';
-import { Badge, ScrollBar, Text, Button } from '@/components/common';
-import UserGroup from '@/components/Main/UserList/UserGroup';
-import { NotificationData } from '@/components/layout/Header/NotificationCardBell/type';
+import UserSnippet from '@/pages/Main/components/UserList/UserSnippet';
+import { Badge, ScrollBar, Text, Button } from '@/components';
+import UserGroup from '@/pages/Main/components/UserList/UserGroup';
+import { type User } from '@/types/APIResponseTypes';
+
+export interface NotificationData {
+  _id: string;
+  text: string;
+  isFollowing: boolean;
+  author: User;
+  handleClick?: () => void | undefined;
+}
 
 const NotificationCardBell = () => {
   const token = localStorage.getItem('auth-token');
