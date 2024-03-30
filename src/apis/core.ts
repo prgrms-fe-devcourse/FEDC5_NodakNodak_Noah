@@ -7,13 +7,8 @@ const HTTP_METHODS = {
   DELETE: 'delete',
 } as const;
 
-const TIME_OUT = 2000;
-
 const axiosInstance = axios.create({
-  baseURL: `${import.meta.env.VITE_API_URL}/${
-    import.meta.env.VITE_PORT_NUMBER
-  }`,
-  timeout: TIME_OUT,
+  baseURL: `${import.meta.env.VITE_API_URL}`,
   headers: {
     'Content-Type': 'application/json',
   },
