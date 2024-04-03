@@ -25,7 +25,8 @@ const Admin = () => {
 
   const { data: messages, isLoading } = useQuery({
     queryKey: ['request'],
-    queryFn: async () => await axiosInstance.get('messages/conversations'),
+    queryFn: async () =>
+      await axiosInstance.get<Message[]>('messages/conversations'),
   });
 
   const handleSeen = async (id: string) => {
