@@ -1,6 +1,5 @@
+import { BadgeBox, Super } from './style';
 import { PropsWithChildren } from 'react';
-
-import { BadgeContainer, Super } from '@/components/OnlineBadge/style';
 
 export interface OnlineBadgePropsTypes {
   isOnline: boolean;
@@ -13,10 +12,10 @@ const OnLineBadge = ({
   isFollowing = false,
 }: PropsWithChildren<OnlineBadgePropsTypes>) => {
   return (
-    <BadgeContainer>
+    <BadgeBox>
       {children}
       <Super className='dot' $isOnline={isOnline} $isFollowing={isFollowing} />
-    </BadgeContainer>
+    </BadgeBox>
   );
 };
 

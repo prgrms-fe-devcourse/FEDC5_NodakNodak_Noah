@@ -1,6 +1,6 @@
 ﻿import { forwardRef, Ref } from 'react';
 
-import { Wrapper, StyledInput } from '@/components/Input/style';
+import { InputBox, InputElement } from '@/components/Input/style';
 
 export interface InputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {
@@ -35,18 +35,18 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     ref: Ref<HTMLInputElement>,
   ) => {
     return (
-      <Wrapper
+      <InputBox
         ref={ref}
         $justifyContent={justifyContent}
         style={{ width: wrapperWidth }}>
-        <StyledInput
+        <InputElement
           $bordertype={bordertype}
           $fontType={fontType}
           $underline={underline}
           style={{ ...props.style, width, height }}
           {...props}
         />
-      </Wrapper>
+      </InputBox>
     );
   },
 );

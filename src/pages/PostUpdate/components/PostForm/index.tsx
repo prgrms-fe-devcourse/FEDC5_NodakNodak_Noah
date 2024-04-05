@@ -89,7 +89,7 @@ const PostForm = ({ channelId }: { channelId: string | undefined }) => {
         isEditable
       />
       <ButtonWrapper>
-        <Button styleType='primary' size='small' type='submit' event='enabled'>
+        <Button styleType='primary' size='small' event='enabled'>
           등록하기
         </Button>
       </ButtonWrapper>
