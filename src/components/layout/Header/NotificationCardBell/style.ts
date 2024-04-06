@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import theme from '@/styles/theme';
 
-export const NotificationContainer = styled.nav`
+export const NotificationBox = styled.nav`
   display: flex;
   flex-direction: column;
   width: 280px;

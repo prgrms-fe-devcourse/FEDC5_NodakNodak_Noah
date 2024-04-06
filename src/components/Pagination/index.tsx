@@ -1,10 +1,6 @@
+import { PageNumberBox, PaginationBox, TextBox } from './style';
 import RightArrowIcon from '@/assets/RightArrowIcon';
 import { Button, Text } from '@/components';
-import {
-  PaginationWrapper,
-  TextWrapper,
-  PageNumberWrapper,
-} from '@/components/Pagination/style';
 import theme from '@/styles/theme';
 
 export interface PaginationProps {
@@ -28,7 +24,7 @@ const Pagination = ({ page, totalPage, onPageChange }: PaginationProps) => {
   if (totalPage <= 1) return null;
 
   return (
-    <PaginationWrapper>
+    <PaginationBox>
       <Button
         size='mini'
         styleType='ghost'
@@ -36,9 +32,9 @@ const Pagination = ({ page, totalPage, onPageChange }: PaginationProps) => {
         style={{ padding: '0' }}>
         <RightArrowIcon flip />
       </Button>
-      <PageNumberWrapper>
+      <PageNumberBox>
         {pageArray.map((index) => (
-          <TextWrapper key={index} onClick={handlePageChange(index + 1)}>
+          <TextBox key={index} onClick={handlePageChange(index + 1)}>
             <Text
               key={index}
               tagType='span'
@@ -55,9 +51,9 @@ const Pagination = ({ page, totalPage, onPageChange }: PaginationProps) => {
               }>
               {(index + 1).toString()}
             </Text>
-          </TextWrapper>
+          </TextBox>
         ))}
-      </PageNumberWrapper>
+      </PageNumberBox>
       <Button
         size='mini'
         styleType='ghost'
@@ -65,7 +61,7 @@ const Pagination = ({ page, totalPage, onPageChange }: PaginationProps) => {
         style={{ padding: '0' }}>
         <RightArrowIcon />
       </Button>
-    </PaginationWrapper>
+    </PaginationBox>
   );
 };
 

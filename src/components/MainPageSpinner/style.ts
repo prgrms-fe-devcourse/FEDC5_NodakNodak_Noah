@@ -15,7 +15,7 @@ export const Spinner = styled.div`
   animation: ${spin} 2s linear infinite;
 `;
 
-export const SpinnerContainer = styled.div`
+export const SpinnerBox = styled.div`
   display: flex;
   width: 904px;
   height: 600px;

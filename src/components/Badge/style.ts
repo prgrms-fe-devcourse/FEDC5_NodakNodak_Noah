@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import theme from '@/styles/theme';
 
-export const BadgeContainer = styled.div`
+export const BadgeBox = styled.div`
   position: relative;
   display: inline-block;
   text-align: center;

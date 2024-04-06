@@ -1,14 +1,21 @@
-import { LogoWithFontSizeProps } from '@/components/layout/LogoWithFontSize/type';
 import theme from '@/styles/theme';
 
-const LogoWithFontSize = ({ fontSize = '16px' }: LogoWithFontSizeProps) => {
-  const baseFontSize = 110;
-  const originalWidth = 457;
-  const originalHeight = 110;
+export interface LogoWithFontSizeProps {
+  fontSize?: string;
+}
 
-  const scaleFactor = parseInt(fontSize, 10) / baseFontSize;
-  const width = originalWidth * scaleFactor;
-  const height = originalHeight * scaleFactor;
+const baseFontSize = 110;
+const originalWidth = 457;
+const originalHeight = 110;
+
+const scaleFactor = (fontSize: string) => {
+  const factor = parseInt(fontSize, 10) / baseFontSize;
+
+  return [originalWidth * factor, originalHeight * factor];
+};
+
+const LogoWithFontSize = ({ fontSize = '16px' }: LogoWithFontSizeProps) => {
+  const [width, height] = scaleFactor(fontSize);
 
   return (
     <svg

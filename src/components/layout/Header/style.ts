@@ -1,19 +1,19 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const StyledHeaderWrapper = styled.nav`
+export const HeaderLayout = styled.nav`
   width: 80%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
 
-export const LogoWrapper = styled.div`
+export const LogoBox = styled.div`
   cursor: pointer;
   user-select: none;
 `;
 
-export const ChannelWrapper = styled.div`
+export const ChannelList = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,18 +22,18 @@ export const ChannelWrapper = styled.div`
   width: 400px;
 `;
 
-export const NavLinkWrapper = styled(NavLink)`
+export const NavLinkBox = styled(NavLink)`
   text-decoration: none;
 `;
 
-export const FormContainer = styled.form`
+export const FormElement = styled.form`
   display: flex;
   position: relative;
   width: 160px;
   flex-wrap: nowrap;
 `;
 
-export const AuthUiWrapper = styled.div`
+export const AuthUiBox = styled.div`
   display: flex;
   position: relative;
   justify-content: center;
@@ -41,7 +41,7 @@ export const AuthUiWrapper = styled.div`
   gap: 16px;
 `;
 
-export const IconWrapper = styled.span`
+export const IconBox = styled.span`
   cursor: pointer;
   user-select: none;
   transition: all 0.2s linear;

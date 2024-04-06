@@ -16,9 +16,9 @@ import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 import { useSelectedNotifications } from '@/hooks/useSelectedNotifications';
 import { useSelectedPostListByMyId } from '@/hooks/useSelectedPostListById';
 import {
-  NotificationContainer,
   NotificationList,
   NotificationHeader,
+  NotificationBox,
 } from '@/components/layout/Header/NotificationCardBell/style';
 import UserSnippet from '@/pages/Main/components/UserList/UserSnippet';
 import { Badge, ScrollBar, Text, Button } from '@/components';
@@ -149,7 +149,7 @@ const NotificationCardBell = () => {
     <Badge count={count}>
       <BellIcon onToggleCard={handleToggleCard} />
       {toggleNotification && (
-        <NotificationContainer ref={ref}>
+        <NotificationBox ref={ref}>
           <ScrollBar>
             <NotificationHeader>
               <Text tagType='span' fontType='body3'>
@@ -192,7 +192,7 @@ const NotificationCardBell = () => {
               </UserGroup>
             </NotificationList>
           </ScrollBar>
-        </NotificationContainer>
+        </NotificationBox>
       )}
     </Badge>
   );

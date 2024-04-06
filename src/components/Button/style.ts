@@ -125,7 +125,7 @@ interface ButtonLayoutProps {
   $disabled?: boolean;
 }
 
-export const ButtonLayout = styled.button<ButtonLayoutProps>`
+export const ButtonElement = styled.button<ButtonLayoutProps>`
   border-radius: 8px;
   border: none;
   text-align: center;
@@ -179,7 +179,7 @@ interface ButtonWrapperProps {
   $size?: 'mini' | 'small' | 'regular' | 'wide';
 }
 
-export const ButtonWrapper = styled.div<ButtonWrapperProps>`
+export const ButtonBox = styled.div<ButtonWrapperProps>`
   visibility: hidden;
   padding: 1px;
   flex-direction: column;

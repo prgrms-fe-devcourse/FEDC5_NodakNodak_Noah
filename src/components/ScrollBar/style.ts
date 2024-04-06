@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import theme from '@/styles/theme';
 
-export const PaddingWrapper = styled.div`
+export const PaddingBox = styled.div`
   display: flex;
   padding: 16px 8px 16px 16px;
   height: 100%;
@@ -11,7 +11,7 @@ export const PaddingWrapper = styled.div`
   padding: 16px;
 `;
 
-export const ScrollBarWrapper = styled.div`
+export const ScrollBarBox = styled.div`
   width: 100%;
   height: 100%;
   overflow-y: auto;

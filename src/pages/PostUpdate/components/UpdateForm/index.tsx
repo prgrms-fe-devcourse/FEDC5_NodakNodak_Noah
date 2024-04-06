@@ -137,7 +137,7 @@ const UpdateForm = ({ postId }: { postId: string | undefined }) => {
         isEditable={isVoteEmpty}
       />
       <ButtonWrapper>
-        <Button styleType='primary' size='small' type='submit' event='enabled'>
+        <Button styleType='primary' size='small' event='enabled'>
           수정하기
         </Button>
       </ButtonWrapper>

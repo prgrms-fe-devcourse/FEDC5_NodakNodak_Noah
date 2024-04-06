@@ -7,9 +7,9 @@ import DownArrowIcon from '@/assets/DownArrowIcon';
 import {
   DropdownButton,
   BorderLine,
-  ListItemButton,
-  DropdownContent,
-  MenuForm,
+  DropDownItem,
+  MenuBox,
+  DropdownList,
 } from '@/components/Dropdown/style';
 import useClickAway from '@/hooks/useClickAway';
 
@@ -53,7 +53,7 @@ const DropdownMenu = ({ channelId, setChannelId }: DropdownProps) => {
   }, [channelId, channels]);
 
   return (
-    <MenuForm>
+    <MenuBox>
       <DropdownButton
         type='button'
         onClick={toggleMenu}
@@ -64,18 +64,18 @@ const DropdownMenu = ({ channelId, setChannelId }: DropdownProps) => {
         <DownArrowIcon open={isMenuOpen} />
       </DropdownButton>
       {isMenuOpen && (
-        <DropdownContent ref={DropMenuRef as RefObject<HTMLUListElement>}>
+        <DropdownList ref={DropMenuRef as RefObject<HTMLUListElement>}>
           {channels.map((item) => (
-            <ListItemButton
+            <DropDownItem
               type='button'
               key={item._id}
               onClick={() => handleItemClick(item)}>
               {item.name}
-            </ListItemButton>
+            </DropDownItem>
           ))}
-        </DropdownContent>
+        </DropdownList>
       )}
-    </MenuForm>
+    </MenuBox>
   );
 };
 

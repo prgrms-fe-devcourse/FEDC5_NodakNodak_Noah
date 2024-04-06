@@ -1,5 +1,5 @@
 import { PropsWithChildren } from 'react';
-import { BadgeContainer, Super } from '@/components/Badge/style';
+import { BadgeBox, Super } from '@/components/Badge/style';
 
 export interface BadgeProps {
   count?: number;
@@ -20,10 +20,10 @@ const Badge = ({
   }
 
   return (
-    <BadgeContainer style={{ ...props.style }}>
+    <BadgeBox style={{ ...props.style }}>
       {children}
       {badge}
-    </BadgeContainer>
+    </BadgeBox>
   );
 };
 
