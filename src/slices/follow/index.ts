@@ -1,10 +1,10 @@
 import { PayloadAction, createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { getUser, getMyInfo } from '@/slices/user/thunk';
-import { FollowData, InitialState } from '@/slices/follow/type';
 import { SLICE_NAME } from '@/slices/constants';
 import { follow, unfollow } from '@/slices/follow/thunk';
-import { Follow, User } from '@/types/APIResponseTypes';
+import { FollowData, InitialState } from '@/slices/follow/type';
 import { initialUser } from '@/slices/initialState';
+import { getMyInfo, getUser } from '@/slices/user/thunk';
+import { Follow, User } from '@/types/APIResponseTypes';
 
 const initialState: InitialState = {
   targetUser: initialUser,

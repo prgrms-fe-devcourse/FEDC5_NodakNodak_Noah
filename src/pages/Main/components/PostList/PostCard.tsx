@@ -1,19 +1,17 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-
-import {
-  FlexWrapper,
-  PostSnippetBox,
-  ContentBox,
-} from '@/pages/Main/components/PostList/style';
-import { UserSnippetBox } from '@/pages/Main/components/style';
-import { Button, Card, Text, Avatar } from '@/components';
+import { Avatar, Button, Card, Text } from '@/components';
 import {
   useSelectedChannel,
   useSelectedChannelLoading,
 } from '@/hooks/useSelectedChannel';
 import { useSelectedUser } from '@/hooks/useSelectedUser';
+import {
+  ContentBox,
+  FlexWrapper,
+  PostSnippetBox,
+} from '@/pages/Main/components/PostList/style';
+import { UserSnippetBox } from '@/pages/Main/components/style';
 import theme from '@/styles/theme';
-
 import { Comment, User } from '@/types/APIResponseTypes';
 
 export interface PostCardProps {

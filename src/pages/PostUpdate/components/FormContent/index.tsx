@@ -1,18 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-
-import { Input, Dropdown, Button } from '@/components';
+import { Button, Dropdown, Input } from '@/components';
 import ImageUploader from '@/components/Button/ImageUploadButton';
 import {
-  HeaderWrapper,
-  UploadButtonsWrapper,
   FormArea,
-  TextAreaWrapper,
+  HeaderWrapper,
   StyledTextArea,
+  TextAreaWrapper,
+  UploadButtonsWrapper,
 } from '@/pages/PostUpdate/components/FormContent/style';
-import { PLACEHOLDER, FORM_SIZE } from '@/utils/constants';
-import { useDispatch } from '@/store';
 import { getMyInfo } from '@/slices/user/thunk';
+import { useDispatch } from '@/store';
+import { FORM_SIZE, PLACEHOLDER } from '@/utils/constants';
 
 export interface FormContentProps {
   values: {

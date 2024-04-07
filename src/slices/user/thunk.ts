@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
-import axiosInstance from '@/utils/customAxios';
 import { SLICE_NAME } from '@/slices/constants';
+import axiosInstance from '@/utils/customAxios';
 
 export const getUser = createAsyncThunk(
   `${SLICE_NAME.USER}/getUser`,

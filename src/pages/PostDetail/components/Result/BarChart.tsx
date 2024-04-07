@@ -1,9 +1,9 @@
+import { Input, Text } from '@/components';
 import {
-  InputWrapper,
   BarChartContainer,
+  InputWrapper,
 } from '@/pages/PostDetail/components/Result/style';
 import theme from '@/styles/theme';
-import { Text, Input } from '@/components';
 
 const BarChart = ({
   voteArray,

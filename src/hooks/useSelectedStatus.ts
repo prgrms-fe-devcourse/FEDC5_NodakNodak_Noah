@@ -1,9 +1,8 @@
-import { useSelector } from 'react-redux';
 import { AxiosError } from 'axios';
-
+import { useSelector } from 'react-redux';
 import { RootState } from '@/store';
+import { AllUrlList, Methods } from '@/utils/customAxios/type';
 import { ensureEndingSlash } from '@/utils/customAxios/utils';
-import { Methods, AllUrlList } from '@/utils/customAxios/type';
 
 type UseSelectedStatusType = (
   method: Methods,

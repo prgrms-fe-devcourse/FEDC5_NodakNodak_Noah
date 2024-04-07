@@ -1,10 +1,10 @@
-import { Spinner, SpinnerContainer } from './style';
+import { Spinner, SpinnerBox } from './style';
 
 const MainPageSpinner = () => {
   return (
-    <SpinnerContainer>
+    <SpinnerBox>
       <Spinner />
-    </SpinnerContainer>
+    </SpinnerBox>
   );
 };
 

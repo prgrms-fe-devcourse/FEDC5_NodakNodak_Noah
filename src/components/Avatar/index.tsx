@@ -1,10 +1,10 @@
-import { AvatarWrapper } from './style';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { AvatarBox } from './style';
 
 export interface AvatarProps {
   src?: string;
   size?: 'mini' | 'small' | 'middle' | 'large';
-  alt?: string;
+  alt: string;
   style?: React.CSSProperties;
   onClick?: () => void;
 }
@@ -17,7 +17,7 @@ const avatarSizes = {
 };
 
 const Avatar = ({
-  src,
+  src = '/DefaultProfile.webp',
   size = 'middle',
   alt,
   onClick,
@@ -32,7 +32,7 @@ const Avatar = ({
 
   return (
     <>
-      <AvatarWrapper
+      <AvatarBox
         onClick={onClick}
         style={{
           width: avatarSize,
@@ -41,11 +41,11 @@ const Avatar = ({
         <img
           width={avatarSize}
           height={avatarSize}
-          src={src ? src : '/DefaultProfile.webp'}
+          src={src}
           alt={alt}
           style={{ ...props.style, opacity: loaded ? 1 : 0 }}
         />
-      </AvatarWrapper>
+      </AvatarBox>
     </>
   );
 };

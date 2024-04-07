@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Card, SignText, GoHome } from '@/pages/Sign/style';
+import LeftArrowIcon from '@/assets/LeftArrowIcon';
 import { Text } from '@/components';
 import In from '@/pages/Sign/components/In';
 import Up from '@/pages/Sign/components/Up';
-import LeftArrowIcon from '@/assets/LeftArrowIcon';
+import { Card, Container, GoHome, SignText } from '@/pages/Sign/style';
 import theme from '@/styles/theme';
 
 export interface SignProps {

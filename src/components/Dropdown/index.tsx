@@ -1,17 +1,16 @@
-import { useEffect, useState, RefObject } from 'react';
+import { RefObject, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-
-import { getChannel } from '@/slices/channel/thunk';
-import { useDispatch, RootState } from '@/store';
 import DownArrowIcon from '@/assets/DownArrowIcon';
 import {
-  DropdownButton,
   BorderLine,
-  ListItemButton,
-  DropdownContent,
-  MenuForm,
+  DropDownItem,
+  DropdownButton,
+  DropdownList,
+  MenuBox,
 } from '@/components/Dropdown/style';
 import useClickAway from '@/hooks/useClickAway';
+import { getChannel } from '@/slices/channel/thunk';
+import { RootState, useDispatch } from '@/store';
 
 export interface Channel {
   _id: string;
@@ -53,7 +52,7 @@ const DropdownMenu = ({ channelId, setChannelId }: DropdownProps) => {
   }, [channelId, channels]);
 
   return (
-    <MenuForm>
+    <MenuBox>
       <DropdownButton
         type='button'
         onClick={toggleMenu}
@@ -64,18 +63,18 @@ const DropdownMenu = ({ channelId, setChannelId }: DropdownProps) => {
         <DownArrowIcon open={isMenuOpen} />
       </DropdownButton>
       {isMenuOpen && (
-        <DropdownContent ref={DropMenuRef as RefObject<HTMLUListElement>}>
+        <DropdownList ref={DropMenuRef as RefObject<HTMLUListElement>}>
           {channels.map((item) => (
-            <ListItemButton
+            <DropDownItem
               type='button'
               key={item._id}
               onClick={() => handleItemClick(item)}>
               {item.name}
-            </ListItemButton>
+            </DropDownItem>
           ))}
-        </DropdownContent>
+        </DropdownList>
       )}
-    </MenuForm>
+    </MenuBox>
   );
 };
 

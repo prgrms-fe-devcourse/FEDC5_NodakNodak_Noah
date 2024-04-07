@@ -1,15 +1,14 @@
 import { useNavigate, useParams } from 'react-router-dom';
-
-import {
-  PostContentContainer,
-  PostContentAuthorWrapper,
-  PostContentTitleContainer,
-} from '@/pages/PostDetail/components/Content/style';
-import { Text, Button, Avatar } from '@/components';
+import { Avatar, Button, Text } from '@/components';
 import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
-import axiosInstance from '@/utils/customAxios';
+import {
+  PostContentAuthorWrapper,
+  PostContentContainer,
+  PostContentTitleContainer,
+} from '@/pages/PostDetail/components/Content/style';
 import theme from '@/styles/theme';
+import axiosInstance from '@/utils/customAxios';
 
 const PostContent = () => {
   const postDetailContent = useSelectedPostDetail();

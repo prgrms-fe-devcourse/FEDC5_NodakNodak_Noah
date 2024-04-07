@@ -1,5 +1,4 @@
 ﻿import { useEffect } from 'react';
-
 import useIntervalFn from '@/hooks/useIntervalFn';
 
 type CallbackFunction = () => void;

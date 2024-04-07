@@ -1,11 +1,11 @@
 import { PropsWithChildren } from 'react';
-import { ButtonLayout, ButtonWrapper } from '@/components/Button/style';
+import { ButtonBox, ButtonElement } from '@/components/Button/style';
 
 export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   styleType?: 'primary' | 'ghost' | 'danger';
   size?: 'mini' | 'small' | 'regular' | 'wide';
   event?: 'enabled' | 'hover' | 'disabled';
-  type?: 'button' | 'submit' | 'reset';
+  type?: 'button' | 'submit';
   disabled?: boolean;
 }
 
@@ -14,14 +14,14 @@ const Button = ({
   styleType = 'primary',
   size = 'regular',
   event = 'enabled',
-  type,
+  type = 'submit',
   onClick,
   disabled,
   ...props
 }: PropsWithChildren<ButtonProps>) => {
   return (
-    <ButtonWrapper $styleType={styleType} $size={size}>
-      <ButtonLayout
+    <ButtonBox $styleType={styleType} $size={size}>
+      <ButtonElement
         type={type}
         onClick={onClick}
         $styleType={styleType}
@@ -31,8 +31,8 @@ const Button = ({
         disabled={disabled}
         style={{ ...props.style }}>
         {children}
-      </ButtonLayout>
-    </ButtonWrapper>
+      </ButtonElement>
+    </ButtonBox>
   );
 };
 

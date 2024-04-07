@@ -25,7 +25,7 @@ export interface StyledInputProps {
     | 'caption';
 }
 
-export const Wrapper = styled.div<{
+export const InputBox = styled.div<{
   $justifyContent?: 'center' | 'flex-start';
   $width?: string;
 }>`
@@ -49,7 +49,7 @@ export const Eye = styled.span`
   cursor: pointer;
 `;
 
-export const StyledInput = styled.input<StyledInputProps>`
+export const InputElement = styled.input<StyledInputProps>`
   font-size: ${({ $fontType }) =>
     $fontType ? theme.fontSize[$fontType].size : 'auto'};
   border: 1px solid ${({ $bordertype }) => borderMap[$bordertype]};

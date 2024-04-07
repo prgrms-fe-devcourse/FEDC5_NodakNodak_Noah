@@ -1,15 +1,14 @@
-import { useDispatch as reduxUseDispatch } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
-
-import followReducer from '@/slices/follow';
-import userInfoReducer from '@/slices/user';
+import { useDispatch as reduxUseDispatch } from 'react-redux';
 import channelReducer from '@/slices/channel';
-import statusReducer from '@/slices/status';
-import postListReducer from '@/slices/postList';
-import userListReducer from '@/slices/userList';
-import postDetailReducer from '@/slices/postDetail';
+import followReducer from '@/slices/follow';
 import notificationReducer from '@/slices/notification';
+import postDetailReducer from '@/slices/postDetail';
+import postListReducer from '@/slices/postList';
 import searchedDataReducer from '@/slices/searchedData';
+import statusReducer from '@/slices/status';
+import userInfoReducer from '@/slices/user';
+import userListReducer from '@/slices/userList';
 
 const store = configureStore({
   reducer: {

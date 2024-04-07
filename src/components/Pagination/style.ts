@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const PaginationWrapper = styled.div`
+export const PaginationBox = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -8,14 +8,14 @@ export const PaginationWrapper = styled.div`
   user-select: none;
 `;
 
-export const TextWrapper = styled.span`
+export const TextBox = styled.span`
   display: inline-block;
   width: 30px;
   text-align: center;
   cursor: pointer;
 `;
 
-export const PageNumberWrapper = styled.div`
+export const PageNumberBox = styled.div`
   display: flex;
   align-items: center;
   gap: 16px;

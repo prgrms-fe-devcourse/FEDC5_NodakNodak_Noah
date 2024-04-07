@@ -1,22 +1,22 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import {
-  UserButtonContainer,
-  UserInfoWrapper,
-  UserInfoContainer,
-  AvatarWrapper,
-} from '@/pages/Profile/components/UserInfo/style';
-import GrassTable from '@/pages/Profile/components/GrassTable';
 import { Avatar, Button, Text } from '@/components';
-import { useDispatch } from '@/store';
-import { getUser } from '@/slices/user/thunk';
-import { useSelectedFollowData } from '@/hooks/useSelectedFollowData';
-import { useSelectedUser } from '@/hooks/useSelectedUser';
-import Tooltip from '@/components/Tooltip';
-import { useSelectedUserList } from '@/hooks/useSelectedUserList';
-import { getUserList } from '@/slices/userList/thunk';
 import ImageUploader from '@/components/Button/ImageUploadButton';
+import Tooltip from '@/components/Tooltip';
+import { useSelectedFollowData } from '@/hooks/useSelectedFollowData';
 import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
+import { useSelectedUser } from '@/hooks/useSelectedUser';
+import { useSelectedUserList } from '@/hooks/useSelectedUserList';
+import GrassTable from '@/pages/Profile/components/GrassTable';
+import {
+  AvatarWrapper,
+  UserButtonContainer,
+  UserInfoContainer,
+  UserInfoWrapper,
+} from '@/pages/Profile/components/UserInfo/style';
+import { getUser } from '@/slices/user/thunk';
+import { getUserList } from '@/slices/userList/thunk';
+import { useDispatch } from '@/store';
 
 const MESSAGE = {
   NO_USER_MESSAGE: '사용자가, 없습니다.',

@@ -1,24 +1,23 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-
-import {
-  FlexColumn,
-  CommentBoundaryLine,
-  CommentContainer,
-  FormContainer,
-} from '@/pages/PostDetail/components/CommentList/style';
-import { useDispatch } from '@/store';
-import { createNotification } from '@/slices/notification/thunk';
-import { CreateNotificationData } from '@/slices/notification/type';
-import { getPostDetail } from '@/slices/postDetail/thunk';
-import Item from '@/pages/PostDetail/components/CommentList/CommentItem';
-import { Input, Button } from '@/components';
-import { Warning } from '@/pages/Sign/components/style';
-import theme from '@/styles/theme';
-import { Comment } from '@/types/APIResponseTypes';
+import { Button, Input } from '@/components';
 import useClickAway from '@/hooks/useClickAway';
 import { useSelectedComment } from '@/hooks/useSelectedComment';
 import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
+import Item from '@/pages/PostDetail/components/CommentList/CommentItem';
+import {
+  CommentBoundaryLine,
+  CommentContainer,
+  FlexColumn,
+  FormContainer,
+} from '@/pages/PostDetail/components/CommentList/style';
+import { Warning } from '@/pages/Sign/components/style';
+import { createNotification } from '@/slices/notification/thunk';
+import { CreateNotificationData } from '@/slices/notification/type';
+import { getPostDetail } from '@/slices/postDetail/thunk';
+import { useDispatch } from '@/store';
+import theme from '@/styles/theme';
+import { Comment } from '@/types/APIResponseTypes';
 import axiosInstance from '@/utils/customAxios';
 
 const MAX_COMMENT_LENGTH = 120;

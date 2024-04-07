@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
-import { UserSnippetBox } from '@/pages/Main/components/style';
 import { Avatar, OnLineBadge } from '@/components';
+import { UserSnippetBox } from '@/pages/Main/components/style';
 
 export interface UserSnippetProps extends React.HTMLAttributes<HTMLDivElement> {
   text: string;

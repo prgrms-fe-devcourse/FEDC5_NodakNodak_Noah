@@ -26,7 +26,7 @@ const Card = ({
   const getBackgroundColor = () =>
     theme.isDark ? theme.colors.grayscale[400] : theme.colors.white;
 
-  const CardStyle = {
+  const cardStyle = {
     width,
     height,
     boxShadow: ShadowSizes[shadowType],
@@ -34,7 +34,7 @@ const Card = ({
     ...props.style,
   };
 
-  return <div style={CardStyle}>{children}</div>;
+  return <div style={cardStyle}>{children}</div>;
 };
 
 export default Card;

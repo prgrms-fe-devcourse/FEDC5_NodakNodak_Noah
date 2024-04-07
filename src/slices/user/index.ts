@@ -1,10 +1,9 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-
-import { UserInfo } from '@/slices/user/type';
-import { initialUser } from '@/slices/initialState';
-import { User } from '@/types/APIResponseTypes';
 import { SLICE_NAME } from '@/slices/constants';
-import { getUser, getMyInfo } from '@/slices/user/thunk';
+import { initialUser } from '@/slices/initialState';
+import { getMyInfo, getUser } from '@/slices/user/thunk';
+import { UserInfo } from '@/slices/user/type';
+import { User } from '@/types/APIResponseTypes';
 
 const initialState: UserInfo = {
   currentUser: initialUser,

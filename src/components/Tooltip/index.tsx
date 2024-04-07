@@ -1,15 +1,15 @@
 import {
-  useEffect,
-  useRef,
-  PropsWithChildren,
-  useState,
-  ReactElement,
   Children,
   Fragment,
+  PropsWithChildren,
+  ReactElement,
+  useEffect,
+  useRef,
+  useState,
 } from 'react';
-import useHover from '@/hooks/useHover';
-import TooltipContainer, { TooltipContent } from '@/components/Tooltip/style';
 import TooltipArrow from '@/components/Tooltip/TooltipArrow';
+import { TooltipBox, TooltipContent } from '@/components/Tooltip/style';
+import useHover from '@/hooks/useHover';
 
 export type TooltipDirection = 'top' | 'bottom' | 'left' | 'right';
 export type TooltipType = 'click' | 'focus' | 'hover';
@@ -58,7 +58,7 @@ const Tooltip = ({
   const childElement = Children.only(children) as ReactElement;
 
   return (
-    <TooltipContainer>
+    <TooltipBox>
       <span ref={ref}>{childElement}</span>
       {show && (
         <TooltipContent
@@ -79,7 +79,7 @@ const Tooltip = ({
           {hasArrow && <TooltipArrow direction={direction} />}
         </TooltipContent>
       )}
-    </TooltipContainer>
+    </TooltipBox>
   );
 };
 

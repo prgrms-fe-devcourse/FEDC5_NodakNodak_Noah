@@ -1,6 +1,5 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
-import { StatusState, SetFetchingStatePayload } from '@/slices/status/type';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { SetFetchingStatePayload, StatusState } from '@/slices/status/type';
 
 const name = 'status';
 

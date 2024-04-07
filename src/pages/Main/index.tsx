@@ -1,7 +1,7 @@
-import { MainWrapper, PostContentWrapper } from '@/pages/Main/style';
+import ContentHeader from '@/pages/Main/components/ContentHeader';
 import PostList from '@/pages/Main/components/PostList';
 import UserList from '@/pages/Main/components/UserList';
-import ContentHeader from '@/pages/Main/components/ContentHeader';
+import { MainWrapper, PostContentWrapper } from '@/pages/Main/style';
 
 const Main = () => {
   return (

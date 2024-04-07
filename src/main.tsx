@@ -2,25 +2,24 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import ProtectedRoute from '@/components/ProtectedRoute';
-
-import store from '@/store';
 import App from '@/App';
+import ProtectedRoute from '@/components/ProtectedRoute';
 import AdminPage from '@/pages/Admin';
-import MainPage from '@/pages/Main';
-import LoginPage from '@/pages/Sign';
 import IntroducePage from '@/pages/Introduce';
-import UserPage from '@/pages/Profile';
-import ProfileEditPage from '@/pages/ProfileEdit';
+import MainPage from '@/pages/Main';
 import NotFoundPage from '@/pages/NotFound';
-import DetailPage from '@/pages/PostDetail';
 import PostCreatePage from '@/pages/PostCreate';
-import PostUpdatePage from '@/pages/PostUpdate';
+import DetailPage from '@/pages/PostDetail';
 import PostVoteChart from '@/pages/PostDetail/components/Result';
 import PostVote from '@/pages/PostDetail/components/Vote';
-import RequestToAdminPage from '@/pages/RequestToAdmin';
-import UserInfo from '@/pages/ProfileEdit/components/UserInfo';
+import PostUpdatePage from '@/pages/PostUpdate';
+import UserPage from '@/pages/Profile';
+import ProfileEditPage from '@/pages/ProfileEdit';
 import Password from '@/pages/ProfileEdit/components/Password';
+import UserInfo from '@/pages/ProfileEdit/components/UserInfo';
+import RequestToAdminPage from '@/pages/RequestToAdmin';
+import LoginPage from '@/pages/Sign';
+import store from '@/store';
 import GlobalStyle from '@/styles/GlobalStyle';
 
 const router = createBrowserRouter([

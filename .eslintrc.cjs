@@ -53,23 +53,7 @@ module.exports = {
         selector: 'typeAlias',
       },
     ],
-    'import/order': [
-      'warn',
-      {
-        groups: [
-          'index',
-          'sibling',
-          'parent',
-          'internal',
-          'external',
-          'builtin',
-          'object',
-          'type',
-        ],
-      },
-    ],
     'unused-imports/no-unused-imports': 'error',
-    'import/newline-after-import': ['error', { count: 1 }],
     'padding-line-between-statements': [
       'error',
       { blankLine: 'always', prev: 'const', next: 'return' },

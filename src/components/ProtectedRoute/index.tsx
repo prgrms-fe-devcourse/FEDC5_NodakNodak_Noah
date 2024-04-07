@@ -1,5 +1,5 @@
-import { Navigate, useLocation } from 'react-router-dom';
 import { PropsWithChildren } from 'react';
+import { Navigate, useLocation } from 'react-router-dom';
 
 export interface ProtectedRouteProps {
   admin?: boolean;

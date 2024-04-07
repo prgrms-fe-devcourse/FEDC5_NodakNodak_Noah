@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import theme from '@/styles/theme';
 
-export const AvatarWrapper = styled.div`
+export const AvatarBox = styled.div`
   position: relative;
   display: inline-block;
   border: 1px solid ${theme.colors.grayscale[200]};

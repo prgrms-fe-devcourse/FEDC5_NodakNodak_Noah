@@ -1,8 +1,8 @@
-import { TooltipDirection } from '.';
 import styled from 'styled-components';
 import theme from '@/styles/theme';
+import { TooltipDirection } from '.';
 
-export const TooltipContainer = styled.div`
+export const TooltipBox = styled.div`
   position: relative;
   cursor: pointer;
   width: fit-content;
@@ -52,4 +52,4 @@ export const getBoxShadow = (direction: TooltipDirection) => {
   }
 };
 
-export default TooltipContainer;
+export default TooltipBox;

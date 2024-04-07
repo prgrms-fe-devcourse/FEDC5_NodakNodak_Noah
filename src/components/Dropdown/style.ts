@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import theme from '@/styles/theme';
 
-export const MenuForm = styled.div`
+export const MenuBox = styled.div`
   width: 211px;
   height: 48px;
   max-width: 100%;
@@ -33,7 +33,7 @@ export const BorderLine = styled.div`
   border-left: 1px solid ${theme.colors.grayscale[300]};
 `;
 
-export const ListItemButton = styled.button`
+export const DropDownItem = styled.button`
   width: 100%;
   height: 48px;
   text-align: left;
@@ -61,7 +61,7 @@ export const ListItemButton = styled.button`
   }
 `;
 
-export const DropdownContent = styled.ul`
+export const DropdownList = styled.ul`
   width: 100%;
   min-width: 132px;
   position: absolute;

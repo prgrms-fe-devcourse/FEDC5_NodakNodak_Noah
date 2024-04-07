@@ -1,37 +1,35 @@
 import {
   ChangeEvent,
-  RefObject,
-  useState,
-  useEffect,
   FormEvent,
+  RefObject,
   useCallback,
+  useEffect,
+  useState,
 } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import { Text, Card, Input, Avatar, Button } from '@/components';
-import LogoWithFontSize from '@/components/layout/LogoWithFontSize';
+import SearchIcon from '@/assets/SearchIcon';
+import { Avatar, Button, Card, Input, Text } from '@/components';
+import { DropDownItem, DropdownList } from '@/components/Dropdown/style';
+import DarkModeToggle from '@/components/layout/Header/DarkModeToggle';
 import NotificationCardBell from '@/components/layout/Header/NotificationCardBell';
-import { DropdownContent, ListItemButton } from '@/components/Dropdown/style';
+import LogoWithFontSize from '@/components/layout/LogoWithFontSize';
 import useClickAway from '@/hooks/useClickAway';
-import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 import { useSelectedChannels } from '@/hooks/useSelectedChannel';
-
-import { useDispatch } from '@/store';
+import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 import { setChannel } from '@/slices/channel';
 import { getChannel } from '@/slices/channel/thunk';
 import { getNotificationArray } from '@/slices/notification/thunk';
-import {
-  StyledHeaderWrapper,
-  ChannelWrapper,
-  LogoWrapper,
-  FormContainer,
-  AuthUiWrapper,
-  NavLinkWrapper,
-} from '@/components/layout/Header/style';
-import DarkModeToggle from '@/components/layout/Header/DarkModeToggle';
-import axiosInstance from '@/utils/customAxios';
+import { useDispatch } from '@/store';
 import theme from '@/styles/theme';
-import SearchIcon from '@/assets/SearchIcon';
+import axiosInstance from '@/utils/customAxios';
+import {
+  AuthUiBox,
+  ChannelList,
+  FormElement,
+  HeaderLayout,
+  LogoBox,
+  NavLinkBox,
+} from './style';
 
 const Header = () => {
   const [focus, setFocus] = useState(false);
@@ -147,13 +145,13 @@ const Header = () => {
         justifyContent: 'center',
         backgroundColor: 'transparent',
       }}>
-      <StyledHeaderWrapper>
-        <LogoWrapper onClick={() => navigate('/home')}>
+      <HeaderLayout>
+        <LogoBox onClick={() => navigate('/home')}>
           <LogoWithFontSize fontSize='24px' />
-        </LogoWrapper>
-        <ChannelWrapper>
+        </LogoBox>
+        <ChannelList>
           {channels.map(({ _id, name }) => (
-            <NavLinkWrapper
+            <NavLinkBox
               key={_id}
               to={`/home/${_id}`}
               onClick={handleClick(_id)}>
@@ -165,10 +163,10 @@ const Header = () => {
                 colorNumber={theme.isDark ? '200' : '500'}>
                 {name}
               </Text>
-            </NavLinkWrapper>
+            </NavLinkBox>
           ))}
-        </ChannelWrapper>
-        <FormContainer onSubmit={handleSearch}>
+        </ChannelList>
+        <FormElement onSubmit={handleSearch}>
           <Input
             ref={inputRef as RefObject<HTMLInputElement>}
             height={'32px'}
@@ -178,17 +176,13 @@ const Header = () => {
             onChange={(e) => setInputValue(e.target.value)}
             onFocus={handleFocus}
           />
-          <Button
-            type='submit'
-            styleType='ghost'
-            size='mini'
-            style={{ padding: 0 }}>
+          <Button styleType='ghost' size='mini' style={{ padding: 0 }}>
             <SearchIcon />
           </Button>
-        </FormContainer>
+        </FormElement>
         <DarkModeToggle />
         {token ? (
-          <AuthUiWrapper>
+          <AuthUiBox>
             <NotificationCardBell />
             <Avatar
               size='small'
@@ -198,26 +192,26 @@ const Header = () => {
             />
 
             {showMenu && (
-              <DropdownContent
+              <DropdownList
                 ref={menuRef as RefObject<HTMLUListElement>}
                 style={{ borderRadius: '4px' }}>
                 {menu.map((item) => (
-                  <ListItemButton
+                  <DropDownItem
                     type='button'
                     key={item}
                     onClick={() => handleMenuItemClick(item)}>
                     {item}
-                  </ListItemButton>
+                  </DropDownItem>
                 ))}
-              </DropdownContent>
+              </DropdownList>
             )}
-          </AuthUiWrapper>
+          </AuthUiBox>
         ) : (
           <Button styleType='primary' size='small' onClick={handleLogin}>
             로그인
           </Button>
         )}
-      </StyledHeaderWrapper>
+      </HeaderLayout>
     </Card>
   );
 };

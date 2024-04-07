@@ -1,9 +1,8 @@
-import { InputProps } from '.';
 import { useState } from 'react';
-
-import { Wrapper, StyledInput, Eye } from '@/components/Input/style';
-import ViewEyesIcon from '@/assets/ViewEyesIcon';
 import HideEyesIcon from '@/assets/HideEyesIcon';
+import ViewEyesIcon from '@/assets/ViewEyesIcon';
+import { Eye, InputBox, InputElement } from '@/components/Input/style';
+import { InputProps } from '.';
 
 const PasswordInput = ({
   bordertype = 'filled',
@@ -20,8 +19,8 @@ const PasswordInput = ({
   };
 
   return (
-    <Wrapper>
-      <StyledInput
+    <InputBox>
+      <InputElement
         $bordertype={bordertype}
         $fontType={fontType}
         $underline={underline}
@@ -32,7 +31,7 @@ const PasswordInput = ({
       <Eye onClick={handleEye} style={{ right: eyePosition }}>
         {canSee ? <HideEyesIcon /> : <ViewEyesIcon />}
       </Eye>
-    </Wrapper>
+    </InputBox>
   );
 };
 

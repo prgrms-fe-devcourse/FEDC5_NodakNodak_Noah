@@ -1,28 +1,27 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import BellIcon from '@/assets/BellIcon';
-import theme from '@/styles/theme';
-import { useDispatch } from '@/store';
+import { Badge, Button, ScrollBar, Text } from '@/components';
 import {
-  seeNotifications,
-  getNotificationArray,
-} from '@/slices/notification/thunk';
-import { getPostListByMyId } from '@/slices/postList/thunks';
-import { notificationType } from '@/slices/notification';
-import useInterval from '@/hooks/useInterval';
+  NotificationBox,
+  NotificationHeader,
+  NotificationList,
+} from '@/components/layout/Header/NotificationCardBell/style';
 import useClickAway from '@/hooks/useClickAway';
+import useInterval from '@/hooks/useInterval';
 import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 import { useSelectedNotifications } from '@/hooks/useSelectedNotifications';
 import { useSelectedPostListByMyId } from '@/hooks/useSelectedPostListById';
-import {
-  NotificationContainer,
-  NotificationList,
-  NotificationHeader,
-} from '@/components/layout/Header/NotificationCardBell/style';
-import UserSnippet from '@/pages/Main/components/UserList/UserSnippet';
-import { Badge, ScrollBar, Text, Button } from '@/components';
 import UserGroup from '@/pages/Main/components/UserList/UserGroup';
+import UserSnippet from '@/pages/Main/components/UserList/UserSnippet';
+import { notificationType } from '@/slices/notification';
+import {
+  getNotificationArray,
+  seeNotifications,
+} from '@/slices/notification/thunk';
+import { getPostListByMyId } from '@/slices/postList/thunks';
+import { useDispatch } from '@/store';
+import theme from '@/styles/theme';
 import { type User } from '@/types/APIResponseTypes';
 
 export interface NotificationData {
@@ -149,7 +148,7 @@ const NotificationCardBell = () => {
     <Badge count={count}>
       <BellIcon onToggleCard={handleToggleCard} />
       {toggleNotification && (
-        <NotificationContainer ref={ref}>
+        <NotificationBox ref={ref}>
           <ScrollBar>
             <NotificationHeader>
               <Text tagType='span' fontType='body3'>
@@ -192,7 +191,7 @@ const NotificationCardBell = () => {
               </UserGroup>
             </NotificationList>
           </ScrollBar>
-        </NotificationContainer>
+        </NotificationBox>
       )}
     </Badge>
   );

@@ -1,12 +1,11 @@
 import { useParams, useSearchParams } from 'react-router-dom';
-
-import Pagination from '@/components/Pagination';
-import PostCard from '@/pages/Main/components/PostList/PostCard';
 import MainPageSpinner from '@/components/MainPageSpinner';
-import { useSearchPosts } from '@/pages/Main/components/hooks/useSearchPosts';
+import Pagination from '@/components/Pagination';
+import { usePagination } from '@/hooks/usePagination';
+import PostCard from '@/pages/Main/components/PostList/PostCard';
 import { PostCardWrapper } from '@/pages/Main/components/PostList/style';
 import { useFetchChannelPosts } from '@/pages/Main/components/hooks/useChannelPosts';
-import { usePagination } from '@/hooks/usePagination';
+import { useSearchPosts } from '@/pages/Main/components/hooks/useSearchPosts';
 
 const PostList = () => {
   const [searchParams] = useSearchParams();

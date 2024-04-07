@@ -1,3 +1,10 @@
+import { useEffect, useState } from 'react';
+import { Button, Input, Text } from '@/components';
+import { getMyInfo } from '@/slices/user/thunk';
+import { useDispatch } from '@/store';
+import { Message } from '@/types/APIResponseTypes';
+import axiosInstance from '@/utils/customAxios';
+import { Container } from '../Sign/style';
 import {
   AdminCard,
   ChannelCreator,
@@ -9,13 +16,7 @@ import {
   RequestMessage,
   RequestUl,
 } from './style';
-import { Container } from '../Sign/style';
-import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { Button, Input, Text } from '@/components';
-import { useDispatch } from '@/store';
-import { getMyInfo } from '@/slices/user/thunk';
-import { Message } from '@/apis/responseModel';
 import { Spinner } from '@/components/MainPageSpinner/style';
 import { api } from '@/apis/core';
 

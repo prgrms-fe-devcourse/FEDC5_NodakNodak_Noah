@@ -1,10 +1,10 @@
-import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import PostForm from '@/pages/PostUpdate/components/PostForm';
+import { useParams } from 'react-router-dom';
+import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 import { FormPageContainer } from '@/pages/PostCreate/style';
+import PostForm from '@/pages/PostUpdate/components/PostForm';
 import UserInfo from '@/pages/PostUpdate/components/UserInfo';
 import { getMyInfo } from '@/slices/user/thunk';
-import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 import { useDispatch } from '@/store';
 
 const PostCreatePage = () => {

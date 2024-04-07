@@ -1,5 +1,5 @@
-import { Notification } from '@/types/APIResponseTypes';
 import { StatusType } from '@/slices/type';
+import { Notification } from '@/types/APIResponseTypes';
 
 export type NotificationWithType = Notification & { type: string };
 
