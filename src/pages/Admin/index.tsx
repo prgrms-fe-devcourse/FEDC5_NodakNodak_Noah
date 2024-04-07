@@ -16,31 +16,32 @@ import {
   RequestMessage,
   RequestUl,
 } from './style';
+import { useQuery } from '@tanstack/react-query';
+import { Spinner } from '@/components/MainPageSpinner/style';
+import { api } from '@/apis/core';
 
 const Admin = () => {
-  const [messages, setMessages] = useState([]);
   const [channelName, setChannelName] = useState('');
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const getMessages = async () => {
-      const { data } = await axiosInstance.get('messages/conversations');
-      setMessages(data);
-    };
-    getMessages();
-  }, []);
+  const { data: messages, isPending } = useQuery({
+    queryKey: ['request'],
+    queryFn: async () =>
+      await api.get<Message[]>({ url: 'messages/conversations' }),
+  });
 
   const handleSeen = async (id: string) => {
-    await axiosInstance.put('messages/update-seen', {
-      sender: id,
-    });
+    await api.put({ url: 'messages/update-seen', data: { sender: id } });
   };
 
   const handleCreateChannel = async () => {
-    await axiosInstance.post('channels/create', {
-      authRequired: false,
-      description: '',
-      name: channelName,
+    await api.post({
+      url: 'channels/create',
+      data: {
+        authRequired: false,
+        description: '',
+        name: channelName,
+      },
     });
   };
 
@@ -52,7 +53,7 @@ const Admin = () => {
     <Container>
       <AdminCard>
         <Text tagType='span' fontType='h1' style={{ marginTop: '32px' }}>
-          사용자의 문의 요청
+          사용자 문의 요청
         </Text>
         <Legend key={'Question Legend'}>
           <FullName>문의자</FullName>
@@ -60,34 +61,38 @@ const Admin = () => {
           <RequestDate>문의일</RequestDate>
           <LegendRead>처리 상태</LegendRead>
         </Legend>
-        <RequestUl>
-          {messages.length
-            ? messages.map((message: Message) => {
-                const originalDate = new Date(message.createdAt);
-                const year = originalDate.getFullYear();
-                const month = originalDate.getMonth() + 1;
-                const day = originalDate.getDate();
+        {isPending ? (
+          <Spinner />
+        ) : (
+          <RequestUl>
+            {messages && messages.length
+              ? messages.map(({ createdAt, sender, message, seen }) => {
+                  const originalDate = new Date(createdAt);
+                  const year = originalDate.getFullYear();
+                  const month = originalDate.getMonth() + 1;
+                  const day = originalDate.getDate();
 
-                return (
-                  <RequestLi
-                    key={message.createdAt}
-                    onClick={() => handleSeen(message.sender._id)}>
-                    <FullName>{message.sender.fullName}</FullName>
-                    <RequestMessage>{message.message}</RequestMessage>
-                    <RequestDate>{`${year}/${month}/${day}`}</RequestDate>
-                    <Button
-                      size='small'
-                      styleType='ghost'
-                      disabled={message.seen}
-                      event={message.seen ? 'disabled' : 'enabled'}
-                      style={{ height: '16px' }}>
-                      {message.seen ? '완료' : '미완료'}
-                    </Button>
-                  </RequestLi>
-                );
-              })
-            : '문의 사항이 없습니다'}
-        </RequestUl>
+                  return (
+                    <RequestLi
+                      key={createdAt}
+                      onClick={() => handleSeen(sender._id)}>
+                      <FullName>{sender.fullName}</FullName>
+                      <RequestMessage>{message}</RequestMessage>
+                      <RequestDate>{`${year}/${month}/${day}`}</RequestDate>
+                      <Button
+                        size='small'
+                        styleType='ghost'
+                        disabled={seen}
+                        event={seen ? 'disabled' : 'enabled'}
+                        style={{ height: '16px' }}>
+                        {seen ? '완료' : '미완료'}
+                      </Button>
+                    </RequestLi>
+                  );
+                })
+              : '문의 사항이 없습니다'}
+          </RequestUl>
+        )}
         <ChannelCreator>
           <Input
             height={'32px'}
