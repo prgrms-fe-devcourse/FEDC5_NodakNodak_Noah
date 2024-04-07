@@ -12,34 +12,35 @@ import {
 import { Container } from '../Sign/style';
 import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import axiosInstance from '@/utils/customAxios';
 import { Button, Input, Text } from '@/components';
 import { useDispatch } from '@/store';
 import { getMyInfo } from '@/slices/user/thunk';
 import { Message } from '@/apis/responseModel';
 import { Spinner } from '@/components/MainPageSpinner/style';
+import { api } from '@/apis/core';
 
 const Admin = () => {
   const [channelName, setChannelName] = useState('');
   const dispatch = useDispatch();
 
-  const { data: messages, isLoading } = useQuery({
+  const { data: messages, isPending } = useQuery({
     queryKey: ['request'],
     queryFn: async () =>
-      await axiosInstance.get<Message[]>('messages/conversations'),
+      await api.get<Message[]>({ url: 'messages/conversations' }),
   });
 
   const handleSeen = async (id: string) => {
-    await axiosInstance.put('messages/update-seen', {
-      sender: id,
-    });
+    await api.put({ url: 'messages/update-seen', data: { sender: id } });
   };
 
   const handleCreateChannel = async () => {
-    await axiosInstance.post('channels/create', {
-      authRequired: false,
-      description: '',
-      name: channelName,
+    await api.post({
+      url: 'channels/create',
+      data: {
+        authRequired: false,
+        description: '',
+        name: channelName,
+      },
     });
   };
 
@@ -59,31 +60,31 @@ const Admin = () => {
           <RequestDate>문의일</RequestDate>
           <LegendRead>처리 상태</LegendRead>
         </Legend>
-        {isLoading ? (
+        {isPending ? (
           <Spinner />
         ) : (
           <RequestUl>
-            {messages && messages.data.length
-              ? messages.data.map((message: Message) => {
-                  const originalDate = new Date(message.createdAt);
+            {messages && messages.length
+              ? messages.map(({ createdAt, sender, message, seen }) => {
+                  const originalDate = new Date(createdAt);
                   const year = originalDate.getFullYear();
                   const month = originalDate.getMonth() + 1;
                   const day = originalDate.getDate();
 
                   return (
                     <RequestLi
-                      key={message.createdAt}
-                      onClick={() => handleSeen(message.sender._id)}>
-                      <FullName>{message.sender.fullName}</FullName>
-                      <RequestMessage>{message.message}</RequestMessage>
+                      key={createdAt}
+                      onClick={() => handleSeen(sender._id)}>
+                      <FullName>{sender.fullName}</FullName>
+                      <RequestMessage>{message}</RequestMessage>
                       <RequestDate>{`${year}/${month}/${day}`}</RequestDate>
                       <Button
                         size='small'
                         styleType='ghost'
-                        disabled={message.seen}
-                        event={message.seen ? 'disabled' : 'enabled'}
+                        disabled={seen}
+                        event={seen ? 'disabled' : 'enabled'}
                         style={{ height: '16px' }}>
-                        {message.seen ? '완료' : '미완료'}
+                        {seen ? '완료' : '미완료'}
                       </Button>
                     </RequestLi>
                   );
