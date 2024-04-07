@@ -1,6 +1,6 @@
-import { TooltipDirection } from '.';
 import styled from 'styled-components';
 import theme from '@/styles/theme';
+import { TooltipDirection } from '.';
 
 export const TooltipBox = styled.div`
   position: relative;

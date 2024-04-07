@@ -1,7 +1,7 @@
-import { UserInfoWrapper, RightButton } from '@/pages/Profile/style';
 import FollowButton from '@/pages/Profile/components/FollowButton';
-import UserPostList from '@/pages/Profile/components/UserPostList';
 import UserInfo from '@/pages/Profile/components/UserInfo';
+import UserPostList from '@/pages/Profile/components/UserPostList';
+import { RightButton, UserInfoWrapper } from '@/pages/Profile/style';
 
 const UserPage = () => {
   return (

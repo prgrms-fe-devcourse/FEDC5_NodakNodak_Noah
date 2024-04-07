@@ -1,5 +1,5 @@
-import { User } from '@/types/APIResponseTypes';
 import { StatusType } from '@/slices/type';
+import { User } from '@/types/APIResponseTypes';
 
 export interface FollowData {
   followId?: string;

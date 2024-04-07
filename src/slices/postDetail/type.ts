@@ -1,5 +1,5 @@
-import { Post } from '@/types/APIResponseTypes';
 import { StatusType } from '@/slices/type';
+import { Post } from '@/types/APIResponseTypes';
 
 export interface PostId {
   postId: string | undefined;

@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
-
-import { useDispatch } from '@/store';
-import { searchAllData } from '@/slices/searchedData/thunk';
 import {
   useSelectedSearchedDataLoading,
   useSelectedSearchedPostData,
 } from '@/hooks/useSelectedSearchedData';
+import { searchAllData } from '@/slices/searchedData/thunk';
+import { useDispatch } from '@/store';
 
 export const useSearchPosts = (keyword: string | null) => {
   const dispatch = useDispatch();

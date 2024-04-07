@@ -1,11 +1,11 @@
 import { PayloadAction, createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { SLICE_NAME } from '@/slices/constants';
 import {
+  createNotification,
   getNotificationArray,
   seeNotifications,
-  createNotification,
 } from '@/slices/notification/thunk';
 import { InitialState, NotificationWithType } from '@/slices/notification/type';
-import { SLICE_NAME } from '@/slices/constants';
 import { Notification } from '@/types/APIResponseTypes';
 
 export const notificationType = {

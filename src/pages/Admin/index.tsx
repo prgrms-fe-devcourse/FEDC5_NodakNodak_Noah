@@ -1,3 +1,10 @@
+import { useEffect, useState } from 'react';
+import { Button, Input, Text } from '@/components';
+import { getMyInfo } from '@/slices/user/thunk';
+import { useDispatch } from '@/store';
+import { Message } from '@/types/APIResponseTypes';
+import axiosInstance from '@/utils/customAxios';
+import { Container } from '../Sign/style';
 import {
   AdminCard,
   ChannelCreator,
@@ -9,13 +16,6 @@ import {
   RequestMessage,
   RequestUl,
 } from './style';
-import { Container } from '../Sign/style';
-import { useEffect, useState } from 'react';
-import axiosInstance from '@/utils/customAxios';
-import { Button, Input, Text } from '@/components';
-import { Message } from '@/types/APIResponseTypes';
-import { useDispatch } from '@/store';
-import { getMyInfo } from '@/slices/user/thunk';
 
 const Admin = () => {
   const [messages, setMessages] = useState([]);

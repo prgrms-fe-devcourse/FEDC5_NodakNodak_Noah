@@ -1,3 +1,4 @@
+import { SearchedPost } from '@/slices/searchedData/type';
 import {
   Channel,
   Comment,
@@ -9,7 +10,6 @@ import {
   Post,
   User,
 } from '@/types/APIResponseTypes';
-import { SearchedPost } from '@/slices/searchedData/type';
 
 export const initialTitle = `{"title":"","content":"","voteTitle":"","voteArray":[""]}`;
 export const initialCustomComment = `{"type":"","content":""}`;

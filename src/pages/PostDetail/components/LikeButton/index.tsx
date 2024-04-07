@@ -1,14 +1,13 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-
-import useTimeoutFn from '@/hooks/useTimeoutFn';
+import LikeButtonIcon from '@/assets/LikeButtonIcon';
 import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
-import LikeButtonIcon from '@/assets/LikeButtonIcon';
-import axiosInstance from '@/utils/customAxios';
-import { useDispatch } from '@/store';
+import useTimeoutFn from '@/hooks/useTimeoutFn';
 import { createNotification } from '@/slices/notification/thunk';
 import { CreateNotificationData } from '@/slices/notification/type';
+import { useDispatch } from '@/store';
+import axiosInstance from '@/utils/customAxios';
 
 export interface LikeButtonProps {
   postId: string | undefined;

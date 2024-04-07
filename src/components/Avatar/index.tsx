@@ -1,5 +1,5 @@
+import { useEffect, useState } from 'react';
 import { AvatarBox } from './style';
-import { useState, useEffect } from 'react';
 
 export interface AvatarProps {
   src?: string;

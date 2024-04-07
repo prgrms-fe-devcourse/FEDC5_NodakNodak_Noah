@@ -1,10 +1,9 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-
-import { InitialState } from '@/slices/postDetail/type';
-import { initialPost } from '@/slices/initialState';
-import { Post } from '@/types/APIResponseTypes';
-import { getPostDetail } from '@/slices/postDetail/thunk';
 import { SLICE_NAME } from '@/slices/constants';
+import { initialPost } from '@/slices/initialState';
+import { getPostDetail } from '@/slices/postDetail/thunk';
+import { InitialState } from '@/slices/postDetail/type';
+import { Post } from '@/types/APIResponseTypes';
 
 const initialState: InitialState = {
   post: initialPost,

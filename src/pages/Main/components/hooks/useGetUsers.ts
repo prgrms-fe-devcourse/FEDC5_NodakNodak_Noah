@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
-
-import { useDispatch } from '@/store';
+import useInterval from '@/hooks/useInterval';
 import {
   useSelectedMyInfo,
   useSelectedMyInfoLoading,
@@ -9,9 +8,9 @@ import {
   useSelectedUserList,
   useSelectedUserListLoading,
 } from '@/hooks/useSelectedUserList';
-import useInterval from '@/hooks/useInterval';
 import { getMyInfo } from '@/slices/user/thunk';
 import { getUserList } from '@/slices/userList/thunk';
+import { useDispatch } from '@/store';
 
 const useGetUserList = () => {
   const token = localStorage.getItem('auth-token');

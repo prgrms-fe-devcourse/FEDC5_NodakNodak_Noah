@@ -1,9 +1,8 @@
 import { useNavigate, useParams } from 'react-router-dom';
-
-import { Text, Button } from '@/components';
-import { ContentHeaderWrapper } from '@/pages/Main/components/ContentHeader/style';
-import { useSelectedStatus } from '@/hooks/useSelectedStatus';
+import { Button, Text } from '@/components';
 import { useSelectedChannel } from '@/hooks/useSelectedChannel';
+import { useSelectedStatus } from '@/hooks/useSelectedStatus';
+import { ContentHeaderWrapper } from '@/pages/Main/components/ContentHeader/style';
 
 const ContentHeader = () => {
   const { channelId } = useParams();

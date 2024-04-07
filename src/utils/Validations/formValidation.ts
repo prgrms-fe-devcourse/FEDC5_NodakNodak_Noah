@@ -1,4 +1,4 @@
-import { PROMPT, MAX_LENGTH } from '@/utils/constants';
+import { MAX_LENGTH, PROMPT } from '@/utils/constants';
 
 interface FormType {
   title: string;

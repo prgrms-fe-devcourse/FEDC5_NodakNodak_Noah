@@ -1,22 +1,21 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-
-import { Comment } from '@/types/APIResponseTypes';
-import {
-  VoteTitleWrapper,
-  InputWrapper,
-  ButtonWrapper,
-} from '@/pages/PostDetail/components/Vote/style';
-import theme from '@/styles/theme';
-import { useDispatch } from '@/store';
-import { getPostDetail } from '@/slices/postDetail/thunk';
-import { createNotification } from '@/slices/notification/thunk';
-import { CreateNotificationData } from '@/slices/notification/type';
-import { useSelectedVote } from '@/hooks/useSelectedVote';
+import { Button, Card, Input, ScrollBar, Text } from '@/components';
 import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
 import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
-import { Input, Button, Card, ScrollBar, Text } from '@/components';
+import { useSelectedVote } from '@/hooks/useSelectedVote';
+import {
+  ButtonWrapper,
+  InputWrapper,
+  VoteTitleWrapper,
+} from '@/pages/PostDetail/components/Vote/style';
 import { Warning } from '@/pages/Sign/components/style';
+import { createNotification } from '@/slices/notification/thunk';
+import { CreateNotificationData } from '@/slices/notification/type';
+import { getPostDetail } from '@/slices/postDetail/thunk';
+import { useDispatch } from '@/store';
+import theme from '@/styles/theme';
+import { Comment } from '@/types/APIResponseTypes';
 import axiosInstance from '@/utils/customAxios';
 
 const PostVote = () => {

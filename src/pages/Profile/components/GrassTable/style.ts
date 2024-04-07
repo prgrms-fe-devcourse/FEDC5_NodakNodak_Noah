@@ -1,6 +1,6 @@
-import { LightnessType } from '.';
 import styled from 'styled-components';
 import theme from '@/styles/theme';
+import { LightnessType } from '.';
 
 export const GrassWrapper = styled.div`
   width: 152px;

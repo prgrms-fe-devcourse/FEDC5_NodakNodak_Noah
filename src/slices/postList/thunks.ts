@@ -1,11 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
 import { SLICE_NAME } from '@/slices/constants';
-import axiosInstance from '@/utils/customAxios';
 import {
   GetPostsByChannelIdParams,
   GetPostsByUserIdParams,
 } from '@/slices/postList/type';
+import axiosInstance from '@/utils/customAxios';
 
 export const getPostListByChannelId = createAsyncThunk(
   `${SLICE_NAME.POST_LIST}/getPostListByChannelId`,

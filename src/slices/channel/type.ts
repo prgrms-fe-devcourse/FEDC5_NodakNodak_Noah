@@ -1,5 +1,5 @@
-import { Channel } from '@/types/APIResponseTypes';
 import { StatusType } from '@/slices/type';
+import { Channel } from '@/types/APIResponseTypes';
 
 export interface InitialState {
   channels: Channel[];

@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { SLICE_NAME } from '@/slices/constants';
-import { getPostListByMyId } from '@/slices/postList/thunks';
 import { createNotification } from '@/slices/notification/thunk';
 import { CreateNotificationData } from '@/slices/notification/type';
+import { getPostListByMyId } from '@/slices/postList/thunks';
 import { RootState } from '@/store';
 import axiosInstance from '@/utils/customAxios';
 

@@ -1,12 +1,11 @@
 import axios, { AxiosError } from 'axios';
-
-import store from '@/store';
 import { setFetchingState } from '@/slices/status';
-import { AllUrlList, Methods } from '@/utils/customAxios/type';
+import store from '@/store';
 import {
   authRequiredUrlList,
   formHeaderRequiredUrlList,
 } from '@/utils/customAxios/constants';
+import { AllUrlList, Methods } from '@/utils/customAxios/type';
 import { ensureLeadingSlash } from '@/utils/customAxios/utils';
 
 const axiosInstance = axios.create({

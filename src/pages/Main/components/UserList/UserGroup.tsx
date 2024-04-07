@@ -1,5 +1,5 @@
-import { Title } from './style';
 import { PropsWithChildren } from 'react';
+import { Title } from './style';
 
 export interface UserSnippetGroupProps {
   title?: string;

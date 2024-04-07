@@ -1,8 +1,8 @@
 import { PayloadAction, createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { InitialState, SearchedPost } from '@/slices/searchedData/type';
-import { searchAllData, searchUserData } from '@/slices/searchedData/thunk';
 import { SLICE_NAME } from '@/slices/constants';
 import { initialSearchedPost, initialUser } from '@/slices/initialState';
+import { searchAllData, searchUserData } from '@/slices/searchedData/thunk';
+import { InitialState, SearchedPost } from '@/slices/searchedData/type';
 import { User } from '@/types/APIResponseTypes';
 
 const initialState: InitialState = {

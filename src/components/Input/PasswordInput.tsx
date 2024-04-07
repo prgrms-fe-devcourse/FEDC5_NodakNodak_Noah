@@ -1,9 +1,8 @@
-import { InputProps } from '.';
 import { useState } from 'react';
-
-import { Eye, InputBox, InputElement } from '@/components/Input/style';
-import ViewEyesIcon from '@/assets/ViewEyesIcon';
 import HideEyesIcon from '@/assets/HideEyesIcon';
+import ViewEyesIcon from '@/assets/ViewEyesIcon';
+import { Eye, InputBox, InputElement } from '@/components/Input/style';
+import { InputProps } from '.';
 
 const PasswordInput = ({
   bordertype = 'filled',

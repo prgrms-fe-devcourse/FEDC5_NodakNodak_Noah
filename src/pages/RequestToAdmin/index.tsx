@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useState } from 'react';
+import { Button, Text } from '@/components';
 import {
   Container,
   MessageContent,
   RequestCard,
 } from '@/pages/RequestToAdmin/style';
-import { Button, Text } from '@/components';
-import axiosInstance from '@/utils/customAxios';
 import { getMyInfo } from '@/slices/user/thunk';
 import { useDispatch } from '@/store';
+import axiosInstance from '@/utils/customAxios';
 
 const RequestToAdmin = () => {
   const [content, setContent] = useState('');

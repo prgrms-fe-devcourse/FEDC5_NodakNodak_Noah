@@ -1,17 +1,16 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-
+import MailIcon from '@/assets/MailIcon';
+import { Button, Text } from '@/components';
+import PasswordInput from '@/components/Input/PasswordInput';
+import { useSelectedUser } from '@/hooks/useSelectedUser';
 import {
   ButtonWrapper,
+  ContentWrapper,
   InputWrapper,
   TextWrapper,
-  ContentWrapper,
   Warning,
 } from '@/pages/ProfileEdit/components/style';
-import PasswordInput from '@/components/Input/PasswordInput';
-import { Text, Button } from '@/components';
-import { useSelectedUser } from '@/hooks/useSelectedUser';
-import MailIcon from '@/assets/MailIcon';
 import axiosInstance from '@/utils/customAxios';
 
 const Password = () => {

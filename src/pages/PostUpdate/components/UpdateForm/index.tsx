@@ -1,15 +1,14 @@
 import { useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
 import { useFormik } from 'formik';
-
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Button } from '@/components';
 import { useSelectedVote } from '@/hooks/useSelectedVote';
-import { isValidatedForm } from '@/utils/Validations/formValidation';
-import { MESSAGE } from '@/utils/constants';
 import { sendPostRequest } from '@/pages/PostUpdate/components/Api';
-import VoteBox from '@/pages/PostUpdate/components/VoteBox';
 import FormContent from '@/pages/PostUpdate/components/FormContent';
 import { ButtonWrapper } from '@/pages/PostUpdate/components/PostForm/style';
+import VoteBox from '@/pages/PostUpdate/components/VoteBox';
+import { isValidatedForm } from '@/utils/Validations/formValidation';
+import { MESSAGE } from '@/utils/constants';
 
 export interface FormType {
   title: string;

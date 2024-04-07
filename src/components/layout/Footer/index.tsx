@@ -1,6 +1,6 @@
 import { Text } from '@/components';
-import LogoWithFontSize from '@/components/layout/LogoWithFontSize';
 import { FooterLayout } from '@/components/layout/Footer/style';
+import LogoWithFontSize from '@/components/layout/LogoWithFontSize';
 
 const Footer = () => {
   return (

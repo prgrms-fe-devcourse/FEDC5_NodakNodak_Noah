@@ -1,14 +1,14 @@
-import {
-  ContentWrapper,
-  Content,
-  InputContainer,
-  DeleteButton,
-} from '@/pages/PostUpdate/components/VoteBox/style';
-import { PLACEHOLDER, MESSAGE } from '@/utils/constants';
-import { Card, Input, Button, ScrollBar } from '@/components';
 import DeleteIcon from '@/assets/DeleteIcon';
+import { Button, Card, Input, ScrollBar } from '@/components';
 import Text from '@/components/Text';
+import {
+  Content,
+  ContentWrapper,
+  DeleteButton,
+  InputContainer,
+} from '@/pages/PostUpdate/components/VoteBox/style';
 import theme from '@/styles/theme';
+import { MESSAGE, PLACEHOLDER } from '@/utils/constants';
 
 export interface FormProps {
   values: {

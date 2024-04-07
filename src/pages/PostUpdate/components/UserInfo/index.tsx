@@ -1,5 +1,5 @@
-import { UserInfoWrapper } from '@/pages/PostUpdate/components/UserInfo/style';
 import { Avatar, Text } from '@/components';
+import { UserInfoWrapper } from '@/pages/PostUpdate/components/UserInfo/style';
 import theme from '@/styles/theme';
 
 interface UserInfoProps {

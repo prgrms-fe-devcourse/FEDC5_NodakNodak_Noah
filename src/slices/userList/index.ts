@@ -1,8 +1,8 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { SLICE_NAME } from '@/slices/constants';
+import { initialUser } from '@/slices/initialState';
 import { getUserList } from '@/slices/userList/thunk';
 import { UserList } from '@/slices/userList/type';
-import { initialUser } from '@/slices/initialState';
 import { User } from '@/types/APIResponseTypes';
 
 const initialState: UserList = {
