@@ -1,7 +1,7 @@
-import { PageNumberBox, PaginationBox, TextBox } from './style';
 import RightArrowIcon from '@/assets/RightArrowIcon';
 import { Button, Text } from '@/components';
 import theme from '@/styles/theme';
+import { PageNumberBox, PaginationBox, TextBox } from './style';
 
 export interface PaginationProps {
   page: number;

@@ -1,16 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Button from '@/components/Button';
-import useTimeoutFn from '@/hooks/useTimeoutFn';
+import { useSelectedFollowData } from '@/hooks/useSelectedFollowData';
 import {
   useSelectedMyInfo,
   useSelectedMyInfoLoading,
 } from '@/hooks/useSelectedMyInfo';
-import { useSelectedFollowData } from '@/hooks/useSelectedFollowData';
-import { unfollow, follow } from '@/slices/follow/thunk';
-import { useDispatch } from '@/store';
-import { getMyInfo } from '@/slices/user/thunk';
 import { useSelectedUserLoading } from '@/hooks/useSelectedUser';
+import useTimeoutFn from '@/hooks/useTimeoutFn';
+import { follow, unfollow } from '@/slices/follow/thunk';
+import { getMyInfo } from '@/slices/user/thunk';
+import { useDispatch } from '@/store';
 
 const FollowButton = () => {
   const userId = useParams().userId!;

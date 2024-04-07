@@ -1,13 +1,13 @@
 import { PayloadAction, createSlice, isAnyOf } from '@reduxjs/toolkit';
-import { InitialState } from '@/slices/postList/type';
 import { SLICE_NAME } from '@/slices/constants';
-import {
-  getPostListByChannelId,
-  getPostListByUserId,
-  getFullPostList,
-  getPostListByMyId,
-} from '@/slices/postList/thunks';
 import { initialPost } from '@/slices/initialState';
+import {
+  getFullPostList,
+  getPostListByChannelId,
+  getPostListByMyId,
+  getPostListByUserId,
+} from '@/slices/postList/thunks';
+import { InitialState } from '@/slices/postList/type';
 import { Post } from '@/types/APIResponseTypes';
 
 const initialState: InitialState = {

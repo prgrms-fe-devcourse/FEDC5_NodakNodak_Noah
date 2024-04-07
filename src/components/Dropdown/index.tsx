@@ -1,17 +1,16 @@
-import { useEffect, useState, RefObject } from 'react';
+import { RefObject, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-
-import { getChannel } from '@/slices/channel/thunk';
-import { useDispatch, RootState } from '@/store';
 import DownArrowIcon from '@/assets/DownArrowIcon';
 import {
-  DropdownButton,
   BorderLine,
   DropDownItem,
-  MenuBox,
+  DropdownButton,
   DropdownList,
+  MenuBox,
 } from '@/components/Dropdown/style';
 import useClickAway from '@/hooks/useClickAway';
+import { getChannel } from '@/slices/channel/thunk';
+import { RootState, useDispatch } from '@/store';
 
 export interface Channel {
   _id: string;

@@ -1,5 +1,5 @@
-import { BadgeBox, Super } from './style';
 import { PropsWithChildren } from 'react';
+import { BadgeBox, Super } from './style';
 
 export interface OnlineBadgePropsTypes {
   isOnline: boolean;

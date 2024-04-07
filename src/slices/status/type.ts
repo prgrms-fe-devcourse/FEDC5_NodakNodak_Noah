@@ -1,5 +1,4 @@
 import { AxiosError } from 'axios';
-
 import { AllUrlList, Methods } from '@/utils/customAxios/type';
 
 export type AllowedKeys =

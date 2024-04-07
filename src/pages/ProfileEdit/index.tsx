@@ -1,11 +1,10 @@
 import { useEffect } from 'react';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
-
-import { Container, CardWrapper } from '@/pages/ProfileEdit/style';
-import { getUser } from '@/slices/user/thunk';
-import { useDispatch } from '@/store';
 import { Avatar } from '@/components';
 import { useSelectedUser } from '@/hooks/useSelectedUser';
+import { CardWrapper, Container } from '@/pages/ProfileEdit/style';
+import { getUser } from '@/slices/user/thunk';
+import { useDispatch } from '@/store';
 
 const Setting = () => {
   const currentUser = useSelectedUser();

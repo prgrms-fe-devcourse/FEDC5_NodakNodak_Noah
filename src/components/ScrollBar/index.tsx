@@ -1,5 +1,4 @@
 import { HtmlHTMLAttributes, PropsWithChildren } from 'react';
-
 import { PaddingBox, ScrollBarBox } from '@/components/ScrollBar/style';
 
 const ScrollBar = ({

@@ -1,5 +1,4 @@
-﻿import { forwardRef, Ref } from 'react';
-
+﻿import { Ref, forwardRef } from 'react';
 import { InputBox, InputElement } from '@/components/Input/style';
 
 export interface InputProps

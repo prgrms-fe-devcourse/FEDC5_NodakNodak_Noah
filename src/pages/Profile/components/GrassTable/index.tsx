@@ -1,9 +1,9 @@
-import {
-  GrassWrapper,
-  GrassItem,
-} from '@/pages/Profile/components/GrassTable/style';
-import { useSelectedUser } from '@/hooks/useSelectedUser';
 import Tooltip from '@/components/Tooltip';
+import { useSelectedUser } from '@/hooks/useSelectedUser';
+import {
+  GrassItem,
+  GrassWrapper,
+} from '@/pages/Profile/components/GrassTable/style';
 
 export type LightnessType = 100 | 200 | 300 | 400 | 500;
 

@@ -1,4 +1,28 @@
 import {
+  ChangeEvent,
+  FormEvent,
+  RefObject,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
+import { useNavigate } from 'react-router-dom';
+import SearchIcon from '@/assets/SearchIcon';
+import { Avatar, Button, Card, Input, Text } from '@/components';
+import { DropDownItem, DropdownList } from '@/components/Dropdown/style';
+import DarkModeToggle from '@/components/layout/Header/DarkModeToggle';
+import NotificationCardBell from '@/components/layout/Header/NotificationCardBell';
+import LogoWithFontSize from '@/components/layout/LogoWithFontSize';
+import useClickAway from '@/hooks/useClickAway';
+import { useSelectedChannels } from '@/hooks/useSelectedChannel';
+import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
+import { setChannel } from '@/slices/channel';
+import { getChannel } from '@/slices/channel/thunk';
+import { getNotificationArray } from '@/slices/notification/thunk';
+import { useDispatch } from '@/store';
+import theme from '@/styles/theme';
+import axiosInstance from '@/utils/customAxios';
+import {
   AuthUiBox,
   ChannelList,
   FormElement,
@@ -6,33 +30,6 @@ import {
   LogoBox,
   NavLinkBox,
 } from './style';
-import {
-  ChangeEvent,
-  RefObject,
-  useState,
-  useEffect,
-  FormEvent,
-  useCallback,
-} from 'react';
-import { useNavigate } from 'react-router-dom';
-
-import { Text, Card, Input, Avatar, Button } from '@/components';
-import LogoWithFontSize from '@/components/layout/LogoWithFontSize';
-import NotificationCardBell from '@/components/layout/Header/NotificationCardBell';
-import useClickAway from '@/hooks/useClickAway';
-import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
-import { useSelectedChannels } from '@/hooks/useSelectedChannel';
-
-import { useDispatch } from '@/store';
-import { setChannel } from '@/slices/channel';
-import { getChannel } from '@/slices/channel/thunk';
-import { getNotificationArray } from '@/slices/notification/thunk';
-
-import DarkModeToggle from '@/components/layout/Header/DarkModeToggle';
-import axiosInstance from '@/utils/customAxios';
-import theme from '@/styles/theme';
-import SearchIcon from '@/assets/SearchIcon';
-import { DropDownItem, DropdownList } from '@/components/Dropdown/style';
 
 const Header = () => {
   const [focus, setFocus] = useState(false);

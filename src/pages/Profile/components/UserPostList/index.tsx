@@ -1,16 +1,16 @@
 import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Text from '@/components/Text';
-import { useDispatch } from '@/store';
-import { getUser } from '@/slices/user/thunk';
-import PostCard from '@/pages/Main/components/PostList/PostCard';
 import Pagination from '@/components/Pagination';
-import { getPostListByUserId } from '@/slices/postList/thunks';
-import { useSelectedUser } from '@/hooks/useSelectedUser';
+import Text from '@/components/Text';
 import { usePagination } from '@/hooks/usePagination';
-import theme from '@/styles/theme';
-import { PostCardWrapper } from '@/pages/Main/components/PostList/style';
 import { useSelectedPostListByUser } from '@/hooks/useSelectedPostListByUser';
+import { useSelectedUser } from '@/hooks/useSelectedUser';
+import PostCard from '@/pages/Main/components/PostList/PostCard';
+import { PostCardWrapper } from '@/pages/Main/components/PostList/style';
+import { getPostListByUserId } from '@/slices/postList/thunks';
+import { getUser } from '@/slices/user/thunk';
+import { useDispatch } from '@/store';
+import theme from '@/styles/theme';
 
 const UserPostList = () => {
   const dispatch = useDispatch();

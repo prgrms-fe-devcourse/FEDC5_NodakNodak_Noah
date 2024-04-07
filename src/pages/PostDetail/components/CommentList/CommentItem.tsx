@@ -1,16 +1,15 @@
+import { useNavigate } from 'react-router-dom';
+import { Avatar, Button, Text } from '@/components';
+import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
+import { deleteComment } from '@/slices/postDetail';
+import { useDispatch } from '@/store';
+import theme from '@/styles/theme';
+import axiosInstance from '@/utils/customAxios';
 import {
   CommentAuthorContainer,
   CommentAuthorWrapper,
   CommentItemContainer,
 } from './style';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from '@/store';
-import { deleteComment } from '@/slices/postDetail';
-import { Text, Avatar, Button } from '@/components';
-import axiosInstance from '@/utils/customAxios';
-import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
-
-import theme from '@/styles/theme';
 
 export interface CommentItemProps {
   authorName: string;

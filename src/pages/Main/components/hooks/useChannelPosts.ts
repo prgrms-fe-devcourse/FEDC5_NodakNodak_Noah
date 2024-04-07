@@ -1,12 +1,11 @@
 import { useEffect } from 'react';
-
-import { useDispatch } from '@/store';
+import { useSelectedPostList } from '@/hooks/useSelectedPostList';
+import { useSelectedStatus } from '@/hooks/useSelectedStatus';
 import {
   getFullPostList,
   getPostListByChannelId,
 } from '@/slices/postList/thunks';
-import { useSelectedStatus } from '@/hooks/useSelectedStatus';
-import { useSelectedPostList } from '@/hooks/useSelectedPostList';
+import { useDispatch } from '@/store';
 
 export const useFetchChannelPosts = (channelId: string | undefined) => {
   const dispatch = useDispatch();

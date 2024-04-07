@@ -1,9 +1,9 @@
-import { Pagination, Navigation } from 'swiper/modules';
-import theme from '@/styles/theme';
+import { Navigation, Pagination } from 'swiper/modules';
 import {
   StyledSwiper,
   StyledSwiperSlide,
 } from '@/pages/Introduce/components/Swipe/style';
+import theme from '@/styles/theme';
 
 const Swipe = () => {
   return (

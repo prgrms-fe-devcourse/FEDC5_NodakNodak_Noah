@@ -1,4 +1,4 @@
-import { styled, css } from 'styled-components';
+import { css, styled } from 'styled-components';
 import theme from '@/styles/theme';
 
 export const ButtonSize = {
