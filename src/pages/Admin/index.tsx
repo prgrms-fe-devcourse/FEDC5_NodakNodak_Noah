@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { api } from '@/apis/core';
 import { Button, Input, Text } from '@/components';
+import { Spinner } from '@/components/MainPageSpinner/style';
 import { getMyInfo } from '@/slices/user/thunk';
 import { useDispatch } from '@/store';
 import { Message } from '@/types/APIResponseTypes';
-import axiosInstance from '@/utils/customAxios';
 import { Container } from '../Sign/style';
 import {
   AdminCard,
@@ -16,9 +18,6 @@ import {
   RequestMessage,
   RequestUl,
 } from './style';
-import { useQuery } from '@tanstack/react-query';
-import { Spinner } from '@/components/MainPageSpinner/style';
-import { api } from '@/apis/core';
 
 const Admin = () => {
   const [channelName, setChannelName] = useState('');
