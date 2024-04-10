@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
+import { Comment, User } from '@/apis/responseModel';
 import { Avatar, Button, Card, Text } from '@/components';
 import {
   useSelectedChannel,
@@ -12,7 +13,6 @@ import {
 } from '@/pages/Main/components/PostList/style';
 import { UserSnippetBox } from '@/pages/Main/components/style';
 import theme from '@/styles/theme';
-import { Comment, User } from '@/types/APIResponseTypes';
 
 export interface PostCardProps {
   image?: string;
