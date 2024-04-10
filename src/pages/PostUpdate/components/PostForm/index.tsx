@@ -45,7 +45,7 @@ const PostForm = ({ channelId }: { channelId: string | undefined }) => {
 
       if (response) {
         alert(MESSAGE.CREATE_POST);
-        navigate(`/home`);
+        navigate(`/home/all`);
       }
     } catch (error) {
       alert(MESSAGE.CREATE_POST_FAIL);

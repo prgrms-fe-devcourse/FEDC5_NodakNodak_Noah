@@ -17,7 +17,7 @@ const Setting = () => {
       dispatch(getUser({ userId }));
     } else {
       alert('올바르지 않은 접근입니다.');
-      navigate('/home');
+      navigate('/home/all');
     }
   }, [dispatch, navigate, userId]);
 

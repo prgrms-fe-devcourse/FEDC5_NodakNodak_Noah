@@ -9,7 +9,7 @@ const Index = () => {
 
   const handleStart = (e: React.MouseEvent) => {
     e.preventDefault();
-    navigate('/home');
+    navigate('/home/all');
   };
 
   return (
