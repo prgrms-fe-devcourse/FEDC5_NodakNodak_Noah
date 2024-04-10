@@ -6,7 +6,6 @@ import notificationReducer from '@/slices/notification';
 import postDetailReducer from '@/slices/postDetail';
 import postListReducer from '@/slices/postList';
 import searchedDataReducer from '@/slices/searchedData';
-import statusReducer from '@/slices/status';
 import userInfoReducer from '@/slices/user';
 import userListReducer from '@/slices/userList';
 
@@ -20,7 +19,6 @@ const store = configureStore({
     notification: notificationReducer,
     follow: followReducer,
     searchedData: searchedDataReducer,
-    status: statusReducer,
   },
 });
 type AppDispatch = typeof store.dispatch;
