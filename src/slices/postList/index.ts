@@ -1,6 +1,6 @@
 import { PayloadAction, createSlice, isAnyOf } from '@reduxjs/toolkit';
+import { Post } from '@/apis/responseModel';
 import { SLICE_NAME } from '@/slices/constants';
-import { initialPost } from '@/slices/initialState';
 import {
   getFullPostList,
   getPostListByChannelId,
@@ -8,13 +8,12 @@ import {
   getPostListByUserId,
 } from '@/slices/postList/thunks';
 import { InitialState } from '@/slices/postList/type';
-import { Post } from '@/types/APIResponseTypes';
 
 const initialState: InitialState = {
-  posts: [initialPost],
-  postListByChannelId: [initialPost],
-  postListByUserId: [initialPost],
-  postListByMyId: [initialPost],
+  posts: [],
+  postListByChannelId: [],
+  postListByUserId: [],
+  postListByMyId: [],
   status: 'idle',
 };
 
@@ -58,9 +57,9 @@ const postSlice = createSlice({
       ),
       (state) => {
         state.status = 'loading';
-        state.postListByChannelId = [initialPost];
-        state.postListByUserId = [initialPost];
-        state.posts = [initialPost];
+        state.postListByChannelId = [];
+        state.postListByUserId = [];
+        state.posts = [];
       },
     );
     builder.addMatcher(
