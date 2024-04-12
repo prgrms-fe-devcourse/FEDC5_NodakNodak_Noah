@@ -1,11 +1,7 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { getPostListBySearch } from '@/apis/getPosts';
 
-interface UseFetchSearchPostsParams {
-  search?: string;
-}
-
-const useFetchSearchPosts = ({ search }: UseFetchSearchPostsParams) =>
+const useFetchSearchPosts = (search?: string) =>
   useQuery({
     queryKey: ['posts', 'search', search],
     queryFn: () =>
