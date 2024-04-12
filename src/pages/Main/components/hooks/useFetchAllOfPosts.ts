@@ -1,6 +1,5 @@
 import { keepPreviousData, useInfiniteQuery } from '@tanstack/react-query';
-import { AxiosError } from 'axios';
-import { getFullPostList } from '@/apis/getPosts';
+import { getAllPostList } from '@/apis/getPosts';
 
 interface UseFetchAllOfPostsParams {
   limit: number;
@@ -10,9 +9,7 @@ const useFetchAllOfPosts = ({ limit }: UseFetchAllOfPostsParams) =>
   useInfiniteQuery({
     queryKey: ['posts', 'all'],
     queryFn: ({ pageParam = 1 }) =>
-      getFullPostList({ limit, offset: pageParam }),
-    retry: (failureCount, error: AxiosError) =>
-      error.status === 502 && failureCount < 3,
+      getAllPostList({ limit, offset: pageParam }),
     getNextPageParam: (lastPage, _, lastPageParmas) =>
       lastPage.length < limit ? undefined : lastPageParmas + limit,
     initialPageParam: 0,
