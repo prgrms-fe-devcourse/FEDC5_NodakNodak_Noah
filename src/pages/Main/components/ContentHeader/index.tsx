@@ -5,7 +5,9 @@ import { ContentHeaderWrapper } from '@/pages/Main/components/ContentHeader/styl
 const ContentHeader = () => {
   const { channelId } = useParams();
   const navigate = useNavigate();
-  const channelName = useLocation().state as string;
+  const { state: channelName } = useLocation() as { state?: string };
+
+  if (channelId && !channelName) navigate('/404');
 
   const handleWriteClick: React.MouseEventHandler<HTMLButtonElement> = (e) => {
     e.preventDefault();
