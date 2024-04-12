@@ -4,8 +4,8 @@ import useFetchSearchPosts from '@/pages/Main/components/hooks/useFetchSearchPos
 
 const SearchPostList = () => {
   const { search } = useParams<{ search: string }>();
-  const response = useFetchSearchPosts({ search });
+  const response = useFetchSearchPosts(search);
 
-  return <PostList response={response} />;
+  return <PostList {...response} />;
 };
 export default SearchPostList;

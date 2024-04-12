@@ -4,7 +4,7 @@ import useFetchAllOfPosts from '@/pages/Main/components/hooks/useFetchAllOfPosts
 const AllOfPostList = () => {
   const response = useFetchAllOfPosts({ limit: 9 });
 
-  return <PostList response={response} />;
+  return <PostList {...response} />;
 };
 
 export default AllOfPostList;

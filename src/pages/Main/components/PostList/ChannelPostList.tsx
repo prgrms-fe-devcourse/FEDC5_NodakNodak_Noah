@@ -6,7 +6,7 @@ const ChannelPostList = () => {
   const channelId = useParams<{ channelId: string }>().channelId;
   const response = useFetchChannelPosts({ channelId, limit: 9 });
 
-  return <PostList response={response} />;
+  return <PostList {...response} />;
 };
 
 export default ChannelPostList;

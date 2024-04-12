@@ -57,7 +57,7 @@ const UserPostList = () => {
             return (
               <PostCard
                 key={_id}
-                postId={_id}
+                _id={_id}
                 image={image}
                 title={title}
                 author={author}

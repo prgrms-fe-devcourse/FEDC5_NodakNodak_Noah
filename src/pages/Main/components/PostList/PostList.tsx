@@ -1,28 +1,22 @@
 import { UseInfiniteQueryResult, UseQueryResult } from '@tanstack/react-query';
-import { Post, SearchedPost } from '@/apis/responseModel';
 import { Button } from '@/components';
 import MainPageSpinner from '@/components/MainPageSpinner';
-import PostCard from '@/pages/Main/components/PostList/PostCard';
+import PostCard, {
+  PostCardProps,
+} from '@/pages/Main/components/PostList/PostCard';
 import { PostCardWrapper } from '@/pages/Main/components/PostList/style';
 
-const IsInfiniteQueryResult = (
-  response: UseInfiniteQueryResult<Post[]> | UseQueryResult<SearchedPost[]>,
-): response is UseInfiniteQueryResult<Post[]> => {
-  return 'fetchNextPage' in response;
-};
+type PostListProps = Partial<UseInfiniteQueryResult<PostCardProps[]>> &
+  UseQueryResult<PostCardProps[]>;
 
-export interface PostListProps {
-  response: UseInfiniteQueryResult<Post[]> | UseQueryResult<SearchedPost[]>;
-}
-
-const PostList = ({ response }: PostListProps) => {
-  const { data, isFetching, isPending } = response;
-
-  const infiniteResponse = IsInfiniteQueryResult(response) ? response : null;
-
-  const { fetchNextPage, hasNextPage, isFetchingNextPage } =
-    infiniteResponse || {};
-
+const PostList = ({
+  data,
+  isFetching,
+  isPending,
+  fetchNextPage,
+  hasNextPage,
+  isFetchingNextPage,
+}: PostListProps) => {
   if (isPending) {
     return <MainPageSpinner />;
   }
@@ -33,7 +27,7 @@ const PostList = ({ response }: PostListProps) => {
         {data?.map(({ _id, image, title, author, comments }) => (
           <PostCard
             key={_id}
-            postId={_id}
+            _id={_id}
             image={image}
             title={title}
             author={author}
@@ -41,7 +35,7 @@ const PostList = ({ response }: PostListProps) => {
           />
         ))}
       </PostCardWrapper>
-      {infiniteResponse && (
+      {!!fetchNextPage && (
         <>
           <Button
             onClick={() => fetchNextPage && fetchNextPage()}

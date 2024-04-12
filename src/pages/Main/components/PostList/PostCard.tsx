@@ -18,7 +18,7 @@ export interface PostCardProps {
   image?: string;
   title: string;
   author: User;
-  postId: string;
+  _id: string;
   comments: Comment[];
 }
 
@@ -26,7 +26,7 @@ const PostCard = ({
   image,
   title,
   author,
-  postId,
+  _id: postId,
   comments,
 }: PostCardProps) => {
   const { fullName, _id: userId, image: avatar } = author;
