@@ -1,7 +1,7 @@
 // 채널, 사용자, 별로 다른 응답
 // 채널ID, 작성자ID로 구분
 import { api } from '@/apis/core';
-import { Post, SearchedPost } from './responseModel';
+import type { Post, SearchedPost } from './responseModel';
 
 export type Posts = Post[];
 
@@ -10,7 +10,17 @@ interface GetFullPostListParams {
   offset: number;
 }
 
-export const getFullPostList = ({ limit, offset }: GetFullPostListParams) =>
+interface GetPostListByChannelIdParams {
+  channelId: string;
+  limit: number;
+  offset: number;
+}
+
+interface GetPostListBySearchParams {
+  search: string;
+}
+
+export const getAllPostList = ({ limit, offset }: GetFullPostListParams) =>
   api.get<Posts>({
     url: '/posts',
     params: {
@@ -18,12 +28,6 @@ export const getFullPostList = ({ limit, offset }: GetFullPostListParams) =>
       offset,
     },
   });
-
-interface GetPostListByChannelIdParams {
-  channelId: string;
-  limit: number;
-  offset: number;
-}
 
 export const getPostListByChannelId = ({
   channelId,
@@ -38,9 +42,6 @@ export const getPostListByChannelId = ({
     },
   });
 
-interface GetPostListBySearchParams {
-  search: string;
-}
 export const getPostListBySearch = ({ search }: GetPostListBySearchParams) => {
   const query = `"title":"[^"]*${search}[^"]*"|"content":"[^"]*${search}[^"]*"`;
 
