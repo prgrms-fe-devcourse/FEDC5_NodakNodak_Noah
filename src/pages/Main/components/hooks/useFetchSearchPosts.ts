@@ -1,4 +1,4 @@
-import { keepPreviousData, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { getPostListBySearch } from '@/apis/getPosts';
 
 const useFetchSearchPosts = (search?: string) =>
@@ -6,7 +6,6 @@ const useFetchSearchPosts = (search?: string) =>
     queryKey: ['posts', 'search', search],
     queryFn: () =>
       search ? getPostListBySearch({ search }) : Promise.resolve([]),
-    placeholderData: keepPreviousData,
   });
 
 export default useFetchSearchPosts;

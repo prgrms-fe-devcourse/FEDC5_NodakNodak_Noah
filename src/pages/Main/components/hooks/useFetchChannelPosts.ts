@@ -1,4 +1,4 @@
-import { keepPreviousData, useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery } from '@tanstack/react-query';
 import { getPostListByChannelId } from '@/apis/getPosts';
 
 interface UseFetchChannelPostsParams {
@@ -24,7 +24,6 @@ const useFetchChannelPosts = ({
       lastPage.length < limit ? undefined : lastPageParmas + limit,
     initialPageParam: 0,
     select: (data) => data.pages.flatMap((page) => page),
-    placeholderData: keepPreviousData,
   });
 
 export default useFetchChannelPosts;
