@@ -1,6 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from '@/App';
 import ProtectedRoute from '@/components/ProtectedRoute';
+import AllOfPostList from '@/pages/Main/components/PostList/AllOfPostList';
+import ChannelPostList from '@/pages/Main/components/PostList/ChannelPostList';
+import SearchPostList from '@/pages/Main/components/PostList/SearchPostList';
 import PostVoteChart from '@/pages/PostDetail/components/Result';
 import PostVote from '@/pages/PostDetail/components/Vote';
 import Password from '@/pages/ProfileEdit/components/Password';
@@ -59,7 +62,15 @@ export const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
-      { path: '/home/:channelId?', element: <MainPage /> },
+      {
+        path: '/home',
+        element: <MainPage />,
+        children: [
+          { path: 'all', element: <AllOfPostList /> },
+          { path: 'channel/:channelId', element: <ChannelPostList /> },
+          { path: 'search/:search?', element: <SearchPostList /> },
+        ],
+      },
       { path: '/user/:userId', element: <UserPage /> },
       {
         path: '/request',

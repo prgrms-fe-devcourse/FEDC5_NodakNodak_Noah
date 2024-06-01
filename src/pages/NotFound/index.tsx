@@ -13,7 +13,7 @@ const NotFound = () => {
     <NotFoundContainer>
       <NotFoundWrapper>
         <TitleText>페이지를 찾을 수 없습니다</TitleText>
-        <Button size='wide' onClick={() => navigate('/home')}>
+        <Button size='wide' onClick={() => navigate('/home/all')}>
           홈으로 돌아가기
         </Button>
       </NotFoundWrapper>

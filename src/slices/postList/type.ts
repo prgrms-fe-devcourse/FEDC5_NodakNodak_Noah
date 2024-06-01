@@ -1,5 +1,5 @@
+import { Post } from '@/apis/responseModel';
 import { StatusType } from '@/slices/type';
-import { Post } from '@/types/APIResponseTypes';
 
 export interface InitialState {
   posts: Post[];

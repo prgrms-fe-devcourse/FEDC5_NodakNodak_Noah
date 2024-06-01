@@ -19,7 +19,7 @@ const Login = () => {
   return (
     <Container>
       <Card>
-        <GoHome onClick={() => navigate('/home')}>
+        <GoHome onClick={() => navigate('/home/all')}>
           <LeftArrowIcon />
           <Text
             tagType='span'

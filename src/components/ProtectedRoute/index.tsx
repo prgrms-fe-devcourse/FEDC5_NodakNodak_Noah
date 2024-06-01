@@ -13,7 +13,11 @@ const ProtectedRoute = ({
   const token = localStorage.getItem('auth-token');
 
   if (admin) {
-    return state !== 'SuperAdmin' ? <Navigate to='/home' replace /> : children;
+    return state !== 'SuperAdmin' ? (
+      <Navigate to='/home/all' replace />
+    ) : (
+      children
+    );
   } else {
     return token ? (
       children
@@ -22,7 +26,7 @@ const ProtectedRoute = ({
         to={
           confirm('로그인이 필요합니다. 로그인 하시겠습니까?')
             ? '/sign'
-            : '/home'
+            : '/home/all'
         }
         replace
       />

@@ -51,7 +51,7 @@ const Header = () => {
 
   const handleSearch = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    navigate(`/home?search=${inputValue}`);
+    navigate(`/home/search/${inputValue}`);
   };
 
   const handleClick = (id: string) => () => {
@@ -146,15 +146,16 @@ const Header = () => {
         backgroundColor: 'transparent',
       }}>
       <HeaderLayout>
-        <LogoBox onClick={() => navigate('/home')}>
+        <LogoBox onClick={() => navigate('/home/all')}>
           <LogoWithFontSize fontSize='24px' />
         </LogoBox>
         <ChannelList>
           {channels.map(({ _id, name }) => (
             <NavLinkBox
               key={_id}
-              to={`/home/${_id}`}
-              onClick={handleClick(_id)}>
+              to={`/home/channel/${_id}`}
+              onClick={handleClick(_id)}
+              state={name}>
               <Text
                 key={_id}
                 tagType='span'

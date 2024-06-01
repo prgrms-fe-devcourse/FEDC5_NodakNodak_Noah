@@ -22,7 +22,7 @@ const In = ({ isLogin, setIsLogin }: SignProps) => {
           password,
         });
         localStorage.setItem('auth-token', data.token);
-        navigate('/home');
+        navigate('/home/all');
       } catch (e) {
         setWarnText('아이디 또는 비밀번호가 일치하지 않습니다.');
         setWarn(true);

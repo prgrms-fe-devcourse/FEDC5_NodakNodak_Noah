@@ -38,7 +38,7 @@ const PostContent = () => {
     try {
       await axiosInstance.delete(`posts/delete`, { data: { id: postId } });
       alert('게시글이 삭제되었습니다.');
-      navigate(`/home`);
+      navigate(`/home/all`);
     } catch (e) {
       alert(e);
     }

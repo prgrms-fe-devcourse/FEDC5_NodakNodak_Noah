@@ -32,6 +32,12 @@ export interface Post {
   updatedAt: string;
 }
 
+export interface SearchedPost
+  extends Omit<Post, 'channel' | 'likes' | 'imagePublicId'> {
+  likes: string[];
+  channel: string;
+}
+
 export interface Channel {
   authRequired: boolean; // 사용되지 않음
   posts: string[];

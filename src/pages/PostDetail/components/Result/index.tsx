@@ -22,7 +22,7 @@ const PostVoteChart = () => {
   });
 
   const handleToHome = () => {
-    navigate('/home');
+    navigate('/home/all');
   };
 
   const handleToDetail = () => {

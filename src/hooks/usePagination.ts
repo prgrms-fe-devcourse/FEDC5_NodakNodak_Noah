@@ -1,9 +1,8 @@
 import { useEffect, useState } from 'react';
-import { SearchedPost } from '@/slices/searchedData/type';
-import { Post } from '@/types/APIResponseTypes';
+import { Post, SearchedPost } from '@/apis/responseModel';
 
 export const usePagination = (
-  postList: Array<SearchedPost | Post>,
+  postList: Post[] | SearchedPost[],
   limit: number = 12,
 ) => {
   const [page, setPage] = useState(1);
