@@ -1,7 +1,7 @@
 import { Card, ScrollBar } from '@/components';
 import UserGroup from '@/pages/Main/components/UserList/UserGroup';
 import UserSnippet from '@/pages/Main/components/UserList/UserSnippet';
-import useGetUserList from '@/pages/Main/components/hooks/useGetUsers';
+import useGetUserList from '@/pages/Main/hooks/useGetUsers';
 
 export type RenderUserSnippets = (
   users: {
