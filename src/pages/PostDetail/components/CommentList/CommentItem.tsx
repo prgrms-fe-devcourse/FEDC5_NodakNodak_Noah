@@ -1,10 +1,9 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useGetMyInfo } from '@/apis/myInfo';
 import { Avatar, Button, Text } from '@/components';
-import { useSelectedMyInfo } from '@/hooks/useSelectedMyInfo';
-import { deleteComment } from '@/slices/postDetail';
-import { useDispatch } from '@/store';
 import theme from '@/styles/theme';
-import axiosInstance from '@/utils/customAxios';
+import timeOffset from '@/utils/formatRelativeDate';
+import { useCommentAPI } from '../../hooks/useComment';
 import {
   CommentAuthorContainer,
   CommentAuthorWrapper,
@@ -33,13 +32,10 @@ const CommentItem = ({
   comment,
   commentId,
 }: CommentItemProps) => {
-  const myInfo = useSelectedMyInfo();
-  const dispatch = useDispatch();
+  const myInfo = useGetMyInfo();
   const navigate = useNavigate();
-  const dateObject = new Date(createdAt);
-  const year = dateObject.getFullYear();
-  const month = dateObject.getMonth() + 1;
-  const date = dateObject.getDate();
+  const { postId } = useParams() as { postId: string };
+  const { deleteComment } = useCommentAPI(postId);
 
   const { content } = { ...JSON.parse(comment) } as CommentContent;
 
@@ -50,13 +46,7 @@ const CommentItem = ({
   const handleCommentRemove = async () => {
     const isConfirm = confirm('댓글을 정말 삭제하시겠습니까?');
     if (!isConfirm) return;
-
-    try {
-      axiosInstance.delete(`comments/delete`, { data: { id: commentId } });
-      dispatch(deleteComment(commentId));
-    } catch (e) {
-      alert(e);
-    }
+    deleteComment(commentId);
   };
 
   return (
@@ -69,22 +59,23 @@ const CommentItem = ({
           onClick={() => {
             handleCommentAuthorAvatarClick(authorId);
           }}
+          style={{ cursor: 'pointer' }}
         />
         <CommentAuthorWrapper>
           <Text
             colorType='grayscale'
             colorNumber={theme.isDark ? '100' : '500'}
             fontType='body1'
-            tagType='span'>
+            tagType='span'
+            style={{ minWidth: '80px' }}>
             {authorName}
           </Text>
           <Text
             tagType='span'
             fontType='caption'
             colorType='grayscale'
-            colorNumber='300'
-            style={{ marginTop: '10px' }}>
-            {`${year}년 ${month}월 ${date}일`}
+            colorNumber='300'>
+            {`${timeOffset(createdAt)}`}
           </Text>
         </CommentAuthorWrapper>
       </CommentAuthorContainer>
@@ -93,22 +84,14 @@ const CommentItem = ({
         fontType='body3'
         colorType='black'
         style={{
-          paddingLeft: '3rem',
           maxWidth: '340px',
           wordWrap: 'break-word',
+          flexGrow: 1,
         }}>
         {content}
       </Text>
       {(authorId === myInfo?._id || myInfo.role === 'SuperAdmin') && (
-        <Button
-          style={{
-            position: 'absolute',
-            right: '2px',
-            bottom: '40px',
-          }}
-          onClick={handleCommentRemove}>
-          삭제
-        </Button>
+        <Button onClick={handleCommentRemove}>삭제</Button>
       )}
     </CommentItemContainer>
   );

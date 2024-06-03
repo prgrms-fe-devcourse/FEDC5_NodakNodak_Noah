@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useFormik } from 'formik';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useGetPostAPI } from '@/apis/posts';
 import { Button } from '@/components';
 import { useSelectedVote } from '@/hooks/useSelectedVote';
 import { sendPostRequest } from '@/pages/PostUpdate/components/Api';
@@ -29,14 +30,18 @@ export interface TitleType {
   voteArray: string[];
 }
 
-const UpdateForm = ({ postId }: { postId: string | undefined }) => {
+const UpdateForm = () => {
   const navigate = useNavigate();
   const postDetailVote = useSelectedVote();
-  const postDetail = useLocation();
+  const { postId, channelId } = useParams() as {
+    postId: string;
+    channelId: string;
+  };
+  const postDetailContent = useGetPostAPI(postId);
 
-  const { title, channel, image, imagePublicId } = postDetail.state;
-  const channelId = channel._id;
-  const serverData = JSON.parse(title) as TitleType;
+  const { title, content, voteTitle, voteArray, image, imagePublicId } =
+    postDetailContent;
+
   const isVoteEmpty = postDetailVote.length === 0;
 
   const handleFormSubmit = async (forms: FormType) => {
@@ -108,16 +113,28 @@ const UpdateForm = ({ postId }: { postId: string | undefined }) => {
   const { values, handleChange, handleSubmit, setFieldValue } = formik;
 
   useEffect(() => {
-    if (serverData && values.channelId === '') {
+    if (values.channelId === '') {
       formik.setValues({
-        ...serverData,
-        imageSrc: image,
+        title,
+        content,
+        voteTitle,
+        voteArray,
+        imageSrc: image ? image : '',
         image: null,
         channelId: channelId,
         imageToDeletePublicId: '',
       });
     }
-  }, [serverData, formik, values, channelId, image]);
+  }, [
+    title,
+    content,
+    voteTitle,
+    voteArray,
+    image,
+    channelId,
+    formik,
+    values.channelId,
+  ]);
 
   return (
     <form onSubmit={handleSubmit} noValidate>

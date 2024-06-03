@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import PostList from '@/pages/Main/components/PostList/PostList';
-import useFetchChannelPosts from '@/pages/Main/components/hooks/useFetchChannelPosts';
+import useFetchChannelPosts from '@/pages/Main/hooks/useFetchChannelPosts';
 
 const ChannelPostList = () => {
   const channelId = useParams<{ channelId: string }>().channelId;

@@ -1,16 +1,34 @@
 import styled from 'styled-components';
 
-export const PostContentContainer = styled.div`
-  margin: 3rem;
+export const PostTitleWrapper = styled.div`
+  display: flex;
+  items-align: start;
+  justify-content: space-between;
+  gap: 5rem;
 `;
 
-export const PostContentTitleContainer = styled.div`
-  display: inline-flex;
-  margin-left: 20px;
+export const PostEditButtonWrapper = styled.div`
+  display: flex;
+  gap: 0.125rem;
+  items-align: center;
 `;
-export const PostContentAuthorWrapper = styled.div`
+
+export const PostAuthorWrapper = styled.div`
   display: flex;
   align-items: center;
-  flex-shrink: 0;
-  margin: 1.5rem 0;
+  gap: 1rem;
+`;
+
+export const PostContentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+`;
+
+export const PostContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
 `;

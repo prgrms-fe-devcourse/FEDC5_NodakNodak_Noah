@@ -55,10 +55,6 @@ const PostCard = ({
     navigate(`/detail/${channel?._id}/${postId}`);
   };
 
-  const handleDetailResultClick = () => {
-    navigate(`/detail/${channel?._id}/${postId}/result`);
-  };
-
   const handleUserClick = () => {
     navigate(`/user/${userId}`);
   };
@@ -114,12 +110,6 @@ const PostCard = ({
           event={channelLoading ? 'disabled' : 'enabled'}
           onClick={handleDetailClick}>
           자세히 보기
-        </Button>
-        <Button
-          styleType='ghost'
-          event={channelLoading ? 'disabled' : 'enabled'}
-          onClick={handleDetailResultClick}>
-          결과 보기
         </Button>
       </FlexWrapper>
     </Card>

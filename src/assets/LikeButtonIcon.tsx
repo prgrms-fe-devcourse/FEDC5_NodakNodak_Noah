@@ -15,9 +15,7 @@ const LikeButton = ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        width: '100px',
         height: '100px',
-        margin: '24px',
       }}>
       <div
         onClick={onClick}

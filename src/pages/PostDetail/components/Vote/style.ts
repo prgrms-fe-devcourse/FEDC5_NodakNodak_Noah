@@ -4,16 +4,26 @@ export const VoteTitleWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-bottom: 2.5rem;
+  gap: 1rem;
 `;
 
-export const ButtonWrapper = styled.div`
-  margin-top: 1.5rem;
-  display: flex;
-  justify-content: center;
-`;
-export const InputWrapper = styled.div`
+export const InputWrapper = styled.form`
   display: flex;
   align-items: center;
   flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+  width: 100%;
+  flex-grow: 1;
+  overflow-y: auto;
+`;
+
+export const VoteContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  height: 90%;
+  width: 100%;
+  padding: 2rem 0;
 `;

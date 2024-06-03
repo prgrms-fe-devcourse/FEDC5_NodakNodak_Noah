@@ -4,8 +4,6 @@ import ProtectedRoute from '@/components/ProtectedRoute';
 import AllOfPostList from '@/pages/Main/components/PostList/AllOfPostList';
 import ChannelPostList from '@/pages/Main/components/PostList/ChannelPostList';
 import SearchPostList from '@/pages/Main/components/PostList/SearchPostList';
-import PostVoteChart from '@/pages/PostDetail/components/Result';
-import PostVote from '@/pages/PostDetail/components/Vote';
 import Password from '@/pages/ProfileEdit/components/Password';
 import UserInfo from '@/pages/ProfileEdit/components/UserInfo';
 import {
@@ -89,16 +87,12 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: '/detail/:channelId/:postId/',
+        path: '/detail/:channelId/:postId',
         element: (
           <ProtectedRoute>
             <PostDetailPage />
           </ProtectedRoute>
         ),
-        children: [
-          { path: '', element: <PostVote /> },
-          { path: 'result', element: <PostVoteChart /> },
-        ],
       },
     ],
   },
