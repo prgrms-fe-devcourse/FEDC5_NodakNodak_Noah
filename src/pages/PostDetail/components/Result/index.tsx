@@ -1,37 +1,36 @@
-import { useNavigate, useParams } from 'react-router-dom';
-import { Button, Card, ScrollBar, Text } from '@/components';
-import { useSelectedPostDetail } from '@/hooks/useSelectedPostDetail';
-import { useSelectedVote } from '@/hooks/useSelectedVote';
+import { Link } from 'react-router-dom';
+import { Comment, User } from '@/apis/responseModel';
+import { Button, Card, Text } from '@/components';
 import BarChart from '@/pages/PostDetail/components/Result/BarChart';
 import {
-  ButtonWrapper,
+  VoteContainer,
   VoteTitleWrapper,
 } from '@/pages/PostDetail/components/Vote/style';
 
-const PostVoteChart = () => {
-  const postDetailContent = useSelectedPostDetail();
-  const postDetailVote = useSelectedVote();
-  const { postId, channelId } = useParams();
-  const navigate = useNavigate();
-
-  if (!postDetailContent.title) return null;
-  const { voteArray, voteTitle } = JSON.parse(postDetailContent.title);
-
-  const votedArray = postDetailVote.map((vote) => {
+interface PostVoteChartProps {
+  myInfo: User;
+  postDetailVotes: Comment[];
+  voteArray: string[];
+  voteTitle: string;
+}
+const PostVoteChart = ({
+  postDetailVotes,
+  voteArray,
+  voteTitle,
+  // myInfo,
+}: PostVoteChartProps) => {
+  const votedArray = postDetailVotes.map((vote) => {
     return JSON.parse(vote.comment)?.content;
   });
 
-  const handleToHome = () => {
-    navigate('/home/all');
-  };
-
-  const handleToDetail = () => {
-    navigate(`/detail/${channelId}/${postId}`);
-  };
+  // const myVote = postDetailVotes.filter(
+  //   (vote) => vote.author._id === myInfo._id,
+  // );
+  // TODO : ADD MY VOTE
 
   return (
-    <Card width='44.375rem' height='31.25rem' shadowType='large'>
-      <ScrollBar>
+    <Card width='44.375rem' height='fit-content' shadowType='large'>
+      <VoteContainer>
         <VoteTitleWrapper>
           <Text
             tagType='span'
@@ -41,27 +40,16 @@ const PostVoteChart = () => {
             {voteTitle}
           </Text>
           <Text tagType='span' fontType='body2' colorType='black'>
-            {`${postDetailVote?.length}명 투표`}
+            {`${postDetailVotes?.length}명 투표`}
           </Text>
         </VoteTitleWrapper>
         <BarChart voteArray={voteArray} votedArray={votedArray} />
-        <ButtonWrapper>
-          <Button
-            event='enabled'
-            styleType='ghost'
-            size='wide'
-            onClick={handleToDetail}>
-            투표 하기
-          </Button>
-          <Button
-            event='enabled'
-            styleType='ghost'
-            size='wide'
-            onClick={handleToHome}>
+        <Link to='/home/all' style={{ textDecorationLine: 'none' }}>
+          <Button event='enabled' styleType='ghost' size='wide'>
             홈 으로
           </Button>
-        </ButtonWrapper>
-      </ScrollBar>
+        </Link>
+      </VoteContainer>
     </Card>
   );
 };
