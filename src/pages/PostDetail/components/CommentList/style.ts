@@ -2,25 +2,26 @@ import styled from 'styled-components';
 import theme from '@/styles/theme';
 
 export const CommentItemContainer = styled.div`
-  position: relative;
   display: flex;
   align-items: center;
-  margin: 8px;
   border-bottom: 2px solid ${theme.colors.grayscale[200]};
-  padding-bottom: 8px;
-  width: 712px;
-  height: 96px;
+  box-sizing: border-box;
+  padding: 1.5rem;
+  gap: 5rem;
+  width: 100%;
+  position: relative;
 `;
 
 export const CommentAuthorContainer = styled.div`
-  display: inline-flex;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
 `;
 
 export const CommentAuthorWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 8px;
-  margin-left: 8px;
+  gap: 0.5rem;
 `;
 
 export const FlexColumn = styled.div`
@@ -37,21 +38,18 @@ export const FlexColumn = styled.div`
   }
 `;
 
-export const CommentBoundaryLine = styled.div`
-  margin: 3rem 15.19rem;
-  border-top: solid 1px ${theme.colors.grayscale[200]};
-`;
-
-export const CommentContainer = styled.div`
+export const CommentListContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
+  border-top: solid 1px ${theme.colors.grayscale[200]};
 `;
 
 export const FormContainer = styled.form`
   display: flex;
-  margin-top: 16px;
-  width: 712px;
+  margin-top: 1rem;
+  width: 100%;
   align-items: center;
   justify-content: space-between;
 `;
